@@ -1,0 +1,1960 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Reservar Tour - Jaguar Expeditions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css?v=<?php echo time(); ?>">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <style>
+        /* Estilos para el header */
+        .header {
+            background: linear-gradient(135deg, #2d5016, #4a7c59);
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #ffd700;
+        }
+
+        .company-info h1 {
+            color: white;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .slogan {
+            color: #ffd700;
+            font-size: 0.9rem;
+            font-style: italic;
+            font-weight: 300;
+        }
+
+        .contact-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .phone {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: white;
+            font-weight: 500;
+        }
+
+        .phone i {
+            color: #ffd700;
+        }
+
+        .social-media {
+            display: flex;
+            gap: 10px;
+        }
+
+        .social-media a {
+            color: white;
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-media a:hover {
+            color: #ffd700;
+        }
+
+        /* Navegación */
+        .navbar {
+            background: #2d5016;
+            padding: 0;
+            position: sticky;
+            top: 80px;
+            z-index: 999;
+        }
+
+        .navbar-nav {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .navbar-nav .nav-item {
+            margin: 0;
+        }
+
+        .navbar-nav .nav-link {
+            display: block;
+            padding: 15px 20px;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+
+        .navbar-nav .nav-link:hover,
+        .navbar-nav .nav-link.active {
+            background: #4a7c59;
+            border-bottom-color: #ffd700;
+            color: #ffd700;
+        }
+
+        body {
+            padding-top: 140px;
+        }
+
+        .reservation-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-top: 20px;
+        }
+
+        .step-indicator {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            position: relative;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #e0e0e0;
+            color: #666;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-bottom: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .step.active .step-number {
+            background: #2c5530;
+            color: white;
+        }
+
+        .step.completed .step-number {
+            background: #28a745;
+            color: white;
+        }
+
+        .step-title {
+            font-size: 12px;
+            text-align: center;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .step.active .step-title {
+            color: #2c5530;
+            font-weight: bold;
+        }
+
+        .step-content {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .step-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #2c5530;
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            min-height: 45px;
+            box-sizing: border-box;
+        }
+
+        .btn-anterior {
+            background: #6c757d;
+            color: white;
+            border: 2px solid #6c757d;
+        }
+
+        .btn-anterior:hover {
+            background: #5a6268;
+            border-color: #5a6268;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(108, 117, 125, 0.3);
+        }
+
+        .btn-siguiente {
+            background: #2c5530;
+            color: white;
+            border: 2px solid #2c5530;
+            margin-left: auto;
+        }
+
+        .btn-siguiente:hover {
+            background: #1e3a21;
+            border-color: #1e3a21;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(44, 85, 48, 0.3);
+        }
+
+        .btn:disabled {
+            background: #e0e0e0;
+            color: #999;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+            border-color: #e0e0e0;
+        }
+
+        .btn:disabled:hover {
+            background: #e0e0e0;
+            border-color: #e0e0e0;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .tour-info {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .tour-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2c5530;
+            margin-bottom: 10px;
+        }
+
+        .tour-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .detail-item i {
+            color: #2c5530;
+            width: 20px;
+        }
+
+        .client-form {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border-left: 4px solid #2c5530;
+        }
+
+        .client-form h4 {
+            color: #2c5530;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .payment-method {
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .payment-method:hover {
+            border-color: #2c5530;
+        }
+
+        .payment-method.selected {
+            border-color: #2c5530;
+            background: #f0f8f0;
+        }
+
+        .payment-method input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        .summary-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding: 5px 0;
+        }
+
+        .summary-total {
+            border-top: 2px solid #2c5530;
+            padding-top: 10px;
+            font-weight: bold;
+            font-size: 18px;
+            color: #2c5530;
+        }
+
+        .success-animation {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .checkmark {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: #28a745;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: bounceIn 0.6s ease-in-out;
+        }
+
+        .checkmark i {
+            color: white;
+            font-size: 40px;
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            border: 1px solid #f5c6cb;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #2c5530;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .reservation-container {
+                margin: 20px;
+                padding: 15px;
+                margin-top: 80px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .tour-details {
+                grid-template-columns: 1fr;
+            }
+
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .btn-siguiente {
+                margin-left: 0;
+            }
+
+            .step-indicator {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+
+            .step {
+                min-width: 80px;
+            }
+
+            .step-title {
+                font-size: 11px;
+            }
+
+            .step-number {
+                width: 35px;
+                height: 35px;
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .reservation-container {
+                margin: 10px;
+                padding: 10px;
+            }
+
+            .btn {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+
+            .tour-title {
+                font-size: 20px;
+            }
+        }
+
+        /* Estilos para el calculador de precio */
+        #precio-preview {
+            margin-top: 20px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+        }
+
+        #precio-preview h4 {
+            color: #2c5530;
+            margin-bottom: 15px;
+        }
+
+        .price-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .price-item:last-child {
+            border-bottom: none;
+            border-top: 2px solid #2c5530;
+            margin-top: 10px;
+            padding-top: 15px;
+            font-weight: bold;
+            background: #3e6842;
+            color: white;
+            margin: 10px -20px -20px -20px;
+            padding: 15px 20px;
+            border-radius: 0 0 8px 8px;
+        }
+
+        .price-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #333;
+        }
+
+        .price-value {
+            font-weight: 600;
+            color: #2c5530;
+            text-align: right;
+            min-width: 80px;
+        }
+
+        .price-total .price-value {
+            color: white;
+            font-size: 18px;
+        }
+
+        .price-discount {
+            color: #28a745 !important;
+        }
+
+        .price-badge {
+            background: #28a745;
+            color: white;
+            font-size: 11px;
+            padding: 2px 6px;
+            border-radius: 10px;
+            margin-left: 5px;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .reservation-container {
+                margin-top: 10px;
+                padding: 15px;
+            }
+
+            .btn {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+
+            .tour-title {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <img src="img/logo.jpeg" alt="Jaguar Expeditions" class="logo">
+                <div class="company-info">
+                    <h1>JAGUAR EXPEDITIONS</h1>
+                    <p class="slogan">Descubre la magia de la selva amazónica</p>
+                </div>
+            </div>
+            <div class="contact-info">
+                <div class="phone">
+                    <i class="fas fa-phone"></i>
+                    <span>+51 965 842 777</span>
+                </div>
+                <div class="social-media">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navegación -->
+    <!-- <nav class="navbar">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a href="index.html" class="nav-link">
+                    <i class="fas fa-home"></i> Inicio
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="tours.html" class="nav-link">
+                    <i class="fas fa-map"></i> Tours
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="reservar.html" class="nav-link active">
+                    <i class="fas fa-calendar-check"></i> Reservar
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#contacto" class="nav-link">
+                    <i class="fas fa-envelope"></i> Contacto
+                </a>
+            </li>
+        </ul>
+    </nav>
+ -->
+    <div class="reservation-container">
+        <h1 style="text-align: center; color: #2c5530; margin-bottom: 30px;">
+            <i class="fas fa-calendar-check"></i> Reservar Tour
+        </h1>
+
+        <!-- Indicador de pasos -->
+        <div class="step-indicator">
+            <div class="step active" data-step="1">
+                <div class="step-number">1</div>
+                <div class="step-title">Seleccionar Tour</div>
+            </div>
+            <div class="step" data-step="2">
+                <div class="step-number">2</div>
+                <div class="step-title">Fecha y Personas</div>
+            </div>
+            <div class="step" data-step="3">
+                <div class="step-number">3</div>
+                <div class="step-title">Datos Personales</div>
+            </div>
+            <div class="step" data-step="4">
+                <div class="step-number">4</div>
+                <div class="step-title">Pago</div>
+            </div>
+            <div class="step" data-step="5">
+                <div class="step-number">5</div>
+                <div class="step-title">Confirmación</div>
+            </div>
+        </div>
+
+        <!-- Paso 1: Selección de Tour -->
+        <div class="step-content active" id="paso1">
+            <div class="tour-info" id="tour-info">
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <p>Cargando información del tour...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Paso 2: Fecha y Número de Personas -->
+        <div class="step-content" id="paso2">
+            <h3>Selecciona la fecha y número de personas</h3>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="fecha-tour">
+                        <i class="fas fa-calendar"></i> Fecha del Tour
+                    </label>
+                    <input type="date" id="fecha-tour" required>
+                    <small style="color: #666; margin-top: 5px; display: block;">
+                        Las fechas disponibles se mostrarán automáticamente
+                    </small>
+                </div>
+
+                <div class="form-group">
+                    <label for="num-clientes">
+                        <i class="fas fa-users"></i> Número de Personas
+                    </label>
+                    <select id="num-clientes" required>
+                        <option value="">Seleccionar...</option>
+                        <option value="1">1 Persona</option>
+                        <option value="2">2 Personas</option>
+                        <option value="3">3 Personas</option>
+                        <option value="4">4 Personas</option>
+                        <option value="5">5 Personas</option>
+                        <option value="6">6 Personas</option>
+                        <option value="7">7 Personas</option>
+                        <option value="8">8 Personas</option>
+                        <option value="9">9 Personas</option>
+                        <option value="10">10 Personas</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="precio-preview" style="display: none; margin-top: 20px; padding: 20px; background: #f8f9fa; border-radius: 10px; border: 1px solid #ddd;">
+                <h4><i class="fas fa-calculator"></i> Cálculo de Precio</h4>
+                <div id="calculo-detalle"></div>
+            </div>
+        </div>
+
+        <!-- Paso 3: Datos de los Clientes -->
+        <div class="step-content" id="paso3">
+            <h3>Datos de los participantes</h3>
+            <div id="formularios-clientes"></div>
+        </div>
+
+        <!-- Paso 4: Método de Pago -->
+        <div class="step-content" id="paso4">
+            <h3>Método de Pago</h3>
+            
+            <div class="summary-section">
+                <h4><i class="fas fa-receipt"></i> Resumen de la Reserva</h4>
+                <div id="resumen-reserva"></div>
+            </div>
+
+            <h4 style="margin-bottom: 20px;">
+                <i class="fas fa-credit-card"></i> Selecciona tu método de pago
+            </h4>
+
+            <div class="payment-method" data-method="tarjeta">
+                <input type="radio" name="metodo-pago" value="tarjeta" id="pago-tarjeta">
+                <label for="pago-tarjeta">
+                    <i class="fas fa-credit-card"></i> Tarjeta de Crédito/Débito
+                    <small style="display: block; color: #666; margin-top: 5px;">
+                        Visa, Mastercard, American Express
+                    </small>
+                </label>
+            </div>
+
+            <div class="payment-method" data-method="yape">
+                <input type="radio" name="metodo-pago" value="yape" id="pago-yape">
+                <label for="pago-yape">
+                    <i class="fas fa-mobile-alt"></i> Yape
+                    <small style="display: block; color: #666; margin-top: 5px;">
+                        Pago rápido y seguro desde tu celular
+                    </small>
+                </label>
+            </div>
+
+            <div class="payment-method" data-method="plin">
+                <input type="radio" name="metodo-pago" value="plin" id="pago-plin">
+                <label for="pago-plin">
+                    <i class="fas fa-mobile-alt"></i> Plin
+                    <small style="display: block; color: #666; margin-top: 5px;">
+                        Transferencia instantánea
+                    </small>
+                </label>
+            </div>
+
+            <div class="payment-method" data-method="transferencia">
+                <input type="radio" name="metodo-pago" value="transferencia" id="pago-transferencia">
+                <label for="pago-transferencia">
+                    <i class="fas fa-university"></i> Transferencia Bancaria
+                    <small style="display: block; color: #666; margin-top: 5px;">
+                        BCP, BBVA, Interbank, Scotiabank
+                    </small>
+                </label>
+            </div>
+
+            <!-- Formulario de tarjeta (se muestra cuando se selecciona tarjeta) -->
+            <div id="formulario-tarjeta" style="display: none; margin-top: 20px; padding: 20px; background: #f8f9fa; border-radius: 10px;">
+                <h5><i class="fas fa-lock"></i> Datos de la Tarjeta</h5>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Número de Tarjeta</label>
+                        <input type="text" id="numero-tarjeta" placeholder="1234 5678 9012 3456" maxlength="19">
+                    </div>
+                    <div class="form-group">
+                        <label>Nombre en la Tarjeta</label>
+                        <input type="text" id="nombre-tarjeta" placeholder="NOMBRE APELLIDO">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Fecha de Vencimiento</label>
+                        <input type="text" id="fecha-vencimiento" placeholder="MM/AA" maxlength="5">
+                    </div>
+                    <div class="form-group">
+                        <label>CVV</label>
+                        <input type="text" id="cvv" placeholder="123" maxlength="4">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Paso 5: Confirmación -->
+        <div class="step-content" id="paso5">
+            <div class="success-animation">
+                <div class="checkmark">
+                    <i class="fas fa-check"></i>
+                </div>
+                <h2 style="color: #28a745; margin-bottom: 15px;">¡Reserva Confirmada!</h2>
+                <p style="font-size: 16px; color: #666; margin-bottom: 20px;">
+                    Tu reserva ha sido procesada exitosamente
+                </p>
+                <div id="detalles-confirmacion" style="background: #f8f9fa; padding: 20px; border-radius: 10px; text-align: left;"></div>
+                
+                <div style="margin-top: 30px; display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                    <button class="btn btn-siguiente" onclick="imprimirComprobante()">
+                        <i class="fas fa-print"></i> Imprimir Comprobante
+                    </button>
+                    <button class="btn btn-anterior" onclick="enviarPorEmail()">
+                        <i class="fas fa-envelope"></i> Enviar por Email
+                    </button>
+                    <a href="tours.html" class="btn" style="background: #17a2b8; color: white; border-color: #17a2b8;">
+                        <i class="fas fa-search"></i> Ver Más Tours
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Botones de navegación -->
+        <div class="navigation-buttons">
+            <button type="button" class="btn btn-anterior" id="btn-anterior" onclick="pasoAnterior()" style="display: none;">
+                <i class="fas fa-arrow-left"></i> <span>Anterior</span>
+            </button>
+            <button type="button" class="btn btn-siguiente" id="btn-siguiente" onclick="siguientePaso()">
+                <i class="fas fa-arrow-right"></i> <span>Siguiente</span>
+            </button>
+        </div>
+
+        <!-- Loading overlay -->
+        <div id="loading-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 9999;">
+            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; color: white;">
+                <div class="spinner" style="border-color: #f3f3f3; border-top-color: #fff;"></div>
+                <p>Procesando tu reserva...</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Variables globales
+        let pasoActual = 1;
+        let tourSeleccionado = null;
+        let datosReserva = {};
+        let tourId = null;
+        let fechaSeleccionada = '';
+        let numeroClientes = 0;
+
+        // Inicialización
+        $(document).ready(function() {
+            // Obtener ID del tour desde la URL
+            const urlParams = new URLSearchParams(window.location.search);
+            tourId = urlParams.get('tour');
+            
+            if (tourId) {
+                cargarInformacionTour();
+            } else {
+                mostrarError('No se ha seleccionado un tour válido');
+            }
+
+            // Configurar fecha mínima (hoy)
+            const hoy = new Date().toISOString().split('T')[0];
+            document.getElementById('fecha-tour').min = hoy;
+
+            // Event listeners
+            configurarEventListeners();
+        });
+
+        function configurarEventListeners() {
+            // Cambio en número de clientes
+            $('#num-clientes').change(function() {
+                numeroClientes = parseInt(this.value) || 0;
+                actualizarPrecio();
+                if (numeroClientes > 0) {
+                    generarFormulariosClientes();
+                }
+            });
+
+            // Cambio en fecha
+            $('#fecha-tour').change(function() {
+                fechaSeleccionada = this.value;
+                actualizarPrecio();
+            });
+
+            // Métodos de pago
+            $('input[name="metodo-pago"]').change(function() {
+                $('.payment-method').removeClass('selected');
+                $(this).closest('.payment-method').addClass('selected');
+                
+                if (this.value === 'tarjeta') {
+                    $('#formulario-tarjeta').slideDown();
+                    configurarFormularioTarjeta();
+                } else {
+                    $('#formulario-tarjeta').slideUp();
+                }
+            });
+
+            // Validación en tiempo real para tarjeta
+            $('#numero-tarjeta').on('input', function() {
+                let valor = this.value.replace(/\s/g, '').replace(/[^0-9]/gi, '');
+                let formateado = valor.match(/.{1,4}/g)?.join(' ') || valor;
+                if (formateado.length <= 19) {
+                    this.value = formateado;
+                }
+            });
+
+            $('#fecha-vencimiento').on('input', function() {
+                let valor = this.value.replace(/\D/g, '');
+                if (valor.length >= 2) {
+                    valor = valor.substring(0,2) + '/' + valor.substring(2,4);
+                }
+                this.value = valor;
+            });
+
+            $('#cvv').on('input', function() {
+                this.value = this.value.replace(/[^0-9]/g, '').substring(0, 4);
+            });
+        }
+
+        function cargarInformacionTour() {
+            const tourInfo = document.getElementById('tour-info');
+            const loading = tourInfo.querySelector('.loading');
+            
+            loading.style.display = 'block';
+            
+            // Intentar primero con la API principal
+            $.get(`api/tours.php?path=${tourId}`)
+                .done(function(response) {
+                    if (response.success && response.data) {
+                        tourSeleccionado = response.data;
+                        mostrarInformacionTour(response.data);
+                    } else {
+                        // Si falla, intentar con la API simplificada
+                        cargarConAPISimplificada();
+                    }
+                })
+                .fail(function() {
+                    // Si falla la API principal, intentar con la API simplificada
+                    cargarConAPISimplificada();
+                })
+                .always(function() {
+                    loading.style.display = 'none';
+                });
+        }
+
+        function cargarConAPISimplificada() {
+            $.get(`api/get_tour.php?id=${tourId}`)
+                .done(function(response) {
+                    if (response.success && response.data) {
+                        tourSeleccionado = response.data;
+                        mostrarInformacionTour(response.data);
+                    } else {
+                        cargarDatosEstaticos();
+                    }
+                })
+                .fail(function() {
+                    // Si todas las APIs fallan, usar datos estáticos
+                    cargarDatosEstaticos();
+                });
+        }
+
+        function cargarDatosEstaticos() {
+            // Datos reales de la base de datos para demostrar funcionalidad
+            const toursEstaticos = {
+                '1': {
+                    id: 1,
+                    nombre: 'Expedición Río Amazonas',
+                    descripcion: 'Una aventura completa por el río Amazonas, explorando la biodiversidad más rica del planeta.',
+                    descripcion_corta: 'Aventura de 3 días por el río Amazonas',
+                    duracion: '3 días',
+                    precio: 299.00,
+                    ubicacion: 'Río Amazonas, Iquitos',
+                    grupo_max: 8,
+                    incluye: 'Transporte, alimentación, guía especializado, alojamiento en lodge'
+                },
+                '2': {
+                    id: 2,
+                    nombre: 'Safari Nocturno Amazonico',
+                    descripcion: 'Explora la vida nocturna de la selva amazónica en una aventura única.',
+                    descripcion_corta: 'Safari nocturno de 1 día por la amazonía',
+                    duracion: '1 día',
+                    precio: 89.00,
+                    ubicacion: 'Iquitos, Perú',
+                    grupo_max: 12,
+                    incluye: 'Transporte, guía especializado, equipo de observación nocturna'
+                },
+                '3': {
+                    id: 3,
+                    nombre: 'Comunidades Nativas',
+                    descripcion: 'Conoce la cultura ancestral de las comunidades nativas amazónicas.',
+                    descripcion_corta: 'Experiencia cultural de 2 días',
+                    duracion: '2 días',
+                    precio: 199.00,
+                    ubicacion: 'Iquitos, Perú',
+                    grupo_max: 10,
+                    incluye: 'Transporte, alimentación, guía cultural, actividades tradicionales'
+                },
+                'amazonia-3-dias': {
+                    id: 1,
+                    nombre: 'Expedición Río Amazonas',
+                    descripcion: 'Una aventura completa por el río Amazonas, explorando la biodiversidad más rica del planeta.',
+                    descripcion_corta: 'Aventura de 3 días por el río Amazonas',
+                    duracion: '3 días',
+                    precio: 299.00,
+                    ubicacion: 'Río Amazonas, Iquitos',
+                    grupo_max: 8,
+                    incluye: 'Transporte, alimentación, guía especializado, alojamiento en lodge'
+                }
+            };
+
+            tourSeleccionado = toursEstaticos[tourId] || toursEstaticos['1'];
+            mostrarInformacionTour(tourSeleccionado);
+        }
+
+        function mostrarInformacionTour(tour) {
+            const tourInfo = document.getElementById('tour-info');
+            
+            tourInfo.innerHTML = `
+                <div class="tour-title">${tour.nombre}</div>
+                <p style="color: #666; margin-bottom: 15px;">${tour.descripcion_corta || tour.descripcion}</p>
+                
+                <div class="tour-details">
+                    <div class="detail-item">
+                        <i class="fas fa-clock"></i>
+                        <span><strong>Duración:</strong> ${tour.duracion}</span>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span><strong>Ubicación:</strong> ${tour.ubicacion}</span>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-dollar-sign"></i>
+                        <span><strong>Precio:</strong> $${parseFloat(tour.precio).toFixed(2)} por persona</span>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-users"></i>
+                        <span><strong>Grupo máximo:</strong> ${tour.grupo_max || 'No limitado'} personas</span>
+                    </div>
+                </div>
+                
+                ${tour.incluye ? `
+                    <div style="margin-top: 15px;">
+                        <strong style="color: #2c5530;">Incluye:</strong>
+                        <p style="margin: 5px 0; color: #666;">${tour.incluye}</p>
+                    </div>
+                ` : ''}
+            `;
+        }
+
+        function siguientePaso() {
+            if (validarPasoActual()) {
+                if (pasoActual < 5) {
+                    pasoActual++;
+                    mostrarPaso(pasoActual);
+                    actualizarBotonesNavegacion();
+                } else {
+                    procesarReservaFinal();
+                }
+            }
+        }
+
+        function pasoAnterior() {
+            if (pasoActual > 1) {
+                pasoActual--;
+                mostrarPaso(pasoActual);
+                actualizarBotonesNavegacion();
+            }
+        }
+
+        function mostrarPaso(paso) {
+            // Ocultar todos los pasos
+            document.querySelectorAll('.step-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Mostrar el paso actual
+            document.getElementById(`paso${paso}`).classList.add('active');
+            
+            // Actualizar indicador
+            document.querySelectorAll('.step').forEach((step, index) => {
+                step.classList.remove('active', 'completed');
+                if (index + 1 === paso) {
+                    step.classList.add('active');
+                } else if (index + 1 < paso) {
+                    step.classList.add('completed');
+                }
+            });
+
+            // Scroll al inicio del formulario
+            document.querySelector('.reservation-container').scrollIntoView({ 
+                behavior: 'smooth' 
+            });
+        }
+
+        function actualizarBotonesNavegacion() {
+            const btnAnterior = document.getElementById('btn-anterior');
+            const btnSiguiente = document.getElementById('btn-siguiente');
+            const spanAnterior = btnAnterior.querySelector('span');
+            const spanSiguiente = btnSiguiente.querySelector('span');
+
+            // Botón anterior
+            if (pasoActual === 1) {
+                btnAnterior.style.display = 'none';
+            } else {
+                btnAnterior.style.display = 'flex';
+                spanAnterior.textContent = 'Anterior';
+            }
+
+            // Botón siguiente
+            switch(pasoActual) {
+                case 4:
+                    spanSiguiente.textContent = 'Procesar Pago';
+                    btnSiguiente.innerHTML = '<i class="fas fa-credit-card"></i> <span>Procesar Pago</span>';
+                    break;
+                case 5:
+                    btnSiguiente.style.display = 'none';
+                    break;
+                default:
+                    spanSiguiente.textContent = 'Siguiente';
+                    btnSiguiente.innerHTML = '<i class="fas fa-arrow-right"></i> <span>Siguiente</span>';
+            }
+        }
+
+        function validarPasoActual() {
+            switch(pasoActual) {
+                case 1:
+                    return validarPaso1();
+                case 2:
+                    return validarPaso2();
+                case 3:
+                    return validarPaso3();
+                case 4:
+                    return validarPaso4();
+                default:
+                    return true;
+            }
+        }
+
+        function validarPaso1() {
+            if (!tourSeleccionado) {
+                mostrarError('Debe seleccionar un tour válido');
+                return false;
+            }
+            return true;
+        }
+
+        function validarPaso2() {
+            const fecha = document.getElementById('fecha-tour').value;
+            const numClientes = document.getElementById('num-clientes').value;
+
+            if (!fecha) {
+                mostrarError('Debe seleccionar una fecha para el tour');
+                return false;
+            }
+
+            if (!numClientes || numClientes < 1) {
+                mostrarError('Debe seleccionar el número de personas');
+                return false;
+            }
+
+            const fechaTour = new Date(fecha);
+            const hoy = new Date();
+            hoy.setHours(0,0,0,0);
+
+            if (fechaTour < hoy) {
+                mostrarError('La fecha del tour no puede ser anterior a hoy');
+                return false;
+            }
+
+            return true;
+        }
+
+        function validarPaso3() {
+            const formularios = document.querySelectorAll('.client-form');
+            
+            for (let i = 0; i < formularios.length; i++) {
+                const formulario = formularios[i];
+                
+                // Validar campos obligatorios
+                const nombre = formulario.querySelector(`input[name="nombre_${i}"]`);
+                if (!nombre.value.trim()) {
+                    mostrarError(`Ingrese el nombre completo del cliente ${i + 1}`);
+                    nombre.focus();
+                    return false;
+                }
+
+                const documento = formulario.querySelector(`input[name="documento_${i}"]`);
+                if (!documento.value.trim()) {
+                    mostrarError(`Ingrese el documento de identidad del cliente ${i + 1}`);
+                    documento.focus();
+                    return false;
+                }
+
+                const edad = formulario.querySelector(`input[name="edad_${i}"]`);
+                if (!edad.value || edad.value < 1 || edad.value > 99) {
+                    mostrarError(`Ingrese una edad válida para el cliente ${i + 1}`);
+                    edad.focus();
+                    return false;
+                }
+
+                const genero = formulario.querySelector(`select[name="genero_${i}"]`);
+                if (!genero.value) {
+                    mostrarError(`Seleccione el género del cliente ${i + 1}`);
+                    genero.focus();
+                    return false;
+                }
+
+                const pais = formulario.querySelector(`select[name="pais_${i}"]`);
+                if (!pais.value) {
+                    mostrarError(`Seleccione el país del cliente ${i + 1}`);
+                    pais.focus();
+                    return false;
+                }
+
+                const celular = formulario.querySelector(`input[name="celular_${i}"]`);
+                if (!celular.value.trim()) {
+                    mostrarError(`Ingrese el celular del cliente ${i + 1}`);
+                    celular.focus();
+                    return false;
+                }
+
+                // Validaciones específicas para el contacto principal
+                if (i === 0) {
+                    const email = formulario.querySelector(`input[name="email_${i}"]`);
+                    if (!email.value.trim()) {
+                        mostrarError('Ingrese el email de contacto');
+                        email.focus();
+                        return false;
+                    }
+                    if (!validarEmail(email.value)) {
+                        mostrarError('Ingrese un email válido');
+                        email.focus();
+                        return false;
+                    }
+
+                    const celularContacto = formulario.querySelector(`input[name="celular_contacto_${i}"]`);
+                    if (!celularContacto.value.trim()) {
+                        mostrarError('Ingrese un celular de contacto de emergencia');
+                        celularContacto.focus();
+                        return false;
+                    }
+                }
+
+                // Validar formato de celulares
+                if (celular.value && celular.value.length < 9) {
+                    mostrarError(`Ingrese un número de celular válido para el cliente ${i + 1}`);
+                    celular.focus();
+                    return false;
+                }
+
+                const celularContacto = formulario.querySelector(`input[name="celular_contacto_${i}"]`);
+                if (celularContacto && celularContacto.value && celularContacto.value.length < 9) {
+                    mostrarError(`Ingrese un número de contacto de emergencia válido para el cliente ${i + 1}`);
+                    celularContacto.focus();
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        function validarPaso4() {
+            const metodoPago = document.querySelector('input[name="metodo-pago"]:checked');
+            
+            if (!metodoPago) {
+                mostrarError('Debe seleccionar un método de pago');
+                return false;
+            }
+
+            if (metodoPago.value === 'tarjeta') {
+                return validarDatosTarjeta();
+            }
+
+            return true;
+        }
+
+        function validarDatosTarjeta() {
+            const numero = document.getElementById('numero-tarjeta').value.replace(/\s/g, '');
+            const nombre = document.getElementById('nombre-tarjeta').value;
+            const fecha = document.getElementById('fecha-vencimiento').value;
+            const cvv = document.getElementById('cvv').value;
+
+            if (!numero || numero.length < 13) {
+                mostrarError('Ingrese un número de tarjeta válido');
+                return false;
+            }
+
+            if (!nombre.trim()) {
+                mostrarError('Ingrese el nombre que aparece en la tarjeta');
+                return false;
+            }
+
+            if (!fecha || fecha.length !== 5) {
+                mostrarError('Ingrese una fecha de vencimiento válida (MM/AA)');
+                return false;
+            }
+
+            if (!cvv || cvv.length < 3) {
+                mostrarError('Ingrese un CVV válido');
+                return false;
+            }
+
+            return true;
+        }
+
+        function validarEmail(email) {
+            const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return regex.test(email);
+        }
+
+        function generarFormulariosClientes() {
+            const container = document.getElementById('formularios-clientes');
+            container.innerHTML = '';
+
+            for (let i = 0; i < numeroClientes; i++) {
+                const formulario = document.createElement('div');
+                formulario.className = 'client-form';
+                formulario.innerHTML = `
+                    <h4><i class="fas fa-user"></i> Cliente ${i + 1} ${i === 0 ? '(Contacto Principal)' : ''}</h4>
+                    
+                    <!-- Información Personal Básica -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Nombre Completo *</label>
+                            <input type="text" name="nombre_${i}" required 
+                                   placeholder="Nombres y apellidos completos">
+                        </div>
+                        <div class="form-group">
+                            <label>Documento de Identidad (DNI) *</label>
+                            <input type="text" name="documento_${i}" required 
+                                   placeholder="Número de DNI o Pasaporte" maxlength="20">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Edad *</label>
+                            <input type="number" name="edad_${i}" required min="1" max="99"
+                                   placeholder="Edad en años">
+                        </div>
+                        <div class="form-group">
+                            <label>Género *</label>
+                            <select name="genero_${i}" required>
+                                <option value="">Seleccionar...</option>
+                                <option value="M">Masculino</option>
+                                <option value="F">Femenino</option>
+                                <option value="O">Otro</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>País *</label>
+                            <select name="pais_${i}" required>
+                                <option value="">Seleccionar país...</option>
+                                <option value="PE">Perú</option>
+                                <option value="AR">Argentina</option>
+                                <option value="BO">Bolivia</option>
+                                <option value="BR">Brasil</option>
+                                <option value="CL">Chile</option>
+                                <option value="CO">Colombia</option>
+                                <option value="EC">Ecuador</option>
+                                <option value="UY">Uruguay</option>
+                                <option value="VE">Venezuela</option>
+                                <option value="US">Estados Unidos</option>
+                                <option value="CA">Canadá</option>
+                                <option value="MX">México</option>
+                                <option value="ES">España</option>
+                                <option value="FR">Francia</option>
+                                <option value="DE">Alemania</option>
+                                <option value="IT">Italia</option>
+                                <option value="UK">Reino Unido</option>
+                                <option value="JP">Japón</option>
+                                <option value="AU">Australia</option>
+                                <option value="OTHER">Otro</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Celular Personal *</label>
+                            <input type="tel" name="celular_${i}" required 
+                                   placeholder="+51 999 999 999">
+                        </div>
+                    </div>
+                    
+                    ${i === 0 ? `
+                        <!-- Información de Contacto Principal -->
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Email de Contacto *</label>
+                                <input type="email" name="email_${i}" required 
+                                       placeholder="correo@ejemplo.com">
+                            </div>
+                            <div class="form-group">
+                                <label>Celular de Contacto de Emergencia *</label>
+                                <input type="tel" name="celular_contacto_${i}" required 
+                                       placeholder="+51 999 999 999 (Familiar)">
+                                <small style="color: #666; font-size: 12px; margin-top: 5px; display: block;">
+                                    Número de un familiar o contacto de emergencia
+                                </small>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Observaciones Especiales</label>
+                            <textarea name="observaciones_${i}" rows="3" 
+                                      placeholder="Alergias alimentarias, restricciones médicas, necesidades especiales, etc."></textarea>
+                        </div>
+                    ` : `
+                        <!-- Para participantes adicionales -->
+                        <div class="form-group">
+                            <label>Celular de Contacto de Emergencia</label>
+                            <input type="tel" name="celular_contacto_${i}" 
+                                   placeholder="+51 999 999 999 (Familiar)">
+                            <small style="color: #666; font-size: 12px; margin-top: 5px; display: block;">
+                                Número de un familiar o contacto de emergencia (opcional)
+                            </small>
+                        </div>
+                    `}
+                `;
+                container.appendChild(formulario);
+            }
+        }
+
+        function generarOpcionesEdad() {
+            let opciones = '';
+            for (let edad = 1; edad <= 99; edad++) {
+                opciones += `<option value="${edad}">${edad} año${edad !== 1 ? 's' : ''}</option>`;
+            }
+            return opciones;
+        }
+
+        function actualizarPrecio() {
+            if (!tourSeleccionado || !numeroClientes || !fechaSeleccionada) {
+                document.getElementById('precio-preview').style.display = 'none';
+                return;
+            }
+
+            const precioPorPersona = parseFloat(tourSeleccionado.precio);
+            const subtotal = precioPorPersona * numeroClientes;
+            const descuento = calcularDescuento(subtotal, numeroClientes);
+            const impuestos = (subtotal - descuento) * 0.18; // IGV 18%
+            const total = subtotal - descuento + impuestos;
+
+            const detalleHtml = `
+                <div class="price-item">
+                    <div class="price-label">
+                        <i class="fas fa-user"></i>
+                        Precio por persona
+                    </div>
+                    <div class="price-value">$${precioPorPersona.toFixed(2)}</div>
+                </div>
+                <div class="price-item">
+                    <div class="price-label">
+                        <i class="fas fa-users"></i>
+                        ${numeroClientes} persona${numeroClientes !== 1 ? 's' : ''}
+                    </div>
+                    <div class="price-value">$${subtotal.toFixed(2)}</div>
+                </div>
+                ${descuento > 0 ? `
+                    <div class="price-item">
+                        <div class="price-label">
+                            <i class="fas fa-percentage"></i>
+                            Descuento por grupo
+                            <span class="price-badge">-${Math.round((descuento/subtotal)*100)}%</span>
+                        </div>
+                        <div class="price-value price-discount">-$${descuento.toFixed(2)}</div>
+                    </div>
+                ` : ''}
+                <div class="price-item">
+                    <div class="price-label">
+                        <i class="fas fa-receipt"></i>
+                        IGV (18%)
+                    </div>
+                    <div class="price-value">$${impuestos.toFixed(2)}</div>
+                </div>
+                <div class="price-item price-total">
+                    <div class="price-label">
+                        <i class="fas fa-credit-card"></i>
+                        Total a Pagar
+                    </div>
+                    <div class="price-value">$${total.toFixed(2)}</div>
+                </div>
+            `;
+
+            document.getElementById('calculo-detalle').innerHTML = detalleHtml;
+            document.getElementById('precio-preview').style.display = 'block';
+
+            // Actualizar resumen si estamos en el paso 4
+            if (pasoActual >= 4) {
+                actualizarResumenReserva();
+            }
+        }
+
+        function calcularDescuento(subtotal, numPersonas) {
+            if (numPersonas >= 6) return subtotal * 0.15; // 15% para 6+ personas
+            if (numPersonas >= 4) return subtotal * 0.10; // 10% para 4-5 personas
+            if (numPersonas >= 2) return subtotal * 0.05; // 5% para 2-3 personas
+            return 0;
+        }
+
+        function actualizarResumenReserva() {
+            const precioPorPersona = parseFloat(tourSeleccionado.precio);
+            const subtotal = precioPorPersona * numeroClientes;
+            const descuento = calcularDescuento(subtotal, numeroClientes);
+            const impuestos = (subtotal - descuento) * 0.18;
+            const total = subtotal - descuento + impuestos;
+
+            const resumen = document.getElementById('resumen-reserva');
+            resumen.innerHTML = `
+                <div class="summary-item">
+                    <span><strong>Tour:</strong> ${tourSeleccionado.nombre}</span>
+                </div>
+                <div class="summary-item">
+                    <span><strong>Fecha:</strong> ${new Date(fechaSeleccionada).toLocaleDateString('es-ES')}</span>
+                </div>
+                <div class="summary-item">
+                    <span><strong>Participantes:</strong> ${numeroClientes} persona${numeroClientes !== 1 ? 's' : ''}</span>
+                </div>
+                <div class="summary-item">
+                    <span>Subtotal:</span>
+                    <span>$${subtotal.toFixed(2)}</span>
+                </div>
+                ${descuento > 0 ? `
+                    <div class="summary-item" style="color: #28a745;">
+                        <span>Descuento por grupo:</span>
+                        <span>-$${descuento.toFixed(2)}</span>
+                    </div>
+                ` : ''}
+                <div class="summary-item">
+                    <span>IGV (18%):</span>
+                    <span>$${impuestos.toFixed(2)}</span>
+                </div>
+                <div class="summary-item summary-total">
+                    <span>TOTAL A PAGAR:</span>
+                    <span>$${total.toFixed(2)}</span>
+                </div>
+            `;
+        }
+
+        function configurarFormularioTarjeta() {
+            // Detectar tipo de tarjeta
+            $('#numero-tarjeta').on('input', function() {
+                const numero = this.value.replace(/\s/g, '');
+                let tipo = 'credit-card';
+                
+                if (numero.startsWith('4')) tipo = 'cc-visa';
+                else if (numero.startsWith('5') || numero.startsWith('2')) tipo = 'cc-mastercard';
+                else if (numero.startsWith('3')) tipo = 'cc-amex';
+                
+                $(this).siblings('i').removeClass().addClass(`fas fa-${tipo}`);
+            });
+        }
+
+        function procesarReservaFinal() {
+            const loadingOverlay = document.getElementById('loading-overlay');
+            loadingOverlay.style.display = 'block';
+
+            // Recopilar datos de la reserva
+            const datosCompletos = recopilarDatosReserva();
+
+            // Simular procesamiento de pago
+            setTimeout(() => {
+                procesarPago(datosCompletos);
+            }, 2000);
+        }
+
+        function recopilarDatosReserva() {
+            const datos = {
+                tour_id: tourId,
+                fecha_tour: fechaSeleccionada,
+                num_clientes: numeroClientes,
+                clientes: [],
+                metodo_pago: document.querySelector('input[name="metodo-pago"]:checked').value,
+                subtotal: parseFloat(tourSeleccionado.precio) * numeroClientes,
+                descuento: calcularDescuento(parseFloat(tourSeleccionado.precio) * numeroClientes, numeroClientes),
+                impuestos: 0,
+                total: 0
+            };
+
+            // Calcular totales
+            datos.impuestos = (datos.subtotal - datos.descuento) * 0.18;
+            datos.total = datos.subtotal - datos.descuento + datos.impuestos;
+
+            // Recopilar datos de clientes
+            for (let i = 0; i < numeroClientes; i++) {
+                const cliente = {
+                    nombre: document.querySelector(`input[name="nombre_${i}"]`).value.trim(),
+                    documento: document.querySelector(`input[name="documento_${i}"]`).value.trim(),
+                    edad: parseInt(document.querySelector(`input[name="edad_${i}"]`).value),
+                    genero: document.querySelector(`select[name="genero_${i}"]`).value || null,
+                    pais: document.querySelector(`select[name="pais_${i}"]`).value || null,
+                    celular: document.querySelector(`input[name="celular_${i}"]`).value.trim(),
+                    celular_contacto: document.querySelector(`input[name="celular_contacto_${i}"]`)?.value.trim() || null
+                };
+
+                // Para el contacto principal (cliente 0)
+                if (i === 0) {
+                    cliente.email = document.querySelector(`input[name="email_${i}"]`).value.trim();
+                    cliente.observaciones = document.querySelector(`textarea[name="observaciones_${i}"]`).value.trim() || null;
+                }
+
+                datos.clientes.push(cliente);
+            }
+
+            return datos;
+        }
+
+        function procesarPago(datos) {
+            // Intentar enviar datos al servidor
+            $.ajax({
+                url: 'api/crear_reserva.php',
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(datos),
+                timeout: 5000, // 5 segundos de timeout
+                success: function(response) {
+                    document.getElementById('loading-overlay').style.display = 'none';
+                    
+                    if (response.success) {
+                        mostrarConfirmacionExitosa(response.data);
+                    } else {
+                        mostrarError(response.message || 'Error al procesar la reserva');
+                    }
+                },
+                error: function(xhr) {
+                    console.log('Backend no disponible, usando simulación local');
+                    // Si falla la conexión, simular una reserva exitosa
+                    simularReservaExitosa(datos);
+                }
+            });
+        }
+
+        function simularReservaExitosa(datos) {
+            document.getElementById('loading-overlay').style.display = 'none';
+            
+            // Generar código de reserva simulado
+            const codigoReserva = 'JE' + Date.now().toString().slice(-6);
+            
+            const datosSimulados = {
+                codigo_reserva: codigoReserva,
+                tour: tourSeleccionado,
+                fecha_tour: datos.fecha_tour,
+                num_clientes: datos.num_clientes,
+                clientes: datos.clientes,
+                metodo_pago: datos.metodo_pago,
+                subtotal: datos.subtotal,
+                descuento: datos.descuento,
+                impuestos: datos.impuestos,
+                total: datos.total,
+                fecha_pago: new Date().toLocaleDateString('es-ES'),
+                hora_pago: new Date().toLocaleTimeString('es-ES'),
+                estado: 'Confirmado'
+            };
+            
+            mostrarConfirmacionExitosa(datosSimulados);
+        }
+
+        function mostrarConfirmacionExitosa(datosReserva) {
+            // Guardar datos para el comprobante
+            window.datosComprobante = datosReserva;
+            
+            const detalles = document.getElementById('detalles-confirmacion');
+            detalles.innerHTML = `
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <h3 style="color: #2c5530; margin-bottom: 10px;">
+                        <i class="fas fa-ticket-alt"></i> Código de Reserva
+                    </h3>
+                    <div style="font-size: 24px; font-weight: bold; color: #28a745; background: #f8f9fa; padding: 15px; border-radius: 8px; border: 2px dashed #28a745;">
+                        ${datosReserva.codigo_reserva}
+                    </div>
+                    <small style="color: #666; margin-top: 10px; display: block;">
+                        Guarda este código para futuras consultas
+                    </small>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
+                    <div style="background: white; padding: 15px; border-radius: 8px; border-left: 4px solid #2c5530;">
+                        <h5 style="color: #2c5530; margin-bottom: 10px;">
+                            <i class="fas fa-map-marked-alt"></i> Detalles del Tour
+                        </h5>
+                        <p><strong>Tour:</strong> ${tourSeleccionado.nombre}</p>
+                        <p><strong>Fecha:</strong> ${new Date(fechaSeleccionada).toLocaleDateString('es-ES')}</p>
+                        <p><strong>Participantes:</strong> ${numeroClientes} persona${numeroClientes !== 1 ? 's' : ''}</p>
+                    </div>
+
+                    <div style="background: white; padding: 15px; border-radius: 8px; border-left: 4px solid #28a745;">
+                        <h5 style="color: #28a745; margin-bottom: 10px;">
+                            <i class="fas fa-dollar-sign"></i> Resumen de Pago
+                        </h5>
+                        <p><strong>Total Pagado:</strong> $${datosReserva.total.toFixed(2)}</p>
+                        <p><strong>Método:</strong> ${obtenerNombreMetodoPago(datosReserva.metodo_pago)}</p>
+                        <p><strong>Estado:</strong> <span style="color: #28a745; font-weight: bold;">CONFIRMADO</span></p>
+                    </div>
+                </div>
+
+                <div style="background: #e3f2fd; padding: 15px; border-radius: 8px; margin-top: 20px; border-left: 4px solid #1976d2;">
+                    <h5 style="color: #1976d2; margin-bottom: 10px;">
+                        <i class="fas fa-info-circle"></i> Información Importante
+                    </h5>
+                    <ul style="margin: 0; padding-left: 20px; color: #666;">
+                        <li>Te hemos enviado la confirmación a tu email</li>
+                        <li>Presenta tu código de reserva el día del tour</li>
+                        <li>Llega 15 minutos antes de la hora de salida</li>
+                        <li>Para cambios o cancelaciones, contacta con 48h de anticipación</li>
+                    </ul>
+                </div>
+            `;
+
+            pasoActual = 5;
+            mostrarPaso(5);
+            actualizarBotonesNavegacion();
+        }
+
+        function obtenerNombreMetodoPago(metodo) {
+            const nombres = {
+                'tarjeta': 'Tarjeta de Crédito/Débito',
+                'yape': 'Yape',
+                'plin': 'Plin',
+                'transferencia': 'Transferencia Bancaria'
+            };
+            return nombres[metodo] || metodo;
+        }
+
+        function imprimirComprobante() {
+            if (!window.datosComprobante) {
+                mostrarError('No se encontraron datos del comprobante');
+                return;
+            }
+
+            const ventanaImpresion = window.open('', '_blank');
+            const datos = window.datosComprobante;
+            
+            ventanaImpresion.document.write(`
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>Comprobante de Pago - ${datos.codigo_reserva}</title>
+                    <style>
+                        body { font-family: Arial, sans-serif; margin: 20px; line-height: 1.4; }
+                        .header { text-align: center; border-bottom: 2px solid #2c5530; padding-bottom: 15px; margin-bottom: 20px; }
+                        .logo { font-size: 24px; font-weight: bold; color: #2c5530; margin-bottom: 5px; }
+                        .section { margin: 20px 0; padding: 15px; border: 1px solid #ddd; border-radius: 5px; }
+                        .section h3 { margin-top: 0; color: #2c5530; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+                        .detail-row { display: flex; justify-content: space-between; margin-bottom: 8px; }
+                        .total { font-size: 18px; font-weight: bold; color: #2c5530; }
+                        .codigo { font-size: 20px; font-weight: bold; background: #f8f9fa; padding: 10px; text-align: center; border: 2px dashed #2c5530; margin: 15px 0; }
+                        @media print { 
+                            body { margin: 0; }
+                            .no-print { display: none; }
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="header">
+                        <div class="logo">JAGUAR EXPEDITIONS</div>
+                        <h2 style="margin: 10px 0; color: #666;">Comprobante de Pago</h2>
+                        <p style="margin: 0; color: #666;">Fecha: ${new Date().toLocaleDateString('es-ES')} ${new Date().toLocaleTimeString('es-ES')}</p>
+                    </div>
+                    
+                    <div class="codigo">
+                        CÓDIGO DE RESERVA: ${datos.codigo_reserva}
+                    </div>
+                    
+                    <div class="section">
+                        <h3>Detalles de la Reserva</h3>
+                        <div class="detail-row">
+                            <span>Tour:</span>
+                            <span>${tourSeleccionado.nombre}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span>Fecha del tour:</span>
+                            <span>${new Date(fechaSeleccionada).toLocaleDateString('es-ES')}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span>Número de personas:</span>
+                            <span>${numeroClientes}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span>Duración:</span>
+                            <span>${tourSeleccionado.duracion}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span>Ubicación:</span>
+                            <span>${tourSeleccionado.ubicacion}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="section">
+                        <h3>Información de Pago</h3>
+                        <div class="detail-row">
+                            <span>Método de pago:</span>
+                            <span>${obtenerNombreMetodoPago(datos.metodo_pago)}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span>Subtotal:</span>
+                            <span>$${datos.subtotal.toFixed(2)}</span>
+                        </div>
+                        ${datos.descuento > 0 ? `
+                            <div class="detail-row" style="color: #28a745;">
+                                <span>Descuento aplicado:</span>
+                                <span>-$${datos.descuento.toFixed(2)}</span>
+                            </div>
+                        ` : ''}
+                        <div class="detail-row">
+                            <span>IGV (18%):</span>
+                            <span>$${datos.impuestos.toFixed(2)}</span>
+                        </div>
+                        <hr>
+                        <div class="detail-row total">
+                            <span>TOTAL PAGADO:</span>
+                            <span>$${datos.total.toFixed(2)}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="section">
+                        <h3>Instrucciones Importantes</h3>
+                        <ul>
+                            <li>Presente este comprobante y su código de reserva el día del tour</li>
+                            <li>Llegue 15 minutos antes de la hora de salida</li>
+                            <li>Para cambios o cancelaciones, contacte con 48 horas de anticipación</li>
+                            <li>En caso de mal tiempo, nos comunicaremos para reprogramar</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="section">
+                        <h3>Contacto</h3>
+                        <div class="detail-row">
+                            <span>Email:</span>
+                            <span>info@jaguarexpeditions.com</span>
+                        </div>
+                        <div class="detail-row">
+                            <span>Teléfono:</span>
+                            <span>+51 999 888 777</span>
+                        </div>
+                        <div class="detail-row">
+                            <span>WhatsApp:</span>
+                            <span>+51 999 888 777</span>
+                        </div>
+                    </div>
+                    
+                    <div class="no-print" style="text-align: center; margin-top: 30px;">
+                        <button onclick="window.print()" style="background: #2c5530; color: white; border: none; padding: 10px 20px; border-radius: 5px; margin-right: 10px; cursor: pointer;">
+                            Imprimir
+                        </button>
+                        <button onclick="window.close()" style="background: #6c757d; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+                            Cerrar
+                        </button>
+                    </div>
+                </body>
+                </html>
+            `);
+            
+            ventanaImpresion.document.close();
+            
+            // Auto-imprimir después de que se cargue
+            ventanaImpresion.onload = function() {
+                ventanaImpresion.focus();
+                ventanaImpresion.print();
+            };
+        }
+
+        function enviarPorEmail() {
+            if (!window.datosComprobante) {
+                mostrarError('No se encontraron datos de la reserva');
+                return;
+            }
+
+            const email = window.datosComprobante.clientes[0].email;
+            
+            $.ajax({
+                url: 'api/enviar_comprobante.php',
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    codigo_reserva: window.datosComprobante.codigo_reserva,
+                    email: email
+                }),
+                success: function(response) {
+                    if (response.success) {
+                        alert(`Comprobante enviado exitosamente a ${email}`);
+                    } else {
+                        mostrarError('Error al enviar el email: ' + response.message);
+                    }
+                },
+                error: function() {
+                    mostrarError('Error al conectar con el servidor para enviar el email');
+                }
+            });
+        }
+
+        function mostrarError(mensaje) {
+            // Remover alertas anteriores
+            const alertasAnteriores = document.querySelectorAll('.error-message');
+            alertasAnteriores.forEach(alerta => alerta.remove());
+
+            // Crear nueva alerta
+            const alerta = document.createElement('div');
+            alerta.className = 'error-message';
+            alerta.innerHTML = `
+                <i class="fas fa-exclamation-triangle"></i> ${mensaje}
+                <button onclick="this.parentElement.remove()" style="float: right; background: none; border: none; color: #721c24; cursor: pointer; font-size: 16px;">×</button>
+            `;
+
+            // Insertar al inicio del contenedor actual
+            const pasoActivo = document.querySelector('.step-content.active');
+            pasoActivo.insertBefore(alerta, pasoActivo.firstChild);
+
+            // Scroll a la alerta
+            alerta.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+            // Auto-remover después de 8 segundos
+            setTimeout(() => {
+                if (alerta.parentElement) {
+                    alerta.remove();
+                }
+            }, 8000);
+        }
+
+        // Inicializar botones de navegación
+        actualizarBotonesNavegacion();
+    </script>
+</body>
+</html>

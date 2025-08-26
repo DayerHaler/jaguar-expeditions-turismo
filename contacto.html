@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto - Jaguar Expeditions</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="responsive.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <!-- Logo y nombre -->
+                <div class="logo-section">
+                    <img src="img/logo.jpeg" alt="Jaguar Expeditions Logo" class="logo">
+                    <div class="company-info">
+                        <h1 class="company-name">Jaguar Expeditions</h1>
+                        <p class="slogan">Más que un tour, una aventura salvaje.</p>
+                    </div>
+                </div>
+                
+                <!-- Información de contacto -->
+                <div class="contact-info">
+                    <div class="phone">
+                        <i class="fas fa-phone"></i>
+                        <span>+51 999 123 456</span>
+                    </div>
+                    
+                    <!-- Redes sociales -->
+                    <div class="social-media">
+                        <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-tripadvisor"></i></a>
+                    </div>
+                    
+                    <!-- Selector de idioma -->
+                    <div class="language-selector">
+                        <select id="language">
+                            <option value="es">ES</option>
+                            <option value="en">EN</option>
+                            <option value="pt">PT</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Buscador -->
+                    <div class="search-box">
+                        <input type="text" placeholder="Buscar tours...">
+                        <button><i class="fas fa-search"></i></button>
+                    </div>
+                    
+                    <!-- Carrito -->
+                    <div class="cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navegación -->
+    <nav class="navbar">
+        <div class="container">
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Inicio</a></li>
+                <li><a href="tours.html" class="nav-link">Tours</a></li>
+                <li><a href="contacto.html" class="nav-link active">Contacto</a></li>
+                <li><a href="preguntas.html" class="nav-link">Preguntas</a></li>
+                <li><a href="galeria.html" class="nav-link">Galería</a></li>
+                <li><a href="nosotros.html" class="nav-link">Nosotros</a></li>
+            </ul>
+            
+            <!-- Menú hamburguesa para móviles -->
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sección Principal - Contacto -->
+    <main id="contacto">
+        <!-- Hero Section -->
+        <section class="page-hero">
+            <div class="hero-background">
+                <img src="img/fondo.jpeg" alt="Contacto Jaguar Expeditions">
+                <div class="hero-overlay"></div>
+            </div>
+            <div class="hero-content">
+                <h1>Contacta con Nosotros</h1>
+                <p>Estamos aquí para hacer realidad tu aventura amazónica</p>
+            </div>
+        </section>
+
+        <!-- Información de Contacto -->
+        <section class="contact-main">
+            <div class="container">
+                <div class="contact-grid">
+                    <!-- Información de contacto -->
+                    <div class="contact-info-section">
+                        <h2>Información de Contacto</h2>
+                        <div class="contact-cards">
+                            <div class="contact-card">
+                                <div class="contact-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div class="contact-details">
+                                    <h3>Ubicación</h3>
+                                    <p>Jr. Putumayo 184, Iquitos 16001<br>Loreto, Perú</p>
+                                </div>
+                            </div>
+
+                            <div class="contact-card">
+                                <div class="contact-icon">
+                                    <i class="fas fa-phone"></i>
+                                </div>
+                                <div class="contact-details">
+                                    <h3>Teléfono</h3>
+                                    <p>+51 999 123 456<br>Disponible 24/7</p>
+                                </div>
+                            </div>
+
+                            <div class="contact-card">
+                                <div class="contact-icon">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div class="contact-details">
+                                    <h3>Email</h3>
+                                    <p>info@jaguarexpeditions.com<br>reservas@jaguarexpeditions.com</p>
+                                </div>
+                            </div>
+
+                            <div class="contact-card">
+                                <div class="contact-icon">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div class="contact-details">
+                                    <h3>Horarios</h3>
+                                    <p>Lunes a Domingo<br>8:00 AM - 7:00 PM</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Botones de contacto directo -->
+                        <div class="contact-buttons">
+                            <a href="tel:+51999123456" class="btn-contact primary">
+                                <i class="fas fa-phone"></i>
+                                Llamar Ahora
+                            </a>
+                            <a href="https://wa.me/51999123456" target="_blank" class="btn-contact whatsapp">
+                                <i class="fab fa-whatsapp"></i>
+                                WhatsApp
+                            </a>
+                            <a href="mailto:info@jaguarexpeditions.com" class="btn-contact email">
+                                <i class="fas fa-envelope"></i>
+                                Enviar Email
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Formulario de contacto -->
+                    <div class="contact-form-section">
+                        <h2>Envíanos un Mensaje</h2>
+                        <form class="contact-form" id="contactForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="nombre">Nombre Completo *</label>
+                                    <input type="text" id="nombre" name="nombre" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email *</label>
+                                    <input type="email" id="email" name="email" required>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="telefono">Teléfono</label>
+                                    <input type="tel" id="telefono" name="telefono">
+                                </div>
+                                <div class="form-group">
+                                    <label for="pais">País de Origen</label>
+                                    <select id="pais" name="pais">
+                                        <option value="">Seleccionar país</option>
+                                        <option value="PE">Perú</option>
+                                        <option value="AR">Argentina</option>
+                                        <option value="BR">Brasil</option>
+                                        <option value="CL">Chile</option>
+                                        <option value="CO">Colombia</option>
+                                        <option value="EC">Ecuador</option>
+                                        <option value="US">Estados Unidos</option>
+                                        <option value="ES">España</option>
+                                        <option value="FR">Francia</option>
+                                        <option value="DE">Alemania</option>
+                                        <option value="IT">Italia</option>
+                                        <option value="UK">Reino Unido</option>
+                                        <option value="CA">Canadá</option>
+                                        <option value="AU">Australia</option>
+                                        <option value="JP">Japón</option>
+                                        <option value="OTHER">Otro</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="fechaViaje">Fecha Preferida de Viaje</label>
+                                    <input type="date" id="fechaViaje" name="fechaViaje">
+                                </div>
+                                <div class="form-group">
+                                    <label for="personas">Número de Personas</label>
+                                    <select id="personas" name="personas">
+                                        <option value="1">1 persona</option>
+                                        <option value="2">2 personas</option>
+                                        <option value="3">3 personas</option>
+                                        <option value="4">4 personas</option>
+                                        <option value="5">5 personas</option>
+                                        <option value="6+">6+ personas</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="tourInteres">Tour de Interés</label>
+                                <select id="tourInteres" name="tourInteres">
+                                    <option value="">Seleccionar tour</option>
+                                    <option value="rio-amazonas">Expedición Río Amazonas</option>
+                                    <option value="safari-nocturno">Safari Nocturno</option>
+                                    <option value="comunidades-nativas">Comunidades Nativas</option>
+                                    <option value="aventura-extrema">Aventura Extrema</option>
+                                    <option value="tour-personalizado">Tour Personalizado</option>
+                                    <option value="otro">Otro</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="mensaje">Mensaje *</label>
+                                <textarea id="mensaje" name="mensaje" rows="5" placeholder="Cuéntanos sobre tu aventura ideal en la Amazonía..." required></textarea>
+                            </div>
+
+                            <div class="form-group checkbox-group">
+                                <input type="checkbox" id="newsletter" name="newsletter">
+                                <label for="newsletter">Quiero recibir ofertas especiales y noticias por email</label>
+                            </div>
+
+                            <div class="form-group checkbox-group">
+                                <input type="checkbox" id="terminos" name="terminos" required>
+                                <label for="terminos">Acepto los <a href="#" class="terms-link">términos y condiciones</a> y la <a href="#" class="privacy-link">política de privacidad</a> *</label>
+                            </div>
+
+                            <button type="submit" class="btn-submit">
+                                <i class="fas fa-paper-plane"></i>
+                                Enviar Mensaje
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mapa -->
+        <section class="contact-map">
+            <div class="container">
+                <h2>Encuéntranos</h2>
+                <div class="map-container">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3969.4756339282814!2d-73.25093708469!3d-3.7436994972404!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91ea00fc4c7a6c9b%3A0x4c9f8a8a8a8a8a8a!2sIquitos%2C%20Peru!5e0!3m2!1sen!2sus!4v1692181234567!5m2!1sen!2sus"
+                        width="100%" 
+                        height="400" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade"
+                        title="Ubicación Jaguar Expeditions Iquitos">
+                    </iframe>
+                    <div class="map-overlay">
+                        <a href="https://maps.app.goo.gl/Koz8zbmThWb59ikH9" target="_blank" class="map-button">
+                            <i class="fas fa-external-link-alt"></i>
+                            Abrir en Google Maps
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Métodos de Contacto Alternativos -->
+        <section class="alternative-contact">
+            <div class="container">
+                <h2>Otras Formas de Contactarnos</h2>
+                <div class="contact-methods">
+                    <div class="method-card">
+                        <div class="method-icon">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <h3>WhatsApp Business</h3>
+                        <p>Respuesta inmediata para consultas rápidas</p>
+                        <a href="https://wa.me/51999123456" target="_blank" class="method-link">+51 999 123 456</a>
+                    </div>
+
+                    <div class="method-card">
+                        <div class="method-icon">
+                            <i class="fab fa-facebook-messenger"></i>
+                        </div>
+                        <h3>Facebook Messenger</h3>
+                        <p>Chatea con nosotros en Facebook</p>
+                        <a href="#" target="_blank" class="method-link">@JaguarExpeditions</a>
+                    </div>
+
+                    <div class="method-card">
+                        <div class="method-icon">
+                            <i class="fab fa-skype"></i>
+                        </div>
+                        <h3>Videollamada</h3>
+                        <p>Consulta personalizada por Skype</p>
+                        <a href="#" class="method-link">jaguar.expeditions</a>
+                    </div>
+
+                    <div class="method-card">
+                        <div class="method-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <h3>Chat en Vivo</h3>
+                        <p>Asistencia en tiempo real</p>
+                        <button class="method-link" onclick="openLiveChat()">Iniciar Chat</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Jaguar Expeditions</h3>
+                    <p>Tu puerta de entrada a la aventura amazónica más auténtica</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> Iquitos, Perú</p>
+                    <p><i class="fas fa-phone"></i> +51 999 123 456</p>
+                    <p><i class="fas fa-envelope"></i> info@jaguarexpeditions.com</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Síguenos</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#"><i class="fab fa-tripadvisor"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2025 Jaguar Expeditions. Todos los derechos reservados.</p>
+                    <div class="footer-links">
+                        <a href="#" class="terms-link">
+                            <i class="fas fa-file-contract"></i>
+                            Términos y Condiciones
+                        </a>
+                        <a href="#" class="privacy-link">
+                            <i class="fas fa-shield-alt"></i>
+                            Política de Privacidad
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script src="script.js"></script>
+    
+    <script>
+        $(document).ready(function() {
+            // Cargar tours disponibles para el selector
+            cargarToursDisponibles();
+            
+            // Manejar envío del formulario
+            $('#contactForm').on('submit', function(e) {
+                e.preventDefault();
+                enviarFormularioContacto();
+            });
+        });
+
+        function cargarToursDisponibles() {
+            $.get('api/tours.php/activos')
+                .done(function(response) {
+                    if (response.success) {
+                        const selector = $('#tourInteres');
+                        const opcionesActuales = selector.html();
+                        
+                        // Limpiar y agregar opción por defecto
+                        selector.html('<option value="">Seleccionar tour</option>');
+                        
+                        // Agregar tours desde la base de datos
+                        response.data.forEach(tour => {
+                            selector.append(`<option value="${tour.id}">${tour.nombre}</option>`);
+                        });
+                        
+                        // Agregar opciones adicionales
+                        selector.append('<option value="tour-personalizado">Tour Personalizado</option>');
+                        selector.append('<option value="otro">Otro</option>');
+                    }
+                })
+                .fail(function() {
+                    console.log('Error al cargar tours, usando opciones por defecto');
+                });
+        }
+
+        function enviarFormularioContacto() {
+            // Mostrar loading
+            const btnSubmit = $('.btn-submit');
+            const textoOriginal = btnSubmit.html();
+            btnSubmit.html('<i class="fas fa-spinner fa-spin"></i> Enviando...').prop('disabled', true);
+
+            // Recopilar datos del formulario
+            const formData = {
+                nombre: $('#nombre').val().trim(),
+                email: $('#email').val().trim(),
+                telefono: $('#telefono').val().trim(),
+                asunto: $('#asunto').val().trim(),
+                mensaje: $('#mensaje').val().trim(),
+                tour_interes: $('#tourInteres').val() || null,
+                fecha_preferida: $('#fechaViaje').val() || null,
+                num_personas: $('#personas').val() || null,
+                origen_pais: $('#pais').val() || ''
+            };
+
+            // Validaciones básicas
+            if (!formData.nombre || !formData.email || !formData.mensaje) {
+                mostrarMensaje('error', 'Por favor completa todos los campos obligatorios');
+                restaurarBoton(btnSubmit, textoOriginal);
+                return;
+            }
+
+            if (!validarEmail(formData.email)) {
+                mostrarMensaje('error', 'Por favor ingresa un email válido');
+                restaurarBoton(btnSubmit, textoOriginal);
+                return;
+            }
+
+            // Enviar datos
+            $.ajax({
+                url: 'api/procesar_contacto.php',
+                method: 'POST',
+                data: formData,
+                success: function(response) {
+                    if (response.success) {
+                        mostrarMensaje('success', response.message);
+                        $('#contactForm')[0].reset();
+                        
+                        // Scroll hacia arriba para ver el mensaje
+                        $('html, body').animate({
+                            scrollTop: $('.contact-form').offset().top - 100
+                        }, 500);
+                    } else {
+                        mostrarMensaje('error', response.message);
+                    }
+                },
+                error: function() {
+                    mostrarMensaje('error', 'Error de conexión. Por favor, inténtalo de nuevo.');
+                },
+                complete: function() {
+                    restaurarBoton(btnSubmit, textoOriginal);
+                }
+            });
+        }
+
+        function mostrarMensaje(tipo, mensaje) {
+            // Remover mensajes anteriores
+            $('.mensaje-formulario').remove();
+            
+            const claseColor = tipo === 'success' ? 'color: #28a745' : 'color: #dc3545';
+            const icono = tipo === 'success' ? 'fa-check-circle' : 'fa-exclamation-triangle';
+            
+            const mensajeHtml = `
+                <div class="mensaje-formulario" style="
+                    padding: 15px; 
+                    margin-bottom: 20px; 
+                    border-radius: 8px; 
+                    background: ${tipo === 'success' ? '#d4edda' : '#f8d7da'}; 
+                    border: 1px solid ${tipo === 'success' ? '#c3e6cb' : '#f5c6cb'}; 
+                    ${claseColor}; 
+                    text-align: center;
+                    font-weight: 500;
+                ">
+                    <i class="fas ${icono}" style="margin-right: 8px;"></i>
+                    ${mensaje}
+                </div>
+            `;
+            
+            $('.contact-form').prepend(mensajeHtml);
+            
+            // Auto-remover después de 5 segundos si es éxito
+            if (tipo === 'success') {
+                setTimeout(() => {
+                    $('.mensaje-formulario').fadeOut(500, function() {
+                        $(this).remove();
+                    });
+                }, 5000);
+            }
+        }
+
+        function restaurarBoton(btn, textoOriginal) {
+            btn.html(textoOriginal).prop('disabled', false);
+        }
+
+        function validarEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
+        // Animaciones adicionales
+        $(window).on('scroll', function() {
+            $('.contact-card').each(function() {
+                const elementTop = $(this).offset().top;
+                const elementBottom = elementTop + $(this).outerHeight();
+                const viewportTop = $(window).scrollTop();
+                const viewportBottom = viewportTop + $(window).height();
+
+                if (elementBottom > viewportTop && elementTop < viewportBottom) {
+                    $(this).addClass('visible');
+                }
+            });
+        });
+
+        // Efecto hover en tarjetas de contacto
+        $('.contact-card').hover(
+            function() {
+                $(this).find('.contact-icon').addClass('bounce');
+            },
+            function() {
+                $(this).find('.contact-icon').removeClass('bounce');
+            }
+        );
+    </script>
+
+    <style>
+        .contact-card {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .contact-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .contact-icon.bounce {
+            animation: bounce 0.6s ease;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .btn-submit:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .mensaje-formulario {
+            animation: slideInDown 0.5s ease;
+        }
+
+        @keyframes slideInDown {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</body>
+</html>

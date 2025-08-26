@@ -1,0 +1,55 @@
+<!-- EJEMPLO DE INTEGRACIÓN PAYPAL -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PayPal Integration</title>
+</head>
+<body>
+    <!-- Contenedor para botón de PayPal -->
+    <div id="paypal-button-container"></div>
+
+    <!-- Incluir PayPal SDK -->
+    <script src="https://www.paypal.com/sdk/js?client-id=AQUI_PEGA_TU_CLIENT_ID&currency=USD"></script>
+
+    <script>
+        paypal.Buttons({
+            // Configurar la transacción
+            createOrder: function(data, actions) {
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: '299.00' // Precio del tour
+                        },
+                        description: 'Expedición Río Amazonas - Jaguar Expeditions'
+                    }]
+                });
+            },
+
+            // Ejecutar cuando el pago es aprobado
+            onApprove: function(data, actions) {
+                return actions.order.capture().then(function(details) {
+                    alert('Pago completado por ' + details.payer.name.given_name);
+                    
+                    // Enviar detalles al servidor
+                    fetch('/procesar-pago-paypal.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            orderID: data.orderID,
+                            details: details
+                        }),
+                    });
+                });
+            },
+
+            // Manejar errores
+            onError: function(err) {
+                console.error('Error de PayPal:', err);
+                alert('Hubo un error con PayPal. Intente nuevamente.');
+            }
+        }).render('#paypal-button-container');
+    </script>
+</body>
+</html>

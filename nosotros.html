@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nosotros - Jaguar Expeditions</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="responsive.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <!-- Logo y nombre -->
+                <div class="logo-section">
+                    <img src="img/logo.jpeg" alt="Jaguar Expeditions Logo" class="logo">
+                    <div class="company-info">
+                        <h1 class="company-name">Jaguar Expeditions</h1>
+                        <p class="slogan">Más que un tour, una aventura salvaje.</p>
+                    </div>
+                </div>
+                
+                <!-- Información de contacto -->
+                <div class="contact-info">
+                    <div class="phone">
+                        <i class="fas fa-phone"></i>
+                        <span>+51 999 123 456</span>
+                    </div>
+                    
+                    <!-- Redes sociales -->
+                    <div class="social-media">
+                        <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-tripadvisor"></i></a>
+                    </div>
+                    
+                    <!-- Selector de idioma -->
+                    <div class="language-selector">
+                        <select id="language">
+                            <option value="es">ES</option>
+                            <option value="en">EN</option>
+                            <option value="pt">PT</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Buscador -->
+                    <div class="search-box">
+                        <input type="text" placeholder="Buscar tours...">
+                        <button><i class="fas fa-search"></i></button>
+                    </div>
+                    
+                    <!-- Carrito -->
+                    <div class="cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navegación -->
+    <nav class="navbar">
+        <div class="container">
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Inicio</a></li>
+                <li><a href="tours.html" class="nav-link">Tours</a></li>
+                <li><a href="contacto.html" class="nav-link">Contacto</a></li>
+                <li><a href="preguntas.html" class="nav-link">Preguntas</a></li>
+                <li><a href="galeria.html" class="nav-link">Galería</a></li>
+                <li><a href="nosotros.html" class="nav-link active">Nosotros</a></li>
+            </ul>
+            
+            <!-- Menú hamburguesa para móviles -->
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sección Principal - Nosotros -->
+    <main id="nosotros">
+        <!-- Hero Section -->
+        <section class="page-hero">
+            <div class="hero-background">
+                <img src="img/fondo.jpeg" alt="Nosotros Jaguar Expeditions">
+                <div class="hero-overlay"></div>
+            </div>
+            <div class="hero-content">
+                <h1>Conoce Jaguar Expeditions</h1>
+                <p>15 años conectando aventureros con la magia de la Amazonía peruana</p>
+            </div>
+        </section>
+
+        <!-- Nuestra Historia -->
+        <section class="our-story">
+            <div class="container">
+                <div class="story-content">
+                    <div class="story-text">
+                        <div class="section-header">
+                            <h2>Nuestra Historia</h2>
+                            <p>Un viaje que comenzó con la pasión por la Amazonía</p>
+                        </div>
+                        <div class="story-description">
+                            <p>Todo comenzó en 2010, cuando nuestro fundador, <strong>Carlos Ríos</strong>, un guía nativo de Iquitos con más de 20 años de experiencia en la selva, decidió crear algo más que una simple agencia de turismo. Su visión era compartir la verdadera esencia de la Amazonía peruana con viajeros de todo el mundo.</p>
+                            
+                            <p>Nacido y criado en las orillas del río Amazonas, Carlos creció aprendiendo los secretos de la selva de su abuelo, un chamán respetado en la comunidad. Esta conexión profunda con la naturaleza y la cultura ancestral se convirtió en el corazón de Jaguar Expeditions.</p>
+                            
+                            <p>Lo que comenzó como pequeños tours para amigos extranjeros se transformó gradualmente en una empresa reconocida internacionalmente. Hoy, 15 años después, hemos guiado a más de 10,000 aventureros de 50 países diferentes, siempre manteniendo nuestros valores fundamentales de respeto, autenticidad y conservación.</p>
+                        </div>
+                    </div>
+                    <div class="story-image">
+                        <img src="img/CasaHierro.png" alt="Historia de Jaguar Expeditions">
+                        <div class="image-caption">
+                            <p>Casa del Hierro, uno de los primeros sitios que comenzamos a mostrar a nuestros visitantes</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Nuestra Misión y Visión -->
+        <section class="mission-vision">
+            <div class="container">
+                <div class="mv-grid">
+                    <div class="mv-card">
+                        <div class="mv-icon">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <h3>Nuestra Visión</h3>
+                        <p>Ser la agencia de turismo amazónico más respetada y responsable del Perú, reconocida por ofrecer experiencias auténticas que transforman vidas mientras protegemos la selva y apoyamos a las comunidades locales.</p>
+                    </div>
+                    
+                    <div class="mv-card">
+                        <div class="mv-icon">
+                            <i class="fas fa-bullseye"></i>
+                        </div>
+                        <h3>Nuestra Misión</h3>
+                        <p>Conectar a viajeros de todo el mundo con la magia de la Amazonía peruana a través de aventuras seguras, educativas y sostenibles, promoviendo la conservación del ecosistema y el desarrollo de las comunidades nativas.</p>
+                    </div>
+                    
+                    <div class="mv-card">
+                        <div class="mv-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h3>Nuestros Valores</h3>
+                        <ul>
+                            <li><strong>Respeto:</strong> Por la naturaleza y las culturas ancestrales</li>
+                            <li><strong>Autenticidad:</strong> Experiencias genuinas y verdaderas</li>
+                            <li><strong>Sostenibilidad:</strong> Turismo responsable y consciente</li>
+                            <li><strong>Seguridad:</strong> Protección total de nuestros visitantes</li>
+                            <li><strong>Pasión:</strong> Amor genuino por lo que hacemos</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Nuestro Equipo -->
+        <section class="our-team">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Nuestro Equipo</h2>
+                    <p>Conoce a los expertos que harán de tu aventura una experiencia inolvidable</p>
+                </div>
+                
+                <div class="team-grid">
+                    <div class="team-member">
+                        <div class="member-photo">
+                            <img src="img/agregar.jpeg" alt="Carlos Ríos">
+                            <div class="member-overlay">
+                                <div class="social-links">
+                                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                                    <a href="#"><i class="fab fa-instagram"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="member-info">
+                            <h3>Carlos Ríos</h3>
+                            <span class="member-role">Fundador y Guía Principal</span>
+                            <p>20+ años de experiencia en la selva amazónica. Especialista en flora, fauna y culturas nativas. Habla español, inglés y shipibo.</p>
+                            <div class="member-badges">
+                                <span class="badge">Guía Certificado</span>
+                                <span class="badge">Primeros Auxilios</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="team-member">
+                        <div class="member-photo">
+                            <img src="img/agregar.jpeg" alt="Ana Vásquez">
+                            <div class="member-overlay">
+                                <div class="social-links">
+                                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                                    <a href="#"><i class="fab fa-facebook"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="member-info">
+                            <h3>Ana Vásquez</h3>
+                            <span class="member-role">Coordinadora de Tours</span>
+                            <p>Licenciada en Turismo con especialización en ecoturismo. Se encarga de planificar y coordinar todas nuestras expediciones con precisión y cuidado.</p>
+                            <div class="member-badges">
+                                <span class="badge">Lic. Turismo</span>
+                                <span class="badge">Ecoturismo</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="team-member">
+                        <div class="member-photo">
+                            <img src="img/agregar.jpeg" alt="Miguel Tamani">
+                            <div class="member-overlay">
+                                <div class="social-links">
+                                    <a href="#"><i class="fab fa-instagram"></i></a>
+                                    <a href="#"><i class="fab fa-facebook"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="member-info">
+                            <h3>Miguel Tamani</h3>
+                            <span class="member-role">Guía Especializado</span>
+                            <p>Guía nativo shipibo con conocimiento ancestral de plantas medicinales. Experto en avistamiento de fauna y navegación nocturna.</p>
+                            <div class="member-badges">
+                                <span class="badge">Guía Nativo</span>
+                                <span class="badge">Plantas Medicinales</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="team-member">
+                        <div class="member-photo">
+                            <img src="img/agregar.jpeg" alt="Rosa Pinedo">
+                            <div class="member-overlay">
+                                <div class="social-links">
+                                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                                    <a href="#"><i class="fab fa-instagram"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="member-info">
+                            <h3>Rosa Pinedo</h3>
+                            <span class="member-role">Chef Amazónica</span>
+                            <p>Especialista en gastronomía amazónica tradicional y moderna. Crea experiencias culinarias únicas utilizando ingredientes locales frescos.</p>
+                            <div class="member-badges">
+                                <span class="badge">Chef Certificada</span>
+                                <span class="badge">Cocina Amazónica</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="team-member">
+                        <div class="member-photo">
+                            <img src="img/agregar.jpeg" alt="Roberto Silva">
+                            <div class="member-overlay">
+                                <div class="social-links">
+                                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                                    <a href="#"><i class="fab fa-facebook"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="member-info">
+                            <h3>Roberto Silva</h3>
+                            <span class="member-role">Capitán de Embarcación</span>
+                            <p>15 años navegando los ríos amazónicos. Licencia náutica profesional y experto en seguridad acuática. Conoce cada rincón de los ríos.</p>
+                            <div class="member-badges">
+                                <span class="badge">Capitán Licenciado</span>
+                                <span class="badge">Seguridad Acuática</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="team-member">
+                        <div class="member-photo">
+                            <img src="img/agregar.jpeg" alt="Elena Rodriguez">
+                            <div class="member-overlay">
+                                <div class="social-links">
+                                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                                    <a href="#"><i class="fab fa-instagram"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="member-info">
+                            <h3>Elena Rodriguez</h3>
+                            <span class="member-role">Atención al Cliente</span>
+                            <p>Trilingüe (español, inglés, português) especializada en atención personalizada. Se encarga de que cada visitante se sienta como en casa.</p>
+                            <div class="member-badges">
+                                <span class="badge">Trilingüe</span>
+                                <span class="badge">Atención VIP</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Nuestros Logros -->
+        <section class="achievements">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Nuestros Logros</h2>
+                    <p>15 años de excelencia reconocida</p>
+                </div>
+                
+                <div class="achievements-grid">
+                    <div class="achievement-card">
+                        <div class="achievement-icon">
+                            <i class="fas fa-award"></i>
+                        </div>
+                        <h3>Certificación TripAdvisor</h3>
+                        <p>Certificate of Excellence 2020-2025</p>
+                        <span class="achievement-year">2020-2025</span>
+                    </div>
+                    
+                    <div class="achievement-card">
+                        <div class="achievement-icon">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <h3>Turismo Sostenible</h3>
+                        <p>Certificación MINCETUR en Turismo Responsable</p>
+                        <span class="achievement-year">2022</span>
+                    </div>
+                    
+                    <div class="achievement-card">
+                        <div class="achievement-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <h3>5 Estrellas TripAdvisor</h3>
+                        <p>Calificación promedio 4.9/5 con 247+ reseñas</p>
+                        <span class="achievement-year">2025</span>
+                    </div>
+                    
+                    <div class="achievement-card">
+                        <div class="achievement-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>10,000+ Aventureros</h3>
+                        <p>Más de 10,000 viajeros satisfechos</p>
+                        <span class="achievement-year">2010-2025</span>
+                    </div>
+                    
+                    <div class="achievement-card">
+                        <div class="achievement-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h3>Alianza Comunitaria</h3>
+                        <p>Trabajo directo con 15 comunidades nativas</p>
+                        <span class="achievement-year">2015-2025</span>
+                    </div>
+                    
+                    <div class="achievement-card">
+                        <div class="achievement-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Cero Accidentes</h3>
+                        <p>15 años sin incidentes graves</p>
+                        <span class="achievement-year">2010-2025</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Compromiso Social -->
+        <section class="social-commitment">
+            <div class="container">
+                <div class="commitment-content">
+                    <div class="commitment-text">
+                        <h2>Compromiso Social y Ambiental</h2>
+                        <p>En Jaguar Expeditions creemos que el turismo debe ser una fuerza positiva para el cambio. Por eso, hemos desarrollado varios programas que benefician directamente a las comunidades locales y contribuyen a la conservación de la Amazonía.</p>
+                        
+                        <div class="commitment-programs">
+                            <div class="program">
+                                <div class="program-icon">
+                                    <i class="fas fa-graduation-cap"></i>
+                                </div>
+                                <div class="program-content">
+                                    <h3>Educación Ambiental</h3>
+                                    <p>Programa educativo en escuelas rurales sobre conservación y turismo sostenible. Hemos beneficiado a más de 500 niños.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="program">
+                                <div class="program-icon">
+                                    <i class="fas fa-seedling"></i>
+                                </div>
+                                <div class="program-content">
+                                    <h3>Reforestación</h3>
+                                    <p>Por cada tour, plantamos un árbol nativo. Hasta la fecha hemos plantado más de 15,000 árboles en áreas degradadas.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="program">
+                                <div class="program-icon">
+                                    <i class="fas fa-heart"></i>
+                                </div>
+                                <div class="program-content">
+                                    <h3>Apoyo Comunitario</h3>
+                                    <p>El 20% de nuestras ganancias se reinvierte en proyectos comunitarios: centros de salud, sistemas de agua potable y talleres productivos.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="commitment-image">
+                        <img src="img/fauna.jpg" alt="Compromiso Ambiental">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonios del Equipo -->
+        <section class="team-testimonials">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Nuestro Equipo Habla</h2>
+                    <p>Conoce las motivaciones de quienes hacen posible cada aventura</p>
+                </div>
+                
+                <div class="testimonials-carousel">
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <p>"Cada día en la selva es único. Mi mayor satisfacción es ver los ojos de asombro de nuestros visitantes cuando descubren la magia de la Amazonía por primera vez. Es el mismo asombro que siento yo cada día, incluso después de 20 años."</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <img src="img/agregar.jpeg" alt="Carlos Ríos">
+                            <div class="author-info">
+                                <h4>Carlos Ríos</h4>
+                                <span>Fundador y Guía Principal</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <p>"Organizar cada tour es como crear una sinfonía. Cada detalle debe estar en perfecta armonía para que nuestros aventureros vivan una experiencia transformadora. La logística es mi pasión."</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <img src="img/agregar.jpeg" alt="Ana Vásquez">
+                            <div class="author-info">
+                                <h4>Ana Vásquez</h4>
+                                <span>Coordinadora de Tours</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <p>"Compartir el conocimiento ancestral de mi pueblo es un honor. Cada planta, cada animal tiene una historia que contar. Me emociona ver cómo los visitantes conectan con la sabiduría de mis ancestros."</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <img src="img/agregar.jpeg" alt="Miguel Tamani">
+                            <div class="author-info">
+                                <h4>Miguel Tamani</h4>
+                                <span>Guía Especializado</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Llamada a la acción -->
+        <section class="about-cta">
+            <div class="container">
+                <div class="cta-content">
+                    <h2>¿Listo para Conocer la Verdadera Amazonía?</h2>
+                    <p>Únete a nuestra familia de aventureros y descubre por qué somos más que una agencia de turismo</p>
+                    <div class="cta-buttons">
+                        <a href="tours.html" class="btn-primary">Ver Nuestros Tours</a>
+                        <a href="contacto.html" class="btn-secondary">Contáctanos</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Jaguar Expeditions</h3>
+                    <p>Tu puerta de entrada a la aventura amazónica más auténtica</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> Iquitos, Perú</p>
+                    <p><i class="fas fa-phone"></i> +51 999 123 456</p>
+                    <p><i class="fas fa-envelope"></i> info@jaguarexpeditions.com</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Síguenos</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#"><i class="fab fa-tripadvisor"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2025 Jaguar Expeditions. Todos los derechos reservados.</p>
+                    <div class="footer-links">
+                        <a href="#" class="terms-link">
+                            <i class="fas fa-file-contract"></i>
+                            Términos y Condiciones
+                        </a>
+                        <a href="#" class="privacy-link">
+                            <i class="fas fa-shield-alt"></i>
+                            Política de Privacidad
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

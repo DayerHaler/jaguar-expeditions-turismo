@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preguntas Frecuentes - Jaguar Expeditions</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="responsive.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <!-- Logo y nombre -->
+                <div class="logo-section">
+                    <img src="img/logo.jpeg" alt="Jaguar Expeditions Logo" class="logo">
+                    <div class="company-info">
+                        <h1 class="company-name">Jaguar Expeditions</h1>
+                        <p class="slogan">Más que un tour, una aventura salvaje.</p>
+                    </div>
+                </div>
+                
+                <!-- Información de contacto -->
+                <div class="contact-info">
+                    <div class="phone">
+                        <i class="fas fa-phone"></i>
+                        <span>+51 999 123 456</span>
+                    </div>
+                    
+                    <!-- Redes sociales -->
+                    <div class="social-media">
+                        <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-tripadvisor"></i></a>
+                    </div>
+                    
+                    <!-- Selector de idioma -->
+                    <div class="language-selector">
+                        <select id="language">
+                            <option value="es">ES</option>
+                            <option value="en">EN</option>
+                            <option value="pt">PT</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Buscador -->
+                    <div class="search-box">
+                        <input type="text" placeholder="Buscar tours...">
+                        <button><i class="fas fa-search"></i></button>
+                    </div>
+                    
+                    <!-- Carrito -->
+                    <div class="cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navegación -->
+    <nav class="navbar">
+        <div class="container">
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Inicio</a></li>
+                <li><a href="tours.html" class="nav-link">Tours</a></li>
+                <li><a href="contacto.html" class="nav-link">Contacto</a></li>
+                <li><a href="preguntas.html" class="nav-link active">Preguntas</a></li>
+                <li><a href="galeria.html" class="nav-link">Galería</a></li>
+                <li><a href="nosotros.html" class="nav-link">Nosotros</a></li>
+            </ul>
+            
+            <!-- Menú hamburguesa para móviles -->
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sección Principal - Preguntas -->
+    <main id="preguntas">
+        <!-- Hero Section -->
+        <section class="page-hero">
+            <div class="hero-background">
+                <img src="img/fondo.jpeg" alt="Preguntas Frecuentes Jaguar Expeditions">
+                <div class="hero-overlay"></div>
+            </div>
+            <div class="hero-content">
+                <h1>Preguntas Frecuentes</h1>
+                <p>Resolvemos todas tus dudas sobre nuestras aventuras amazónicas</p>
+            </div>
+        </section>
+
+        <!-- Buscador de FAQ -->
+        <section class="faq-search">
+            <div class="container">
+                <div class="search-faq">
+                    <input type="text" id="faqSearchInput" placeholder="Buscar en preguntas frecuentes...">
+                    <button type="button" id="faqSearchBtn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Categorías de FAQ -->
+        <section class="faq-categories">
+            <div class="container">
+                <div class="category-filters">
+                    <button class="category-btn active" data-category="all">Todas</button>
+                    <button class="category-btn" data-category="reservas">Reservas</button>
+                    <button class="category-btn" data-category="tours">Tours</button>
+                    <button class="category-btn" data-category="pagos">Pagos</button>
+                    <button class="category-btn" data-category="salud">Salud</button>
+                    <button class="category-btn" data-category="equipaje">Equipaje</button>
+                    <button class="category-btn" data-category="seguridad">Seguridad</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Preguntas Frecuentes -->
+        <section class="faq-section">
+            <div class="container">
+                <div class="faq-content">
+                    <!-- Categoría: Reservas -->
+                    <div class="faq-category" data-category="reservas">
+                        <h2><i class="fas fa-calendar-check"></i> Reservas y Cancelaciones</h2>
+                        
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h3>¿Cómo puedo hacer una reserva?</h3>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Puedes hacer tu reserva de varias formas:</p>
+                                <ul>
+                                    <li>A través de nuestro sitio web usando el formulario de contacto</li>
+                                    <li>Llamando directamente al +51 999 123 456</li>
+                                    <li>Por WhatsApp al mismo número</li>
+                                    <li>Visitando nuestra oficina en Jr. Putumayo 184, Iquitos</li>
+                                </ul>
+                                <p>Te confirmaremos la disponibilidad en menos de 24 horas.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h3>¿Cuánto tiempo de anticipación necesito para reservar?</h3>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Recomendamos reservar con al menos:</p>
+                                <ul>
+                                    <li><strong>Tours de 1 día:</strong> 2-3 días de anticipación</li>
+                                    <li><strong>Tours de 2-3 días:</strong> 1 semana de anticipación</li>
+                                    <li><strong>Tours de 4+ días:</strong> 2-3 semanas de anticipación</li>
+                                </ul>
+                                <p>En temporada alta (junio-agosto), recomendamos reservar con 1 mes de anticipación.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h3>¿Cuál es la política de cancelación?</h3>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Nuestra política de cancelación es:</p>
+                                <ul>
+                                    <li><strong>7+ días antes:</strong> Reembolso del 90%</li>
+                                    <li><strong>3-6 días antes:</strong> Reembolso del 70%</li>
+                                    <li><strong>1-2 días antes:</strong> Reembolso del 50%</li>
+                                    <li><strong>Mismo día:</strong> Sin reembolso</li>
+                                </ul>
+                                <p>Cancelaciones por mal clima: reembolso completo o reprogramación gratuita.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Categoría: Tours -->
+                    <div class="faq-category" data-category="tours">
+                        <h2><i class="fas fa-map-marked-alt"></i> Sobre Nuestros Tours</h2>
+                        
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h3>¿Qué incluyen los tours?</h3>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Todos nuestros tours incluyen:</p>
+                                <ul>
+                                    <li>Guía especializado bilingüe</li>
+                                    <li>Transporte desde/hacia el puerto</li>
+                                    <li>Todas las comidas especificadas</li>
+                                    <li>Agua potable durante el tour</li>
+                                    <li>Seguro básico de accidentes</li>
+                                    <li>Equipo de seguridad (chalecos salvavidas, botiquín)</li>
+                                </ul>
+                                <p>Los tours de múltiples días incluyen también alojamiento en lodges o campamento.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h3>¿Puedo personalizar un tour?</h3>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>¡Absolutamente! Ofrecemos tours completamente personalizados. Podemos adaptar:</p>
+                                <ul>
+                                    <li>Duración del tour</li>
+                                    <li>Actividades específicas</li>
+                                    <li>Nivel de dificultad</li>
+                                    <li>Tipo de alojamiento</li>
+                                    <li>Comidas especiales (vegetarianas, veganas, etc.)</li>
+                                </ul>
+                                <p>Contáctanos para crear tu aventura ideal.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h3>¿Qué animales puedo ver?</h3>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>La Amazonía alberga una increíble biodiversidad. Comúnmente avistamos:</p>
+                                <ul>
+                                    <li><strong>Mamíferos:</strong> Delfines rosados, perezosos, monos, nutrias gigantes</li>
+                                    <li><strong>Aves:</strong> Guacamayos, tucanes, garzas, más de 500 especies</li>
+                                    <li><strong>Reptiles:</strong> Caimanes, iguanas, tortugas</li>
+                                    <li><strong>Peces:</strong> Pirañas, paiche, pez gato gigante</li>
+                                </ul>
+                                <p>Los avistamientos dependen de la época del año y las condiciones climáticas.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Categoría: Pagos -->
+                    <div class="faq-category" data-category="pagos">
+                        <h2><i class="fas fa-credit-card"></i> Pagos y Precios</h2>
+                        
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h3>¿Qué métodos de pago aceptan?</h3>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Aceptamos los siguientes métodos de pago:</p>
+                                <ul>
+                                    <li>Efectivo (soles peruanos o dólares americanos)</li>
+                                    <li>Tarjetas de crédito (Visa, Mastercard)</li>
+                                    <li>Transferencia bancaria</li>
+                                    <li>PayPal para pagos internacionales</li>
+                                    <li>Western Union</li>
+                                </ul>
+                                <p>Requerimos 50% de adelanto para confirmar la reserva.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h3>¿Los precios incluyen impuestos?</h3>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Sí, todos nuestros precios incluyen:</p>
+                                <ul>
+                                    <li>IGV (18% impuesto peruano)</li>
+                                    <li>Tasas portuarias</li>
+                                    <li>Permisos de ingreso a áreas protegidas</li>
+                                </ul>
+                                <p>No hay costos adicionales ocultos en nuestros tours.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Categoría: Salud -->
+                    <div class="faq-category" data-category="salud">
+                        <h2><i class="fas fa-heartbeat"></i> Salud y Seguridad</h2>
+                        
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h3>¿Necesito vacunas para viajar a la Amazonía?</h3>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Sí, recomendamos encarecidamente:</p>
+                                <ul>
+                                    <li><strong>Obligatoria:</strong> Fiebre amarilla (10 días antes del viaje)</li>
+                                    <li><strong>Recomendadas:</strong> Hepatitis A y B, tétanos, fiebre tifoidea</li>
+                                    <li><strong>Profilaxis de malaria:</strong> Consultar con médico especialista</li>
+                                </ul>
+                                <p>Consulta con un médico especialista en medicina del viajero 4-6 semanas antes.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h3>¿Qué pasa si tengo una emergencia médica?</h3>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Estamos preparados para emergencias:</p>
+                                <ul>
+                                    <li>Guías certificados en primeros auxilios</li>
+                                    <li>Botiquín completo en cada tour</li>
+                                    <li>Comunicación satelital para emergencias</li>
+                                    <li>Evacuación médica disponible</li>
+                                    <li>Contacto directo con hospitales en Iquitos</li>
+                                </ul>
+                                <p>Todos los tours incluyen seguro básico de accidentes.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Categoría: Equipaje -->
+                    <div class="faq-category" data-category="equipaje">
+                        <h2><i class="fas fa-suitcase"></i> Equipaje y Qué Traer</h2>
+                        
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h3>¿Qué debo traer para el tour?</h3>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Lista esencial de equipaje:</p>
+                                <ul>
+                                    <li><strong>Ropa:</strong> Ligera, de manga larga, pantalones largos</li>
+                                    <li><strong>Calzado:</strong> Botas de lluvia, sandalias</li>
+                                    <li><strong>Protección:</strong> Repelente, protector solar, sombrero</li>
+                                    <li><strong>Equipos:</strong> Linterna, cámara impermeable, binoculares</li>
+                                    <li><strong>Medicinas:</strong> Personales, analgésicos básicos</li>
+                                </ul>
+                                <p>Te enviaremos una lista detallada al confirmar tu reserva.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h3>¿Hay límite de equipaje?</h3>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Recomendaciones de equipaje:</p>
+                                <ul>
+                                    <li><strong>Tours de 1 día:</strong> Mochila pequeña suficiente</li>
+                                    <li><strong>Tours de 2-3 días:</strong> Bolsa de viaje de 40-50L</li>
+                                    <li><strong>Tours largos:</strong> Máximo 20kg por persona</li>
+                                </ul>
+                                <p>Ofrecemos servicio de guardarropa gratuito en nuestra oficina.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Categoría: Seguridad -->
+                    <div class="faq-category" data-category="seguridad">
+                        <h2><i class="fas fa-shield-alt"></i> Seguridad</h2>
+                        
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h3>¿Es seguro viajar a la Amazonía?</h3>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Sí, con las precauciones adecuadas. Nuestras medidas de seguridad incluyen:</p>
+                                <ul>
+                                    <li>Guías certificados con 10+ años de experiencia</li>
+                                    <li>Equipos de comunicación satelital</li>
+                                    <li>Chalecos salvavidas en todas las embarcaciones</li>
+                                    <li>Rutas probadas y seguras</li>
+                                    <li>Protocolos estrictos de seguridad</li>
+                                </ul>
+                                <p>Tenemos un historial impecable de seguridad en 15 años de operación.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- No se encontraron resultados -->
+                    <div id="noResults" class="no-results" style="display: none;">
+                        <div class="no-results-content">
+                            <i class="fas fa-search"></i>
+                            <h3>No se encontraron resultados</h3>
+                            <p>No hemos encontrado preguntas que coincidan con tu búsqueda.</p>
+                            <p>¿No encontraste lo que buscabas? <a href="contacto.html">Contáctanos directamente</a></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contacto directo -->
+                <div class="faq-contact">
+                    <div class="contact-card">
+                        <h3>¿No encontraste tu respuesta?</h3>
+                        <p>Nuestro equipo está listo para ayudarte con cualquier pregunta específica</p>
+                        <div class="contact-buttons">
+                            <a href="contacto.html" class="btn-contact">
+                                <i class="fas fa-envelope"></i>
+                                Contactar
+                            </a>
+                            <a href="https://wa.me/51999123456" target="_blank" class="btn-contact whatsapp">
+                                <i class="fab fa-whatsapp"></i>
+                                WhatsApp
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Jaguar Expeditions</h3>
+                    <p>Tu puerta de entrada a la aventura amazónica más auténtica</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> Iquitos, Perú</p>
+                    <p><i class="fas fa-phone"></i> +51 999 123 456</p>
+                    <p><i class="fas fa-envelope"></i> info@jaguarexpeditions.com</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Síguenos</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#"><i class="fab fa-tripadvisor"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2025 Jaguar Expeditions. Todos los derechos reservados.</p>
+                    <div class="footer-links">
+                        <a href="#" class="terms-link">
+                            <i class="fas fa-file-contract"></i>
+                            Términos y Condiciones
+                        </a>
+                        <a href="#" class="privacy-link">
+                            <i class="fas fa-shield-alt"></i>
+                            Política de Privacidad
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

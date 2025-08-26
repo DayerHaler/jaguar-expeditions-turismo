@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estado de Reserva - Jaguar Expeditions</title>
+    <link rel="styleshe                            <div class="acciones-reserva">
+                                <a href="pagar.html?reserva=${reserva.codigo_reserva}" class="btn-accion btn-pagar" target="_blank">
+                                    <i class="fas fa-credit-card"></i> Pagar Ahora
+                                </a>
+                                <button onclick="cancelarReserva('${reserva.codigo_reserva}')" class="btn-accion btn-cancelar">
+                                    <i class="fas fa-times"></i> Cancelar Reserva
+                                </button>
+                                <button onclick="mostrarPoliticaCancelacion()" class="btn-accion btn-info" style="background: #17a2b8;">
+                                    <i class="fas fa-info-circle"></i> Política de Cancelación
+                                </button>
+                            </div>="style.css">
+    <link rel="stylesheet" href="responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .estado-reserva-container {
+            max-width: 800px;
+            margin: 120px auto 40px;
+            padding: 40px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .icono-estado {
+            font-size: 80px;
+            margin-bottom: 20px;
+        }
+        
+        .estado-pendiente { color: #ff9800; }
+        .estado-confirmado { color: #4caf50; }
+        .estado-cancelado { color: #f44336; }
+        
+        .codigo-reserva {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--color-primario);
+            margin-bottom: 30px;
+            padding: 15px;
+            background: #fff8e1;
+            border-radius: 8px;
+            border: 2px dashed #ffc107;
+        }
+        
+        .detalles-reserva {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 10px;
+            margin: 30px 0;
+            text-align: left;
+        }
+        
+        .detalle-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .detalle-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        
+        .acciones-reserva {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        
+        .btn-accion {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .btn-pagar {
+            background: var(--color-primario);
+            color: white;
+        }
+        
+        .btn-pagar:hover {
+            background: #e6a800;
+            transform: translateY(-2px);
+        }
+        
+        .btn-cancelar {
+            background: #dc3545;
+            color: white;
+        }
+        
+        .btn-cancelar:hover {
+            background: #c82333;
+        }
+        
+        .btn-volver {
+            background: #6c757d;
+            color: white;
+        }
+        
+        .btn-volver:hover {
+            background: #5a6268;
+        }
+        
+        .tiempo-limite {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            color: #856404;
+        }
+        
+        .contador-tiempo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #dc3545;
+            margin: 10px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .estado-reserva-container {
+                margin: 100px 20px 40px;
+                padding: 20px;
+            }
+            
+            .acciones-reserva {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn-accion {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <img src="img/logo.jpeg" alt="Jaguar Expeditions">
+                <span>Jaguar Expeditions</span>
+            </div>
+            
+            <nav class="nav">
+                <a href="index.html">Inicio</a>
+                <a href="tours.html">Tours</a>
+                <a href="contacto.html">Contacto</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Contenido principal -->
+    <main class="estado-reserva-container">
+        <div id="estado-contenido">
+            <!-- El contenido se cargará dinámicamente -->
+            <div class="loading">
+                <i class="fas fa-spinner fa-spin" style="font-size: 48px; color: var(--color-primario);"></i>
+                <p>Consultando estado de tu reserva...</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const codigoReserva = urlParams.get('codigo');
+            
+            if (!codigoReserva) {
+                mostrarError('No se proporcionó un código de reserva válido');
+                return;
+            }
+            
+            consultarEstadoReserva(codigoReserva);
+        });
+        
+        function consultarEstadoReserva(codigo) {
+            $.ajax({
+                url: `api/consultar_reserva.php?codigo=${codigo}`,
+                method: 'GET',
+                success: function(response) {
+                    if (response.success) {
+                        mostrarEstadoReserva(response.data);
+                    } else {
+                        mostrarError(response.message);
+                    }
+                },
+                error: function() {
+                    mostrarError('Error al consultar el estado de la reserva');
+                }
+            });
+        }
+        
+        function mostrarEstadoReserva(reserva) {
+            let iconoEstado = '';
+            let claseEstado = '';
+            let mensajeEstado = '';
+            let acciones = '';
+            
+            switch (reserva.estado_reserva) {
+                case 'Pendiente_Pago':
+                    iconoEstado = '<i class="fas fa-clock estado-pendiente"></i>';
+                    claseEstado = 'estado-pendiente';
+                    mensajeEstado = 'Tu reserva está pendiente de pago';
+                    
+                    // Calcular tiempo restante
+                    const tiempoLimite = new Date(reserva.tiempo_limite_pago);
+                    const ahora = new Date();
+                    const diferencia = tiempoLimite - ahora;
+                    
+                    if (diferencia > 0) {
+                        acciones = `
+                            <div class="tiempo-limite">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                <strong>¡Tiempo límite para pagar!</strong>
+                                <div class="contador-tiempo" id="contador-tiempo"></div>
+                                <p>Si no completas el pago antes de este límite, tu reserva será cancelada automáticamente.</p>
+                            </div>
+                            <div class="acciones-reserva">
+                                <a href="pagar.html?codigo=${reserva.codigo_reserva}" class="btn-accion btn-pagar">
+                                    <i class="fas fa-credit-card"></i> Pagar Ahora
+                                </a>
+                                <button onclick="cancelarReserva('${reserva.codigo_reserva}')" class="btn-accion btn-cancelar">
+                                    <i class="fas fa-times"></i> Cancelar Reserva
+                                </button>
+                            </div>
+                        `;
+                        
+                        // Iniciar contador regresivo
+                        iniciarContador(diferencia);
+                    } else {
+                        mensajeEstado = 'Tu reserva ha expirado';
+                        iconoEstado = '<i class="fas fa-times-circle estado-cancelado"></i>';
+                        acciones = `
+                            <div class="acciones-reserva">
+                                <a href="tours.html" class="btn-accion btn-volver">
+                                    <i class="fas fa-search"></i> Buscar Otro Tour
+                                </a>
+                            </div>
+                        `;
+                    }
+                    break;
+                    
+                case 'Confirmada':
+                case 'Pagada':
+                    iconoEstado = '<i class="fas fa-check-circle estado-confirmado"></i>';
+                    claseEstado = 'estado-confirmado';
+                    mensajeEstado = 'Tu reserva está confirmada';
+                    acciones = `
+                        <div class="acciones-reserva">
+                            <a href="confirmacion.html?codigo=${reserva.codigo_reserva}" class="btn-accion btn-pagar">
+                                <i class="fas fa-eye"></i> Ver Detalles Completos
+                            </a>
+                            <button onclick="cancelarReserva('${reserva.codigo_reserva}')" class="btn-accion btn-cancelar">
+                                <i class="fas fa-times"></i> Cancelar Reserva
+                            </button>
+                            <button onclick="mostrarPoliticaCancelacion()" class="btn-accion btn-info" style="background: #17a2b8;">
+                                <i class="fas fa-info-circle"></i> Política de Cancelación
+                            </button>
+                            <a href="tours.html" class="btn-accion btn-volver">
+                                <i class="fas fa-search"></i> Buscar Otro Tour
+                            </a>
+                        </div>
+                    `;
+                    break;
+                    
+                case 'Cancelada':
+                    iconoEstado = '<i class="fas fa-times-circle estado-cancelado"></i>';
+                    claseEstado = 'estado-cancelado';
+                    mensajeEstado = 'Tu reserva ha sido cancelada';
+                    acciones = `
+                        <div class="acciones-reserva">
+                            <a href="tours.html" class="btn-accion btn-volver">
+                                <i class="fas fa-search"></i> Buscar Otro Tour
+                            </a>
+                        </div>
+                    `;
+                    break;
+            }
+            
+            const html = `
+                <div class="icono-estado">
+                    ${iconoEstado}
+                </div>
+                
+                <h1 class="${claseEstado}">${mensajeEstado}</h1>
+                
+                <div class="codigo-reserva">
+                    <i class="fas fa-barcode"></i> ${reserva.codigo_reserva}
+                </div>
+                
+                <div class="detalles-reserva">
+                    <h3><i class="fas fa-info-circle"></i> Detalles de la Reserva</h3>
+                    
+                    <div class="detalle-item">
+                        <span><strong>Tour:</strong></span>
+                        <span>${reserva.tour_nombre}</span>
+                    </div>
+                    
+                    <div class="detalle-item">
+                        <span><strong>Fecha:</strong></span>
+                        <span>${new Date(reserva.fecha_tour).toLocaleDateString('es-ES')}</span>
+                    </div>
+                    
+                    <div class="detalle-item">
+                        <span><strong>Personas:</strong></span>
+                        <span>${reserva.total_personas} (${reserva.num_adultos} adultos, ${reserva.num_ninos} niños, ${reserva.num_bebes} bebés)</span>
+                    </div>
+                    
+                    <div class="detalle-item">
+                        <span><strong>Cliente:</strong></span>
+                        <span>${reserva.cliente_nombre} ${reserva.cliente_apellido}</span>
+                    </div>
+                    
+                    <div class="detalle-item">
+                        <span><strong>Email:</strong></span>
+                        <span>${reserva.cliente_email}</span>
+                    </div>
+                    
+                    <div class="detalle-item">
+                        <span><strong>Total a pagar:</strong></span>
+                        <span style="font-size: 18px; color: var(--color-primario); font-weight: bold;">$${parseFloat(reserva.total).toFixed(2)}</span>
+                    </div>
+                </div>
+                
+                ${acciones}
+            `;
+            
+            $('#estado-contenido').html(html);
+        }
+        
+        function mostrarError(mensaje) {
+            const html = `
+                <div class="icono-estado">
+                    <i class="fas fa-exclamation-triangle" style="color: #f44336;"></i>
+                </div>
+                
+                <h1 style="color: #f44336;">Error</h1>
+                
+                <p>${mensaje}</p>
+                
+                <div class="acciones-reserva">
+                    <a href="tours.html" class="btn-accion btn-volver">
+                        <i class="fas fa-arrow-left"></i> Volver a Tours
+                    </a>
+                </div>
+            `;
+            
+            $('#estado-contenido').html(html);
+        }
+        
+        function iniciarContador(milisegundos) {
+            function actualizarContador() {
+                const horas = Math.floor(milisegundos / (1000 * 60 * 60));
+                const minutos = Math.floor((milisegundos % (1000 * 60 * 60)) / (1000 * 60));
+                const segundos = Math.floor((milisegundos % (1000 * 60)) / 1000);
+                
+                $('#contador-tiempo').text(`${horas.toString().padStart(2, '0')}:${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`);
+                
+                if (milisegundos <= 0) {
+                    location.reload(); // Recargar para mostrar estado expirado
+                    return;
+                }
+                
+                milisegundos -= 1000;
+                setTimeout(actualizarContador, 1000);
+            }
+            
+            actualizarContador();
+        }
+        
+        function cancelarReserva(codigo) {
+            // Mostrar política de cancelación primero
+            const confirmarPolitica = confirm(`POLÍTICA DE CANCELACIÓN:
+
+📅 Más de 48 horas antes: Cancelación gratuita
+⚠️ Entre 24-48 horas: Posible penalización del 25%
+❌ Menos de 24 horas: Penalización del 50%
+
+💰 Reembolsos procesados en 3-5 días hábiles
+
+¿Deseas continuar con la cancelación?`);
+            
+            if (!confirmarPolitica) {
+                return;
+            }
+            
+            const motivo = prompt('Por favor, indica el motivo de la cancelación (opcional):');
+            
+            if (motivo === null) {
+                return; // Usuario canceló
+            }
+            
+            if (!confirm('¿Estás completamente seguro? Esta acción no se puede deshacer.')) {
+                return;
+            }
+
+            // Mostrar indicador de carga
+            const loadingHtml = `
+                <div id="loading-cancelacion" style="text-align: center; padding: 20px; background: #fff3cd; border-radius: 5px; margin: 10px 0;">
+                    <i class="fas fa-spinner fa-spin"></i> Procesando cancelación...
+                </div>
+            `;
+            $('#estado-contenido').append(loadingHtml);
+
+            $.ajax({
+                url: 'api/cancelar_reserva.php',
+                method: 'POST',
+                data: JSON.stringify({ 
+                    codigo_reserva: codigo,
+                    motivo: motivo || 'Cancelación solicitada por el cliente'
+                }),
+                contentType: 'application/json',
+                success: function(response) {
+                    $('#loading-cancelacion').remove();
+                    
+                    if (response.exito) {
+                        // Mostrar mensaje de éxito
+                        const exitoHtml = `
+                            <div style="text-align: center; padding: 20px; background: #d4edda; border: 1px solid #c3e6cb; border-radius: 5px; margin: 20px 0;">
+                                <i class="fas fa-check-circle" style="color: #28a745; font-size: 24px; margin-bottom: 10px;"></i>
+                                <h3 style="color: #155724; margin: 10px 0;">Reserva Cancelada</h3>
+                                <p style="color: #155724;">Tu reserva ha sido cancelada correctamente.</p>
+                                <p style="color: #155724;">Recibirás un email de confirmación en breve.</p>
+                                ${response.datos && response.datos.cancelacion_tardia ? 
+                                    '<p style="color: #856404; background: #fff3cd; padding: 10px; border-radius: 5px; margin-top: 10px;"><strong>Nota:</strong> Cancelación tardía (menos de 24h antes del tour)</p>' 
+                                    : ''
+                                }
+                            </div>
+                        `;
+                        $('#estado-contenido').html(exitoHtml);
+                        
+                        // Redireccionar después de unos segundos
+                        setTimeout(() => {
+                            window.location.href = 'tours.html';
+                        }, 3000);
+                        
+                    } else {
+                        alert('Error al cancelar la reserva: ' + response.mensaje);
+                    }
+                },
+                error: function() {
+                    $('#loading-cancelacion').remove();
+                    alert('Error de conexión al cancelar la reserva. Por favor, inténtalo de nuevo.');
+                }
+            });
+        }
+
+        // Función para mostrar política de cancelación completa
+        function mostrarPoliticaCancelacion() {
+            const modal = `
+                <div id="modal-politica" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; display: flex; align-items: center; justify-content: center;">
+                    <div style="background: white; padding: 30px; border-radius: 10px; max-width: 600px; max-height: 80vh; overflow-y: auto; position: relative;">
+                        <button onclick="$('#modal-politica').remove()" style="position: absolute; top: 10px; right: 15px; background: none; border: none; font-size: 24px; cursor: pointer;">&times;</button>
+                        
+                        <h3 style="color: #2c3e50; margin-bottom: 20px;">
+                            <i class="fas fa-file-contract"></i> Política de Cancelación
+                        </h3>
+                        
+                        <div style="text-align: left; line-height: 1.6;">
+                            <div style="background: #e8f5e8; padding: 15px; border-radius: 5px; margin-bottom: 15px;">
+                                <h4 style="color: #27ae60; margin-top: 0;">
+                                    <i class="fas fa-calendar-check"></i> Cancelaciones Gratuitas
+                                </h4>
+                                <ul>
+                                    <li><strong>Más de 48 horas antes:</strong> Cancelación 100% gratuita</li>
+                                    <li><strong>Entre 24-48 horas:</strong> Posible penalización del 25%</li>
+                                </ul>
+                            </div>
+                            
+                            <div style="background: #fff3cd; padding: 15px; border-radius: 5px; margin-bottom: 15px;">
+                                <h4 style="color: #856404; margin-top: 0;">
+                                    <i class="fas fa-exclamation-triangle"></i> Cancelaciones Tardías
+                                </h4>
+                                <ul>
+                                    <li><strong>Menos de 24 horas:</strong> Penalización del 50%</li>
+                                    <li><strong>El día del tour:</strong> Sin reembolso disponible</li>
+                                </ul>
+                            </div>
+                            
+                            <div style="background: #e3f2fd; padding: 15px; border-radius: 5px; margin-bottom: 15px;">
+                                <h4 style="color: #1976d2; margin-top: 0;">
+                                    <i class="fas fa-money-bill-wave"></i> Proceso de Reembolso
+                                </h4>
+                                <ul>
+                                    <li>Pagos procesados: Reembolso en 3-5 días hábiles</li>
+                                    <li>Reservas pendientes: Liberación inmediata sin cargos</li>
+                                    <li>Los reembolsos se procesan al método de pago original</li>
+                                </ul>
+                            </div>
+                            
+                            <div style="background: #f3e5f5; padding: 15px; border-radius: 5px; margin-bottom: 15px;">
+                                <h4 style="color: #7b1fa2; margin-top: 0;">
+                                    <i class="fas fa-shield-alt"></i> Excepciones (Sin penalización)
+                                </h4>
+                                <ul>
+                                    <li>Condiciones climáticas extremas</li>
+                                    <li>Emergencias médicas (con documentación)</li>
+                                    <li>Cancelación por parte de la empresa</li>
+                                    <li>Restricciones gubernamentales</li>
+                                </ul>
+                            </div>
+                            
+                            <div style="border-left: 4px solid #f44336; padding: 15px; background: #ffebee; margin-top: 20px;">
+                                <p style="margin: 0; color: #c62828;">
+                                    <strong>Importante:</strong> La empresa se reserva el derecho de cancelar tours por motivos de seguridad, fuerza mayor o condiciones adversas. En estos casos, se ofrecerá reembolso completo o reprogramación sin costo adicional.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div style="text-align: center; margin-top: 20px;">
+                            <button onclick="$('#modal-politica').remove()" 
+                                    style="background: #28a745; color: white; border: none; padding: 12px 24px; border-radius: 5px; cursor: pointer; font-size: 16px;">
+                                <i class="fas fa-check"></i> Entendido
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            $('body').append(modal);
+        }
+    </script>
+</body>
+</html>

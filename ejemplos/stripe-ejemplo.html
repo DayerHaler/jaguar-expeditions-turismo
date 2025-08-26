@@ -1,0 +1,62 @@
+<!-- EJEMPLO DE INTEGRACIÓN STRIPE -->
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Incluir Stripe.js -->
+    <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+    <!-- Formulario de tarjeta -->
+    <form id="payment-form">
+        <div id="card-element">
+            <!-- Stripe Elements creará aquí el formulario de tarjeta -->
+        </div>
+        <button id="submit-payment">Pagar</button>
+    </form>
+
+    <script>
+        // Inicializar Stripe con tu clave pública
+        const stripe = Stripe('pk_test_TU_CLAVE_PUBLICA_AQUI');
+        const elements = stripe.elements();
+
+        // Crear elemento de tarjeta
+        const cardElement = elements.create('card', {
+            style: {
+                base: {
+                    fontSize: '16px',
+                    color: '#424770',
+                    '::placeholder': {
+                        color: '#aab7c4',
+                    },
+                },
+            },
+        });
+
+        // Montar el elemento en el DOM
+        cardElement.mount('#card-element');
+
+        // Manejar envío del formulario
+        document.getElementById('payment-form').addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const {token, error} = await stripe.createToken(cardElement);
+
+            if (error) {
+                console.error('Error:', error);
+            } else {
+                // Enviar token al servidor para procesar el pago
+                fetch('/procesar-pago-stripe.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        token: token.id,
+                        amount: 29900, // $299.00 en centavos
+                    }),
+                });
+            }
+        });
+    </script>
+</body>
+</html>

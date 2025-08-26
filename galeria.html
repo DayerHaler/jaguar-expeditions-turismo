@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería - Jaguar Expeditions</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="responsive.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <!-- Logo y nombre -->
+                <div class="logo-section">
+                    <img src="img/logo.jpeg" alt="Jaguar Expeditions Logo" class="logo">
+                    <div class="company-info">
+                        <h1 class="company-name">Jaguar Expeditions</h1>
+                        <p class="slogan">Más que un tour, una aventura salvaje.</p>
+                    </div>
+                </div>
+                
+                <!-- Información de contacto -->
+                <div class="contact-info">
+                    <div class="phone">
+                        <i class="fas fa-phone"></i>
+                        <span>+51 999 123 456</span>
+                    </div>
+                    
+                    <!-- Redes sociales -->
+                    <div class="social-media">
+                        <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-tripadvisor"></i></a>
+                    </div>
+                    
+                    <!-- Selector de idioma -->
+                    <div class="language-selector">
+                        <select id="language">
+                            <option value="es">ES</option>
+                            <option value="en">EN</option>
+                            <option value="pt">PT</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Buscador -->
+                    <div class="search-box">
+                        <input type="text" placeholder="Buscar tours...">
+                        <button><i class="fas fa-search"></i></button>
+                    </div>
+                    
+                    <!-- Carrito -->
+                    <div class="cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navegación -->
+    <nav class="navbar">
+        <div class="container">
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Inicio</a></li>
+                <li><a href="tours.html" class="nav-link">Tours</a></li>
+                <li><a href="contacto.html" class="nav-link">Contacto</a></li>
+                <li><a href="preguntas.html" class="nav-link">Preguntas</a></li>
+                <li><a href="galeria.html" class="nav-link active">Galería</a></li>
+                <li><a href="nosotros.html" class="nav-link">Nosotros</a></li>
+            </ul>
+            
+            <!-- Menú hamburguesa para móviles -->
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sección Principal - Galería -->
+    <main id="galeria">
+        <!-- Hero Section -->
+        <section class="page-hero">
+            <div class="hero-background">
+                <img src="img/fondo.jpeg" alt="Galería Jaguar Expeditions">
+                <div class="hero-overlay"></div>
+            </div>
+            <div class="hero-content">
+                <h1>Galería de Aventuras</h1>
+                <p>Descubre la belleza de la Amazonía a través de nuestras fotografías</p>
+            </div>
+        </section>
+
+        <!-- Filtros de Galería -->
+        <section class="gallery-filters">
+            <div class="container">
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">Todas</button>
+                    <button class="filter-btn" data-filter="fauna">Fauna</button>
+                    <button class="filter-btn" data-filter="flora">Flora</button>
+                    <button class="filter-btn" data-filter="aventura">Aventura</button>
+                    <button class="filter-btn" data-filter="cultura">Cultura</button>
+                    <button class="filter-btn" data-filter="paisajes">Paisajes</button>
+                    <button class="filter-btn" data-filter="tours">Tours</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Galería Principal -->
+        <section class="main-gallery">
+            <div class="container">
+                <div class="gallery-grid">
+                    <!-- Imagen 1 -->
+                    <div class="gallery-item" data-category="fauna">
+                        <img src="img/g1.jpg" alt="Fauna Amazónica" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h3>Jaguar en su Hábitat</h3>
+                                <p>Avistamiento durante tour nocturno</p>
+                                <button class="view-btn" data-image="img/g1.jpg" data-title="Jaguar en su Hábitat" data-description="Uno de los momentos más emocionantes de nuestros tours nocturnos es el avistamiento del jaguar, el felino más grande de América.">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Imagen 2 -->
+                    <div class="gallery-item" data-category="paisajes">
+                        <img src="img/g2.jpg" alt="Río Amazonas" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h3>Amanecer en el Amazonas</h3>
+                                <p>El río más grande del mundo</p>
+                                <button class="view-btn" data-image="img/g2.jpg" data-title="Amanecer en el Amazonas" data-description="Cada amanecer en el río Amazonas es único, con la niebla matutina creando un paisaje mágico.">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Imagen 3 -->
+                    <div class="gallery-item" data-category="fauna">
+                        <img src="img/g3.jpg" alt="Delfines Rosados" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h3>Delfines Rosados</h3>
+                                <p>Encuentro mágico con estos mamíferos</p>
+                                <button class="view-btn" data-image="img/g3.jpg" data-title="Delfines Rosados" data-description="Los delfines rosados del Amazonas son una de las especies más carismáticas que podrás encontrar en nuestros tours.">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Imagen 4 -->
+                    <div class="gallery-item" data-category="aventura">
+                        <img src="img/g4.jpg" alt="Canopy Adventure" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h3>Canopy en las Alturas</h3>
+                                <p>Adrenalina entre las copas de los árboles</p>
+                                <button class="view-btn" data-image="img/g4.jpg" data-title="Canopy en las Alturas" data-description="Experimenta la selva desde una perspectiva única con nuestro tour de canopy, deslizándote entre las copas de los árboles gigantes.">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Imagen 5 -->
+                    <div class="gallery-item" data-category="cultura">
+                        <img src="img/g5.jpg" alt="Comunidad Nativa" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h3>Cultura Ancestral</h3>
+                                <p>Comunidades nativas del Amazonas</p>
+                                <button class="view-btn" data-image="img/g5.jpg" data-title="Cultura Ancestral" data-description="Conoce de cerca las tradiciones milenarias de las comunidades nativas que habitan en la selva amazónica.">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Imagen 6 -->
+                    <div class="gallery-item" data-category="flora">
+                        <img src="img/g6.jpg" alt="Victoria Regia" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h3>Victoria Regia</h3>
+                                <p>La flor de loto gigante del Amazonas</p>
+                                <button class="view-btn" data-image="img/g6.jpg" data-title="Victoria Regia" data-description="La Victoria Regia es una de las plantas acuáticas más impresionantes del mundo, con hojas que pueden alcanzar hasta 2 metros de diámetro.">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Imagen 7 -->
+                    <div class="gallery-item" data-category="fauna">
+                        <img src="img/g7.jpg" alt="Guacamayos" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h3>Guacamayos Multicolor</h3>
+                                <p>Aves exóticas de la selva</p>
+                                <button class="view-btn" data-image="img/g7.jpg" data-title="Guacamayos Multicolor" data-description="Los guacamayos son una de las aves más coloridas y llamativas de la Amazonía, conocidos por su inteligencia y belleza.">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Imagen 8 -->
+                    <div class="gallery-item" data-category="aventura">
+                        <img src="img/g8.jpg" alt="Pesca de Pirañas" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h3>Pesca de Pirañas</h3>
+                                <p>Actividad tradicional amazónica</p>
+                                <button class="view-btn" data-image="img/g8.jpg" data-title="Pesca de Pirañas" data-description="Una experiencia única pescando pirañas con técnicas tradicionales, aprendiendo sobre estos fascinantes peces.">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Imagen 9 -->
+                    <div class="gallery-item" data-category="paisajes">
+                        <img src="img/g9.jpg" alt="Selva Virgen" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h3>Selva Virgen</h3>
+                                <p>Bosque primario intocado</p>
+                                <button class="view-btn" data-image="img/g9.jpg" data-title="Selva Virgen" data-description="Adentrarse en la selva virgen es como viajar en el tiempo, donde la naturaleza permanece intocada por el hombre.">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Imagen 10 -->
+                    <div class="gallery-item" data-category="tours">
+                        <img src="img/g10.jpg" alt="Grupo de Aventureros" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h3>Aventureros en Acción</h3>
+                                <p>Momentos inolvidables en grupo</p>
+                                <button class="view-btn" data-image="img/g10.jpg" data-title="Aventureros en Acción" data-description="Nuestros tours crean lazos especiales entre los aventureros, compartiendo experiencias únicas en la selva.">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Imagen 11 -->
+                    <div class="gallery-item" data-category="fauna">
+                        <img src="img/g11.jpg" alt="Perezoso" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h3>Perezoso en su Árbol</h3>
+                                <p>El mamífero más lento del mundo</p>
+                                <button class="view-btn" data-image="img/g11.jpg" data-title="Perezoso en su Árbol" data-description="Los perezosos son animales fascinantes que se mueven tan lentamente que las algas crecen en su pelaje, proporcionándoles camuflaje natural.">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Imagen 12 -->
+                    <div class="gallery-item" data-category="aventura">
+                        <img src="img/g12.jpg" alt="Navegación Nocturna" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h3>Navegación Nocturna</h3>
+                                <p>La selva cobra vida por la noche</p>
+                                <button class="view-btn" data-image="img/g12.jpg" data-title="Navegación Nocturna" data-description="Durante la noche, la selva se transforma completamente. Los sonidos y la vida nocturna crean una experiencia mágica e inolvidable.">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Imagen 13 -->
+                    <div class="gallery-item" data-category="flora">
+                        <img src="img/g13.jpg" alt="Orquídeas Silvestres" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h3>Orquídeas Silvestres</h3>
+                                <p>Flores exóticas de la selva</p>
+                                <button class="view-btn" data-image="img/g13.jpg" data-title="Orquídeas Silvestres" data-description="La Amazonía alberga más de 3,000 especies de orquídeas, cada una más bella y única que la anterior.">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Imagen 14 -->
+                    <div class="gallery-item" data-category="cultura">
+                        <img src="img/g14.jpg" alt="Artesanía Local" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h3>Artesanía Tradicional</h3>
+                                <p>Arte hecho con materiales de la selva</p>
+                                <button class="view-btn" data-image="img/g14.jpg" data-title="Artesanía Tradicional" data-description="Las comunidades nativas crean hermosas artesanías utilizando materiales naturales de la selva, preservando técnicas ancestrales.">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Imagen 15 -->
+                    <div class="gallery-item" data-category="paisajes">
+                        <img src="img/g15.jpg" alt="Atardecer Amazónico" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h3>Atardecer Amazónico</h3>
+                                <p>Los colores mágicos del fin del día</p>
+                                <button class="view-btn" data-image="img/g15.jpg" data-title="Atardecer Amazónico" data-description="Los atardeceres en la Amazonía son espectaculares, con colores que van del dorado al púrpura, reflejándose en las aguas del río.">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Imagen 16 -->
+                    <div class="gallery-item" data-category="fauna">
+                        <img src="img/g16.jpg" alt="Caimán" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h3>Caimán Negro</h3>
+                                <p>El reptil más grande del Amazonas</p>
+                                <button class="view-btn" data-image="img/g16.jpg" data-title="Caimán Negro" data-description="El caimán negro es el depredador acuático más grande de la Amazonía, pudiendo alcanzar hasta 5 metros de longitud.">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Imagen 18 -->
+                    <div class="gallery-item" data-category="tours">
+                        <img src="img/g18.jpg" alt="Camping en la Selva" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h3>Camping en la Selva</h3>
+                                <p>Una noche bajo las estrellas</p>
+                                <button class="view-btn" data-image="img/g18.jpg" data-title="Camping en la Selva" data-description="Dormir en la selva es una experiencia única, rodeado de los sonidos nocturnos de la naturaleza y un cielo estrellado incomparable.">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Imagen 19 -->
+                    <div class="gallery-item" data-category="aventura">
+                        <img src="img/g19.jpg" alt="Trekking en la Selva" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h3>Trekking Amazónico</h3>
+                                <p>Caminata por senderos ancestrales</p>
+                                <button class="view-btn" data-image="img/g19.jpg" data-title="Trekking Amazónico" data-description="Nuestras caminatas te llevan por senderos que han sido utilizados por comunidades nativas durante siglos.">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Imagen 20 -->
+                    <div class="gallery-item" data-category="paisajes">
+                        <img src="img/g20.jpg" alt="Laguna Escondida" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h3>Laguna Escondida</h3>
+                                <p>Rincones secretos de la Amazonía</p>
+                                <button class="view-btn" data-image="img/g20.jpg" data-title="Laguna Escondida" data-description="Descubre lagunas ocultas en el corazón de la selva, refugio de una biodiversidad extraordinaria.">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Botón cargar más -->
+                <div class="load-more-section">
+                    <button class="btn-load-more" id="loadMoreBtn">
+                        <i class="fas fa-plus"></i>
+                        Cargar Más Fotos
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Estadísticas de la Galería -->
+        <section class="gallery-stats">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number">500+</div>
+                        <div class="stat-label">Fotos en Galería</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">50+</div>
+                        <div class="stat-label">Especies Fotografiadas</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">15</div>
+                        <div class="stat-label">Años Documentando</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">1000+</div>
+                        <div class="stat-label">Aventureros Felices</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Llamada a la acción -->
+        <section class="gallery-cta">
+            <div class="container">
+                <div class="cta-content">
+                    <h2>¿Listo para Crear tus Propias Memorias?</h2>
+                    <p>Únete a nosotros y vive experiencias que se convertirán en fotografías inolvidables</p>
+                    <div class="cta-buttons">
+                        <a href="tours.html" class="btn-primary">Ver Tours</a>
+                        <a href="contacto.html" class="btn-secondary">Contactar</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal para ver imágenes -->
+    <div id="imageModal" class="image-modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="close-modal">&times;</button>
+            <div class="modal-image-container">
+                <img id="modalImage" src="" alt="">
+                <div class="modal-navigation">
+                    <button class="nav-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
+                    <button class="nav-btn next-btn"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+            <div class="modal-info">
+                <h3 id="modalTitle"></h3>
+                <p id="modalDescription"></p>
+                <div class="modal-actions">
+                    <button class="btn-download" id="downloadBtn">
+                        <i class="fas fa-download"></i>
+                        Descargar
+                    </button>
+                    <button class="btn-share" id="shareBtn">
+                        <i class="fas fa-share"></i>
+                        Compartir
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Jaguar Expeditions</h3>
+                    <p>Tu puerta de entrada a la aventura amazónica más auténtica</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> Iquitos, Perú</p>
+                    <p><i class="fas fa-phone"></i> +51 999 123 456</p>
+                    <p><i class="fas fa-envelope"></i> info@jaguarexpeditions.com</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Síguenos</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#"><i class="fab fa-tripadvisor"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2025 Jaguar Expeditions. Todos los derechos reservados.</p>
+                    <div class="footer-links">
+                        <a href="#" class="terms-link">
+                            <i class="fas fa-file-contract"></i>
+                            Términos y Condiciones
+                        </a>
+                        <a href="#" class="privacy-link">
+                            <i class="fas fa-shield-alt"></i>
+                            Política de Privacidad
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
