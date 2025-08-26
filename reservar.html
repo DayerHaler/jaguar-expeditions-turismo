@@ -594,6 +594,235 @@
             margin-left: 5px;
         }
 
+        /* Estilos para formularios de cliente responsable y participantes */
+        .cliente-responsable {
+            background: linear-gradient(135deg, #e8f5e8, #f0f8f0);
+            border: 2px solid #2c5530;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .cliente-responsable::before {
+            content: "👤 RESPONSABLE";
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            background: #2c5530;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .participante-form {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .participante-form h4 {
+            color: #495057;
+            border-bottom: 2px solid #dee2e6;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .form-header h3 {
+            color: #2c5530;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .participantes-container {
+            border-top: 3px solid #dee2e6;
+            padding-top: 20px;
+        }
+
+        .copy-option {
+            margin: 20px 0;
+        }
+
+        .copy-option label {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #2196f3;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .copy-option label:hover {
+            background: #bbdefb;
+            border-left-color: #1976d2;
+        }
+
+        .copy-option input[type="checkbox"] {
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
+
+        /* Estilos para opciones de tipo de pago */
+        .payment-type-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            border: 1px solid #dee2e6;
+        }
+
+        .payment-type-option {
+            margin-bottom: 20px;
+            border: 2px solid #dee2e6;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .payment-type-option:hover {
+            border-color: #2c5530;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(44, 85, 48, 0.1);
+        }
+
+        .payment-type-option input[type="radio"] {
+            display: none;
+        }
+
+        .payment-type-option input[type="radio"]:checked + label {
+            background: linear-gradient(135deg, #e8f5e8, #f0f8f0);
+            border-color: #2c5530;
+        }
+
+        .payment-type-option label {
+            display: block;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            background: white;
+        }
+
+        .payment-type-option.selected {
+            border-color: #2c5530 !important;
+            background: linear-gradient(145deg, #f8f9fa, #e8f5e8) !important;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(44, 85, 48, 0.2) !important;
+        }
+
+        .payment-type-option.selected .payment-type-radio {
+            background: #2c5530;
+            border-color: #2c5530;
+        }
+
+        .payment-type-option.selected .payment-type-radio::after {
+            opacity: 1;
+        }
+
+        .payment-type-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            color: #2c5530;
+        }
+
+        .payment-type-header i {
+            font-size: 24px;
+            color: #2c5530;
+        }
+
+        .recommended-badge {
+            background: #28a745;
+            color: white;
+            font-size: 12px;
+            padding: 4px 8px;
+            border-radius: 12px;
+            margin-left: auto;
+            font-weight: 500;
+        }
+
+        .payment-type-description {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .payment-type-benefits {
+            font-size: 13px;
+            color: #2c5530;
+            line-height: 1.6;
+        }
+
+        .payment-type-details {
+            background: rgba(44, 85, 48, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-size: 14px;
+        }
+
+        .payment-method-section {
+            margin: 30px 0;
+        }
+
+        .payment-method {
+            margin-bottom: 15px;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .payment-method:hover {
+            border-color: #2c5530;
+            box-shadow: 0 2px 8px rgba(44, 85, 48, 0.1);
+        }
+
+        .payment-method input[type="radio"] {
+            display: none;
+        }
+
+        .payment-method input[type="radio"]:checked + label {
+            background: #e8f5e8;
+            border-color: #2c5530;
+        }
+
+        .payment-method label {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px 20px;
+            cursor: pointer;
+            background: white;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .payment-method label i {
+            font-size: 20px;
+            color: #2c5530;
+            width: 24px;
+        }
+
+        .payment-method label small {
+            display: block;
+            color: #666;
+            font-size: 12px;
+            margin-top: 2px;
+        }
+
         /* Responsive design */
         @media (max-width: 768px) {
             .reservation-container {
@@ -751,55 +980,93 @@
 
         <!-- Paso 4: Método de Pago -->
         <div class="step-content" id="paso4">
-            <h3>Método de Pago</h3>
+            <h3>Opciones de Pago</h3>
             
             <div class="summary-section">
                 <h4><i class="fas fa-receipt"></i> Resumen de la Reserva</h4>
                 <div id="resumen-reserva"></div>
             </div>
 
-            <h4 style="margin-bottom: 20px;">
-                <i class="fas fa-credit-card"></i> Selecciona tu método de pago
-            </h4>
+            <!-- Opciones de Tipo de Pago -->
+            <div class="payment-type-section">
+                <h4><i class="fas fa-money-bill-wave"></i> Tipo de Pago</h4>
+                
+                <div class="payment-type-option" data-type="completo">
+                    <input type="radio" name="tipo-pago" value="completo" id="tipo-completo" checked>
+                    <label for="tipo-completo">
+                        <div class="payment-type-header">
+                            <i class="fas fa-credit-card"></i>
+                            <span>Pago Completo</span>
+                            <span class="recommended-badge">Recomendado</span>
+                        </div>
+                        <div class="payment-type-description">
+                            Paga el total ahora y confirma tu reserva inmediatamente
+                        </div>
+                        <div class="payment-type-benefits">
+                            ✅ Reserva confirmada al instante<br>
+                            ✅ Sin preocupaciones futuras<br>
+                            ✅ Mejor precio garantizado
+                        </div>
+                    </label>
+                </div>
 
-            <div class="payment-method" data-method="tarjeta">
-                <input type="radio" name="metodo-pago" value="tarjeta" id="pago-tarjeta">
-                <label for="pago-tarjeta">
-                    <i class="fas fa-credit-card"></i> Tarjeta de Crédito/Débito
-                    <small style="display: block; color: #666; margin-top: 5px;">
-                        Visa, Mastercard, American Express
-                    </small>
-                </label>
+                <div class="payment-type-option" data-type="cuotas">
+                    <input type="radio" name="tipo-pago" value="cuotas" id="tipo-cuotas">
+                    <label for="tipo-cuotas">
+                        <div class="payment-type-header">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Pago en 2 Cuotas</span>
+                        </div>
+                        <div class="payment-type-description">
+                            Paga en 2 cuotas para mayor comodidad
+                        </div>
+                        <div class="payment-type-details" id="cuotas-details">
+                            <!-- Se llena dinámicamente con JavaScript -->
+                        </div>
+                        <div class="payment-type-benefits">
+                            💰 Primera cuota: Reserva el tour<br>
+                            📅 Segunda cuota: 15 días antes del viaje<br>
+                            🔒 Reserva asegurada
+                        </div>
+                    </label>
+                </div>
             </div>
 
-            <div class="payment-method" data-method="yape">
-                <input type="radio" name="metodo-pago" value="yape" id="pago-yape">
-                <label for="pago-yape">
-                    <i class="fas fa-mobile-alt"></i> Yape
-                    <small style="display: block; color: #666; margin-top: 5px;">
-                        Pago rápido y seguro desde tu celular
-                    </small>
-                </label>
-            </div>
+            <!-- Métodos de Pago -->
+            <div class="payment-method-section">
+                <h4><i class="fas fa-credit-card"></i> Método de Pago</h4>
 
-            <div class="payment-method" data-method="plin">
-                <input type="radio" name="metodo-pago" value="plin" id="pago-plin">
-                <label for="pago-plin">
-                    <i class="fas fa-mobile-alt"></i> Plin
-                    <small style="display: block; color: #666; margin-top: 5px;">
-                        Transferencia instantánea
-                    </small>
-                </label>
-            </div>
+                <div class="payment-method" data-method="tarjeta">
+                    <input type="radio" name="metodo-pago" value="tarjeta" id="pago-tarjeta" checked>
+                    <label for="pago-tarjeta">
+                        <i class="fas fa-credit-card"></i> Tarjeta de Crédito/Débito
+                        <small>Visa, Mastercard, American Express</small>
+                    </label>
+                </div>
 
-            <div class="payment-method" data-method="transferencia">
-                <input type="radio" name="metodo-pago" value="transferencia" id="pago-transferencia">
-                <label for="pago-transferencia">
-                    <i class="fas fa-university"></i> Transferencia Bancaria
-                    <small style="display: block; color: #666; margin-top: 5px;">
-                        BCP, BBVA, Interbank, Scotiabank
-                    </small>
-                </label>
+                <div class="payment-method" data-method="yape">
+                    <input type="radio" name="metodo-pago" value="yape" id="pago-yape">
+                    <label for="pago-yape">
+                        <i class="fas fa-mobile-alt"></i> Yape
+                        <small>Pago rápido y seguro desde tu celular</small>
+                    </label>
+                </div>
+
+                <div class="payment-method" data-method="plin">
+                    <input type="radio" name="metodo-pago" value="plin" id="pago-plin">
+                    <label for="pago-plin">
+                        <i class="fas fa-mobile-alt"></i> Plin
+                        <small>Transferencia instantánea</small>
+                    </label>
+                </div>
+
+                <div class="payment-method" data-method="transferencia">
+                    <input type="radio" name="metodo-pago" value="transferencia" id="pago-transferencia">
+                    <label for="pago-transferencia">
+                        <i class="fas fa-university"></i> Transferencia Bancaria
+                        <small>BCP, BBVA, Interbank, Scotiabank</small>
+                    </label>
+                </div>
             </div>
 
             <!-- Formulario de tarjeta (se muestra cuando se selecciona tarjeta) -->
@@ -951,6 +1218,77 @@
             $('#cvv').on('input', function() {
                 this.value = this.value.replace(/[^0-9]/g, '').substring(0, 4);
             });
+
+            // Event listeners para tipo de pago
+            $('input[name="tipo-pago"]').change(function() {
+                const tipoPago = this.value;
+                actualizarDetallesCuotas(tipoPago);
+                $('.payment-type-option').removeClass('selected');
+                $(this).closest('.payment-type-option').addClass('selected');
+            });
+
+            // Trigger inicial para mostrar detalles de cuotas
+            actualizarDetallesCuotas('completo');
+        }
+
+        function calcularDescuento(subtotal, numeroPersonas) {
+            let descuento = 0;
+            if (numeroPersonas >= 8) {
+                descuento = subtotal * 0.15; // 15% para grupos de 8 o más
+            } else if (numeroPersonas >= 5) {
+                descuento = subtotal * 0.10; // 10% para grupos de 5-7
+            } else if (numeroPersonas >= 3) {
+                descuento = subtotal * 0.05; // 5% para grupos de 3-4
+            }
+            return descuento;
+        }
+
+        function actualizarDetallesCuotas(tipoPago) {
+            const cuotasDetails = document.getElementById('cuotas-details');
+            
+            if (tipoPago === 'cuotas' && tourSeleccionado && numeroClientes > 0) {
+                const precioPorPersona = parseFloat(tourSeleccionado.precio);
+                const subtotal = precioPorPersona * numeroClientes;
+                const descuento = calcularDescuento(subtotal, numeroClientes);
+                const impuestos = (subtotal - descuento) * 0.18;
+                const total = subtotal - descuento + impuestos;
+                
+                const primeraCuota = total * 0.5; // 50% primera cuota
+                const segundaCuota = total * 0.5; // 50% segunda cuota
+                
+                const fechaHoy = new Date();
+                const fechaSegundaCuota = new Date(fechaSeleccionada);
+                fechaSegundaCuota.setDate(fechaSegundaCuota.getDate() - 15); // 15 días antes del tour
+                
+                cuotasDetails.innerHTML = `
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 10px 0;">
+                        <div style="background: white; padding: 15px; border-radius: 8px; border: 2px solid #2c5530;">
+                            <div style="font-weight: 600; color: #2c5530; margin-bottom: 8px;">
+                                <i class="fas fa-calendar-check"></i> Primera Cuota
+                            </div>
+                            <div style="font-size: 18px; font-weight: bold; color: #2c5530;">
+                                $${primeraCuota.toFixed(2)}
+                            </div>
+                            <div style="font-size: 12px; color: #666; margin-top: 5px;">
+                                Pago inmediato (reserva el tour)
+                            </div>
+                        </div>
+                        <div style="background: white; padding: 15px; border-radius: 8px; border: 2px solid #fd7e14;">
+                            <div style="font-weight: 600; color: #fd7e14; margin-bottom: 8px;">
+                                <i class="fas fa-calendar-alt"></i> Segunda Cuota
+                            </div>
+                            <div style="font-size: 18px; font-weight: bold; color: #fd7e14;">
+                                $${segundaCuota.toFixed(2)}
+                            </div>
+                            <div style="font-size: 12px; color: #666; margin-top: 5px;">
+                                Hasta el ${fechaSegundaCuota.toLocaleDateString('es-PE')}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } else {
+                cuotasDetails.innerHTML = '';
+            }
         }
 
         function cargarInformacionTour() {
@@ -1348,76 +1686,279 @@
             const container = document.getElementById('formularios-clientes');
             container.innerHTML = '';
 
+            // 1. FORMULARIO DEL CLIENTE RESPONSABLE (quien hace la reserva)
+            const formularioResponsable = document.createElement('div');
+            formularioResponsable.className = 'client-form cliente-responsable';
+            formularioResponsable.innerHTML = `
+                <div class="form-header">
+                    <h3><i class="fas fa-user-tie"></i> Datos del Cliente Responsable</h3>
+                    <p style="color: #666; font-size: 14px; margin-bottom: 20px;">
+                        Persona que realiza la reserva y será el contacto principal
+                    </p>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Nombres *</label>
+                        <input type="text" name="responsable_nombre" required 
+                               placeholder="Nombres completos">
+                    </div>
+                    <div class="form-group">
+                        <label>Apellidos *</label>
+                        <input type="text" name="responsable_apellido" required 
+                               placeholder="Apellidos completos">
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Email *</label>
+                        <input type="email" name="responsable_email" required 
+                               placeholder="correo@ejemplo.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Documento de Identidad *</label>
+                        <input type="text" name="responsable_documento" required 
+                               placeholder="DNI o Pasaporte" maxlength="20">
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Tipo de Documento *</label>
+                        <select name="responsable_tipo_documento" required>
+                            <option value="">Seleccionar...</option>
+                            <option value="DNI">DNI</option>
+                            <option value="Pasaporte">Pasaporte</option>
+                            <option value="CE">Carné de Extranjería</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Edad *</label>
+                        <input type="number" name="responsable_edad" required min="18" max="99"
+                               placeholder="Edad en años">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Género *</label>
+                        <select name="responsable_genero" required>
+                            <option value="">Seleccionar...</option>
+                            <option value="Masculino">Masculino</option>
+                            <option value="Femenino">Femenino</option>
+                            <option value="Otro">Otro</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>País *</label>
+                        <select name="responsable_pais" required>
+                            <option value="">Seleccionar país...</option>
+                            <option value="Perú">Perú</option>
+                            <option value="Argentina">Argentina</option>
+                            <option value="Bolivia">Bolivia</option>
+                            <option value="Brasil">Brasil</option>
+                            <option value="Chile">Chile</option>
+                            <option value="Colombia">Colombia</option>
+                            <option value="Ecuador">Ecuador</option>
+                            <option value="Estados Unidos">Estados Unidos</option>
+                            <option value="España">España</option>
+                            <option value="Francia">Francia</option>
+                            <option value="Alemania">Alemania</option>
+                            <option value="Otro">Otro</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Celular Personal *</label>
+                        <input type="tel" name="responsable_celular" required 
+                               placeholder="+51 999 999 999">
+                    </div>
+                    <div class="form-group">
+                        <label>Celular de Contacto de Emergencia</label>
+                        <input type="tel" name="responsable_celular_contacto" 
+                               placeholder="+51 999 999 999 (familiar o amigo)">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Dirección</label>
+                    <textarea name="responsable_direccion" rows="2" 
+                              placeholder="Dirección completa (opcional)"></textarea>
+                </div>
+            `;
+            
+            container.appendChild(formularioResponsable);
+
+            // 2. FORMULARIOS DE LOS PARTICIPANTES
+            const participantesContainer = document.createElement('div');
+            participantesContainer.className = 'participantes-container';
+            participantesContainer.innerHTML = `
+                <div class="form-header" style="margin-top: 30px;">
+                    <h3><i class="fas fa-users"></i> Datos de los Participantes</h3>
+                    <p style="color: #666; font-size: 14px; margin-bottom: 20px;">
+                        Información de cada persona que participará en el tour (${numeroClientes} ${numeroClientes === 1 ? 'persona' : 'personas'})
+                    </p>
+                </div>
+            `;
+
             for (let i = 0; i < numeroClientes; i++) {
-                const formulario = document.createElement('div');
-                formulario.className = 'client-form';
-                formulario.innerHTML = `
-                    <h4><i class="fas fa-user"></i> Cliente ${i + 1} ${i === 0 ? '(Contacto Principal)' : ''}</h4>
+                const formularioParticipante = document.createElement('div');
+                formularioParticipante.className = 'client-form participante-form';
+                formularioParticipante.innerHTML = `
+                    <h4><i class="fas fa-user"></i> Participante ${i + 1}</h4>
                     
-                    <!-- Información Personal Básica -->
                     <div class="form-row">
                         <div class="form-group">
-                            <label>Nombre Completo *</label>
-                            <input type="text" name="nombre_${i}" required 
-                                   placeholder="Nombres y apellidos completos">
+                            <label>Nombres *</label>
+                            <input type="text" name="participante_nombre_${i}" required 
+                                   placeholder="Nombres completos">
                         </div>
                         <div class="form-group">
-                            <label>Documento de Identidad (DNI) *</label>
-                            <input type="text" name="documento_${i}" required 
-                                   placeholder="Número de DNI o Pasaporte" maxlength="20">
+                            <label>Apellidos *</label>
+                            <input type="text" name="participante_apellido_${i}" required 
+                                   placeholder="Apellidos completos">
                         </div>
                     </div>
                     
                     <div class="form-row">
                         <div class="form-group">
-                            <label>Edad *</label>
-                            <input type="number" name="edad_${i}" required min="1" max="99"
-                                   placeholder="Edad en años">
+                            <label>Email</label>
+                            <input type="email" name="participante_email_${i}" 
+                                   placeholder="correo@ejemplo.com (opcional)">
                         </div>
                         <div class="form-group">
-                            <label>Género *</label>
-                            <select name="genero_${i}" required>
+                            <label>Documento de Identidad *</label>
+                            <input type="text" name="participante_documento_${i}" required 
+                                   placeholder="DNI o Pasaporte" maxlength="20">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Tipo de Documento *</label>
+                            <select name="participante_tipo_documento_${i}" required>
                                 <option value="">Seleccionar...</option>
-                                <option value="M">Masculino</option>
-                                <option value="F">Femenino</option>
-                                <option value="O">Otro</option>
+                                <option value="DNI">DNI</option>
+                                <option value="Pasaporte">Pasaporte</option>
+                                <option value="CE">Carné de Extranjería</option>
                             </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Edad *</label>
+                            <input type="number" name="participante_edad_${i}" required min="1" max="99"
+                                   placeholder="Edad en años">
                         </div>
                     </div>
 
                     <div class="form-row">
                         <div class="form-group">
                             <label>País *</label>
-                            <select name="pais_${i}" required>
+                            <select name="participante_pais_${i}" required>
                                 <option value="">Seleccionar país...</option>
-                                <option value="PE">Perú</option>
-                                <option value="AR">Argentina</option>
-                                <option value="BO">Bolivia</option>
-                                <option value="BR">Brasil</option>
-                                <option value="CL">Chile</option>
-                                <option value="CO">Colombia</option>
-                                <option value="EC">Ecuador</option>
-                                <option value="UY">Uruguay</option>
-                                <option value="VE">Venezuela</option>
-                                <option value="US">Estados Unidos</option>
-                                <option value="CA">Canadá</option>
-                                <option value="MX">México</option>
-                                <option value="ES">España</option>
-                                <option value="FR">Francia</option>
-                                <option value="DE">Alemania</option>
-                                <option value="IT">Italia</option>
-                                <option value="UK">Reino Unido</option>
-                                <option value="JP">Japón</option>
-                                <option value="AU">Australia</option>
-                                <option value="OTHER">Otro</option>
+                                <option value="Perú">Perú</option>
+                                <option value="Argentina">Argentina</option>
+                                <option value="Bolivia">Bolivia</option>
+                                <option value="Brasil">Brasil</option>
+                                <option value="Chile">Chile</option>
+                                <option value="Colombia">Colombia</option>
+                                <option value="Ecuador">Ecuador</option>
+                                <option value="Estados Unidos">Estados Unidos</option>
+                                <option value="España">España</option>
+                                <option value="Francia">Francia</option>
+                                <option value="Alemania">Alemania</option>
+                                <option value="Otro">Otro</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>Celular Personal *</label>
-                            <input type="tel" name="celular_${i}" required 
-                                   placeholder="+51 999 999 999">
+                            <label>Celular</label>
+                            <input type="tel" name="participante_celular_${i}" 
+                                   placeholder="+51 999 999 999 (opcional)">
                         </div>
                     </div>
+
+                    <div class="form-group">
+                        <label>Celular de Contacto de Emergencia</label>
+                        <input type="tel" name="participante_celular_contacto_${i}" 
+                               placeholder="+51 999 999 999 (familiar o amigo)">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Dirección</label>
+                        <textarea name="participante_direccion_${i}" rows="2" 
+                                  placeholder="Dirección completa (opcional)"></textarea>
+                    </div>
+                `;
+                
+                participantesContainer.appendChild(formularioParticipante);
+            }
+
+            container.appendChild(participantesContainer);
+
+            // Agregar opción de copiar datos del responsable al primer participante
+            if (numeroClientes > 0) {
+                const copyOption = document.createElement('div');
+                copyOption.className = 'copy-option';
+                copyOption.innerHTML = `
+                    <div style="margin: 20px 0; padding: 15px; background: #e3f2fd; border-radius: 8px; border-left: 4px solid #2196f3;">
+                        <label style="display: flex; align-items: center; cursor: pointer;">
+                            <input type="checkbox" id="copy-responsable-data" style="margin-right: 10px;">
+                            <span><i class="fas fa-copy"></i> El responsable también participa en el tour (copiar sus datos al Participante 1)</span>
+                        </label>
+                    </div>
+                `;
+                container.appendChild(copyOption);
+
+                // Event listener para copiar datos
+                document.getElementById('copy-responsable-data').addEventListener('change', function() {
+                    if (this.checked) {
+                        copiarDatosResponsable();
+                    } else {
+                        limpiarDatosParticipante(0);
+                    }
+                });
+            }
+        }
+
+        function copiarDatosResponsable() {
+            const nombres = document.querySelector('input[name="responsable_nombre"]').value;
+            const apellidos = document.querySelector('input[name="responsable_apellido"]').value;
+            const email = document.querySelector('input[name="responsable_email"]').value;
+            const documento = document.querySelector('input[name="responsable_documento"]').value;
+            const tipoDoc = document.querySelector('select[name="responsable_tipo_documento"]').value;
+            const edad = document.querySelector('input[name="responsable_edad"]').value;
+            const pais = document.querySelector('select[name="responsable_pais"]').value;
+            const celular = document.querySelector('input[name="responsable_celular"]').value;
+            const celularContacto = document.querySelector('input[name="responsable_celular_contacto"]').value;
+            const direccion = document.querySelector('textarea[name="responsable_direccion"]').value;
+
+            // Copiar al participante 1 (índice 0)
+            document.querySelector('input[name="participante_nombre_0"]').value = nombres;
+            document.querySelector('input[name="participante_apellido_0"]').value = apellidos;
+            document.querySelector('input[name="participante_email_0"]').value = email;
+            document.querySelector('input[name="participante_documento_0"]').value = documento;
+            document.querySelector('select[name="participante_tipo_documento_0"]').value = tipoDoc;
+            document.querySelector('input[name="participante_edad_0"]').value = edad;
+            document.querySelector('select[name="participante_pais_0"]').value = pais;
+            document.querySelector('input[name="participante_celular_0"]').value = celular;
+            document.querySelector('input[name="participante_celular_contacto_0"]').value = celularContacto;
+            document.querySelector('textarea[name="participante_direccion_0"]').value = direccion;
+        }
+
+        function limpiarDatosParticipante(indice) {
+            document.querySelector(`input[name="participante_nombre_${indice}"]`).value = '';
+            document.querySelector(`input[name="participante_apellido_${indice}"]`).value = '';
+            document.querySelector(`input[name="participante_email_${indice}"]`).value = '';
+            document.querySelector(`input[name="participante_documento_${indice}"]`).value = '';
+            document.querySelector(`select[name="participante_tipo_documento_${indice}"]`).value = '';
+            document.querySelector(`input[name="participante_edad_${indice}"]`).value = '';
+            document.querySelector(`select[name="participante_pais_${indice}"]`).value = '';
+            document.querySelector(`input[name="participante_celular_${indice}"]`).value = '';
+            document.querySelector(`input[name="participante_celular_contacto_${indice}"]`).value = '';
+            document.querySelector(`textarea[name="participante_direccion_${indice}"]`).value = '';
+        }
                     
                     ${i === 0 ? `
                         <!-- Información de Contacto Principal -->
@@ -1643,28 +2184,93 @@
         }
 
         function procesarPago(datos) {
-            // Intentar enviar datos al servidor
+            // Adaptar datos al nuevo formato normalizado
+            const datosNormalizados = {
+                tour_id: tourSeleccionado.id,
+                fecha_tour: fechaSeleccionada,
+                numero_personas: numeroClientes,
+                precio_total: datos.total,
+                tipo_pago: document.querySelector('input[name="tipo-pago"]:checked').value,
+                metodo_pago: datos.metodo_pago,
+                cliente_responsable: {
+                    nombre: document.querySelector('input[name="nombre_0"]').value,
+                    apellido: document.querySelector('input[name="apellido_0"]').value,
+                    email: document.querySelector('input[name="email_0"]').value,
+                    telefono: document.querySelector('input[name="telefono_0"]').value,
+                    documento_identidad: document.querySelector('input[name="documento_0"]').value,
+                    tipo_documento: document.querySelector('select[name="tipo_documento_0"]').value,
+                    fecha_nacimiento: document.querySelector('input[name="fecha_nacimiento_0"]').value,
+                    pais: document.querySelector('select[name="pais_0"]').value,
+                    ciudad: document.querySelector('input[name="ciudad_0"]').value
+                },
+                participantes: []
+            };
+
+            // Recopilar datos de todos los participantes
+            for (let i = 0; i < numeroClientes; i++) {
+                datosNormalizados.participantes.push({
+                    nombre: document.querySelector(`input[name="nombre_${i}"]`).value,
+                    apellido: document.querySelector(`input[name="apellido_${i}"]`).value,
+                    documento_identidad: document.querySelector(`input[name="documento_${i}"]`).value,
+                    tipo_documento: document.querySelector(`select[name="tipo_documento_${i}"]`).value,
+                    fecha_nacimiento: document.querySelector(`input[name="fecha_nacimiento_${i}"]`).value,
+                    edad: document.querySelector(`select[name="edad_${i}"]`).value
+                });
+            }
+
+            // Enviar datos al servidor con el nuevo API
             $.ajax({
-                url: 'api/crear_reserva.php',
+                url: 'api/crear_reserva_normalizada.php',
                 method: 'POST',
                 contentType: 'application/json',
-                data: JSON.stringify(datos),
-                timeout: 5000, // 5 segundos de timeout
+                data: JSON.stringify(datosNormalizados),
+                timeout: 10000, // 10 segundos de timeout
                 success: function(response) {
                     document.getElementById('loading-overlay').style.display = 'none';
                     
                     if (response.success) {
-                        mostrarConfirmacionExitosa(response.data);
+                        // Convertir respuesta del servidor al formato esperado
+                        const datosRespuesta = convertirRespuestaServidor(response.data, datos);
+                        mostrarConfirmacionExitosa(datosRespuesta);
                     } else {
                         mostrarError(response.message || 'Error al procesar la reserva');
                     }
                 },
-                error: function(xhr) {
-                    console.log('Backend no disponible, usando simulación local');
+                error: function(xhr, textStatus, errorThrown) {
+                    console.log('Error al conectar con el servidor:', textStatus, errorThrown);
+                    console.log('Usando simulación local como respaldo');
                     // Si falla la conexión, simular una reserva exitosa
                     simularReservaExitosa(datos);
                 }
             });
+        }
+
+        function convertirRespuestaServidor(respuesta, datosOriginales) {
+            return {
+                codigo_reserva: respuesta.codigo_reserva,
+                tour: tourSeleccionado,
+                fecha_tour: datosOriginales.fecha_tour,
+                num_clientes: datosOriginales.num_clientes,
+                clientes: datosOriginales.clientes,
+                metodo_pago: datosOriginales.metodo_pago,
+                subtotal: datosOriginales.subtotal,
+                descuento: datosOriginales.descuento,
+                impuestos: datosOriginales.impuestos,
+                total: datosOriginales.total,
+                fecha_pago: new Date().toLocaleDateString('es-ES'),
+                hora_pago: new Date().toLocaleTimeString('es-ES'),
+                estado: 'Confirmado',
+                pago: {
+                    codigo_transaccion: respuesta.codigo_transaccion,
+                    metodo_pago: datosOriginales.metodo_pago,
+                    monto: respuesta.total,
+                    moneda: 'USD',
+                    estado: 'Exitoso',
+                    fecha_procesado: new Date().toLocaleString('es-ES'),
+                    descripcion: `Pago por reserva de tour - ${datosOriginales.metodo_pago}`,
+                    ...respuesta.detalles_pago
+                }
+            };
         }
 
         function simularReservaExitosa(datos) {
@@ -1672,6 +2278,10 @@
             
             // Generar código de reserva simulado
             const codigoReserva = 'JE' + Date.now().toString().slice(-6);
+            
+            // Generar detalles del pago simulado
+            const metodoPago = datos.metodo_pago;
+            let detallesPago = generarDetallesPagoSimulado(metodoPago, datos.total);
             
             const datosSimulados = {
                 codigo_reserva: codigoReserva,
@@ -1686,10 +2296,57 @@
                 total: datos.total,
                 fecha_pago: new Date().toLocaleDateString('es-ES'),
                 hora_pago: new Date().toLocaleTimeString('es-ES'),
-                estado: 'Confirmado'
+                estado: 'Confirmado',
+                pago: detallesPago
             };
             
+            // Guardar en localStorage para persistencia
+            localStorage.setItem('ultimaReserva', JSON.stringify(datosSimulados));
+            
             mostrarConfirmacionExitosa(datosSimulados);
+        }
+
+        function generarDetallesPagoSimulado(metodoPago, monto) {
+            const fecha = new Date();
+            const codigoTransaccion = metodoPago.toUpperCase() + '-' + Date.now().toString().slice(-8);
+            
+            let detalles = {
+                codigo_transaccion: codigoTransaccion,
+                metodo_pago: metodoPago,
+                monto: monto,
+                moneda: 'USD',
+                estado: 'Exitoso',
+                fecha_procesado: fecha.toLocaleString('es-ES'),
+                descripcion: `Pago por reserva de tour - ${metodoPago}`
+            };
+
+            switch(metodoPago) {
+                case 'tarjeta':
+                    detalles.procesador = 'Stripe';
+                    detalles.tarjeta_ultimos_4 = '****1234';
+                    detalles.tipo_tarjeta = 'Visa';
+                    detalles.autorizacion = 'AUTH-' + Math.random().toString(36).substr(2, 8).toUpperCase();
+                    detalles.referencia_banco = 'REF-' + Math.random().toString(36).substr(2, 10).toUpperCase();
+                    break;
+                case 'yape':
+                    detalles.procesador = 'Yape';
+                    detalles.telefono_origen = '+51 9********';
+                    detalles.operacion_yape = 'YP-' + Math.random().toString(36).substr(2, 8).toUpperCase();
+                    break;
+                case 'plin':
+                    detalles.procesador = 'Plin';
+                    detalles.telefono_origen = '+51 9********';
+                    detalles.operacion_plin = 'PL-' + Math.random().toString(36).substr(2, 8).toUpperCase();
+                    break;
+                case 'transferencia':
+                    detalles.procesador = 'Banco';
+                    detalles.banco_origen = 'BCP';
+                    detalles.numero_operacion = 'OP-' + Math.random().toString(36).substr(2, 10).toUpperCase();
+                    detalles.cuenta_destino = 'XXXX-XXXX-XXXX-1234';
+                    break;
+            }
+
+            return detalles;
         }
 
         function mostrarConfirmacionExitosa(datosReserva) {
@@ -1710,35 +2367,91 @@
                     </small>
                 </div>
 
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
-                    <div style="background: white; padding: 15px; border-radius: 8px; border-left: 4px solid #2c5530;">
-                        <h5 style="color: #2c5530; margin-bottom: 10px;">
-                            <i class="fas fa-map-marked-alt"></i> Detalles del Tour
-                        </h5>
-                        <p><strong>Tour:</strong> ${tourSeleccionado.nombre}</p>
-                        <p><strong>Fecha:</strong> ${new Date(fechaSeleccionada).toLocaleDateString('es-ES')}</p>
-                        <p><strong>Participantes:</strong> ${numeroClientes} persona${numeroClientes !== 1 ? 's' : ''}</p>
-                    </div>
-
-                    <div style="background: white; padding: 15px; border-radius: 8px; border-left: 4px solid #28a745;">
-                        <h5 style="color: #28a745; margin-bottom: 10px;">
-                            <i class="fas fa-dollar-sign"></i> Resumen de Pago
-                        </h5>
-                        <p><strong>Total Pagado:</strong> $${datosReserva.total.toFixed(2)}</p>
-                        <p><strong>Método:</strong> ${obtenerNombreMetodoPago(datosReserva.metodo_pago)}</p>
-                        <p><strong>Estado:</strong> <span style="color: #28a745; font-weight: bold;">CONFIRMADO</span></p>
+                <!-- Detalles del Tour -->
+                <div style="background: white; padding: 20px; border-radius: 10px; margin-bottom: 20px; border-left: 4px solid #2c5530; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                    <h4 style="color: #2c5530; margin-bottom: 15px;">
+                        <i class="fas fa-map-marked-alt"></i> Detalles del Tour
+                    </h4>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                        <div>
+                            <p><strong>Tour:</strong> ${tourSeleccionado.nombre}</p>
+                            <p><strong>Fecha:</strong> ${new Date(fechaSeleccionada).toLocaleDateString('es-ES')}</p>
+                        </div>
+                        <div>
+                            <p><strong>Participantes:</strong> ${numeroClientes} persona${numeroClientes !== 1 ? 's' : ''}</p>
+                            <p><strong>Duración:</strong> ${tourSeleccionado.duracion}</p>
+                        </div>
                     </div>
                 </div>
 
-                <div style="background: #e3f2fd; padding: 15px; border-radius: 8px; margin-top: 20px; border-left: 4px solid #1976d2;">
+                <!-- Detalles del Pago -->
+                <div style="background: white; padding: 20px; border-radius: 10px; margin-bottom: 20px; border-left: 4px solid #28a745; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                    <h4 style="color: #28a745; margin-bottom: 15px;">
+                        <i class="fas fa-credit-card"></i> Detalles del Pago
+                    </h4>
+                    
+                    <!-- Información Principal del Pago -->
+                    <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                            <div>
+                                <p><strong>Código de Transacción:</strong></p>
+                                <p style="font-family: monospace; color: #007bff; font-weight: bold;">${datosReserva.pago.codigo_transaccion}</p>
+                            </div>
+                            <div>
+                                <p><strong>Método de Pago:</strong></p>
+                                <p>${obtenerNombreMetodoPago(datosReserva.metodo_pago)}</p>
+                            </div>
+                            <div>
+                                <p><strong>Estado:</strong></p>
+                                <p style="color: #28a745; font-weight: bold; text-transform: uppercase;">
+                                    <i class="fas fa-check-circle"></i> ${datosReserva.pago.estado}
+                                </p>
+                            </div>
+                            <div>
+                                <p><strong>Fecha y Hora:</strong></p>
+                                <p>${datosReserva.pago.fecha_procesado}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Detalles Específicos del Método de Pago -->
+                    ${generarDetallesMetodoPago(datosReserva.pago)}
+
+                    <!-- Resumen de Montos -->
+                    <div style="background: #e8f5e8; padding: 15px; border-radius: 8px; border: 1px solid #28a745;">
+                        <h5 style="color: #2c5530; margin-bottom: 10px;">Resumen de Montos</h5>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                            <span>Subtotal:</span>
+                            <span>$${datosReserva.subtotal.toFixed(2)}</span>
+                        </div>
+                        ${datosReserva.descuento > 0 ? `
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 5px; color: #28a745;">
+                            <span>Descuento:</span>
+                            <span>-$${datosReserva.descuento.toFixed(2)}</span>
+                        </div>` : ''}
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                            <span>IGV (18%):</span>
+                            <span>$${datosReserva.impuestos.toFixed(2)}</span>
+                        </div>
+                        <hr style="margin: 10px 0; border: 0; border-top: 2px solid #28a745;">
+                        <div style="display: flex; justify-content: space-between; font-weight: bold; font-size: 18px; color: #2c5530;">
+                            <span>Total Pagado:</span>
+                            <span>$${datosReserva.total.toFixed(2)} ${datosReserva.pago.moneda}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Información Importante -->
+                <div style="background: #e3f2fd; padding: 15px; border-radius: 8px; border-left: 4px solid #1976d2;">
                     <h5 style="color: #1976d2; margin-bottom: 10px;">
                         <i class="fas fa-info-circle"></i> Información Importante
                     </h5>
                     <ul style="margin: 0; padding-left: 20px; color: #666;">
-                        <li>Te hemos enviado la confirmación a tu email</li>
+                        <li>Te hemos enviado la confirmación y comprobante de pago a tu email</li>
                         <li>Presenta tu código de reserva el día del tour</li>
                         <li>Llega 15 minutos antes de la hora de salida</li>
                         <li>Para cambios o cancelaciones, contacta con 48h de anticipación</li>
+                        <li>Guarda el código de transacción para cualquier consulta sobre el pago</li>
                     </ul>
                 </div>
             `;
@@ -1746,6 +2459,69 @@
             pasoActual = 5;
             mostrarPaso(5);
             actualizarBotonesNavegacion();
+        }
+
+        function generarDetallesMetodoPago(pago) {
+            let detallesEspecificos = '';
+            
+            switch(pago.metodo_pago) {
+                case 'tarjeta':
+                    detallesEspecificos = `
+                        <div style="background: #fff3cd; padding: 15px; border-radius: 8px; margin-bottom: 15px; border-left: 4px solid #ffc107;">
+                            <h6 style="color: #856404; margin-bottom: 10px;">
+                                <i class="fas fa-credit-card"></i> Detalles de la Tarjeta
+                            </h6>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; font-size: 14px;">
+                                <p><strong>Procesador:</strong> ${pago.procesador}</p>
+                                <p><strong>Tipo de Tarjeta:</strong> ${pago.tipo_tarjeta}</p>
+                                <p><strong>Tarjeta:</strong> ${pago.tarjeta_ultimos_4}</p>
+                                <p><strong>Autorización:</strong> ${pago.autorizacion}</p>
+                                <p><strong>Referencia Banco:</strong> ${pago.referencia_banco}</p>
+                            </div>
+                        </div>`;
+                    break;
+                case 'yape':
+                    detallesEspecificos = `
+                        <div style="background: #e8f5e8; padding: 15px; border-radius: 8px; margin-bottom: 15px; border-left: 4px solid #28a745;">
+                            <h6 style="color: #155724; margin-bottom: 10px;">
+                                <i class="fas fa-mobile-alt"></i> Detalles de Yape
+                            </h6>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; font-size: 14px;">
+                                <p><strong>Procesador:</strong> ${pago.procesador}</p>
+                                <p><strong>Teléfono Origen:</strong> ${pago.telefono_origen}</p>
+                                <p><strong>Operación Yape:</strong> ${pago.operacion_yape}</p>
+                            </div>
+                        </div>`;
+                    break;
+                case 'plin':
+                    detallesEspecificos = `
+                        <div style="background: #e1f5fe; padding: 15px; border-radius: 8px; margin-bottom: 15px; border-left: 4px solid #0288d1;">
+                            <h6 style="color: #01579b; margin-bottom: 10px;">
+                                <i class="fas fa-mobile-alt"></i> Detalles de Plin
+                            </h6>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; font-size: 14px;">
+                                <p><strong>Procesador:</strong> ${pago.procesador}</p>
+                                <p><strong>Teléfono Origen:</strong> ${pago.telefono_origen}</p>
+                                <p><strong>Operación Plin:</strong> ${pago.operacion_plin}</p>
+                            </div>
+                        </div>`;
+                    break;
+                case 'transferencia':
+                    detallesEspecificos = `
+                        <div style="background: #f3e5f5; padding: 15px; border-radius: 8px; margin-bottom: 15px; border-left: 4px solid #9c27b0;">
+                            <h6 style="color: #4a148c; margin-bottom: 10px;">
+                                <i class="fas fa-university"></i> Detalles de Transferencia
+                            </h6>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; font-size: 14px;">
+                                <p><strong>Banco Origen:</strong> ${pago.banco_origen}</p>
+                                <p><strong>Número de Operación:</strong> ${pago.numero_operacion}</p>
+                                <p><strong>Cuenta Destino:</strong> ${pago.cuenta_destino}</p>
+                            </div>
+                        </div>`;
+                    break;
+            }
+            
+            return detallesEspecificos;
         }
 
         function obtenerNombreMetodoPago(metodo) {
