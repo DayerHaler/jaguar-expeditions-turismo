@@ -34,20 +34,23 @@ try {
     // 1. Insertar cliente responsable
     $clienteData = $input['cliente_responsable'];
     $stmt = $pdo->prepare("
-        INSERT INTO clientes (nombre, apellido, email, telefono, documento_identidad, tipo_documento, fecha_nacimiento, pais, ciudad) 
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+        INSERT INTO clientes (nombre, apellido, email, celular, celular_contacto, documento, tipo_documento, edad, genero, pais, direccion, descripcion) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     ");
     
     $stmt->execute([
         $clienteData['nombre'],
         $clienteData['apellido'],
         $clienteData['email'],
-        $clienteData['telefono'],
-        $clienteData['documento_identidad'],
+        $clienteData['celular'] ?? null,
+        $clienteData['celular_contacto'] ?? null,
+        $clienteData['documento'],
         $clienteData['tipo_documento'],
-        $clienteData['fecha_nacimiento'],
-        $clienteData['pais'],
-        $clienteData['ciudad']
+        $clienteData['edad'],
+        $clienteData['genero'] ?? null,
+        $clienteData['pais'] ?? null,
+        $clienteData['direccion'] ?? null,
+        $clienteData['descripcion'] ?? null
     ]);
     
     $clienteResponsableId = $pdo->lastInsertId();
@@ -70,12 +73,12 @@ try {
     
     $reservaId = $pdo->lastInsertId();
     
-    // 3. Insertar participantes (incluyendo el cliente responsable como primer participante)
+    // 3. Insertar participantes
     $participantes = $input['participantes'];
     foreach ($participantes as $index => $participante) {
         $stmt = $pdo->prepare("
-            INSERT INTO participantes_reserva (reserva_id, nombre, apellido, documento_identidad, tipo_documento, fecha_nacimiento, edad, es_responsable) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            INSERT INTO participantes_reserva (reserva_id, nombre, apellido, email, celular, celular_contacto, documento, tipo_documento, edad, genero, pais, direccion, descripcion, es_responsable) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         ");
         
         $esResponsable = ($index === 0) ? 1 : 0;
@@ -84,10 +87,16 @@ try {
             $reservaId,
             $participante['nombre'],
             $participante['apellido'],
-            $participante['documento_identidad'],
+            $participante['email'] ?? null,
+            $participante['celular'] ?? null,
+            $participante['celular_contacto'] ?? null,
+            $participante['documento'],
             $participante['tipo_documento'],
-            $participante['fecha_nacimiento'],
             $participante['edad'],
+            $participante['genero'] ?? null,
+            $participante['pais'] ?? null,
+            $participante['direccion'] ?? null,
+            $participante['descripcion'] ?? null,
             $esResponsable
         ]);
     }

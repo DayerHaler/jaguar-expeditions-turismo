@@ -1,13 +1,207 @@
-# 🐆 JAGUAR EXPEDITIONS - Sistema Completo de Turismo
+# 🐆 Jaguar Expeditions - Sistema de Turismo
 
-## 📋 Descripción del Proyecto
+[![Sistema de Reservas](https://img.shields.io/badge/Sistema-Reservas%20Online-green)](https://github.com/DayerHaler/jaguar-expeditions-turismo)
+[![Base de Datos](https://img.shields.io/badge/BD-Normalizada-blue)](https://github.com/DayerHaler/jaguar-expeditions-turismo)
+[![Pago Dual](https://img.shields.io/badge/Pago-Completo%20%2F%20Cuotas-orange)](https://github.com/DayerHaler/jaguar-expeditions-turismo)
 
-Jaguar Expeditions es un sistema completo de gestión de turismo para la Amazonía peruana que incluye:
+Sistema completo de reservas de turismo con base de datos normalizada y sistema de pago dual (completo/cuotas).
 
-- **Website responsive** con múltiples páginas
-- **Sistema de reservas** paso a paso
-- **Múltiples pasarelas de pago** (Stripe, PayPal, MercadoPago)
-- **Gestión de contactos** con base de datos
+## 🌟 Características Principales
+
+### ✅ Sistema de Pago Dual
+- **Pago Completo**: Pago total inmediato con descuentos por grupo
+- **Sistema de Cuotas**: 50% inicial + 50% antes del tour (15 días)
+- Cálculo automático de descuentos por cantidad de personas:
+  - 3-4 personas: 5% descuento
+  - 5-7 personas: 10% descuento  
+  - 8+ personas: 15% descuento
+
+### ✅ Base de Datos Normalizada
+- **clientes**: Datos del cliente responsable
+- **reservas**: Información principal de la reserva
+- **participantes_reserva**: Datos individuales de cada participante
+- **pagos**: Registro de pagos realizados
+- **cuotas**: Gestión de cuotas pendientes
+- **tours**: Catálogo de tours disponibles
+
+### ✅ Frontend Mejorado
+- Selección visual de tipo de pago con efectos CSS
+- Formularios separados para cliente responsable y participantes
+- Cálculo automático de cuotas con fechas
+- Validación de datos en tiempo real
+- Interfaz responsive con gradientes y animaciones
+
+## 🚀 Instalación y Configuración
+
+### Prerrequisitos
+- XAMPP (Apache + MySQL + PHP)
+- Git
+
+### 1. Clonar el Repositorio
+```bash
+git clone https://github.com/DayerHaler/jaguar-expeditions-turismo.git
+cd jaguar-expeditions-turismo
+```
+
+### 2. Configurar Base de Datos
+```sql
+-- Crear base de datos
+CREATE DATABASE jaguar_expeditions;
+
+-- Ejecutar estructura normalizada
+SOURCE database/estructura_nueva_segura.sql;
+```
+
+### 3. Configurar XAMPP
+1. Copiar el proyecto a `C:\xampp\htdocs\`
+2. Iniciar Apache y MySQL
+3. Acceder a `http://localhost/jaguar-expeditions-turismo/`
+
+## 📁 Estructura del Proyecto
+
+```
+proyecto/
+├── index.html              # Página principal
+├── reservar.html           # Sistema de reservas (PRINCIPAL)
+├── tours.html              # Catálogo de tours
+├── test_sistema.html       # Página de pruebas del sistema
+├── api/
+│   ├── tours.php           # API gestión de tours
+│   ├── crear_reserva_normalizada.php  # API nueva estructura
+│   └── procesar_pago_completo.php     # API legacy
+├── database/
+│   ├── estructura_nueva_segura.sql    # BD normalizada principal
+│   ├── nueva_estructura.sql           # Versión anterior
+│   └── *.sql               # Scripts de migración
+├── img/                    # Imágenes del sitio
+├── style.css              # Estilos principales
+├── responsive.css         # Estilos responsive
+└── script.js             # JavaScript general
+```
+
+## 🔧 API Endpoints
+
+### GET /api/tours.php
+Obtiene lista de tours disponibles
+```json
+{
+  "id": 1,
+  "nombre": "Expedición Amazonas",
+  "precio": 150.00,
+  "duracion": "3 días",
+  "descripcion": "..."
+}
+```
+
+### POST /api/crear_reserva_normalizada.php
+Crea reserva con estructura normalizada
+```json
+{
+  "tour_id": 1,
+  "fecha_tour": "2024-02-15",
+  "numero_personas": 2,
+  "precio_total": 300.00,
+  "tipo_pago": "completo|cuotas",
+  "metodo_pago": "tarjeta|transferencia|efectivo",
+  "cliente_responsable": {
+    "nombre": "Juan",
+    "apellido": "Pérez",
+    "email": "juan@email.com"
+  },
+  "participantes": [
+    {
+      "nombre": "Juan", 
+      "apellido": "Pérez",
+      "edad": 30
+    }
+  ]
+}
+```
+
+## 🎯 Flujo de Reserva
+
+1. **Selección de Tour**: Usuario elige tour y fecha
+2. **Configuración**: Número de personas y tipo de pago
+3. **Datos del Cliente**: Formulario del responsable de la reserva
+4. **Datos de Participantes**: Información individual de cada persona
+5. **Método de Pago**: Selección de forma de pago
+6. **Procesamiento**: Validación y creación en BD normalizada
+7. **Confirmación**: Código de reserva y detalles
+
+## 🧪 Testing
+
+Accede a `test_sistema.html` para probar:
+- ✅ API de tours
+- ✅ Estructura de base de datos
+- ✅ Creación de reservas (completo/cuotas)
+- ✅ Frontend de reservas
+
+## 💳 Sistema de Pagos
+
+### Pago Completo
+- Pago inmediato del 100%
+- Descuentos automáticos por grupo
+- Estado: `confirmada`
+
+### Sistema de Cuotas
+- 1ª Cuota: 50% inmediato (reserva el tour)
+- 2ª Cuota: 50% hasta 15 días antes del tour
+- Estado inicial: `parcialmente_pagada`
+
+## 📊 Base de Datos
+
+### Normalización Implementada
+- **1NF**: Eliminación de grupos repetidos
+- **2NF**: Dependencias funcionales parciales eliminadas  
+- **3NF**: Dependencias transitivas eliminadas
+
+### Relaciones
+```sql
+clientes 1:N reservas
+reservas 1:N participantes_reserva
+reservas 1:N pagos
+reservas 1:N cuotas
+tours 1:N reservas
+```
+
+## 🔒 Características de Seguridad
+
+- Transacciones ACID en creación de reservas
+- Validación de datos en frontend y backend
+- Prepared statements contra SQL injection
+- CORS configurado para APIs
+- Rollback automático en errores
+
+## 🚀 Próximas Mejoras
+
+- [ ] Sistema de notificaciones por email
+- [ ] Panel administrativo
+- [ ] Integración con pasarelas de pago reales
+- [ ] Sistema de cupones de descuento
+- [ ] Reportes y estadísticas
+- [ ] API REST completa con autenticación
+
+## 👥 Contribuir
+
+1. Fork el proyecto
+2. Crear rama feature (`git checkout -b feature/AmazingFeature`)
+3. Commit cambios (`git commit -m 'Add AmazingFeature'`)
+4. Push a la rama (`git push origin feature/AmazingFeature`)
+5. Abrir Pull Request
+
+## 📝 Licencia
+
+Este proyecto está bajo la Licencia MIT.
+
+## 🤝 Contacto
+
+**Jaguar Expeditions**
+- Website: [jaguar-expeditions-turismo](https://github.com/DayerHaler/jaguar-expeditions-turismo)
+- Email: contact@jaguarexpeditions.com
+
+---
+
+⭐ **¡Dale una estrella si te gusta el proyecto!** ⭐
 - **Panel administrativo** para gestionar tours y reservas
 - **Sistema de emails** automatizado
 - **Base de datos completa** con todas las relaciones
