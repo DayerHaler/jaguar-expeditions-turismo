@@ -434,12 +434,12 @@
                 nombre: $('#nombre').val().trim(),
                 email: $('#email').val().trim(),
                 telefono: $('#telefono').val().trim(),
-                asunto: $('#asunto').val().trim(),
+                pais: $('#pais').val() || '',
+                fechaViaje: $('#fechaViaje').val() || null,
+                personas: $('#personas').val() || null,
+                tourInteres: $('#tourInteres').val() || '',
                 mensaje: $('#mensaje').val().trim(),
-                tour_interes: $('#tourInteres').val() || null,
-                fecha_preferida: $('#fechaViaje').val() || null,
-                num_personas: $('#personas').val() || null,
-                origen_pais: $('#pais').val() || ''
+                newsletter: $('#newsletter').is(':checked') ? 1 : 0
             };
 
             // Validaciones básicas
@@ -455,11 +455,19 @@
                 return;
             }
 
+            // Verificar términos y condiciones
+            if (!$('#terminos').is(':checked')) {
+                mostrarMensaje('error', 'Debes aceptar los términos y condiciones para continuar');
+                restaurarBoton(btnSubmit, textoOriginal);
+                return;
+            }
+
             // Enviar datos
             $.ajax({
-                url: 'api/procesar_contacto.php',
+                url: 'api/procesar_contacto_simple.php',
                 method: 'POST',
                 data: formData,
+                dataType: 'json',
                 success: function(response) {
                     if (response.success) {
                         mostrarMensaje('success', response.message);
@@ -473,7 +481,8 @@
                         mostrarMensaje('error', response.message);
                     }
                 },
-                error: function() {
+                error: function(xhr, status, error) {
+                    console.error('Error AJAX:', error);
                     mostrarMensaje('error', 'Error de conexión. Por favor, inténtalo de nuevo.');
                 },
                 complete: function() {
