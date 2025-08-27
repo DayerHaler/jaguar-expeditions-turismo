@@ -278,6 +278,7 @@ body {
     color: var(--white);
     max-width: 600px;
     padding: 0 20px;
+    padding-bottom: 40px;
 }
 
 .slide-content h2 {
