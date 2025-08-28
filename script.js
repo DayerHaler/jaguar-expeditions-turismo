@@ -835,3 +835,580 @@ $(document).ready(function() {
         }
     `).appendTo('head');
 });
+
+// ========================================
+// ESTADO DE RESERVA - FUNCIONALIDAD
+// ========================================
+
+// Variables globales para estado de reserva
+let tiempoRestante = 0;
+let contadorInterval = null;
+
+$(document).ready(function() {
+    // Si estamos en la página de estado de reserva
+    if (window.location.pathname.includes('estado_reserva.html')) {
+        inicializarEstadoReserva();
+    }
+});
+
+function inicializarEstadoReserva() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const codigoReserva = urlParams.get('codigo');
+    const email = urlParams.get('email');
+    
+    if (codigoReserva && codigoReserva.trim() !== '') {
+        // Solo consultar si hay un código válido en la URL
+        consultarReserva(codigoReserva, email);
+    } else {
+        // Mostrar formulario de búsqueda por defecto
+        mostrarFormularioBusqueda();
+    }
+}
+
+function mostrarFormularioBusqueda() {
+    const contenido = `
+        <div class="estado-reserva-form">
+            <div class="form-header">
+                <i class="fas fa-search" style="font-size: 48px; color: var(--primary-green); margin-bottom: 20px;"></i>
+                <h2>Consultar Estado de Reserva</h2>
+                <p>Ingresa tu código de reserva y email para verificar el estado</p>
+            </div>
+            
+            <form id="form-busqueda" class="reservation-search-form">
+                <div class="form-group">
+                    <label for="codigo-busqueda">Código de Reserva:</label>
+                    <input type="text" id="codigo-busqueda" placeholder="Ej: JE123456" 
+                           style="width: 100%; padding: 15px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px;"
+                           required>
+                    <small class="form-help">Código que recibiste en tu email de confirmación</small>
+                </div>
+                <div class="form-group">
+                    <label for="email-busqueda">Email de contacto:</label>
+                    <input type="email" id="email-busqueda" placeholder="tu-email@ejemplo.com" 
+                           style="width: 100%; padding: 15px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px;"
+                           required>
+                    <small class="form-help">Email usado al hacer la reserva</small>
+                </div>
+                <button type="submit" class="btn-accion btn-info">
+                    <i class="fas fa-search"></i> Consultar Estado
+                </button>
+            </form>
+            
+            <div class="help-section">
+                <p><strong>¿No tienes tu código de reserva?</strong></p>
+                <p>Contáctanos al <strong>+51 999 123 456</strong> o escríbenos a <strong>info@jaguarexpeditions.com</strong></p>
+            </div>
+        </div>
+    `;
+    
+    $('#estado-contenido').html(contenido);
+    
+    // Manejar envío del formulario
+    $('#form-busqueda').on('submit', function(e) {
+        e.preventDefault();
+        const codigo = $('#codigo-busqueda').val().trim();
+        const email = $('#email-busqueda').val().trim();
+        
+        if (!codigo) {
+            alert('Por favor ingresa el código de reserva');
+            return;
+        }
+        
+        if (!email) {
+            alert('Por favor ingresa tu email');
+            return;
+        }
+        
+        consultarReserva(codigo, email);
+    });
+}
+
+function consultarReserva(codigo, email) {
+    // Validar que los parámetros no estén vacíos
+    if (!codigo || codigo.trim() === '') {
+        mostrarError('Por favor ingresa un código de reserva válido');
+        return;
+    }
+    
+    // Mostrar loading
+    $('#estado-contenido').html(`
+        <div class="loading">
+            <i class="fas fa-spinner fa-spin" style="font-size: 48px; color: var(--primary-green);"></i>
+            <p>Consultando estado de tu reserva...</p>
+        </div>
+    `);
+    
+    // Llamada AJAX para consultar la reserva
+    $.ajax({
+        url: 'api/consultar_reserva.php',
+        method: 'POST',
+        dataType: 'json',
+        data: {
+            codigo_reserva: codigo.trim(),
+            email: email ? email.trim() : ''
+        },
+        success: function(response) {
+            if (response.success) {
+                mostrarEstadoReserva(response.reserva);
+            } else {
+                mostrarError(response.message || 'No se encontró la reserva');
+            }
+        },
+        error: function() {
+            mostrarError('Error al consultar la reserva. Intenta nuevamente.');
+        }
+    });
+}
+
+function mostrarEstadoReserva(reserva) {
+    let iconoEstado = '';
+    let claseEstado = '';
+    let textoEstado = '';
+    
+    switch (reserva.estado) {
+        case 'pendiente':
+            iconoEstado = 'fas fa-clock';
+            claseEstado = 'estado-pendiente';
+            textoEstado = 'Pago Pendiente';
+            break;
+        case 'confirmada':
+            iconoEstado = 'fas fa-check-circle';
+            claseEstado = 'estado-confirmado';
+            textoEstado = 'Reserva Confirmada';
+            break;
+        case 'cancelada':
+            iconoEstado = 'fas fa-times-circle';
+            claseEstado = 'estado-cancelado';
+            textoEstado = 'Reserva Cancelada';
+            break;
+        case 'completada':
+            iconoEstado = 'fas fa-check-double';
+            claseEstado = 'estado-confirmado';
+            textoEstado = 'Tour Completado';
+            break;
+        default:
+            iconoEstado = 'fas fa-question-circle';
+            claseEstado = 'estado-pendiente';
+            textoEstado = 'Estado Desconocido';
+    }
+    
+    // Generar información de participantes
+    let participantesHtml = '';
+    if (reserva.tiene_participantes && reserva.participantes.length > 0) {
+        participantesHtml = `
+            <div style="margin-top: 20px; padding: 15px; background: #e8f5e8; border-radius: 8px;">
+                <h4 style="color: var(--primary-green); margin-bottom: 15px;">
+                    <i class="fas fa-users"></i> Participantes Adicionales (${reserva.participantes.length})
+                </h4>
+                ${reserva.participantes.map((p, index) => `
+                    <div style="margin-bottom: 10px; padding: 10px; background: white; border-radius: 5px;">
+                        <strong>${index + 1}. ${p.nombre} ${p.apellido}</strong>
+                        <br><small>📧 ${p.email || 'No especificado'} | 📱 ${p.celular || 'No especificado'}</small>
+                        <br><small>🆔 ${p.tipo_documento}: ${p.documento} | 🎂 ${p.edad ? p.edad + ' años' : 'No especificado'}</small>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+    }
+    
+    // Generar historial de pagos
+    let historialPagosHtml = '';
+    if (reserva.pagos && reserva.pagos.length > 0) {
+        historialPagosHtml = `
+            <div style="margin-top: 20px; padding: 15px; background: #f0f8ff; border-radius: 8px;">
+                <h4 style="color: var(--primary-green); margin-bottom: 15px;">
+                    <i class="fas fa-credit-card"></i> Historial de Pagos
+                </h4>
+                ${reserva.pagos.map((pago, index) => {
+                    let estadoColor = pago.estado === 'Completado' ? '#28a745' : 
+                                     pago.estado === 'Pendiente' ? '#ffc107' : '#dc3545';
+                    return `
+                        <div style="margin-bottom: 10px; padding: 10px; background: white; border-left: 4px solid ${estadoColor}; border-radius: 5px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div>
+                                    <strong>Pago ${index + 1}: $${parseFloat(pago.monto).toFixed(2)}</strong>
+                                    <br><small>${pago.metodo_pago} | ${pago.fecha_pago ? new Date(pago.fecha_pago).toLocaleDateString('es-ES') : 'Fecha pendiente'}</small>
+                                    ${pago.codigo_transaccion ? `<br><small>ID: ${pago.codigo_transaccion}</small>` : ''}
+                                </div>
+                                <span style="background: ${estadoColor}; color: white; padding: 3px 8px; border-radius: 12px; font-size: 12px;">
+                                    ${pago.estado}
+                                </span>
+                            </div>
+                        </div>
+                    `;
+                }).join('')}
+                <div style="margin-top: 15px; padding: 10px; background: #e8f5e8; border-radius: 5px;">
+                    <strong>Total Pagado: $${parseFloat(reserva.total_pagado).toFixed(2)}</strong>
+                    ${reserva.monto_restante > 0 ? `<br><span style="color: #dc3545;">Monto Restante: $${parseFloat(reserva.monto_restante).toFixed(2)}</span>` : ''}
+                </div>
+            </div>
+        `;
+    }
+    
+    const contenido = `
+        <div>
+            <i class="${iconoEstado} icono-estado ${claseEstado}"></i>
+            <h2>${textoEstado}</h2>
+            
+            <div class="codigo-reserva">
+                Código: ${reserva.codigo_reserva}
+            </div>
+            
+            <div class="detalles-reserva">
+                <h3 style="margin-bottom: 20px; color: var(--primary-green);">Detalles de la Reserva</h3>
+                
+                <div class="detalle-item">
+                    <span><strong>Tour:</strong></span>
+                    <span>${reserva.tour_nombre}</span>
+                </div>
+                
+                <div class="detalle-item">
+                    <span><strong>Descripción:</strong></span>
+                    <span>${reserva.tour_descripcion || 'No disponible'}</span>
+                </div>
+                
+                <div class="detalle-item">
+                    <span><strong>Duración:</strong></span>
+                    <span>${reserva.tour_duracion || 'No especificada'}</span>
+                </div>
+                
+                <div class="detalle-item">
+                    <span><strong>Ubicación:</strong></span>
+                    <span>${reserva.tour_ubicacion || 'No especificada'}</span>
+                </div>
+                
+                <div class="detalle-item">
+                    <span><strong>Fecha del Tour:</strong></span>
+                    <span>${formatearFecha(reserva.fecha_tour)}</span>
+                </div>
+                
+                <div class="detalle-item">
+                    <span><strong>Participantes:</strong></span>
+                    <span>${reserva.numero_personas} persona${reserva.numero_personas > 1 ? 's' : ''}</span>
+                </div>
+                
+                <div class="detalle-item">
+                    <span><strong>Precio por Persona:</strong></span>
+                    <span>$${parseFloat(reserva.precio_por_persona).toFixed(2)}</span>
+                </div>
+                
+                ${reserva.descuento > 0 ? `
+                <div class="detalle-item">
+                    <span><strong>Descuento:</strong></span>
+                    <span>-$${parseFloat(reserva.descuento).toFixed(2)}</span>
+                </div>
+                ` : ''}
+                
+                <div class="detalle-item">
+                    <span><strong>Total:</strong></span>
+                    <span style="font-size: 1.2em; font-weight: bold; color: var(--primary-green);">$${parseFloat(reserva.monto_total).toFixed(2)}</span>
+                </div>
+                
+                <div class="detalle-item">
+                    <span><strong>Tipo de Pago:</strong></span>
+                    <span>${reserva.tipo_pago === 'Cuotas' ? 'Pago por Cuotas' : 'Pago Completo'}</span>
+                </div>
+                
+                <div class="detalle-item">
+                    <span><strong>Cliente Responsable:</strong></span>
+                    <span>${reserva.cliente_nombre} ${reserva.cliente_apellido}</span>
+                </div>
+                
+                <div class="detalle-item">
+                    <span><strong>Email:</strong></span>
+                    <span>${reserva.cliente_email}</span>
+                </div>
+                
+                <div class="detalle-item">
+                    <span><strong>Teléfono:</strong></span>
+                    <span>${reserva.cliente_celular || 'No especificado'}</span>
+                </div>
+                
+                <div class="detalle-item">
+                    <span><strong>Documento:</strong></span>
+                    <span>${reserva.cliente_tipo_documento}: ${reserva.cliente_documento}</span>
+                </div>
+                
+                ${participantesHtml}
+                ${historialPagosHtml}
+            </div>
+            
+            ${generarAccionesSegunEstado(reserva)}
+        </div>
+    `;
+    
+    $('#estado-contenido').html(contenido);
+    
+    // Si hay tiempo límite para pago, iniciar contador
+    if (reserva.tiempo_limite) {
+        iniciarContadorTiempo(reserva.tiempo_limite);
+    }
+}
+
+function generarAccionesSegunEstado(reserva) {
+    let acciones = '';
+    const accionesDisponibles = reserva.acciones_disponibles || [];
+    
+    // Generar tiempo límite si aplica
+    if (reserva.tiempo_limite && !reserva.pago_completo) {
+        acciones += `
+            <div class="tiempo-limite">
+                <p><strong>⏰ Tiempo límite para realizar el pago</strong></p>
+                <div id="contador-tiempo" class="contador-tiempo">--:--:--</div>
+                <p>Después de este tiempo, la reserva será cancelada automáticamente.</p>
+            </div>
+        `;
+    }
+    
+    // Generar botones según las acciones disponibles
+    let botonesAccion = '';
+    
+    // Botón para pagar primera cuota
+    if (accionesDisponibles.includes('pagar_primera_cuota')) {
+        const montoPrimeracuota = (parseFloat(reserva.monto_total) * 0.5).toFixed(2);
+        botonesAccion += `
+            <a href="reservar.html?completar=${reserva.codigo_reserva}&tipo=primera_cuota" class="btn-accion btn-pagar">
+                <i class="fas fa-credit-card"></i> Pagar Primera Cuota ($${montoPrimeracuota})
+            </a>
+        `;
+    }
+    
+    // Botón para pagar pago completo
+    if (accionesDisponibles.includes('pagar_completo')) {
+        botonesAccion += `
+            <a href="reservar.html?completar=${reserva.codigo_reserva}&tipo=completo" class="btn-accion btn-pagar">
+                <i class="fas fa-credit-card"></i> Pagar Total ($${parseFloat(reserva.monto_total).toFixed(2)})
+            </a>
+        `;
+    }
+    
+    // Botón para pagar segunda cuota
+    if (accionesDisponibles.includes('pagar_segunda_cuota')) {
+        botonesAccion += `
+            <a href="reservar.html?completar=${reserva.codigo_reserva}&tipo=segunda_cuota" class="btn-accion btn-pagar">
+                <i class="fas fa-credit-card"></i> Pagar Segunda Cuota ($${parseFloat(reserva.monto_restante).toFixed(2)})
+            </a>
+        `;
+    }
+    
+    // Botón de reembolso
+    if (accionesDisponibles.includes('solicitar_reembolso')) {
+        botonesAccion += `
+            <button onclick="solicitarReembolso('${reserva.codigo_reserva}')" class="btn-accion" style="background: #17a2b8; color: white;">
+                <i class="fas fa-undo"></i> Solicitar Reembolso
+            </button>
+        `;
+    }
+    
+    // Botón de cancelación
+    if (accionesDisponibles.includes('cancelar_reserva')) {
+        botonesAccion += `
+            <button onclick="cancelarReserva('${reserva.codigo_reserva}')" class="btn-accion btn-cancelar">
+                <i class="fas fa-times"></i> Cancelar Reserva
+            </button>
+        `;
+    }
+    
+    // Acciones para reservas confirmadas/completadas
+    if (reserva.estado === 'confirmada' || reserva.estado === 'completada') {
+        botonesAccion += `
+            <button onclick="window.print()" class="btn-accion btn-info">
+                <i class="fas fa-print"></i> Imprimir Comprobante
+            </button>
+            <a href="contacto.html" class="btn-accion btn-info">
+                <i class="fas fa-envelope"></i> Contactar Soporte
+            </a>
+        `;
+    }
+    
+    // Acciones para reservas canceladas
+    if (reserva.estado === 'cancelada') {
+        botonesAccion += `
+            <a href="tours.html" class="btn-accion btn-info">
+                <i class="fas fa-search"></i> Ver Otros Tours
+            </a>
+        `;
+    }
+    
+    // Agregar botones si hay alguno
+    if (botonesAccion) {
+        acciones += `
+            <div class="acciones-reserva">
+                ${botonesAccion}
+            </div>
+        `;
+    }
+    
+    // Siempre agregar botón de volver al inicio
+    acciones += `
+        <div class="acciones-reserva" style="margin-top: 20px;">
+            <a href="index.html" class="btn-accion btn-volver">
+                <i class="fas fa-home"></i> Volver al Inicio
+            </a>
+            <button onclick="mostrarFormularioBusqueda()" class="btn-accion btn-info">
+                <i class="fas fa-search"></i> Buscar Otra Reserva
+            </button>
+        </div>
+    `;
+    
+    return acciones;
+}
+
+function iniciarContadorTiempo(tiempoLimite) {
+    const ahora = new Date().getTime();
+    const limite = new Date(tiempoLimite).getTime();
+    tiempoRestante = Math.floor((limite - ahora) / 1000);
+    
+    if (tiempoRestante <= 0) {
+        $('#contador-tiempo').text('TIEMPO AGOTADO');
+        $('.tiempo-limite').css('background', '#ffebee');
+        return;
+    }
+    
+    contadorInterval = setInterval(function() {
+        if (tiempoRestante <= 0) {
+            clearInterval(contadorInterval);
+            $('#contador-tiempo').text('TIEMPO AGOTADO');
+            $('.tiempo-limite').css('background', '#ffebee');
+            // Recargar página para actualizar estado
+            setTimeout(() => location.reload(), 2000);
+            return;
+        }
+        
+        const horas = Math.floor(tiempoRestante / 3600);
+        const minutos = Math.floor((tiempoRestante % 3600) / 60);
+        const segundos = tiempoRestante % 60;
+        
+        const tiempo = `${horas.toString().padStart(2, '0')}:${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
+        $('#contador-tiempo').text(tiempo);
+        
+        tiempoRestante--;
+    }, 1000);
+}
+
+function cancelarReserva(codigoReserva) {
+    if (!confirm('¿Estás seguro de que deseas cancelar esta reserva?')) {
+        return;
+    }
+    
+    $.ajax({
+        url: 'api/cancelar_reserva.php',
+        method: 'POST',
+        dataType: 'json',
+        data: {
+            codigo_reserva: codigoReserva
+        },
+        success: function(response) {
+            if (response.success) {
+                alert('Reserva cancelada exitosamente');
+                location.reload();
+            } else {
+                alert('Error al cancelar la reserva: ' + response.message);
+            }
+        },
+        error: function() {
+            alert('Error al procesar la cancelación');
+        }
+    });
+}
+
+function solicitarReembolso(codigoReserva) {
+    // Mostrar información de política de reembolso
+    const confirmarPolitica = confirm(`🔄 POLÍTICA DE REEMBOLSO
+
+📅 Más de 48 horas antes: Reembolso del 100%
+⚠️ Entre 24-48 horas: Reembolso del 75%
+❌ Menos de 24 horas: Reembolso del 50%
+
+💰 Reembolsos procesados en 5-7 días hábiles
+📧 Recibirás confirmación por email
+
+¿Deseas continuar con la solicitud de reembolso?`);
+    
+    if (!confirmarPolitica) {
+        return;
+    }
+    
+    const motivo = prompt('Por favor, indica el motivo del reembolso (opcional):');
+    
+    if (motivo === null) {
+        return; // Usuario canceló
+    }
+    
+    if (!confirm('¿Estás completamente seguro? Una vez procesado, el reembolso no se puede cancelar.')) {
+        return;
+    }
+
+    // Mostrar indicador de carga
+    const loadingHtml = `
+        <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9999; display: flex; justify-content: center; align-items: center;">
+            <div style="background: white; padding: 30px; border-radius: 10px; text-align: center;">
+                <i class="fas fa-spinner fa-spin" style="font-size: 32px; color: var(--primary-green);"></i>
+                <p style="margin-top: 15px;">Procesando solicitud de reembolso...</p>
+            </div>
+        </div>
+    `;
+    $('body').append(loadingHtml);
+
+    $.ajax({
+        url: 'api/solicitar_reembolso.php',
+        method: 'POST',
+        dataType: 'json',
+        data: {
+            codigo_reserva: codigoReserva,
+            motivo: motivo
+        },
+        success: function(response) {
+            $('body').find('div').last().remove(); // Remover loading
+            
+            if (response.success) {
+                alert('✅ Solicitud de reembolso enviada exitosamente.\n\n' +
+                      'Recibirás una confirmación por email con los detalles del proceso.\n' +
+                      'El reembolso será procesado en 5-7 días hábiles.');
+                location.reload();
+            } else {
+                alert('❌ Error al procesar la solicitud de reembolso: ' + response.message);
+            }
+        },
+        error: function() {
+            $('body').find('div').last().remove(); // Remover loading
+            alert('❌ Error al procesar la solicitud. Intenta nuevamente o contacta al soporte.');
+        }
+    });
+}
+
+function mostrarError(mensaje) {
+    const contenido = `
+        <div style="text-align: center;">
+            <i class="fas fa-exclamation-triangle icono-estado" style="color: #ff9800;"></i>
+            <h2>Error</h2>
+            <p style="font-size: 18px; margin: 20px 0;">${mensaje}</p>
+            
+            <div class="acciones-reserva">
+                <button id="btn-intentar-nuevamente" class="btn-accion btn-info">
+                    <i class="fas fa-search"></i> Intentar Nuevamente
+                </button>
+                <a href="index.html" class="btn-accion btn-volver">
+                    <i class="fas fa-home"></i> Volver al Inicio
+                </a>
+            </div>
+        </div>
+    `;
+    
+    $('#estado-contenido').html(contenido);
+    
+    // Agregar event listener para el botón "Intentar Nuevamente"
+    $('#btn-intentar-nuevamente').on('click', function() {
+        mostrarFormularioBusqueda();
+    });
+}
+
+function formatearFecha(fecha) {
+    const opciones = { 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric',
+        weekday: 'long'
+    };
+    return new Date(fecha).toLocaleDateString('es-ES', opciones);
+}

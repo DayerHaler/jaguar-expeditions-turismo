@@ -2856,7 +2856,16 @@
             
             if (elementoPrecio) {
                 montoTotal = parseFloat(elementoPrecio.textContent.replace('$', '').replace(',', ''));
-                console.log('💰 Monto encontrado:', montoTotal);
+                console.log('💰 Monto total del tour:', montoTotal);
+                
+                // 🔥 IMPORTANTE: Si es pago en cuotas, solo cobrar la primera cuota
+                const tipoPagoSeleccionado = document.querySelector('input[name="tipo-pago"]:checked');
+                if (tipoPagoSeleccionado && tipoPagoSeleccionado.value === 'cuotas') {
+                    montoTotal = montoTotal / 2; // Primera cuota = 50% del total
+                    console.log('💳 Pago en cuotas detectado - cobrando primera cuota:', montoTotal);
+                } else {
+                    console.log('💳 Pago completo - cobrando total:', montoTotal);
+                }
             } else {
                 console.error('❌ No se pudo encontrar el elemento del precio total');
                 container.innerHTML = `
@@ -2888,13 +2897,21 @@
                     const tourSeleccionado = document.querySelector('input[name="tour"]:checked');
                     const descripcionTour = tourSeleccionado ? tourSeleccionado.nextElementSibling.textContent : 'Tour Jaguar Expeditions';
                     
+                    // Determinar la descripción según el tipo de pago
+                    const tipoPagoSeleccionado = document.querySelector('input[name="tipo-pago"]:checked');
+                    let descripcionPago = `Reserva Tour Jaguar Expeditions - ${descripcionTour}`;
+                    
+                    if (tipoPagoSeleccionado && tipoPagoSeleccionado.value === 'cuotas') {
+                        descripcionPago = `Primera Cuota - ${descripcionTour} (Pago en 2 cuotas)`;
+                    }
+                    
                     return actions.order.create({
                         purchase_units: [{
                             amount: {
                                 value: montoTotal.toFixed(2),
                                 currency_code: 'USD'
                             },
-                            description: `Reserva Tour Jaguar Expeditions - ${descripcionTour}`,
+                            description: descripcionPago,
                             custom_id: 'JAGUAR-' + Date.now()
                         }]
                     });
@@ -3049,8 +3066,14 @@
                             window.codigoReservaBD = response.data.codigo_reserva;
                             window.reservaIdBD = response.data.reserva_id;
                             
-                            // Ahora sí mostrar la confirmación final
-                            finalizarReserva();
+                            // Si es pago en cuotas, procesar automáticamente la primera cuota
+                            if (datosReserva.tipo_pago === 'cuotas') {
+                                console.log('💳 Procesando primera cuota automáticamente...');
+                                procesarPrimerasCuotaPayPal(response.data.codigo_reserva, paypalData);
+                            } else {
+                                // Para pago completo, finalizar directamente
+                                finalizarReserva();
+                            }
                         } else {
                             console.error('❌ Error guardando reserva en BD:', response.message);
                             mostrarError('El pago fue exitoso, pero hubo un error guardando la reserva. Código de transacción PayPal: ' + paypalData.transaction_id + '. Contacta al soporte.');
@@ -3074,6 +3097,52 @@
             } catch (error) {
                 console.error('❌ Error en guardarReservaConPagoPayPal:', error);
                 mostrarError('Error procesando la reserva después del pago. ID: ' + paypalData.transaction_id);
+            }
+        }
+
+        // Función para procesar la primera cuota automáticamente después de crear la reserva
+        async function procesarPrimerasCuotaPayPal(codigoReserva, paypalData) {
+            console.log('💳 Procesando primera cuota para reserva:', codigoReserva);
+            
+            try {
+                const response = await fetch('api/procesar_pago_primera_cuota.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        codigo_reserva: codigoReserva,
+                        transaction_id: paypalData.transaction_id,
+                        monto: parseFloat(paypalData.amount)
+                    })
+                });
+
+                const result = await response.json();
+                
+                if (result.success) {
+                    console.log('✅ Primera cuota procesada exitosamente:', result.data);
+                    finalizarReserva();
+                } else {
+                    console.error('❌ Error procesando primera cuota:', result.message);
+                    mostrarError(`
+                        <strong>⚠️ IMPORTANTE:</strong><br>
+                        Tu pago PayPal fue <strong>EXITOSO</strong> y la reserva fue creada.<br>
+                        <strong>Código de reserva:</strong> ${codigoReserva}<br>
+                        <strong>ID de transacción:</strong> ${paypalData.transaction_id}<br><br>
+                        Sin embargo, hubo un problema procesando el pago de la primera cuota.<br>
+                        <strong>Por favor contacta al soporte con estos códigos.</strong>
+                    `);
+                }
+            } catch (error) {
+                console.error('❌ Error conectando con API de cuotas:', error);
+                mostrarError(`
+                    <strong>⚠️ IMPORTANTE:</strong><br>
+                    Tu pago PayPal fue <strong>EXITOSO</strong> y la reserva fue creada.<br>
+                    <strong>Código de reserva:</strong> ${codigoReserva}<br>
+                    <strong>ID de transacción:</strong> ${paypalData.transaction_id}<br><br>
+                    Hubo un problema técnico procesando el pago de la primera cuota.<br>
+                    <strong>Por favor contacta al soporte con estos códigos.</strong>
+                `);
             }
         }
 

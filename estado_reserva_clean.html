@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estado de Reserva - Jaguar Expeditions</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-section">
+                    <img src="img/logo.jpeg" alt="Jaguar Expeditions" class="logo-img">
+                    <div class="company-info">
+                        <h1>Jaguar Expeditions</h1>
+                        <p>Aventuras en la Selva Amazónica</p>
+                    </div>
+                </div>
+                
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+51 999 123 456</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>info@jaguarexpeditions.com</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Navegación -->
+        <nav class="navbar">
+            <div class="container">
+                <ul class="nav-menu">
+                    <li><a href="index.html"><i class="fas fa-home"></i> Inicio</a></li>
+                    <li><a href="tours.html"><i class="fas fa-map-marked-alt"></i> Tours</a></li>
+                    <li><a href="galeria.html"><i class="fas fa-images"></i> Galería</a></li>
+                    <li><a href="nosotros.html"><i class="fas fa-users"></i> Nosotros</a></li>
+                    <li><a href="contacto.html"><i class="fas fa-envelope"></i> Contacto</a></li>
+                    <li><a href="reservar.html" class="reservar-btn"><i class="fas fa-calendar-check"></i> Reservar Ahora</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Contenido principal -->
+    <main class="estado-reserva-container">
+        <div id="estado-contenido">
+            <!-- Formulario de búsqueda por defecto -->
+            <div class="estado-reserva-form">
+                <div class="form-header">
+                    <i class="fas fa-search" style="font-size: 48px; color: var(--primary-green); margin-bottom: 20px;"></i>
+                    <h2>Consultar Estado de Reserva</h2>
+                    <p>Ingresa tu código de reserva y email para verificar el estado</p>
+                </div>
+                
+                <form id="form-busqueda" class="reservation-search-form">
+                    <div class="form-group">
+                        <label for="codigo-busqueda">Código de Reserva:</label>
+                        <input type="text" id="codigo-busqueda" placeholder="Ej: JE123456" required>
+                        <small class="form-help">Código que recibiste en tu email de confirmación</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="email-busqueda">Email de contacto:</label>
+                        <input type="email" id="email-busqueda" placeholder="tu-email@ejemplo.com" required>
+                        <small class="form-help">Email usado al hacer la reserva</small>
+                    </div>
+                    <button type="submit" class="btn-accion btn-info">
+                        <i class="fas fa-search"></i> Consultar Estado
+                    </button>
+                </form>
+                
+                <div class="help-section">
+                    <p><strong>¿No tienes tu código de reserva?</strong></p>
+                    <p>Contáctanos al <strong>+51 999 123 456</strong> o escríbenos a <strong>info@jaguarexpeditions.com</strong></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Jaguar Expeditions</h3>
+                    <p>Descubre la magia de la selva amazónica con nuestros tours especializados.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul>
+                        <li><a href="tours.html">Nuestros Tours</a></li>
+                        <li><a href="galeria.html">Galería</a></li>
+                        <li><a href="nosotros.html">Sobre Nosotros</a></li>
+                        <li><a href="contacto.html">Contacto</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contacto</h3>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Iquitos, Perú</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+51 999 123 456</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>info@jaguarexpeditions.com</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Jaguar Expeditions. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            console.log('Página cargada correctamente');
+            
+            // Manejar envío del formulario
+            $('#form-busqueda').on('submit', function(e) {
+                e.preventDefault();
+                const codigo = $('#codigo-busqueda').val().trim();
+                const email = $('#email-busqueda').val().trim();
+                
+                if (!codigo) {
+                    alert('Por favor ingresa el código de reserva');
+                    return;
+                }
+                
+                if (!email) {
+                    alert('Por favor ingresa tu email');
+                    return;
+                }
+                
+                consultarReserva(codigo, email);
+            });
+        });
+
+        function consultarReserva(codigo, email) {
+            console.log('Consultando reserva:', codigo, email);
+            
+            // Validar que los parámetros no estén vacíos
+            if (!codigo || codigo.trim() === '') {
+                mostrarError('Por favor ingresa un código de reserva válido');
+                return;
+            }
+            
+            // Mostrar loading
+            $('#estado-contenido').html(`
+                <div class="loading">
+                    <i class="fas fa-spinner fa-spin" style="font-size: 48px; color: var(--primary-green);"></i>
+                    <p>Consultando estado de tu reserva...</p>
+                </div>
+            `);
+            
+            // Llamada AJAX para consultar la reserva
+            $.ajax({
+                url: 'api/consultar_reserva.php',
+                method: 'POST',
+                dataType: 'json',
+                data: {
+                    codigo_reserva: codigo.trim(),
+                    email: email ? email.trim() : ''
+                },
+                success: function(response) {
+                    console.log('Respuesta del servidor:', response);
+                    if (response.success) {
+                        mostrarExito('Reserva encontrada correctamente!');
+                        // Aquí puedes agregar la lógica para mostrar los detalles
+                    } else {
+                        mostrarError(response.message || 'No se encontró la reserva');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error AJAX:', error);
+                    mostrarError('Error al consultar la reserva. Intenta nuevamente.');
+                }
+            });
+        }
+
+        function mostrarError(mensaje) {
+            const contenido = `
+                <div style="text-align: center;">
+                    <i class="fas fa-exclamation-triangle icono-estado" style="color: #ff9800; font-size: 80px; margin-bottom: 20px;"></i>
+                    <h2>Error</h2>
+                    <p style="font-size: 18px; margin: 20px 0;">${mensaje}</p>
+                    
+                    <div class="acciones-reserva">
+                        <button id="btn-intentar-nuevamente" class="btn-accion btn-info">
+                            <i class="fas fa-search"></i> Intentar Nuevamente
+                        </button>
+                        <a href="index.html" class="btn-accion btn-volver">
+                            <i class="fas fa-home"></i> Volver al Inicio
+                        </a>
+                    </div>
+                </div>
+            `;
+            
+            $('#estado-contenido').html(contenido);
+            
+            // Agregar event listener para el botón "Intentar Nuevamente"
+            $('#btn-intentar-nuevamente').on('click', function() {
+                location.reload();
+            });
+        }
+
+        function mostrarExito(mensaje) {
+            const contenido = `
+                <div style="text-align: center;">
+                    <i class="fas fa-check-circle" style="color: #4caf50; font-size: 80px; margin-bottom: 20px;"></i>
+                    <h2>¡Éxito!</h2>
+                    <p style="font-size: 18px; margin: 20px 0;">${mensaje}</p>
+                    
+                    <div class="acciones-reserva">
+                        <button onclick="location.reload()" class="btn-accion btn-info">
+                            <i class="fas fa-search"></i> Nueva Búsqueda
+                        </button>
+                        <a href="index.html" class="btn-accion btn-volver">
+                            <i class="fas fa-home"></i> Volver al Inicio
+                        </a>
+                    </div>
+                </div>
+            `;
+            
+            $('#estado-contenido').html(contenido);
+        }
+    </script>
+</body>
+</html>

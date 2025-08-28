@@ -148,12 +148,12 @@ try {
         $stmt->execute([$reservaId]);
         
     } else if ($input['tipo_pago'] === 'cuotas') {
-        // Sistema de cuotas
-        $primeraCuota = $total * 0.5;
-        $segundaCuota = $total * 0.5;
+        // Sistema de cuotas - crear un pago principal y sus cuotas
+        $montoCuota1 = $total * 0.5;
+        $montoCuota2 = $total * 0.5;
         
-        // Primera cuota (inmediata)
-        $codigoTransaccion1 = 'PAY-' . date('Ymd') . '-' . str_pad($reservaId, 6, '0', STR_PAD_LEFT) . '-1';
+        // Crear el registro de pago principal para las cuotas
+        $codigoTransaccionPrincipal = 'PAY-' . date('Ymd') . '-' . str_pad($reservaId, 6, '0', STR_PAD_LEFT) . '-CUOTAS';
         
         $stmt = $pdo->prepare("
             INSERT INTO pagos (
@@ -162,34 +162,42 @@ try {
             ) VALUES (?, ?, ?, ?, ?, NOW(), ?)
         ");
         
-        $datosMetodoPago1 = json_encode([
+        $datosMetodoPago = json_encode([
             'metodo' => $input['metodo_pago'],
-            'tipo_pago' => 'cuota_1',
+            'tipo_pago' => 'cuotas',
             'fecha_procesamiento' => date('Y-m-d H:i:s'),
-            'referencia_interna' => $codigoTransaccion1
+            'referencia_interna' => $codigoTransaccionPrincipal
         ]);
         
         $stmt->execute([
             $reservaId, 
-            $codigoTransaccion1,
-            $primeraCuota, 
+            $codigoTransaccionPrincipal,
+            $total, 
             ucfirst($input['metodo_pago']), 
-            'Completado',
-            $datosMetodoPago1
+            'Pendiente', // El estado general será pendiente hasta que se paguen todas las cuotas
+            $datosMetodoPago
         ]);
         
-        // Segunda cuota (programada)
-        $fechaSegundaCuota = date('Y-m-d', strtotime($input['fecha_tour'] . ' -15 days'));
-        $codigoTransaccion2 = 'PAY-' . date('Ymd') . '-' . str_pad($reservaId, 6, '0', STR_PAD_LEFT) . '-2';
+        $pagoId = $pdo->lastInsertId();
         
+        // Crear las dos cuotas asociadas al pago principal
+        // Cuota 1 - Inmediata
         $stmt = $pdo->prepare("
-            INSERT INTO cuotas (reserva_id, numero_cuota, monto, fecha_vencimiento, estado) 
-            VALUES (?, 2, ?, ?, 'pendiente')
+            INSERT INTO cuotas (pago_id, numero_cuota, monto_cuota, estado_cuota, fecha_vencimiento) 
+            VALUES (?, 1, ?, 'Pendiente', NOW())
         ");
-        $stmt->execute([$reservaId, $segundaCuota, $fechaSegundaCuota]);
+        $stmt->execute([$pagoId, $montoCuota1]);
         
-        // Actualizar estado de reserva a parcialmente pagada  
-        $stmt = $pdo->prepare("UPDATE reservas SET estado_reserva = 'Confirmada' WHERE reserva_id = ?");
+        // Cuota 2 - 15 días antes del tour
+        $fechaSegundaCuota = date('Y-m-d', strtotime($input['fecha_tour'] . ' -15 days'));
+        $stmt = $pdo->prepare("
+            INSERT INTO cuotas (pago_id, numero_cuota, monto_cuota, estado_cuota, fecha_vencimiento) 
+            VALUES (?, 2, ?, 'Pendiente', ?)
+        ");
+        $stmt->execute([$pagoId, $montoCuota2, $fechaSegundaCuota]);
+        
+        // Actualizar estado de reserva
+        $stmt = $pdo->prepare("UPDATE reservas SET estado_reserva = 'Pendiente' WHERE reserva_id = ?");
         $stmt->execute([$reservaId]);
     }
     
