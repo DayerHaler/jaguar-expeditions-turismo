@@ -42,7 +42,9 @@ desktop.ini
 
 # Archivos de prueba
 test_*.php
+test_*.html
 debug_*.php
+diagnostico*.php
 
 # Logs de errores
 error.log

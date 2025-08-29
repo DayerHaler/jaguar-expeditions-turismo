@@ -11,6 +11,34 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css?v=<?php echo time(); ?>">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- PayPal SDK - CONFIGURADO PARA PRODUCCIÓN -->
+    <script>
+        // ⚠️ CLIENT ID DE PRODUCCIÓN REAL
+        const PAYPAL_CLIENT_ID = 'AfodmrbEI6CjK7hiGXrhPPIBJ8ldDejX8DTO61hbLGzR_IrRum1aCmsYKEIANCpnLwM9Od7inW_JkhuC'; // TU CLIENT ID REAL DE PRODUCCIÓN
+        const PAYPAL_ENVIRONMENT = 'production'; // PAGOS REALES ACTIVADOS
+        const PAYPAL_BUSINESS_EMAIL = 'kyckasd@gmail.com'; // Email donde llegan los pagos
+        
+        // Cargar SDK dinámicamente con verificación
+        if (PAYPAL_CLIENT_ID && PAYPAL_CLIENT_ID !== 'TU_CLIENT_ID_DE_PRODUCCION_AQUI') {
+            const paypalScript = document.createElement('script');
+            paypalScript.src = `https://www.paypal.com/sdk/js?client-id=${PAYPAL_CLIENT_ID}&currency=USD&intent=capture`;
+            paypalScript.onload = function() {
+                console.log('✅ PayPal SDK cargado exitosamente');
+            };
+            paypalScript.onerror = function() {
+                console.error('❌ Error cargando PayPal SDK');
+            };
+            document.head.appendChild(paypalScript);
+        } else {
+            console.warn('⚠️ PayPal Client ID no configurado correctamente');
+        }
+        
+        // Log del entorno
+        console.log(`🔴 PayPal configurado en modo: ${PAYPAL_ENVIRONMENT.toUpperCase()}`);
+        if (PAYPAL_ENVIRONMENT === 'production') {
+            console.log('⚠️ ATENCIÓN: Los pagos serán REALES');
+        }
+    </script>
     
     <style>
         /* Estilos para el header */
@@ -1044,6 +1072,14 @@
                     </label>
                 </div>
 
+                <div class="payment-method" data-method="paypal">
+                    <input type="radio" name="metodo-pago" value="paypal" id="pago-paypal">
+                    <label for="pago-paypal">
+                        <i class="fab fa-paypal"></i> PayPal
+                        <small>Pago seguro internacional</small>
+                    </label>
+                </div>
+
                 <div class="payment-method" data-method="yape">
                     <input type="radio" name="metodo-pago" value="yape" id="pago-yape">
                     <label for="pago-yape">
@@ -1091,6 +1127,20 @@
                         <label>CVV</label>
                         <input type="text" id="cvv" placeholder="123" maxlength="4">
                     </div>
+                </div>
+            </div>
+
+            <!-- Formulario de PayPal (se muestra cuando se selecciona PayPal) -->
+            <div id="formulario-paypal" style="display: none; margin-top: 20px; padding: 20px; background: #f8f9fa; border-radius: 10px;">
+                <h5><i class="fab fa-paypal"></i> Pagar con PayPal</h5>
+                <div style="background: #e3f2fd; padding: 15px; border-radius: 8px; margin-bottom: 15px; border-left: 4px solid #2196f3;">
+                    <p style="margin: 0; color: #0d47a1;">
+                        <i class="fas fa-info-circle"></i> 
+                        Serás redirigido a PayPal para completar el pago de forma segura.
+                    </p>
+                </div>
+                <div style="text-align: center; margin: 20px 0;">
+                    <div id="paypal-button-container"></div>
                 </div>
             </div>
         </div>
@@ -1218,11 +1268,26 @@
 
         // Inicialización
         $(document).ready(function() {
-            console.log('Página cargada, iniciando...');
+            console.log('🚀 Página cargada, iniciando...');
+            console.log('🔍 Verificando elemento tour-info...');
+            
+            const tourInfoElement = document.getElementById('tour-info');
+            if (tourInfoElement) {
+                console.log('✅ Elemento tour-info encontrado:', tourInfoElement);
+                console.log('📦 Contenido actual:', tourInfoElement.innerHTML);
+            } else {
+                console.error('❌ Elemento tour-info NO encontrado');
+                return;
+            }
             
             // Mostrar tour inmediatamente
-            console.log('Ejecutando mostrarTourInmediato desde document.ready...');
-            mostrarTourInmediato();
+            console.log('🎯 Ejecutando mostrarTourInmediato...');
+            try {
+                mostrarTourInmediato();
+                console.log('✅ mostrarTourInmediato ejecutado');
+            } catch (error) {
+                console.error('❌ Error en mostrarTourInmediato:', error);
+            }
             
             // Obtener ID del tour desde la URL
             const urlParams = new URLSearchParams(window.location.search);
@@ -1278,9 +1343,15 @@
                 
                 if (this.value === 'tarjeta') {
                     $('#formulario-tarjeta').slideDown();
+                    $('#formulario-paypal').slideUp();
                     configurarFormularioTarjeta();
+                } else if (this.value === 'paypal') {
+                    $('#formulario-tarjeta').slideUp();
+                    $('#formulario-paypal').slideDown();
+                    configurarFormularioPayPal();
                 } else {
                     $('#formulario-tarjeta').slideUp();
+                    $('#formulario-paypal').slideUp();
                 }
             });
 
@@ -2295,6 +2366,8 @@
         }
 
         function procesarPago(datos) {
+            console.log('💳 PROCESANDO PAGO - Datos recibidos:', datos);
+            
             // Adaptar datos al nuevo formato normalizado
             const datosNormalizados = {
                 tour_id: tourSeleccionado.id,
@@ -2330,6 +2403,8 @@
             }
 
             // Enviar datos al servidor con el nuevo API
+            console.log('📤 Enviando datos al servidor:', datosNormalizados);
+            
             $.ajax({
                 url: 'api/crear_reserva_normalizada.php',
                 method: 'POST',
@@ -2337,17 +2412,21 @@
                 data: JSON.stringify(datosNormalizados),
                 timeout: 10000, // 10 segundos de timeout
                 success: function(response) {
+                    console.log('📥 Respuesta del servidor recibida:', response);
                     document.getElementById('loading-overlay').style.display = 'none';
                     
                     if (response.success) {
                         // Convertir respuesta del servidor al formato esperado
                         const datosRespuesta = convertirRespuestaServidor(response.data, datos);
+                        console.log('🔄 Datos convertidos para confirmación:', datosRespuesta);
                         mostrarConfirmacionExitosa(datosRespuesta);
                     } else {
+                        console.error('❌ Error en respuesta del servidor:', response.message);
                         mostrarError(response.message || 'Error al procesar la reserva');
                     }
                 },
                 error: function(xhr, textStatus, errorThrown) {
+                    console.error('❌ Error en AJAX:', textStatus, errorThrown, xhr.responseText);
                     console.log('Error al conectar con el servidor:', textStatus, errorThrown);
                     console.log('Usando simulación local como respaldo');
                     // Si falla la conexión, simular una reserva exitosa
@@ -2445,6 +2524,13 @@
                     detalles.autorizacion = 'AUTH-' + Math.random().toString(36).substr(2, 8).toUpperCase();
                     detalles.referencia_banco = 'REF-' + Math.random().toString(36).substr(2, 10).toUpperCase();
                     break;
+                case 'paypal':
+                    detalles.procesador = 'PayPal';
+                    detalles.transaction_id = 'PP-' + Math.random().toString(36).substr(2, 12).toUpperCase();
+                    detalles.payer_email = 'cliente@ejemplo.com';
+                    detalles.payment_status = 'Completed';
+                    detalles.fee_amount = (monto * 0.039).toFixed(2); // PayPal fee ~3.9%
+                    break;
                 case 'yape':
                     detalles.procesador = 'Yape';
                     detalles.telefono_origen = '+51 9********';
@@ -2467,178 +2553,60 @@
         }
 
         function mostrarConfirmacionExitosa(datosReserva) {
+            console.log('🎯 MOSTRAR CONFIRMACION - Datos recibidos:', datosReserva);
+            console.log('🎯 Variables globales disponibles:');
+            console.log('  - tourSeleccionado:', tourSeleccionado);
+            console.log('  - fechaSeleccionada:', fechaSeleccionada);
+            console.log('  - numeroClientes:', numeroClientes);
+            
             // Guardar datos para el comprobante
             window.datosComprobante = datosReserva;
             
             const detalles = document.getElementById('detalles-confirmacion');
-            detalles.innerHTML = `
-                <div style="text-align: center; margin-bottom: 20px;">
-                    <h3 style="color: #2c5530; margin-bottom: 10px;">
-                        <i class="fas fa-ticket-alt"></i> Código de Reserva
-                    </h3>
-                    <div style="font-size: 24px; font-weight: bold; color: #28a745; background: #f8f9fa; padding: 15px; border-radius: 8px; border: 2px dashed #28a745;">
-                        ${datosReserva.codigo_reserva}
+            console.log('🎯 Elemento detalles-confirmacion encontrado:', detalles);
+            
+            if (!detalles) {
+                console.error('❌ No se encontró el elemento detalles-confirmacion');
+                return;
+            }
+            
+            console.log('🎯 Generando HTML de confirmación...');
+            
+            try {
+                // Primero probar con HTML simple
+                detalles.innerHTML = `
+                    <div style="text-align: center; margin-bottom: 20px;">
+                        <h3 style="color: #2c5530; margin-bottom: 10px;">
+                            ✅ Código de Reserva
+                        </h3>
+                        <div style="font-size: 24px; font-weight: bold; color: #28a745; background: #f8f9fa; padding: 15px; border-radius: 8px; border: 2px dashed #28a745;">
+                            ${datosReserva.codigo_reserva || 'JE' + Date.now().toString().slice(-6)}
+                        </div>
+                        <p>Tour: ${tourSeleccionado ? tourSeleccionado.nombre : 'Tour seleccionado'}</p>
+                        <p>Fecha: ${fechaSeleccionada || new Date().toLocaleDateString()}</p>
+                        <p>Participantes: ${numeroClientes || 1}</p>
+                        <p>Total: \$${datosReserva.total ? datosReserva.total.toFixed(2) : '0.00'}</p>
                     </div>
-                    <small style="color: #666; margin-top: 10px; display: block;">
-                        Guarda este código para futuras consultas
-                    </small>
-                </div>
-
-                <!-- Detalles del Tour -->
-                <div style="background: white; padding: 20px; border-radius: 10px; margin-bottom: 20px; border-left: 4px solid #2c5530; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                    <h4 style="color: #2c5530; margin-bottom: 15px;">
-                        <i class="fas fa-map-marked-alt"></i> Detalles del Tour
-                    </h4>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
-                        <div>
-                            <p><strong>Tour:</strong> ${tourSeleccionado.nombre}</p>
-                            <p><strong>Fecha:</strong> ${new Date(fechaSeleccionada).toLocaleDateString('es-ES')}</p>
-                        </div>
-                        <div>
-                            <p><strong>Participantes:</strong> ${numeroClientes} persona${numeroClientes !== 1 ? 's' : ''}</p>
-                            <p><strong>Duración:</strong> ${tourSeleccionado.duracion}</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Detalles del Pago -->
-                <div style="background: white; padding: 20px; border-radius: 10px; margin-bottom: 20px; border-left: 4px solid #28a745; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                    <h4 style="color: #28a745; margin-bottom: 15px;">
-                        <i class="fas fa-credit-card"></i> Detalles del Pago
-                    </h4>
-                    
-                    <!-- Información Principal del Pago -->
-                    <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
-                            <div>
-                                <p><strong>Código de Transacción:</strong></p>
-                                <p style="font-family: monospace; color: #007bff; font-weight: bold;">${datosReserva.pago.codigo_transaccion}</p>
-                            </div>
-                            <div>
-                                <p><strong>Método de Pago:</strong></p>
-                                <p>${obtenerNombreMetodoPago(datosReserva.metodo_pago)}</p>
-                            </div>
-                            <div>
-                                <p><strong>Estado:</strong></p>
-                                <p style="color: #28a745; font-weight: bold; text-transform: uppercase;">
-                                    <i class="fas fa-check-circle"></i> ${datosReserva.pago.estado}
-                                </p>
-                            </div>
-                            <div>
-                                <p><strong>Fecha y Hora:</strong></p>
-                                <p>${datosReserva.pago.fecha_procesado}</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Detalles Específicos del Método de Pago -->
-                    ${generarDetallesMetodoPago(datosReserva.pago)}
-
-                    <!-- Resumen de Montos -->
-                    <div style="background: #e8f5e8; padding: 15px; border-radius: 8px; border: 1px solid #28a745;">
-                        <h5 style="color: #2c5530; margin-bottom: 10px;">Resumen de Montos</h5>
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
-                            <span>Subtotal:</span>
-                            <span>$${datosReserva.subtotal.toFixed(2)}</span>
-                        </div>
-                        ${datosReserva.descuento > 0 ? `
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 5px; color: #28a745;">
-                            <span>Descuento:</span>
-                            <span>-$${datosReserva.descuento.toFixed(2)}</span>
-                        </div>` : ''}
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
-                            <span>IGV (18%):</span>
-                            <span>$${datosReserva.impuestos.toFixed(2)}</span>
-                        </div>
-                        <hr style="margin: 10px 0; border: 0; border-top: 2px solid #28a745;">
-                        <div style="display: flex; justify-content: space-between; font-weight: bold; font-size: 18px; color: #2c5530;">
-                            <span>Total Pagado:</span>
-                            <span>$${datosReserva.total.toFixed(2)} ${datosReserva.pago.moneda}</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Información Importante -->
-                <div style="background: #e3f2fd; padding: 15px; border-radius: 8px; border-left: 4px solid #1976d2;">
-                    <h5 style="color: #1976d2; margin-bottom: 10px;">
-                        <i class="fas fa-info-circle"></i> Información Importante
-                    </h5>
-                    <ul style="margin: 0; padding-left: 20px; color: #666;">
-                        <li>Te hemos enviado la confirmación y comprobante de pago a tu email</li>
-                        <li>Presenta tu código de reserva el día del tour</li>
-                        <li>Llega 15 minutos antes de la hora de salida</li>
-                        <li>Para cambios o cancelaciones, contacta con 48h de anticipación</li>
-                        <li>Guarda el código de transacción para cualquier consulta sobre el pago</li>
-                    </ul>
-                </div>
-            `;
+                `;
+                
+                console.log('🎯 HTML asignado exitosamente, contenido:', detalles.innerHTML);
+            } catch (error) {
+                console.error('❌ Error al generar HTML de confirmación:', error);
+                
+                // Fallback con HTML simple sin template literals
+                detalles.innerHTML = '<div style="text-align: center;"><h3>✅ Reserva Confirmada</h3><p>Código: ' + 
+                    (datosReserva.codigo_reserva || 'JE' + Date.now().toString().slice(-6)) + '</p></div>';
+            }
 
             pasoActual = 5;
             mostrarPaso(5);
             actualizarBotonesNavegacion();
+            
+            console.log('✅ Confirmación mostrada exitosamente');
         }
 
         function generarDetallesMetodoPago(pago) {
-            let detallesEspecificos = '';
-            
-            switch(pago.metodo_pago) {
-                case 'tarjeta':
-                    detallesEspecificos = `
-                        <div style="background: #fff3cd; padding: 15px; border-radius: 8px; margin-bottom: 15px; border-left: 4px solid #ffc107;">
-                            <h6 style="color: #856404; margin-bottom: 10px;">
-                                <i class="fas fa-credit-card"></i> Detalles de la Tarjeta
-                            </h6>
-                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; font-size: 14px;">
-                                <p><strong>Procesador:</strong> ${pago.procesador}</p>
-                                <p><strong>Tipo de Tarjeta:</strong> ${pago.tipo_tarjeta}</p>
-                                <p><strong>Tarjeta:</strong> ${pago.tarjeta_ultimos_4}</p>
-                                <p><strong>Autorización:</strong> ${pago.autorizacion}</p>
-                                <p><strong>Referencia Banco:</strong> ${pago.referencia_banco}</p>
-                            </div>
-                        </div>`;
-                    break;
-                case 'yape':
-                    detallesEspecificos = `
-                        <div style="background: #e8f5e8; padding: 15px; border-radius: 8px; margin-bottom: 15px; border-left: 4px solid #28a745;">
-                            <h6 style="color: #155724; margin-bottom: 10px;">
-                                <i class="fas fa-mobile-alt"></i> Detalles de Yape
-                            </h6>
-                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; font-size: 14px;">
-                                <p><strong>Procesador:</strong> ${pago.procesador}</p>
-                                <p><strong>Teléfono Origen:</strong> ${pago.telefono_origen}</p>
-                                <p><strong>Operación Yape:</strong> ${pago.operacion_yape}</p>
-                            </div>
-                        </div>`;
-                    break;
-                case 'plin':
-                    detallesEspecificos = `
-                        <div style="background: #e1f5fe; padding: 15px; border-radius: 8px; margin-bottom: 15px; border-left: 4px solid #0288d1;">
-                            <h6 style="color: #01579b; margin-bottom: 10px;">
-                                <i class="fas fa-mobile-alt"></i> Detalles de Plin
-                            </h6>
-                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; font-size: 14px;">
-                                <p><strong>Procesador:</strong> ${pago.procesador}</p>
-                                <p><strong>Teléfono Origen:</strong> ${pago.telefono_origen}</p>
-                                <p><strong>Operación Plin:</strong> ${pago.operacion_plin}</p>
-                            </div>
-                        </div>`;
-                    break;
-                case 'transferencia':
-                    detallesEspecificos = `
-                        <div style="background: #f3e5f5; padding: 15px; border-radius: 8px; margin-bottom: 15px; border-left: 4px solid #9c27b0;">
-                            <h6 style="color: #4a148c; margin-bottom: 10px;">
-                                <i class="fas fa-university"></i> Detalles de Transferencia
-                            </h6>
-                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; font-size: 14px;">
-                                <p><strong>Banco Origen:</strong> ${pago.banco_origen}</p>
-                                <p><strong>Número de Operación:</strong> ${pago.numero_operacion}</p>
-                                <p><strong>Cuenta Destino:</strong> ${pago.cuenta_destino}</p>
-                            </div>
-                        </div>`;
-                    break;
-            }
-            
-            return detallesEspecificos;
+            return ''; // Función simplificada por ahora
         }
 
         function obtenerNombreMetodoPago(metodo) {
@@ -2646,7 +2614,8 @@
                 'tarjeta': 'Tarjeta de Crédito/Débito',
                 'yape': 'Yape',
                 'plin': 'Plin',
-                'transferencia': 'Transferencia Bancaria'
+                'transferencia': 'Transferencia Bancaria',
+                'paypal': 'PayPal'
             };
             return nombres[metodo] || metodo;
         }
@@ -2845,6 +2814,529 @@
                 }
             }, 8000);
         }
+
+        // Configurar formulario PayPal
+        function configurarFormularioPayPal() {
+            console.log('🔄 INICIANDO configurarFormularioPayPal...');
+            console.log('🔍 Verificando SDK PayPal:', typeof paypal);
+            
+            // Limpiar contenedor anterior
+            const container = document.getElementById('paypal-button-container');
+            if (!container) {
+                console.error('❌ Contenedor PayPal no encontrado');
+                return;
+            }
+            
+            console.log('✅ Contenedor PayPal encontrado:', container);
+            container.innerHTML = '';
+            
+            // Verificar que PayPal esté cargado
+            if (typeof paypal === 'undefined') {
+                console.warn('⚠️ PayPal SDK no está cargado todavía, esperando...');
+                container.innerHTML = `
+                    <div style="text-align: center; padding: 20px; background: #fff3cd; border-radius: 8px; border-left: 4px solid #ffc107;">
+                        <i class="fas fa-spinner fa-spin"></i> Cargando PayPal...<br>
+                        <small>Si no carga, verifica la conexión a internet</small>
+                    </div>
+                `;
+                
+                // Reintentar en 2 segundos
+                setTimeout(() => {
+                    console.log('🔄 Reintentando cargar PayPal...');
+                    configurarFormularioPayPal();
+                }, 2000);
+                return;
+            }
+            
+            console.log('✅ PayPal SDK disponible, continuando...');
+            
+            // Obtener el monto total actual
+            let montoTotal = 0;
+            const elementoPrecio = document.querySelector('.price-total .price-value') || document.querySelector('.summary-total span:last-child');
+            
+            if (elementoPrecio) {
+                montoTotal = parseFloat(elementoPrecio.textContent.replace('$', '').replace(',', ''));
+                console.log('💰 Monto total del tour:', montoTotal);
+                
+                // 🔥 IMPORTANTE: Si es pago en cuotas, solo cobrar la primera cuota
+                const tipoPagoSeleccionado = document.querySelector('input[name="tipo-pago"]:checked');
+                if (tipoPagoSeleccionado && tipoPagoSeleccionado.value === 'cuotas') {
+                    montoTotal = montoTotal / 2; // Primera cuota = 50% del total
+                    console.log('💳 Pago en cuotas detectado - cobrando primera cuota:', montoTotal);
+                } else {
+                    console.log('💳 Pago completo - cobrando total:', montoTotal);
+                }
+            } else {
+                console.error('❌ No se pudo encontrar el elemento del precio total');
+                container.innerHTML = `
+                    <div style="background: #f8d7da; padding: 15px; border-radius: 8px; text-align: center; border-left: 4px solid #dc3545;">
+                        <i class="fas fa-exclamation-triangle"></i> Error: No se pudo determinar el precio total<br>
+                        <small>Selecciona un tour y completa todos los campos</small>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Mostrar información del entorno
+            if (PAYPAL_ENVIRONMENT === 'production') {
+                document.getElementById('formulario-paypal').innerHTML += `
+                    <div style="background: #fff3cd; padding: 10px; border-radius: 5px; margin-bottom: 15px; border-left: 4px solid #ffc107;">
+                        <strong>⚠️ MODO PRODUCCIÓN ACTIVO</strong><br>
+                        Los pagos serán REALES y se cobrarán a tu cuenta.
+                    </div>
+                `;
+            }
+            
+            // Crear botones de PayPal
+            console.log('🎯 Creando botones PayPal con monto:', montoTotal);
+            
+            paypal.Buttons({
+                createOrder: function(data, actions) {
+                    console.log('📦 Creando orden PayPal por $' + montoTotal.toFixed(2));
+                    
+                    const tourSeleccionado = document.querySelector('input[name="tour"]:checked');
+                    const descripcionTour = tourSeleccionado ? tourSeleccionado.nextElementSibling.textContent : 'Tour Jaguar Expeditions';
+                    
+                    // Determinar la descripción según el tipo de pago
+                    const tipoPagoSeleccionado = document.querySelector('input[name="tipo-pago"]:checked');
+                    let descripcionPago = `Reserva Tour Jaguar Expeditions - ${descripcionTour}`;
+                    
+                    if (tipoPagoSeleccionado && tipoPagoSeleccionado.value === 'cuotas') {
+                        descripcionPago = `Primera Cuota - ${descripcionTour} (Pago en 2 cuotas)`;
+                    }
+                    
+                    return actions.order.create({
+                        purchase_units: [{
+                            amount: {
+                                value: montoTotal.toFixed(2),
+                                currency_code: 'USD'
+                            },
+                            description: descripcionPago,
+                            custom_id: 'JAGUAR-' + Date.now()
+                        }]
+                    });
+                },
+                onApprove: function(data, actions) {
+                    console.log('✅ Pago aprobado:', data);
+                    
+                    // Mostrar loading usando función segura
+                    const loadingOverlay = crearLoadingOverlay('Procesando pago con PayPal...');
+                    document.body.appendChild(loadingOverlay);
+                    
+                    return actions.order.capture().then(function(details) {
+                        console.log('💳 Pago capturado:', details);
+                        
+                        // Verificar el pago en el servidor
+                        return verificarPagoPayPalServidor(details, montoTotal)
+                            .then(response => {
+                                // Eliminar loading overlay de forma segura
+                                eliminarElementoSeguro(loadingOverlay);
+                                
+                                if (response.success && response.verified) {
+                                    // Pago verificado exitosamente
+                                    procesarReservaPayPalVerificada(response);
+                                } else {
+                                    throw new Error(response.error || 'Error verificando el pago');
+                                }
+                            })
+                            .catch(error => {
+                                // Eliminar loading overlay de forma segura
+                                eliminarElementoSeguro(loadingOverlay);
+                                console.error('Error verificando pago:', error);
+                                mostrarError('Error verificando el pago: ' + error.message + '. Contacta al soporte.');
+                            });
+                    });
+                },
+                onError: function(err) {
+                    console.error('Error en PayPal:', err);
+                    mostrarError('Error en el procesamiento de PayPal: ' + err.message);
+                },
+                onCancel: function(data) {
+                    console.log('❌ Pago cancelado por el usuario:', data);
+                    mostrarError('Pago cancelado. Puedes intentar nuevamente o elegir otro método de pago.');
+                }
+            }).render('#paypal-button-container').then(() => {
+                console.log('✅ Botones PayPal renderizados exitosamente');
+            }).catch(error => {
+                console.error('❌ Error renderizando botones PayPal:', error);
+                container.innerHTML = `
+                    <div style="background: #f8d7da; padding: 15px; border-radius: 8px; text-align: center; border-left: 4px solid #dc3545;">
+                        <i class="fas fa-exclamation-triangle"></i> Error cargando PayPal<br>
+                        <small>${error.message}</small><br>
+                        <button onclick="configurarFormularioPayPal()" style="margin-top: 10px; padding: 5px 15px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;">
+                            <i class="fas fa-redo"></i> Reintentar
+                        </button>
+                    </div>
+                `;
+            });
+        }
+
+        // Verificar pago PayPal en el servidor
+        async function verificarPagoPayPalServidor(paypalDetails, expectedAmount) {
+            try {
+                const response = await fetch('api/verificar_pago_paypal.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        transaction_id: paypalDetails.id,
+                        amount: expectedAmount.toFixed(2)
+                    })
+                });
+
+                const result = await response.json();
+                
+                if (!response.ok) {
+                    throw new Error('Error en la respuesta del servidor');
+                }
+
+                return result;
+            } catch (error) {
+                console.error('Error verificando pago:', error);
+                throw error;
+            }
+        }
+
+        // Procesar reserva con pago PayPal verificado
+        function procesarReservaPayPalVerificada(paypalData) {
+            console.log('🎯 Procesando reserva con pago PayPal verificado:', paypalData);
+            
+            // Actualizar detalles de pago con datos reales verificados
+            window.detallesPago = {
+                metodo_pago: 'paypal',
+                monto: parseFloat(paypalData.amount),
+                moneda: paypalData.currency || 'USD',
+                estado: 'Verificado y Confirmado',
+                fecha_procesado: new Date().toLocaleString('es-ES'),
+                descripcion: 'Pago verificado por PayPal - Jaguar Expeditions',
+                procesador: 'PayPal',
+                transaction_id: paypalData.transaction_id,
+                payer_email: paypalData.payer_email,
+                payer_name: paypalData.payer_name || 'N/A',
+                payment_status: paypalData.status,
+                verified_by_server: true,
+                verification_time: new Date().toISOString(),
+                fee_amount: (parseFloat(paypalData.amount) * 0.039).toFixed(2)
+            };
+
+            // Log para auditoría
+            console.log('✅ Pago PayPal verificado exitosamente:', {
+                id: paypalData.transaction_id,
+                amount: paypalData.amount,
+                email: paypalData.payer_email,
+                verified: true
+            });
+
+            // 🔥 CRUCIAL: Guardar la reserva en la base de datos
+            guardarReservaConPagoPayPal(paypalData);
+        }
+
+        // Nueva función para guardar reserva con pago PayPal en la base de datos
+        function guardarReservaConPagoPayPal(paypalData) {
+            console.log('💾 Guardando reserva en base de datos con pago PayPal...');
+            
+            try {
+                // Recopilar todos los datos de la reserva
+                const datosReserva = recopilarDatosReservaCompletos();
+                
+                // Agregar datos específicos del pago PayPal
+                datosReserva.metodo_pago = 'PayPal';
+                datosReserva.precio_total = parseFloat(paypalData.amount);
+                datosReserva.pago_verificado = true;
+                datosReserva.transaction_id = paypalData.transaction_id;
+                datosReserva.payer_email = paypalData.payer_email;
+
+                console.log('📤 Enviando datos a la API:', datosReserva);
+
+                // Enviar al API para guardar en base de datos
+                $.ajax({
+                    url: 'api/crear_reserva_normalizada.php',
+                    method: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(datosReserva),
+                    timeout: 15000,
+                    success: function(response) {
+                        console.log('📥 Respuesta del servidor:', response);
+                        
+                        if (response.success) {
+                            console.log('✅ Reserva guardada exitosamente en BD:', response.data);
+                            
+                            // Actualizar detalles con los datos de la BD
+                            window.codigoReservaBD = response.data.codigo_reserva;
+                            window.reservaIdBD = response.data.reserva_id;
+                            
+                            // Si es pago en cuotas, procesar automáticamente la primera cuota
+                            if (datosReserva.tipo_pago === 'cuotas') {
+                                console.log('💳 Procesando primera cuota automáticamente...');
+                                procesarPrimerasCuotaPayPal(response.data.codigo_reserva, paypalData);
+                            } else {
+                                // Para pago completo, finalizar directamente
+                                finalizarReserva();
+                            }
+                        } else {
+                            console.error('❌ Error guardando reserva en BD:', response.message);
+                            mostrarError('El pago fue exitoso, pero hubo un error guardando la reserva. Código de transacción PayPal: ' + paypalData.transaction_id + '. Contacta al soporte.');
+                        }
+                    },
+                    error: function(xhr, textStatus, errorThrown) {
+                        console.error('❌ Error conectando con API:', textStatus, errorThrown);
+                        
+                        // El pago fue exitoso, pero no se pudo guardar en BD
+                        // Mostrar mensaje al usuario con el código de transacción
+                        mostrarError(`
+                            <strong>⚠️ IMPORTANTE:</strong><br>
+                            Tu pago PayPal fue <strong>EXITOSO</strong> por $${paypalData.amount} USD.<br>
+                            <strong>ID de transacción:</strong> ${paypalData.transaction_id}<br><br>
+                            Sin embargo, hubo un problema técnico guardando tu reserva.<br>
+                            <strong>Por favor contacta al soporte con este código de transacción.</strong><br><br>
+                            <strong>Tu dinero está seguro y el pago fue procesado correctamente.</strong>
+                        `);
+                    }
+                });
+            } catch (error) {
+                console.error('❌ Error en guardarReservaConPagoPayPal:', error);
+                mostrarError('Error procesando la reserva después del pago. ID: ' + paypalData.transaction_id);
+            }
+        }
+
+        // Función para procesar la primera cuota automáticamente después de crear la reserva
+        async function procesarPrimerasCuotaPayPal(codigoReserva, paypalData) {
+            console.log('💳 Procesando primera cuota para reserva:', codigoReserva);
+            
+            try {
+                const response = await fetch('api/procesar_pago_primera_cuota.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        codigo_reserva: codigoReserva,
+                        transaction_id: paypalData.transaction_id,
+                        monto: parseFloat(paypalData.amount)
+                    })
+                });
+
+                const result = await response.json();
+                
+                if (result.success) {
+                    console.log('✅ Primera cuota procesada exitosamente:', result.data);
+                    finalizarReserva();
+                } else {
+                    console.error('❌ Error procesando primera cuota:', result.message);
+                    mostrarError(`
+                        <strong>⚠️ IMPORTANTE:</strong><br>
+                        Tu pago PayPal fue <strong>EXITOSO</strong> y la reserva fue creada.<br>
+                        <strong>Código de reserva:</strong> ${codigoReserva}<br>
+                        <strong>ID de transacción:</strong> ${paypalData.transaction_id}<br><br>
+                        Sin embargo, hubo un problema procesando el pago de la primera cuota.<br>
+                        <strong>Por favor contacta al soporte con estos códigos.</strong>
+                    `);
+                }
+            } catch (error) {
+                console.error('❌ Error conectando con API de cuotas:', error);
+                mostrarError(`
+                    <strong>⚠️ IMPORTANTE:</strong><br>
+                    Tu pago PayPal fue <strong>EXITOSO</strong> y la reserva fue creada.<br>
+                    <strong>Código de reserva:</strong> ${codigoReserva}<br>
+                    <strong>ID de transacción:</strong> ${paypalData.transaction_id}<br><br>
+                    Hubo un problema técnico procesando el pago de la primera cuota.<br>
+                    <strong>Por favor contacta al soporte con estos códigos.</strong>
+                `);
+            }
+        }
+
+        // Función para recopilar datos completos de la reserva
+        function recopilarDatosReservaCompletos() {
+            console.log('📋 Recopilando datos de la reserva...');
+            
+            try {
+                // Obtener elementos del formulario con validación
+                const responsableNombre = document.querySelector('input[name="responsable_nombre"]');
+                const responsableApellido = document.querySelector('input[name="responsable_apellido"]');
+                const responsableEmail = document.querySelector('input[name="responsable_email"]');
+                const responsableCelular = document.querySelector('input[name="responsable_celular"]');
+                const responsableDocumento = document.querySelector('input[name="responsable_documento"]');
+                const responsableTipoDoc = document.querySelector('select[name="responsable_tipo_documento"]');
+                const responsableEdad = document.querySelector('input[name="responsable_edad"]');
+                const responsablePais = document.querySelector('select[name="responsable_pais"]');
+                const responsableDireccion = document.querySelector('textarea[name="responsable_direccion"]');
+                const tipoPago = document.querySelector('input[name="tipo-pago"]:checked');
+
+                // Validar que existan los elementos requeridos
+                if (!responsableNombre || !responsableApellido || !responsableEmail) {
+                    throw new Error('Faltan campos requeridos del cliente responsable');
+                }
+
+                const datos = {
+                    tour_id: tourSeleccionado.id,
+                    fecha_tour: fechaSeleccionada,
+                    numero_personas: numeroClientes,
+                    tipo_pago: tipoPago ? tipoPago.value : 'completo',
+                    metodo_pago: 'PayPal',
+                    cliente_responsable: {
+                        nombre: responsableNombre.value || '',
+                        apellido: responsableApellido.value || '',
+                        email: responsableEmail.value || '',
+                        telefono: responsableCelular ? responsableCelular.value : '',
+                        documento_identidad: responsableDocumento ? responsableDocumento.value : '',
+                        tipo_documento: responsableTipoDoc ? responsableTipoDoc.value : 'DNI',
+                        edad: responsableEdad ? parseInt(responsableEdad.value) || 30 : 30,
+                        pais: responsablePais ? responsablePais.value : 'Peru',
+                        ciudad: responsableDireccion ? responsableDireccion.value : ''
+                    },
+                    participantes: []
+                };
+
+                // Calcular precio total
+                const subtotal = parseFloat(tourSeleccionado.precio) * numeroClientes;
+                const descuento = calcularDescuento(subtotal, numeroClientes);
+                const impuestos = (subtotal - descuento) * 0.18;
+                datos.precio_total = subtotal - descuento + impuestos;
+
+            // Recopilar datos de todos los participantes
+            for (let i = 0; i < numeroClientes; i++) {
+                const nombreEl = document.querySelector(`input[name="participante_nombre_${i}"]`);
+                const apellidoEl = document.querySelector(`input[name="participante_apellido_${i}"]`);
+                const documentoEl = document.querySelector(`input[name="participante_documento_${i}"]`);
+                const tipoDocEl = document.querySelector(`select[name="participante_tipo_documento_${i}"]`);
+                const edadEl = document.querySelector(`input[name="participante_edad_${i}"]`);
+
+                if (!nombreEl || !apellidoEl || !documentoEl || !tipoDocEl || !edadEl) {
+                    console.error(`❌ Error: No se encontraron los campos del participante ${i}`);
+                    continue;
+                }
+
+                datos.participantes.push({
+                    nombre: nombreEl.value || '',
+                    apellido: apellidoEl.value || '',
+                    documento_identidad: documentoEl.value || '',
+                    tipo_documento: tipoDocEl.value || 'DNI',
+                    fecha_nacimiento: calcularFechaNacimiento(edadEl.value || '25'),
+                    edad: parseInt(edadEl.value || '25')
+                });
+            }
+
+            return datos;
+            
+            } catch (error) {
+                console.error('❌ Error recopilando datos de reserva:', error);
+                throw error;
+            }
+        }
+
+        // Función para finalizar la reserva y mostrar confirmación
+        function finalizarReserva() {
+            console.log('🎉 Finalizando reserva...');
+            
+            // Crear datos para mostrar confirmación
+            const datosConfirmacion = {
+                codigo_reserva: window.codigoReservaBD || 'JE' + Date.now().toString().slice(-6),
+                tour: tourSeleccionado,
+                fecha_tour: fechaSeleccionada,
+                num_clientes: numeroClientes,
+                clientes: [],
+                metodo_pago: 'PayPal',
+                fecha_pago: new Date().toLocaleDateString('es-ES'),
+                hora_pago: new Date().toLocaleTimeString('es-ES'),
+                estado: 'Confirmado',
+                pago: window.detallesPago || {},
+                reserva_id: window.reservaIdBD || null,
+                total: window.detallesPago?.monto || 0
+            };
+
+            // Recopilar datos de clientes para mostrar
+            for (let i = 0; i < numeroClientes; i++) {
+                const nombreEl = document.querySelector(`input[name="participante_nombre_${i}"]`);
+                const apellidoEl = document.querySelector(`input[name="participante_apellido_${i}"]`);
+                const documentoEl = document.querySelector(`input[name="participante_documento_${i}"]`);
+                const edadEl = document.querySelector(`input[name="participante_edad_${i}"]`);
+
+                datosConfirmacion.clientes.push({
+                    nombre: nombreEl ? nombreEl.value : 'N/A',
+                    apellido: apellidoEl ? apellidoEl.value : 'N/A',
+                    documento: documentoEl ? documentoEl.value : 'N/A',
+                    edad: edadEl ? edadEl.value : 'N/A'
+                });
+            }
+
+            // Mostrar confirmación exitosa
+            mostrarConfirmacionExitosa(datosConfirmacion);
+        }
+
+        // Procesar reserva después del pago exitoso de PayPal (función legacy mantenida para compatibilidad)
+        function procesarReservaPayPal(paypalData) {
+            // Mostrar loading usando función segura
+            const loadingOverlay = crearLoadingOverlay('Procesando reserva...');
+            document.body.appendChild(loadingOverlay);
+
+            // Simular procesamiento (aquí iría la llamada real al servidor)
+            setTimeout(() => {
+                // Eliminar loading overlay de forma segura
+                eliminarElementoSeguro(loadingOverlay);
+                
+                // Actualizar detalles de pago con datos reales de PayPal
+                window.detallesPago = {
+                    metodo_pago: 'paypal',
+                    monto: parseFloat(paypalData.amount),
+                    moneda: 'USD',
+                    estado: 'Exitoso',
+                    fecha_procesado: new Date().toLocaleString('es-ES'),
+                    descripcion: 'Pago por reserva de tour - PayPal',
+                    procesador: 'PayPal',
+                    transaction_id: paypalData.transaction_id,
+                    payer_email: paypalData.payer_email,
+                    payment_status: paypalData.payment_status,
+                    fee_amount: (parseFloat(paypalData.amount) * 0.039).toFixed(2)
+                };
+
+                finalizarReserva();
+            }, 2000);
+        }
+
+        // Función auxiliar para eliminar elementos del DOM de forma segura
+        function eliminarElementoSeguro(elemento) {
+            try {
+                if (elemento && elemento.parentNode) {
+                    elemento.parentNode.removeChild(elemento);
+                    console.log('✅ Elemento eliminado del DOM correctamente');
+                    return true;
+                }
+            } catch (error) {
+                console.warn('⚠️ No se pudo eliminar elemento del DOM:', error.message);
+            }
+            return false;
+        }
+
+        // Función auxiliar para crear loading overlay mejorado
+        function crearLoadingOverlay(mensaje = 'Procesando...') {
+            const overlay = document.createElement('div');
+            overlay.style.cssText = `
+                position: fixed; top: 0; left: 0; right: 0; bottom: 0; 
+                background: rgba(0,0,0,0.8); z-index: 9999; 
+                display: flex; align-items: center; justify-content: center;
+                color: white; font-size: 18px; flex-direction: column;
+            `;
+            overlay.innerHTML = `
+                <div style="text-align: center;">
+                    <i class="fas fa-spinner fa-spin" style="font-size: 24px; margin-bottom: 10px;"></i><br>
+                    ${mensaje}<br>
+                    <small>No cierres esta ventana</small>
+                </div>
+            `;
+            overlay.className = 'loading-overlay-paypal';
+            overlay.setAttribute('data-created', Date.now());
+            return overlay;
+        }
+
+        // Limpiar overlays residuales al cargar la página
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🧹 Limpiando overlays residuales...');
+            const overlaysResiduales = document.querySelectorAll('.loading-overlay-paypal');
+            overlaysResiduales.forEach(overlay => {
+                eliminarElementoSeguro(overlay);
+            });
+        });
 
         // Inicializar botones de navegación
         actualizarBotonesNavegacion();
