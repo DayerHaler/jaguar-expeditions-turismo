@@ -278,6 +278,7 @@ body {
     color: var(--white);
     max-width: 600px;
     padding: 0 20px;
+    padding-bottom: 40px;
 }
 
 .slide-content h2 {
@@ -1943,21 +1944,18 @@ img.loaded {
 
 .terms-link,
 .privacy-link {
-    color: #fff;
-    text-decoration: none;
-    display: flex;
+    color: green;
     align-items: center;
     gap: 8px;
     font-size: 0.9rem;
     transition: all 0.3s ease;
-    padding: 8px 15px;
     border-radius: 20px;
     border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .terms-link:hover,
 .privacy-link:hover {
-    color: var(--accent-color);
+    color: red;
     background: rgba(255, 255, 255, 0.1);
     transform: translateY(-2px);
 }
