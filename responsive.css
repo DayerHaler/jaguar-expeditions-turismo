@@ -1970,3 +1970,137 @@
         font-size: 0.9rem;
     }
 }
+
+/* ========================================
+   ESTADO RESERVA - RESPONSIVE
+======================================== */
+
+@media (max-width: 768px) {
+    .estado-reserva-container {
+        margin: 100px 20px 40px;
+        padding: 20px;
+    }
+    
+    .acciones-reserva {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .btn-accion {
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    .detalle-item {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .detalle-item span:first-child {
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+    
+    .codigo-reserva {
+        font-size: 20px;
+        padding: 10px;
+    }
+    
+    .icono-estado {
+        font-size: 60px;
+    }
+}
+
+@media (max-width: 480px) {
+    .estado-reserva-container {
+        margin: 90px 10px 20px;
+        padding: 15px;
+    }
+    
+    .detalles-reserva {
+        padding: 20px;
+    }
+    
+    .btn-accion {
+        padding: 12px 20px;
+        font-size: 14px;
+    }
+    
+    .loading {
+        padding: 40px 15px;
+    }
+}
+
+/* === RESPONSIVE ESPECÍFICO PARA ESTADO DE RESERVA === */
+
+@media (max-width: 768px) {
+    /* Estado de reserva responsive */
+    .estado-reserva-container {
+        margin: 20px;
+        padding: 15px;
+    }
+
+    .reserva-info {
+        grid-template-columns: 1fr;
+    }
+
+    .accion-disponible {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+
+    .acciones-generales {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .modal-content {
+        width: 95%;
+        margin: 10% auto;
+    }
+
+    .form-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .btn-accion {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .estado-reserva-container {
+        margin: 10px;
+        padding: 10px;
+    }
+
+    .estado-reserva-form {
+        padding: 20px;
+    }
+
+    .info-section {
+        padding: 15px;
+    }
+
+    .accion-info {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+
+    .modal-content {
+        width: 98%;
+        margin: 5% auto;
+    }
+
+    .modal-header {
+        padding: 15px;
+    }
+
+    .modal form {
+        padding: 15px;
+    }
+}
