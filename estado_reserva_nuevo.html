@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estado de Reserva - Jaguar Expeditions</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-section">
+                    <img src="img/logo.jpeg" alt="Jaguar Expeditions" class="logo-img">
+                    <div class="company-info">
+                        <h1>Jaguar Expeditions</h1>
+                        <p>Aventuras en la Selva Amazónica</p>
+                    </div>
+                </div>
+                
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+51 XXX XXX XXX</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>info@jaguarexpeditions.com</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Navegación -->
+        <nav class="navbar">
+            <div class="container">
+                <ul class="nav-menu">
+                    <li><a href="index.html"><i class="fas fa-home"></i> Inicio</a></li>
+                    <li><a href="tours.html"><i class="fas fa-map-marked-alt"></i> Tours</a></li>
+                    <li><a href="galeria.html"><i class="fas fa-images"></i> Galería</a></li>
+                    <li><a href="nosotros.html"><i class="fas fa-users"></i> Nosotros</a></li>
+                    <li><a href="contacto.html"><i class="fas fa-envelope"></i> Contacto</a></li>
+                    <li><a href="reservar.html" class="reservar-btn"><i class="fas fa-calendar-check"></i> Reservar Ahora</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Contenido principal -->
+    <main class="estado-reserva-container">
+        <div id="estado-contenido">
+            <!-- El contenido se cargará dinámicamente -->
+            <div class="loading">
+                <i class="fas fa-spinner fa-spin" style="font-size: 48px; color: var(--primary-green);"></i>
+                <p>Consultando estado de tu reserva...</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Jaguar Expeditions</h3>
+                    <p>Descubre la magia de la selva amazónica con nuestros tours especializados.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul>
+                        <li><a href="tours.html">Nuestros Tours</a></li>
+                        <li><a href="galeria.html">Galería</a></li>
+                        <li><a href="nosotros.html">Sobre Nosotros</a></li>
+                        <li><a href="contacto.html">Contacto</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contacto</h3>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Iquitos, Perú</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+51 XXX XXX XXX</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>info@jaguarexpeditions.com</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Jaguar Expeditions. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

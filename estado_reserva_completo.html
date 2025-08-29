@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estado de Reserva - Jaguar Expeditions</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Estilos específicos para el estado de reserva */
+        .estado-reserva-container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .estado-reserva-form {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .form-header h2 {
+            color: var(--primary-green);
+            margin-bottom: 10px;
+        }
+
+        .form-header p {
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .reservation-search-form {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus {
+            border-color: var(--primary-green);
+            outline: none;
+        }
+
+        .form-help {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .help-section {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        /* Estilos para mostrar reserva */
+        .reserva-detalle {
+            padding: 20px;
+        }
+
+        .reserva-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .reserva-info {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        .info-section {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            border-left: 4px solid var(--primary-green);
+        }
+
+        .info-section h3 {
+            color: var(--primary-green);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-content {
+            line-height: 1.6;
+        }
+
+        .info-content p {
+            margin-bottom: 8px;
+        }
+
+        .estado-badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .estado-confirmada { background: #e7f5e7; color: #2e7d32; }
+        .estado-pagada { background: #e3f2fd; color: #1976d2; }
+        .estado-pendiente { background: #fff3e0; color: #f57c00; }
+        .estado-cancelada { background: #ffebee; color: #d32f2f; }
+        .estado-reembolso-solicitado { background: #f3e5f5; color: #7b1fa2; }
+
+        /* Estilos para acciones disponibles */
+        .accion-disponible {
+            background: white;
+            border: 2px solid var(--primary-green);
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .accion-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .accion-info i {
+            font-size: 24px;
+            color: var(--primary-green);
+        }
+
+        .accion-info h4 {
+            margin: 0 0 5px 0;
+            color: var(--primary-green);
+        }
+
+        .accion-info p {
+            margin: 0;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .btn-accion {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-pagar {
+            background: var(--primary-green);
+            color: white;
+        }
+
+        .btn-pagar:hover {
+            background: #388e3c;
+        }
+
+        .btn-reembolso {
+            background: #ff9800;
+            color: white;
+        }
+
+        .btn-reembolso:hover {
+            background: #f57c00;
+        }
+
+        .btn-secundario {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secundario:hover {
+            background: #5a6268;
+        }
+
+        .btn-volver {
+            background: var(--primary-green);
+            color: white;
+        }
+
+        .btn-volver:hover {
+            background: #388e3c;
+        }
+
+        .acciones-generales {
+            text-align: center;
+            margin-top: 30px;
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        /* Modal estilos */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 0;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .modal-header {
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h3 {
+            margin: 0;
+            color: var(--primary-green);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .close {
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: #000;
+        }
+
+        .modal form {
+            padding: 20px;
+        }
+
+        .modal .form-group {
+            margin-bottom: 20px;
+        }
+
+        .modal textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: inherit;
+            resize: vertical;
+        }
+
+        .modal textarea:focus {
+            border-color: var(--primary-green);
+            outline: none;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: flex-end;
+        }
+
+        .btn-confirmar {
+            background: var(--primary-green);
+            color: white;
+        }
+
+        .btn-confirmar:hover {
+            background: #388e3c;
+        }
+
+        .btn-cancelar {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-cancelar:hover {
+            background: #5a6268;
+        }
+
+        /* Loading y error estilos */
+        .loading {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .loading p {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #666;
+        }
+
+        .error {
+            text-align: center;
+            padding: 40px;
+            color: #d32f2f;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .estado-reserva-container {
+                margin: 20px;
+                padding: 15px;
+            }
+
+            .reserva-info {
+                grid-template-columns: 1fr;
+            }
+
+            .accion-disponible {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+
+            .acciones-generales {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .modal-content {
+                width: 95%;
+                margin: 10% auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="container">
+                <div class="nav-brand">
+                    <img src="img/logo.jpeg" alt="Jaguar Expeditions" class="logo">
+                    <span class="brand-text">Jaguar Expeditions</span>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="tours.html">Tours</a></li>
+                    <li><a href="#galeria">Galería</a></li>
+                    <li><a href="#nosotros">Nosotros</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                    <li><a href="estado_reserva.html" class="active">Estado Reserva</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Contenido principal -->
+    <main class="estado-reserva-container">
+        <div id="estado-contenido">
+            <!-- Formulario de búsqueda por defecto -->
+            <div class="estado-reserva-form">
+                <div class="form-header">
+                    <i class="fas fa-search" style="font-size: 48px; color: var(--primary-green); margin-bottom: 20px;"></i>
+                    <h2>Consultar Estado de Reserva</h2>
+                    <p>Ingresa tu código de reserva y email para verificar el estado</p>
+                </div>
+                
+                <form id="form-busqueda" class="reservation-search-form">
+                    <div class="form-group">
+                        <label for="codigo-busqueda">Código de Reserva:</label>
+                        <input type="text" id="codigo-busqueda" placeholder="Ej: JE123456" required>
+                        <small class="form-help">Código que recibiste en tu email de confirmación</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="email-busqueda">Email de contacto:</label>
+                        <input type="email" id="email-busqueda" placeholder="tu-email@ejemplo.com" required>
+                        <small class="form-help">Email usado al hacer la reserva</small>
+                    </div>
+                    <button type="submit" class="btn-accion btn-info">
+                        <i class="fas fa-search"></i> Consultar Estado
+                    </button>
+                </form>
+                
+                <div class="help-section">
+                    <p><strong>¿No tienes tu código de reserva?</strong></p>
+                    <p>Contáctanos al <strong>+51 999 123 456</strong> o escríbenos a <strong>info@jaguarexpeditions.com</strong></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Jaguar Expeditions</h3>
+                    <p>Descubre la magia de la selva amazónica con nuestros tours especializados.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul>
+                        <li><a href="tours.html">Nuestros Tours</a></li>
+                        <li><a href="galeria.html">Galería</a></li>
+                        <li><a href="nosotros.html">Sobre Nosotros</a></li>
+                        <li><a href="contacto.html">Contacto</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contacto</h3>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Iquitos, Perú</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+51 999 123 456</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>info@jaguarexpeditions.com</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Jaguar Expeditions. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            console.log('Página de estado de reserva cargada correctamente');
+            
+            // Manejar envío del formulario
+            $('#form-busqueda').on('submit', function(e) {
+                e.preventDefault();
+                const codigo = $('#codigo-busqueda').val().trim();
+                const email = $('#email-busqueda').val().trim();
+                
+                if (!codigo) {
+                    alert('Por favor ingresa el código de reserva');
+                    return;
+                }
+                
+                if (!email) {
+                    alert('Por favor ingresa tu email');
+                    return;
+                }
+                
+                consultarReservaLocal(codigo, email);
+            });
+        });
+
+        function consultarReservaLocal(codigo, email) {
+            console.log('Iniciando consulta de reserva:', codigo, email);
+            
+            // Validar que los parámetros no estén vacíos
+            if (!codigo || codigo.trim() === '') {
+                mostrarErrorLocal('Por favor ingresa un código de reserva válido');
+                return;
+            }
+            
+            // Mostrar loading
+            $('#estado-contenido').html(`
+                <div class="loading">
+                    <i class="fas fa-spinner fa-spin" style="font-size: 48px; color: var(--primary-green);"></i>
+                    <p>Consultando estado de tu reserva...</p>
+                </div>
+            `);
+            
+            // Llamada AJAX para consultar la reserva
+            $.ajax({
+                url: 'api/consultar_reserva_simple.php',
+                method: 'POST',
+                dataType: 'json',
+                data: {
+                    codigo_reserva: codigo.trim(),
+                    email: email ? email.trim() : ''
+                },
+                success: function(response) {
+                    console.log('Respuesta del servidor:', response);
+                    if (response.success) {
+                        mostrarReservaCompleta(response.data);
+                    } else {
+                        mostrarErrorLocal(response.message || 'No se encontró la reserva');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error AJAX:', error);
+                    console.error('Status:', status);
+                    console.error('Response:', xhr.responseText);
+                    mostrarErrorLocal('Error al consultar la reserva. Intenta nuevamente.');
+                }
+            });
+        }
+
+        function mostrarErrorLocal(mensaje) {
+            const contenido = `
+                <div style="text-align: center; padding: 40px;">
+                    <i class="fas fa-exclamation-triangle" style="color: #ff9800; font-size: 80px; margin-bottom: 20px;"></i>
+                    <h2>Error</h2>
+                    <p style="font-size: 18px; margin: 20px 0;">${mensaje}</p>
+                    
+                    <div style="margin-top: 30px;">
+                        <button id="btn-intentar-nuevamente" class="btn-accion btn-info" style="margin-right: 10px;">
+                            <i class="fas fa-search"></i> Intentar Nuevamente
+                        </button>
+                        <a href="index.html" class="btn-accion btn-volver">
+                            <i class="fas fa-home"></i> Volver al Inicio
+                        </a>
+                    </div>
+                </div>
+            `;
+            
+            $('#estado-contenido').html(contenido);
+            
+            // Agregar event listener para el botón "Intentar Nuevamente"
+            $('#btn-intentar-nuevamente').on('click', function() {
+                location.reload();
+            });
+        }
+
+        function mostrarReservaCompleta(data) {
+            const reserva = data.reserva;
+            const cliente = data.cliente;
+            const tour = data.tour;
+            const pagos = data.pagos;
+            const acciones = data.acciones;
+            
+            const contenido = `
+                <div class="reserva-detalle">
+                    <div class="reserva-header">
+                        <i class="fas fa-check-circle" style="color: #4caf50; font-size: 48px; margin-bottom: 15px;"></i>
+                        <h2>Reserva Encontrada</h2>
+                    </div>
+                    
+                    <div class="reserva-info">
+                        <div class="info-section">
+                            <h3><i class="fas fa-user"></i> Información del Cliente</h3>
+                            <div class="info-content">
+                                <p><strong>Cliente:</strong> ${cliente.nombre_completo}</p>
+                                <p><strong>Email:</strong> ${cliente.email}</p>
+                                <p><strong>Teléfono:</strong> ${cliente.telefono}</p>
+                            </div>
+                        </div>
+                        
+                        <div class="info-section">
+                            <h3><i class="fas fa-map"></i> Información del Tour</h3>
+                            <div class="info-content">
+                                <p><strong>Tour:</strong> ${tour.nombre}</p>
+                                <p><strong>Descripción:</strong> ${tour.descripcion}</p>
+                                <p><strong>Fecha de Inicio:</strong> ${formatearFecha(tour.fecha_inicio)}</p>
+                                <p><strong>Fecha de Fin:</strong> ${formatearFecha(tour.fecha_fin)}</p>
+                                <p><strong>Precio Base:</strong> $${parseFloat(tour.precio_base).toFixed(2)}</p>
+                            </div>
+                        </div>
+                        
+                        <div class="info-section">
+                            <h3><i class="fas fa-ticket-alt"></i> Detalles de la Reserva</h3>
+                            <div class="info-content">
+                                <p><strong>Código:</strong> ${reserva.codigo_reserva}</p>
+                                <p><strong>Estado:</strong> <span class="estado-badge estado-${reserva.estado_reserva.toLowerCase().replace(/\s+/g, '-')}">${reserva.estado_reserva}</span></p>
+                                <p><strong>Fecha de Reserva:</strong> ${formatearFecha(reserva.fecha_reserva)}</p>
+                                <p><strong>Total:</strong> $${parseFloat(reserva.total).toFixed(2)}</p>
+                                <p><strong>Tipo de Pago:</strong> ${reserva.tipo_pago}</p>
+                                <p><strong>Participantes:</strong> ${reserva.numero_participantes}</p>
+                            </div>
+                        </div>
+                        
+                        <div class="info-section">
+                            <h3><i class="fas fa-credit-card"></i> Información de Pagos</h3>
+                            <div class="info-content">
+                                <p><strong>Total Pagado:</strong> $${parseFloat(pagos.total_pagado).toFixed(2)}</p>
+                                <p><strong>Saldo Pendiente:</strong> $${parseFloat(pagos.saldo_pendiente).toFixed(2)}</p>
+                                <p><strong>Número de Cuotas Pagadas:</strong> ${pagos.cuotas_pagadas} de ${pagos.total_cuotas_esperadas}</p>
+                                
+                                ${pagos.puede_pagar_segunda_cuota ? `
+                                    <div class="accion-disponible pago-cuota">
+                                        <div class="accion-info">
+                                            <i class="fas fa-money-bill-wave"></i>
+                                            <div>
+                                                <h4>Segunda Cuota Disponible</h4>
+                                                <p>Monto: $${parseFloat(pagos.monto_segunda_cuota).toFixed(2)}</p>
+                                            </div>
+                                        </div>
+                                        <button onclick="pagarSegundaCuota('${reserva.reserva_id}', '${reserva.codigo_reserva}')" 
+                                                class="btn-accion btn-pagar">
+                                            <i class="fas fa-credit-card"></i> Pagar Segunda Cuota
+                                        </button>
+                                    </div>
+                                ` : ''}
+                                
+                                ${acciones.puede_solicitar_reembolso ? `
+                                    <div class="accion-disponible reembolso">
+                                        <div class="accion-info">
+                                            <i class="fas fa-undo"></i>
+                                            <div>
+                                                <h4>Reembolso Disponible</h4>
+                                                <p>Solicita el reembolso de tu reserva</p>
+                                            </div>
+                                        </div>
+                                        <button onclick="mostrarFormularioReembolso('${reserva.reserva_id}', '${reserva.codigo_reserva}')" 
+                                                class="btn-accion btn-reembolso">
+                                            <i class="fas fa-undo"></i> Solicitar Reembolso
+                                        </button>
+                                    </div>
+                                ` : ''}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="acciones-generales">
+                        <button onclick="location.reload()" class="btn-accion btn-secundario">
+                            <i class="fas fa-search"></i> Nueva Búsqueda
+                        </button>
+                        <a href="index.html" class="btn-accion btn-volver">
+                            <i class="fas fa-home"></i> Volver al Inicio
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Modal para formulario de reembolso -->
+                <div id="modalReembolso" class="modal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3><i class="fas fa-undo"></i> Solicitar Reembolso</h3>
+                            <span class="close" onclick="cerrarModalReembolso()">&times;</span>
+                        </div>
+                        <form id="formReembolso">
+                            <div class="form-group">
+                                <label for="motivoReembolso">Motivo del reembolso:</label>
+                                <textarea id="motivoReembolso" name="motivo" rows="4" required 
+                                        placeholder="Explique brevemente el motivo de su solicitud de reembolso..."></textarea>
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" class="btn-accion btn-confirmar">
+                                    <i class="fas fa-paper-plane"></i> Enviar Solicitud
+                                </button>
+                                <button type="button" class="btn-accion btn-cancelar" onclick="cerrarModalReembolso()">
+                                    <i class="fas fa-times"></i> Cancelar
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            `;
+            
+            $('#estado-contenido').html(contenido);
+            
+            // Configurar el formulario de reembolso
+            configurarFormularioReembolso(reserva.reserva_id, reserva.codigo_reserva);
+        }
+        
+        // Función para formatear fechas
+        function formatearFecha(fecha) {
+            if (!fecha) return 'No especificada';
+            const date = new Date(fecha);
+            const opciones = { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric',
+                timeZone: 'UTC'
+            };
+            return date.toLocaleDateString('es-ES', opciones);
+        }
+        
+        // Función para pagar segunda cuota
+        function pagarSegundaCuota(reservaId, codigoReserva) {
+            if (!confirm('¿Está seguro de proceder con el pago de la segunda cuota?')) {
+                return;
+            }
+            
+            // Mostrar loading
+            const btnPagar = event.target;
+            const textoOriginal = btnPagar.innerHTML;
+            btnPagar.disabled = true;
+            btnPagar.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Procesando...';
+            
+            $.ajax({
+                url: 'api/pagar_segunda_cuota.php',
+                method: 'POST',
+                dataType: 'json',
+                data: {
+                    reserva_id: reservaId,
+                    codigo_reserva: codigoReserva,
+                    metodo_pago: 'Tarjeta'
+                },
+                success: function(response) {
+                    if (response.success) {
+                        alert('¡Segunda cuota pagada exitosamente!\n\nMonto: $' + response.data.monto_pagado.toFixed(2) + '\nCódigo de transacción: ' + response.data.codigo_transaccion);
+                        // Recargar la información de la reserva
+                        location.reload();
+                    } else {
+                        alert('Error al procesar el pago: ' + response.message);
+                        btnPagar.disabled = false;
+                        btnPagar.innerHTML = textoOriginal;
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error AJAX:', error);
+                    alert('Error al procesar el pago. Intente nuevamente.');
+                    btnPagar.disabled = false;
+                    btnPagar.innerHTML = textoOriginal;
+                }
+            });
+        }
+        
+        // Función para mostrar formulario de reembolso
+        function mostrarFormularioReembolso(reservaId, codigoReserva) {
+            document.getElementById('modalReembolso').style.display = 'block';
+        }
+        
+        // Función para cerrar modal de reembolso
+        function cerrarModalReembolso() {
+            document.getElementById('modalReembolso').style.display = 'none';
+            document.getElementById('formReembolso').reset();
+        }
+        
+        // Función para configurar formulario de reembolso
+        function configurarFormularioReembolso(reservaId, codigoReserva) {
+            $('#formReembolso').off('submit').on('submit', function(e) {
+                e.preventDefault();
+                
+                const motivo = $('#motivoReembolso').val().trim();
+                if (!motivo) {
+                    alert('Por favor ingrese el motivo del reembolso');
+                    return;
+                }
+                
+                if (!confirm('¿Está seguro de solicitar el reembolso de esta reserva?')) {
+                    return;
+                }
+                
+                // Mostrar loading en el botón
+                const btnEnviar = $(this).find('button[type="submit"]');
+                const textoOriginal = btnEnviar.html();
+                btnEnviar.prop('disabled', true).html('<i class="fas fa-spinner fa-spin"></i> Enviando...');
+                
+                $.ajax({
+                    url: 'api/solicitar_reembolso.php',
+                    method: 'POST',
+                    dataType: 'json',
+                    data: {
+                        reserva_id: reservaId,
+                        codigo_reserva: codigoReserva,
+                        motivo: motivo
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            const data = response.data;
+                            alert(`¡Solicitud de reembolso enviada exitosamente!\n\nNúmero de solicitud: ${data.reembolso_id}\nMonto a reembolsar: $${data.monto_reembolso.toFixed(2)} (${data.porcentaje_reembolso}%)\nPolítica aplicada: ${data.politica_aplicada}\n\nEn breve nos contactaremos contigo.`);
+                            cerrarModalReembolso();
+                            // Recargar la información de la reserva
+                            location.reload();
+                        } else {
+                            alert('Error al enviar la solicitud: ' + response.message);
+                            btnEnviar.prop('disabled', false).html(textoOriginal);
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error AJAX:', error);
+                        alert('Error al enviar la solicitud. Intente nuevamente.');
+                        btnEnviar.prop('disabled', false).html(textoOriginal);
+                    }
+                });
+            });
+        }
+        
+        // Cerrar modal al hacer clic fuera de él
+        window.onclick = function(event) {
+            const modal = document.getElementById('modalReembolso');
+            if (event.target == modal) {
+                cerrarModalReembolso();
+            }
+        }
+    </script>
+</body>
+</html>
