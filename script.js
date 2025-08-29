@@ -118,26 +118,6 @@ $(document).ready(function() {
     });
 
     // ========================================
-    // BOTÓN SCROLL TO TOP
-    // ========================================
-    const scrollButton = $('<button>')
-        .addClass('scroll-to-top')
-        .html('<i class="fas fa-arrow-up"></i>')
-        .appendTo('body');
-
-    $(window).scroll(function() {
-        if ($(this).scrollTop() > 300) {
-            scrollButton.fadeIn();
-        } else {
-            scrollButton.fadeOut();
-        }
-    });
-
-    scrollButton.click(function() {
-        $('html, body').animate({scrollTop: 0}, 600);
-    });
-
-    // ========================================
     // ANIMACIONES EN SCROLL
     // ========================================
     function animateOnScroll() {
@@ -243,14 +223,6 @@ $(document).ready(function() {
     $('.modal .close, .modal-overlay').click(function() {
         $('.modal').fadeOut(300);
         $('body').css('overflow', 'auto');
-    });
-
-    // ========================================
-    // FUNCIONALIDAD EXPERIENCIAS AMAZÓNICAS
-    // ========================================
-    $('.experience-card').on('click', function() {
-        var experienceName = $(this).find('h3').text();
-        showAlert('Explorando: ' + experienceName, 'info');
     });
 
     // ========================================
@@ -785,30 +757,6 @@ $(document).ready(function() {
             margin-left: auto;
         }
         
-        /* Botón scroll to top */
-        .scroll-to-top {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            font-size: 1.2rem;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-            z-index: 1000;
-            transition: all 0.3s ease;
-            display: none;
-        }
-        
-        .scroll-to-top:hover {
-            background: var(--secondary-color);
-            transform: translateY(-2px);
-        }
-        
         /* Responsive para notificaciones */
         @media (max-width: 480px) {
             .notification,
@@ -823,14 +771,6 @@ $(document).ready(function() {
             .notification-content,
             .alert-content {
                 padding: 15px;
-            }
-            
-            .scroll-to-top {
-                bottom: 20px;
-                right: 20px;
-                width: 45px;
-                height: 45px;
-                font-size: 1.1rem;
             }
         }
     `).appendTo('head');

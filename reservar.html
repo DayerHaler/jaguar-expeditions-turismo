@@ -622,28 +622,7 @@
             margin-left: 5px;
         }
 
-        /* Estilos para formularios de cliente responsable y participantes */
-        .cliente-responsable {
-            background: linear-gradient(135deg, #e8f5e8, #f0f8f0);
-            border: 2px solid #2c5530;
-            border-radius: 12px;
-            padding: 25px;
-            margin-bottom: 30px;
-            position: relative;
-        }
-
-        .cliente-responsable::before {
-            content: "👤 RESPONSABLE";
-            position: absolute;
-            top: -10px;
-            left: 20px;
-            background: #2c5530;
-            color: white;
-            padding: 5px 15px;
-            border-radius: 15px;
-            font-size: 12px;
-            font-weight: bold;
-        }
+        /* Estilos para formularios de participantes */
 
         .participante-form {
             background: #f8f9fa;
@@ -1695,28 +1674,22 @@
         }
 
         function validarPaso3() {
-            // Validación simplificada - solo verificar que hay datos básicos
+            // Validación simplificada - solo verificar que hay datos básicos de participantes
             try {
-                // Verificar datos del responsable
-                const responsableNombre = document.querySelector('input[name="responsable_nombre"]');
-                if (!responsableNombre || !responsableNombre.value.trim()) {
-                    if (numeroClientes === 1) {
-                        mostrarError('Ingrese el nombre del participante');
-                    } else {
-                        mostrarError('Ingrese el nombre del cliente responsable');
+                // Verificar que todos los participantes tengan nombre
+                for (let i = 0; i < numeroClientes; i++) {
+                    const nombre = document.querySelector(`input[name="participante_nombre_${i}"]`);
+                    if (!nombre || !nombre.value.trim()) {
+                        mostrarError(`Ingrese el nombre del participante ${i + 1}`);
+                        return false;
                     }
-                    return false;
                 }
-
-                // Solo verificar participantes adicionales si hay más de 1 persona
-                if (numeroClientes > 1) {
-                    for (let i = 0; i < numeroClientes; i++) {
-                        const nombre = document.querySelector(`input[name="participante_nombre_${i}"]`);
-                        if (!nombre || !nombre.value.trim()) {
-                            mostrarError(`Ingrese el nombre del participante ${i + 1}`);
-                            return false;
-                        }
-                    }
+                
+                // Verificar que el primer participante (contacto principal) tenga email
+                const emailPrincipal = document.querySelector('input[name="participante_email_0"]');
+                if (!emailPrincipal || !emailPrincipal.value.trim()) {
+                    mostrarError('El contacto principal debe tener un email');
+                    return false;
                 }
                 
                 return true;
@@ -1780,246 +1753,28 @@
             const container = document.getElementById('formularios-clientes');
             container.innerHTML = '';
 
-            // Si solo es 1 persona, mostrar solo el formulario del responsable con estilo de participante
-            if (numeroClientes === 1) {
-                const formularioUnico = document.createElement('div');
-                formularioUnico.className = 'client-form participante-form'; // Usar estilo de participante
-                formularioUnico.innerHTML = `
-                    <h4><i class="fas fa-user"></i> Datos del Participante</h4>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Nombres *</label>
-                            <input type="text" name="responsable_nombre" required 
-                                   placeholder="Nombres completos">
-                        </div>
-                        <div class="form-group">
-                            <label>Apellidos *</label>
-                            <input type="text" name="responsable_apellido" required 
-                                   placeholder="Apellidos completos">
-                        </div>
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Email *</label>
-                            <input type="email" name="responsable_email" required 
-                                   placeholder="correo@ejemplo.com">
-                        </div>
-                        <div class="form-group">
-                            <label>Documento de Identidad *</label>
-                            <input type="text" name="responsable_documento" required 
-                                   placeholder="DNI o Pasaporte" maxlength="20">
-                        </div>
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Tipo de Documento *</label>
-                            <select name="responsable_tipo_documento" required>
-                                <option value="">Seleccionar...</option>
-                                <option value="DNI">DNI</option>
-                                <option value="Pasaporte">Pasaporte</option>
-                                <option value="CE">Carné de Extranjería</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Edad *</label>
-                            <input type="number" name="responsable_edad" required min="18" max="99"
-                                   placeholder="Edad en años">
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Género *</label>
-                            <select name="responsable_genero" required>
-                                <option value="">Seleccionar...</option>
-                                <option value="Masculino">Masculino</option>
-                                <option value="Femenino">Femenino</option>
-                                <option value="Otro">Otro</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>País *</label>
-                            <select name="responsable_pais" required>
-                                <option value="">Seleccionar país...</option>
-                                <option value="Perú">Perú</option>
-                                <option value="Argentina">Argentina</option>
-                                <option value="Bolivia">Bolivia</option>
-                                <option value="Brasil">Brasil</option>
-                                <option value="Chile">Chile</option>
-                                <option value="Colombia">Colombia</option>
-                                <option value="Ecuador">Ecuador</option>
-                                <option value="Estados Unidos">Estados Unidos</option>
-                                <option value="España">España</option>
-                                <option value="Francia">Francia</option>
-                                <option value="Alemania">Alemania</option>
-                                <option value="Otro">Otro</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Celular Personal *</label>
-                            <input type="tel" name="responsable_celular" required 
-                                   placeholder="+51 999 999 999">
-                        </div>
-                        <div class="form-group">
-                            <label>Celular de Contacto de Emergencia</label>
-                            <input type="tel" name="responsable_celular_contacto" 
-                                   placeholder="+51 999 999 999 (familiar o amigo)">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Dirección</label>
-                        <textarea name="responsable_direccion" rows="2" 
-                                  placeholder="Dirección completa (opcional)"></textarea>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>Descripción</label>
-                        <textarea name="responsable_descripcion" rows="3" 
-                                  placeholder="Información adicional, alergias, necesidades especiales, etc. (opcional)"></textarea>
-                    </div>
-                `;
-                
-                container.appendChild(formularioUnico);
-                return;
-            }
-
-            // Para múltiples personas, mostrar formulario del responsable + participantes
-            // 1. FORMULARIO DEL CLIENTE RESPONSABLE (quien hace la reserva)
-            const formularioResponsable = document.createElement('div');
-            formularioResponsable.className = 'client-form cliente-responsable';
-            formularioResponsable.innerHTML = `
+            // Encabezado general para todos los participantes
+            const headerContainer = document.createElement('div');
+            headerContainer.className = 'participantes-container';
+            headerContainer.innerHTML = `
                 <div class="form-header">
-                    <h3><i class="fas fa-user-tie"></i> Datos del Cliente Responsable</h3>
-                    <p style="color: #666; font-size: 14px; margin-bottom: 20px;">
-                        Persona que realiza la reserva y será el contacto principal
-                    </p>
-                </div>
-                
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Nombres *</label>
-                        <input type="text" name="responsable_nombre" required 
-                               placeholder="Nombres completos">
-                    </div>
-                    <div class="form-group">
-                        <label>Apellidos *</label>
-                        <input type="text" name="responsable_apellido" required 
-                               placeholder="Apellidos completos">
-                    </div>
-                </div>
-                
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Email *</label>
-                        <input type="email" name="responsable_email" required 
-                               placeholder="correo@ejemplo.com">
-                    </div>
-                    <div class="form-group">
-                        <label>Documento de Identidad *</label>
-                        <input type="text" name="responsable_documento" required 
-                               placeholder="DNI o Pasaporte" maxlength="20">
-                    </div>
-                </div>
-                
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Tipo de Documento *</label>
-                        <select name="responsable_tipo_documento" required>
-                            <option value="">Seleccionar...</option>
-                            <option value="DNI">DNI</option>
-                            <option value="Pasaporte">Pasaporte</option>
-                            <option value="CE">Carné de Extranjería</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Edad *</label>
-                        <input type="number" name="responsable_edad" required min="18" max="99"
-                               placeholder="Edad en años">
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Género *</label>
-                        <select name="responsable_genero" required>
-                            <option value="">Seleccionar...</option>
-                            <option value="Masculino">Masculino</option>
-                            <option value="Femenino">Femenino</option>
-                            <option value="Otro">Otro</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>País *</label>
-                        <select name="responsable_pais" required>
-                            <option value="">Seleccionar país...</option>
-                            <option value="Perú">Perú</option>
-                            <option value="Argentina">Argentina</option>
-                            <option value="Bolivia">Bolivia</option>
-                            <option value="Brasil">Brasil</option>
-                            <option value="Chile">Chile</option>
-                            <option value="Colombia">Colombia</option>
-                            <option value="Ecuador">Ecuador</option>
-                            <option value="Estados Unidos">Estados Unidos</option>
-                            <option value="España">España</option>
-                            <option value="Francia">Francia</option>
-                            <option value="Alemania">Alemania</option>
-                            <option value="Otro">Otro</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Celular Personal *</label>
-                        <input type="tel" name="responsable_celular" required 
-                               placeholder="+51 999 999 999">
-                    </div>
-                    <div class="form-group">
-                        <label>Celular de Contacto de Emergencia</label>
-                        <input type="tel" name="responsable_celular_contacto" 
-                               placeholder="+51 999 999 999 (familiar o amigo)">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label>Dirección</label>
-                    <textarea name="responsable_direccion" rows="2" 
-                              placeholder="Dirección completa (opcional)"></textarea>
-                </div>
-                
-                <div class="form-group">
-                    <label>Descripción</label>
-                    <textarea name="responsable_descripcion" rows="3" 
-                              placeholder="Información adicional, alergias, necesidades especiales, etc. (opcional)"></textarea>
-                </div>
-            `;
-            
-            container.appendChild(formularioResponsable);
-
-            // 2. FORMULARIOS DE LOS PARTICIPANTES
-            const participantesContainer = document.createElement('div');
-            participantesContainer.className = 'participantes-container';
-            participantesContainer.innerHTML = `
-                <div class="form-header" style="margin-top: 30px;">
                     <h3><i class="fas fa-users"></i> Datos de los Participantes</h3>
                     <p style="color: #666; font-size: 14px; margin-bottom: 20px;">
                         Información de cada persona que participará en el tour (${numeroClientes} ${numeroClientes === 1 ? 'persona' : 'personas'})
                     </p>
                 </div>
             `;
+            container.appendChild(headerContainer);
 
             for (let i = 0; i < numeroClientes; i++) {
                 const formularioParticipante = document.createElement('div');
                 formularioParticipante.className = 'client-form participante-form';
+                
+                // El primer participante es el contacto principal
+                const esContactoPrincipal = i === 0;
+                
                 formularioParticipante.innerHTML = `
-                    <h4><i class="fas fa-user"></i> Participante ${i + 1}</h4>
+                    <h4><i class="fas fa-user"></i> Participante ${i + 1}${esContactoPrincipal ? ' (Contacto Principal)' : ''}</h4>
                     
                     <div class="form-row">
                         <div class="form-group">
@@ -2036,10 +1791,11 @@
                     
                     <div class="form-row">
                         <div class="form-group">
-                            <label>Email</label>
-                            <input type="email" name="participante_email_${i}" 
-                                   placeholder="correo@ejemplo.com (opcional)">
+                            <label>Email ${esContactoPrincipal ? '*' : ''}</label>
+                            <input type="email" name="participante_email_${i}" ${esContactoPrincipal ? 'required' : ''}
+                                   placeholder="correo@ejemplo.com${esContactoPrincipal ? '' : ' (opcional)'}">
                         </div>
+                        
                         <div class="form-group">
                             <label>Documento de Identidad *</label>
                             <input type="text" name="participante_documento_${i}" required 
@@ -2059,12 +1815,21 @@
                         </div>
                         <div class="form-group">
                             <label>Edad *</label>
-                            <input type="number" name="participante_edad_${i}" required min="1" max="99"
+                            <input type="number" name="participante_edad_${i}" required min="${esContactoPrincipal ? 18 : 1}" max="99"
                                    placeholder="Edad en años">
                         </div>
                     </div>
 
                     <div class="form-row">
+                        <div class="form-group">
+                            <label>Género *</label>
+                            <select name="participante_genero_${i}" required>
+                                <option value="">Seleccionar...</option>
+                                <option value="Masculino">Masculino</option>
+                                <option value="Femenino">Femenino</option>
+                                <option value="Otro">Otro</option>
+                            </select>
+                        </div>
                         <div class="form-group">
                             <label>País *</label>
                             <select name="participante_pais_${i}" required>
@@ -2083,17 +1848,19 @@
                                 <option value="Otro">Otro</option>
                             </select>
                         </div>
-                        <div class="form-group">
-                            <label>Celular</label>
-                            <input type="tel" name="participante_celular_${i}" 
-                                   placeholder="+51 999 999 999 (opcional)">
-                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label>Celular de Contacto de Emergencia</label>
-                        <input type="tel" name="participante_celular_contacto_${i}" 
-                               placeholder="+51 999 999 999 (familiar o amigo)">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Celular ${esContactoPrincipal ? 'Personal *' : ''}</label>
+                            <input type="tel" name="participante_celular_${i}" ${esContactoPrincipal ? 'required' : ''}
+                                   placeholder="+51 999 999 999${esContactoPrincipal ? '' : ' (opcional)'}">
+                        </div>
+                        <div class="form-group">
+                            <label>Celular de Contacto de Emergencia</label>
+                            <input type="tel" name="participante_celular_contacto_${i}" 
+                                   placeholder="+51 999 999 999 (familiar o amigo)">
+                        </div>
                     </div>
 
                     <div class="form-group">
@@ -2109,76 +1876,14 @@
                     </div>
                 `;
                 
-                participantesContainer.appendChild(formularioParticipante);
+                container.appendChild(formularioParticipante);
             }
 
-            container.appendChild(participantesContainer);
-
-            // Agregar opción de copiar datos del responsable al primer participante
-            if (numeroClientes > 0) {
-                const copyOption = document.createElement('div');
-                copyOption.className = 'copy-option';
-                copyOption.innerHTML = `
-                    <div style="margin: 20px 0; padding: 15px; background: #e3f2fd; border-radius: 8px; border-left: 4px solid #2196f3;">
-                        <label style="display: flex; align-items: center; cursor: pointer;">
-                            <input type="checkbox" id="copy-responsable-data" style="margin-right: 10px;">
-                            <span><i class="fas fa-copy"></i> El responsable también participa en el tour (copiar sus datos al Participante 1)</span>
-                        </label>
-                    </div>
-                `;
-                container.appendChild(copyOption);
-
-                // Event listener para copiar datos
-                document.getElementById('copy-responsable-data').addEventListener('change', function() {
-                    if (this.checked) {
-                        copiarDatosResponsable();
-                    } else {
-                        limpiarDatosParticipante(0);
-                    }
-                });
-            }
+            // Ya no necesitamos la opción de copiar datos del responsable
+            // porque ahora solo trabajamos con participantes
         }
 
-        function copiarDatosResponsable() {
-            const nombres = document.querySelector('input[name="responsable_nombre"]').value;
-            const apellidos = document.querySelector('input[name="responsable_apellido"]').value;
-            const email = document.querySelector('input[name="responsable_email"]').value;
-            const documento = document.querySelector('input[name="responsable_documento"]').value;
-            const tipoDoc = document.querySelector('select[name="responsable_tipo_documento"]').value;
-            const edad = document.querySelector('input[name="responsable_edad"]').value;
-            const pais = document.querySelector('select[name="responsable_pais"]').value;
-            const celular = document.querySelector('input[name="responsable_celular"]').value;
-            const celularContacto = document.querySelector('input[name="responsable_celular_contacto"]').value;
-            const direccion = document.querySelector('textarea[name="responsable_direccion"]').value;
-            const descripcion = document.querySelector('textarea[name="responsable_descripcion"]').value;
-
-            // Copiar al participante 1 (índice 0)
-            document.querySelector('input[name="participante_nombre_0"]').value = nombres;
-            document.querySelector('input[name="participante_apellido_0"]').value = apellidos;
-            document.querySelector('input[name="participante_email_0"]').value = email;
-            document.querySelector('input[name="participante_documento_0"]').value = documento;
-            document.querySelector('select[name="participante_tipo_documento_0"]').value = tipoDoc;
-            document.querySelector('input[name="participante_edad_0"]').value = edad;
-            document.querySelector('select[name="participante_pais_0"]').value = pais;
-            document.querySelector('input[name="participante_celular_0"]').value = celular;
-            document.querySelector('input[name="participante_celular_contacto_0"]').value = celularContacto;
-            document.querySelector('textarea[name="participante_direccion_0"]').value = direccion;
-            document.querySelector('textarea[name="participante_descripcion_0"]').value = descripcion;
-        }
-
-        function limpiarDatosParticipante(indice) {
-            document.querySelector(`input[name="participante_nombre_${indice}"]`).value = '';
-            document.querySelector(`input[name="participante_apellido_${indice}"]`).value = '';
-            document.querySelector(`input[name="participante_email_${indice}"]`).value = '';
-            document.querySelector(`input[name="participante_documento_${indice}"]`).value = '';
-            document.querySelector(`select[name="participante_tipo_documento_${indice}"]`).value = '';
-            document.querySelector(`input[name="participante_edad_${indice}"]`).value = '';
-            document.querySelector(`select[name="participante_pais_${indice}"]`).value = '';
-            document.querySelector(`input[name="participante_celular_${indice}"]`).value = '';
-            document.querySelector(`input[name="participante_celular_contacto_${indice}"]`).value = '';
-            document.querySelector(`textarea[name="participante_direccion_${indice}"]`).value = '';
-            document.querySelector(`textarea[name="participante_descripcion_${indice}"]`).value = '';
-        }
+        // Ya no necesitamos estas funciones porque eliminamos el responsable
 
         function generarOpcionesEdad() {
             let opciones = '';
@@ -2368,6 +2073,19 @@
         function procesarPago(datos) {
             console.log('💳 PROCESANDO PAGO - Datos recibidos:', datos);
             
+            // Usar los datos del primer participante como cliente responsable
+            const clienteResponsable = {
+                nombre: document.querySelector('input[name="participante_nombre_0"]').value,
+                apellido: document.querySelector('input[name="participante_apellido_0"]').value,
+                email: document.querySelector('input[name="participante_email_0"]').value,
+                telefono: document.querySelector('input[name="participante_celular_0"]').value,
+                documento_identidad: document.querySelector('input[name="participante_documento_0"]').value,
+                tipo_documento: document.querySelector('select[name="participante_tipo_documento_0"]').value,
+                fecha_nacimiento: calcularFechaNacimiento(document.querySelector('input[name="participante_edad_0"]').value),
+                pais: document.querySelector('select[name="participante_pais_0"]').value,
+                ciudad: document.querySelector('textarea[name="participante_direccion_0"]')?.value || ''
+            };
+            
             // Adaptar datos al nuevo formato normalizado
             const datosNormalizados = {
                 tour_id: tourSeleccionado.id,
@@ -2376,17 +2094,7 @@
                 precio_total: datos.total,
                 tipo_pago: document.querySelector('input[name="tipo-pago"]:checked').value,
                 metodo_pago: datos.metodo_pago,
-                cliente_responsable: {
-                    nombre: document.querySelector('input[name="responsable_nombre"]').value,
-                    apellido: document.querySelector('input[name="responsable_apellido"]').value,
-                    email: document.querySelector('input[name="responsable_email"]').value,
-                    telefono: document.querySelector('input[name="responsable_celular"]').value,
-                    documento_identidad: document.querySelector('input[name="responsable_documento"]').value,
-                    tipo_documento: document.querySelector('select[name="responsable_tipo_documento"]').value,
-                    fecha_nacimiento: calcularFechaNacimiento(document.querySelector('input[name="responsable_edad"]').value),
-                    pais: document.querySelector('select[name="responsable_pais"]').value,
-                    ciudad: document.querySelector('textarea[name="responsable_direccion"]').value
-                },
+                cliente_responsable: clienteResponsable,
                 participantes: []
             };
 
@@ -2398,7 +2106,11 @@
                     documento_identidad: document.querySelector(`input[name="participante_documento_${i}"]`).value,
                     tipo_documento: document.querySelector(`select[name="participante_tipo_documento_${i}"]`).value,
                     fecha_nacimiento: calcularFechaNacimiento(document.querySelector(`input[name="participante_edad_${i}"]`).value),
-                    edad: parseInt(document.querySelector(`input[name="participante_edad_${i}"]`).value)
+                    edad: parseInt(document.querySelector(`input[name="participante_edad_${i}"]`).value),
+                    genero: document.querySelector(`select[name="participante_genero_${i}"]`)?.value || '',
+                    pais: document.querySelector(`select[name="participante_pais_${i}"]`).value,
+                    celular: document.querySelector(`input[name="participante_celular_${i}"]`)?.value || '',
+                    email: document.querySelector(`input[name="participante_email_${i}"]`)?.value || ''
                 });
             }
 
@@ -3151,21 +2863,21 @@
             console.log('📋 Recopilando datos de la reserva...');
             
             try {
-                // Obtener elementos del formulario con validación
-                const responsableNombre = document.querySelector('input[name="responsable_nombre"]');
-                const responsableApellido = document.querySelector('input[name="responsable_apellido"]');
-                const responsableEmail = document.querySelector('input[name="responsable_email"]');
-                const responsableCelular = document.querySelector('input[name="responsable_celular"]');
-                const responsableDocumento = document.querySelector('input[name="responsable_documento"]');
-                const responsableTipoDoc = document.querySelector('select[name="responsable_tipo_documento"]');
-                const responsableEdad = document.querySelector('input[name="responsable_edad"]');
-                const responsablePais = document.querySelector('select[name="responsable_pais"]');
-                const responsableDireccion = document.querySelector('textarea[name="responsable_direccion"]');
+                // Usar los datos del primer participante como cliente responsable
+                const nombrePrincipal = document.querySelector('input[name="participante_nombre_0"]');
+                const apellidoPrincipal = document.querySelector('input[name="participante_apellido_0"]');
+                const emailPrincipal = document.querySelector('input[name="participante_email_0"]');
+                const celularPrincipal = document.querySelector('input[name="participante_celular_0"]');
+                const documentoPrincipal = document.querySelector('input[name="participante_documento_0"]');
+                const tipoDocPrincipal = document.querySelector('select[name="participante_tipo_documento_0"]');
+                const edadPrincipal = document.querySelector('input[name="participante_edad_0"]');
+                const paisPrincipal = document.querySelector('select[name="participante_pais_0"]');
+                const direccionPrincipal = document.querySelector('textarea[name="participante_direccion_0"]');
                 const tipoPago = document.querySelector('input[name="tipo-pago"]:checked');
 
                 // Validar que existan los elementos requeridos
-                if (!responsableNombre || !responsableApellido || !responsableEmail) {
-                    throw new Error('Faltan campos requeridos del cliente responsable');
+                if (!nombrePrincipal || !apellidoPrincipal || !emailPrincipal) {
+                    throw new Error('Faltan campos requeridos del contacto principal');
                 }
 
                 const datos = {
@@ -3175,15 +2887,15 @@
                     tipo_pago: tipoPago ? tipoPago.value : 'completo',
                     metodo_pago: 'PayPal',
                     cliente_responsable: {
-                        nombre: responsableNombre.value || '',
-                        apellido: responsableApellido.value || '',
-                        email: responsableEmail.value || '',
-                        telefono: responsableCelular ? responsableCelular.value : '',
-                        documento_identidad: responsableDocumento ? responsableDocumento.value : '',
-                        tipo_documento: responsableTipoDoc ? responsableTipoDoc.value : 'DNI',
-                        edad: responsableEdad ? parseInt(responsableEdad.value) || 30 : 30,
-                        pais: responsablePais ? responsablePais.value : 'Peru',
-                        ciudad: responsableDireccion ? responsableDireccion.value : ''
+                        nombre: nombrePrincipal.value || '',
+                        apellido: apellidoPrincipal.value || '',
+                        email: emailPrincipal.value || '',
+                        telefono: celularPrincipal ? celularPrincipal.value : '',
+                        documento_identidad: documentoPrincipal ? documentoPrincipal.value : '',
+                        tipo_documento: tipoDocPrincipal ? tipoDocPrincipal.value : 'DNI',
+                        edad: edadPrincipal ? parseInt(edadPrincipal.value) || 30 : 30,
+                        pais: paisPrincipal ? paisPrincipal.value : 'Peru',
+                        ciudad: direccionPrincipal ? direccionPrincipal.value : ''
                     },
                     participantes: []
                 };

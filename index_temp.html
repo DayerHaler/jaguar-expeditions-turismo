@@ -1060,5 +1060,36 @@
             });
         });
     </script>
+        
+        function volverAExperiencias() {
+            try {
+                // Ocultar todas las secciones de experiencias
+                var sections = document.getElementsByClassName('experience-detail-section');
+                for (var i = 0; i < sections.length; i++) {
+                    sections[i].style.display = 'none';
+                }
+                
+                // Mostrar secciones originales
+                var amazonSection = document.getElementsByClassName('amazon-experiences')[0];
+                if (amazonSection) amazonSection.style.display = 'block';
+                
+                var reviewsSection = document.getElementsByClassName('tripadvisor-reviews')[0];
+                if (reviewsSection) reviewsSection.style.display = 'block';
+                
+                // Scroll de vuelta a experiencias
+                setTimeout(function() {
+                    if (amazonSection) {
+                        amazonSection.scrollIntoView({ 
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }, 100);
+            } catch (error) {
+                // Manejar errores silenciosamente
+            }
+            return false;
+        }
+    </script>
 </body>
 </html>

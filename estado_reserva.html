@@ -3,36 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Estado de Reserva - Jaguar Expeditions</title>
+    <title>Tours - Jaguar Expeditions</title>
+    <meta name="description" content="Descubre todos nuestros tours y aventuras amazónicas en Iquitos. Expediciones personalizadas con guías expertos locales.">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="responsive.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- Header -->
     <header class="header">
-        <nav class="nav">
-            <div class="container">
-                <div class="nav-brand">
-                    <img src="img/logo.jpeg" alt="Jaguar Expeditions" class="logo">
-                    <span class="brand-text">Jaguar Expeditions</span>
+        <div class="container">
+            <div class="header-content">
+                <!-- Logo y nombre -->
+                <div class="logo-section">
+                    <img src="img/logo.jpeg" alt="Jaguar Expeditions Logo" class="logo">
+                    <div class="company-info">
+                        <h1 class="company-name">Jaguar Expeditions</h1>
+                        <p class="slogan">Más que un tour, una aventura salvaje.</p>
+                    </div>
                 </div>
-                <ul class="nav-menu">
-                    <li><a href="index.html">Inicio</a></li>
-                    <li><a href="tours.html">Tours</a></li>
-                    <li><a href="#galeria">Galería</a></li>
-                    <li><a href="#nosotros">Nosotros</a></li>
-                    <li><a href="#contacto">Contacto</a></li>
-                    <li><a href="estado_reserva.html" class="active">Estado Reserva</a></li>
-                </ul>
-                <div class="hamburger">
-                    <span></span>
-                    <span></span>
-                    <span></span>
+                
+                <!-- Información de contacto -->
+                <div class="contact-info">
+                    <div class="phone">
+                        <i class="fas fa-phone"></i>
+                        <span>+51 999 123 456</span>
+                    </div>
+                    
+                    <!-- Redes sociales -->
+                    <div class="social-media">
+                        <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-tripadvisor"></i></a>
+                    </div>
+                    
+                    <!-- Selector de idioma -->
+                    <div class="language-selector">
+                        <select id="language">
+                            <option value="es">ES</option>
+                            <option value="en">EN</option>
+                            <option value="pt">PT</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Buscador -->
+                    <div class="search-box">
+                        <input type="text" placeholder="Buscar tours...">
+                        <button><i class="fas fa-search"></i></button>
+                    </div>
+                    
+                    <!-- Carrito -->
+                    <div class="cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </div>
                 </div>
             </div>
-        </nav>
+        </div>
     </header>
+
+    <!-- Navegación -->
+    <nav class="navbar">
+        <div class="container">
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Inicio</a></li>
+                <li><a href="tours.html" class="nav-link">Tours</a></li>
+                <li><a href="contacto.html" class="nav-link">Contacto</a></li>
+                <li><a href="preguntas.html" class="nav-link">Preguntas</a></li>
+                <li><a href="galeria.html" class="nav-link">Galería</a></li>
+                <li><a href="nosotros.html" class="nav-link">Nosotros</a></li>
+            </ul>
+            
+            <!-- Menú hamburguesa para móviles -->
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
 
     <!-- Contenido principal -->
     <main class="estado-reserva-container">
