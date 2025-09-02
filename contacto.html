@@ -20,8 +20,8 @@
                 <div class="logo-section">
                     <img src="img/logo.jpeg" alt="Jaguar Expeditions Logo" class="logo">
                     <div class="company-info">
-                        <h1 class="company-name">Jaguar Expeditions</h1>
-                        <p class="slogan">Más que un tour, una aventura salvaje.</p>
+                        <h1 class="company-name" data-i18n="site_title">Jaguar Expeditions</h1>
+                        <p class="slogan" data-i18n="site_slogan">Más que un tour, una aventura salvaje.</p>
                     </div>
                 </div>
                 
@@ -42,11 +42,11 @@
                     
                     <!-- Selector de idioma -->
                     <div class="language-selector">
-                        <select id="language">
-                            <option value="es">ES</option>
-                            <option value="en">EN</option>
-                            <option value="pt">PT</option>
-                        </select>
+                        <div class="flag-selector">
+                            <img src="img/espana.png" alt="Español" data-lang="es" class="flag-option active">
+                            <img src="img/reino-unido.png" alt="English" data-lang="en" class="flag-option">
+                            <img src="img/alemania.png" alt="Deutsch" data-lang="de" class="flag-option">
+                        </div>
                     </div>
                     
                     <!-- Buscador -->
@@ -69,12 +69,12 @@
     <nav class="navbar">
         <div class="container">
             <ul class="nav-menu">
-                <li><a href="index.html" class="nav-link">Inicio</a></li>
-                <li><a href="tours.html" class="nav-link">Tours</a></li>
-                <li><a href="contacto.html" class="nav-link active">Contacto</a></li>
-                <li><a href="preguntas.html" class="nav-link">Preguntas</a></li>
-                <li><a href="galeria.html" class="nav-link">Galería</a></li>
-                <li><a href="nosotros.html" class="nav-link">Nosotros</a></li>
+                <li><a href="index.html" class="nav-link" data-i18n="nav_inicio">Inicio</a></li>
+                <li><a href="tours.html" class="nav-link" data-i18n="nav_tours">Tours</a></li>
+                <li><a href="contacto.html" class="nav-link active" data-i18n="nav_contacto">Contacto</a></li>
+                <li><a href="preguntas.html" class="nav-link" data-i18n="nav_preguntas">Preguntas</a></li>
+                <li><a href="galeria.html" class="nav-link" data-i18n="nav_galeria">Galería</a></li>
+                <li><a href="nosotros.html" class="nav-link" data-i18n="nav_nosotros">Nosotros</a></li>
             </ul>
             
             <!-- Menú hamburguesa para móviles -->
@@ -95,8 +95,8 @@
                 <div class="hero-overlay"></div>
             </div>
             <div class="hero-content">
-                <h1>Contacta con Nosotros</h1>
-                <p>Estamos aquí para hacer realidad tu aventura amazónica</p>
+                <h1 data-i18n="contacto_hero_titulo">Contacta con Nosotros</h1>
+                <p data-i18n="contacto_hero_subtitulo">Estamos aquí para hacer realidad tu aventura amazónica</p>
             </div>
         </section>
 
@@ -106,14 +106,14 @@
                 <div class="contact-grid">
                     <!-- Información de contacto -->
                     <div class="contact-info-section">
-                        <h2>Información de Contacto</h2>
+                        <h2 data-i18n="contacto_info_titulo">Información de Contacto</h2>
                         <div class="contact-cards">
                             <div class="contact-card">
                                 <div class="contact-icon">
                                     <i class="fas fa-map-marker-alt"></i>
                                 </div>
                                 <div class="contact-details">
-                                    <h3>Ubicación</h3>
+                                    <h3 data-i18n="contacto_ubicacion">Ubicación</h3>
                                     <p>Jr. Putumayo 184, Iquitos 16001<br>Loreto, Perú</p>
                                 </div>
                             </div>
@@ -123,8 +123,8 @@
                                     <i class="fas fa-phone"></i>
                                 </div>
                                 <div class="contact-details">
-                                    <h3>Teléfono</h3>
-                                    <p>+51 999 123 456<br>Disponible 24/7</p>
+                                    <h3 data-i18n="contacto_telefono">Teléfono</h3>
+                                    <p>+51 999 123 456<br><span data-i18n="contacto_disponible">Disponible 24/7</span></p>
                                 </div>
                             </div>
 
@@ -133,7 +133,7 @@
                                     <i class="fas fa-envelope"></i>
                                 </div>
                                 <div class="contact-details">
-                                    <h3>Email</h3>
+                                    <h3 data-i18n="contacto_email">Email</h3>
                                     <p>info@jaguarexpeditions.com<br>reservas@jaguarexpeditions.com</p>
                                 </div>
                             </div>
@@ -143,8 +143,8 @@
                                     <i class="fas fa-clock"></i>
                                 </div>
                                 <div class="contact-details">
-                                    <h3>Horarios</h3>
-                                    <p>Lunes a Domingo<br>8:00 AM - 7:00 PM</p>
+                                    <h3 data-i18n="contacto_horarios">Horarios</h3>
+                                    <p><span data-i18n="contacto_dias">Lunes a Domingo</span><br>8:00 AM - 7:00 PM</p>
                                 </div>
                             </div>
                         </div>
@@ -153,43 +153,43 @@
                         <div class="contact-buttons">
                             <a href="tel:+51999123456" class="btn-contact primary">
                                 <i class="fas fa-phone"></i>
-                                Llamar Ahora
+                                <span data-i18n="btn_llamar">Llamar Ahora</span>
                             </a>
                             <a href="https://wa.me/51999123456" target="_blank" class="btn-contact whatsapp">
                                 <i class="fab fa-whatsapp"></i>
-                                WhatsApp
+                                <span data-i18n="btn_whatsapp">WhatsApp</span>
                             </a>
                             <a href="mailto:info@jaguarexpeditions.com" class="btn-contact email">
                                 <i class="fas fa-envelope"></i>
-                                Enviar Email
+                                <span data-i18n="btn_email">Enviar Email</span>
                             </a>
                         </div>
                     </div>
 
                     <!-- Formulario de contacto -->
                     <div class="contact-form-section">
-                        <h2>Envíanos un Mensaje</h2>
+                        <h2 data-i18n="contacto_form_titulo">Envíanos un Mensaje</h2>
                         <form class="contact-form" id="contactForm">
                             <div class="form-row">
                                 <div class="form-group">
-                                    <label for="nombre">Nombre Completo *</label>
+                                    <label for="nombre" data-i18n="form_nombre">Nombre Completo *</label>
                                     <input type="text" id="nombre" name="nombre" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="email">Email *</label>
+                                    <label for="email" data-i18n="form_email">Email *</label>
                                     <input type="email" id="email" name="email" required>
                                 </div>
                             </div>
 
                             <div class="form-row">
                                 <div class="form-group">
-                                    <label for="telefono">Teléfono</label>
+                                    <label for="telefono" data-i18n="form_telefono">Teléfono</label>
                                     <input type="tel" id="telefono" name="telefono">
                                 </div>
                                 <div class="form-group">
-                                    <label for="pais">País de Origen</label>
+                                    <label for="pais" data-i18n="form_pais">País de Origen</label>
                                     <select id="pais" name="pais">
-                                        <option value="">Seleccionar país</option>
+                                        <option value="" data-i18n="form_seleccionar_pais">Seleccionar país</option>
                                         <option value="PE">Perú</option>
                                         <option value="AR">Argentina</option>
                                         <option value="BR">Brasil</option>
@@ -212,26 +212,26 @@
 
                             <div class="form-row">
                                 <div class="form-group">
-                                    <label for="fechaViaje">Fecha Preferida de Viaje</label>
+                                    <label for="fechaViaje" data-i18n="form_fecha_viaje">Fecha Preferida de Viaje</label>
                                     <input type="date" id="fechaViaje" name="fechaViaje">
                                 </div>
                                 <div class="form-group">
-                                    <label for="personas">Número de Personas</label>
+                                    <label for="personas" data-i18n="form_personas">Número de Personas</label>
                                     <select id="personas" name="personas">
-                                        <option value="1">1 persona</option>
-                                        <option value="2">2 personas</option>
-                                        <option value="3">3 personas</option>
-                                        <option value="4">4 personas</option>
-                                        <option value="5">5 personas</option>
-                                        <option value="6+">6+ personas</option>
+                                        <option value="1" data-i18n="form_1_persona">1 persona</option>
+                                        <option value="2" data-i18n="form_2_personas">2 personas</option>
+                                        <option value="3" data-i18n="form_3_personas">3 personas</option>
+                                        <option value="4" data-i18n="form_4_personas">4 personas</option>
+                                        <option value="5" data-i18n="form_5_personas">5 personas</option>
+                                        <option value="6+" data-i18n="form_6_personas">6+ personas</option>
                                     </select>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="tourInteres">Tour de Interés</label>
+                                <label for="tourInteres" data-i18n="form_tour_interes">Tour de Interés</label>
                                 <select id="tourInteres" name="tourInteres">
-                                    <option value="">Seleccionar tour</option>
+                                    <option value="" data-i18n="form_seleccionar_tour">Seleccionar tour</option>
                                     <option value="rio-amazonas">Expedición Río Amazonas</option>
                                     <option value="safari-nocturno">Safari Nocturno</option>
                                     <option value="comunidades-nativas">Comunidades Nativas</option>
@@ -242,23 +242,28 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="mensaje">Mensaje *</label>
-                                <textarea id="mensaje" name="mensaje" rows="5" placeholder="Cuéntanos sobre tu aventura ideal en la Amazonía..." required></textarea>
+                                <label for="mensaje" data-i18n="form_mensaje">Mensaje *</label>
+                                <textarea id="mensaje" name="mensaje" rows="5" data-i18n-placeholder="form_mensaje_placeholder" placeholder="Cuéntanos sobre tu aventura ideal en la Amazonía..." required></textarea>
                             </div>
 
                             <div class="form-group checkbox-group">
                                 <input type="checkbox" id="newsletter" name="newsletter">
-                                <label for="newsletter">Quiero recibir ofertas especiales y noticias por email</label>
+                                <label for="newsletter" data-i18n="form_newsletter">Quiero recibir ofertas especiales y noticias por email</label>
                             </div>
 
                             <div class="form-group checkbox-group">
                                 <input type="checkbox" id="terminos" name="terminos" required>
-                                <label for="terminos">Acepto los <a href="#" class="terms-link">términos y condiciones</a> y la <a href="#" class="privacy-link">política de privacidad</a> *</label>
+                                <label for="terminos">
+                                    <span data-i18n="form_acepto_los">Acepto los</span> 
+                                    <a href="#" class="terms-link" data-i18n="form_terminos_link">términos y condiciones</a> 
+                                    <span data-i18n="form_y_la">y la</span> 
+                                    <a href="#" class="privacy-link" data-i18n="form_privacidad_link">política de privacidad</a> *
+                                </label>
                             </div>
 
                             <button type="submit" class="btn-submit">
                                 <i class="fas fa-paper-plane"></i>
-                                Enviar Mensaje
+                                <span data-i18n="form_enviar">Enviar Mensaje</span>
                             </button>
                         </form>
                     </div>
@@ -269,7 +274,7 @@
         <!-- Mapa -->
         <section class="contact-map">
             <div class="container">
-                <h2>Encuéntranos</h2>
+                <h2 data-i18n="mapa_titulo">Encuéntranos</h2>
                 <div class="map-container">
                     <iframe 
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3969.4756339282814!2d-73.25093708469!3d-3.7436994972404!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91ea00fc4c7a6c9b%3A0x4c9f8a8a8a8a8a8a!2sIquitos%2C%20Peru!5e0!3m2!1sen!2sus!4v1692181234567!5m2!1sen!2sus"
@@ -284,7 +289,7 @@
                     <div class="map-overlay">
                         <a href="https://maps.app.goo.gl/Koz8zbmThWb59ikH9" target="_blank" class="map-button">
                             <i class="fas fa-external-link-alt"></i>
-                            Abrir en Google Maps
+                            <span data-i18n="mapa_abrir">Abrir en Google Maps</span>
                         </a>
                     </div>
                 </div>
@@ -294,14 +299,14 @@
         <!-- Métodos de Contacto Alternativos -->
         <section class="alternative-contact">
             <div class="container">
-                <h2>Otras Formas de Contactarnos</h2>
+                <h2 data-i18n="contacto_alternativo_titulo">Otras Formas de Contactarnos</h2>
                 <div class="contact-methods">
                     <div class="method-card">
                         <div class="method-icon">
                             <i class="fab fa-whatsapp"></i>
                         </div>
-                        <h3>WhatsApp Business</h3>
-                        <p>Respuesta inmediata para consultas rápidas</p>
+                        <h3 data-i18n="whatsapp_titulo">WhatsApp Business</h3>
+                        <p data-i18n="whatsapp_descripcion">Respuesta inmediata para consultas rápidas</p>
                         <a href="https://wa.me/51999123456" target="_blank" class="method-link">+51 999 123 456</a>
                     </div>
 
@@ -309,8 +314,8 @@
                         <div class="method-icon">
                             <i class="fab fa-facebook-messenger"></i>
                         </div>
-                        <h3>Facebook Messenger</h3>
-                        <p>Chatea con nosotros en Facebook</p>
+                        <h3 data-i18n="messenger_titulo">Facebook Messenger</h3>
+                        <p data-i18n="messenger_descripcion">Chatea con nosotros en Facebook</p>
                         <a href="#" target="_blank" class="method-link">@JaguarExpeditions</a>
                     </div>
 
@@ -318,8 +323,8 @@
                         <div class="method-icon">
                             <i class="fab fa-skype"></i>
                         </div>
-                        <h3>Videollamada</h3>
-                        <p>Consulta personalizada por Skype</p>
+                        <h3 data-i18n="skype_titulo">Videollamada</h3>
+                        <p data-i18n="skype_descripcion">Consulta personalizada por Skype</p>
                         <a href="#" class="method-link">jaguar.expeditions</a>
                     </div>
 
@@ -327,9 +332,9 @@
                         <div class="method-icon">
                             <i class="fas fa-headset"></i>
                         </div>
-                        <h3>Chat en Vivo</h3>
-                        <p>Asistencia en tiempo real</p>
-                        <button class="method-link" onclick="openLiveChat()">Iniciar Chat</button>
+                        <h3 data-i18n="chat_titulo">Chat en Vivo</h3>
+                        <p data-i18n="chat_descripcion">Asistencia en tiempo real</p>
+                        <button class="method-link" onclick="openLiveChat()" data-i18n="chat_iniciar">Iniciar Chat</button>
                     </div>
                 </div>
             </div>
@@ -341,19 +346,19 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h3>Jaguar Expeditions</h3>
-                    <p>Tu puerta de entrada a la aventura amazónica más auténtica</p>
+                    <h3 data-i18n="site_title">Jaguar Expeditions</h3>
+                    <p data-i18n="site_description">Tu puerta de entrada a la aventura amazónica más auténtica</p>
                 </div>
                 
                 <div class="footer-section">
-                    <h4>Contacto</h4>
+                    <h4 data-i18n="contacto_titulo">Contacto</h4>
                     <p><i class="fas fa-map-marker-alt"></i> Iquitos, Perú</p>
                     <p><i class="fas fa-phone"></i> +51 999 123 456</p>
                     <p><i class="fas fa-envelope"></i> info@jaguarexpeditions.com</p>
                 </div>
                 
                 <div class="footer-section">
-                    <h4>Síguenos</h4>
+                    <h4 data-i18n="footer_siguenos">Síguenos</h4>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-facebook"></i></a>
                         <a href="#"><i class="fab fa-instagram"></i></a>
@@ -365,15 +370,15 @@
             
             <div class="footer-bottom">
                 <div class="footer-bottom-content">
-                    <p>&copy; 2025 Jaguar Expeditions. Todos los derechos reservados.</p>
+                    <p data-i18n="footer_copyright">&copy; 2025 Jaguar Expeditions. Todos los derechos reservados.</p>
                     <div class="footer-links">
                         <a href="#" class="terms-link">
                             <i class="fas fa-file-contract"></i>
-                            Términos y Condiciones
+                            <span data-i18n="footer_terminos">Términos y Condiciones</span>
                         </a>
                         <a href="#" class="privacy-link">
                             <i class="fas fa-shield-alt"></i>
-                            Política de Privacidad
+                            <span data-i18n="footer_privacidad">Política de Privacidad</span>
                         </a>
                     </div>
                 </div>
@@ -405,8 +410,9 @@
                         const selector = $('#tourInteres');
                         const opcionesActuales = selector.html();
                         
-                        // Limpiar y agregar opción por defecto
-                        selector.html('<option value="">Seleccionar tour</option>');
+                        // Limpiar y agregar opción por defecto con traducción
+                        const defaultText = window.jaguarI18n ? window.jaguarI18n.getTranslation('form_seleccionar_tour') : 'Seleccionar tour';
+                        selector.html(`<option value="" data-i18n="form_seleccionar_tour">${defaultText}</option>`);
                         
                         // Agregar tours desde la base de datos
                         response.data.forEach(tour => {
@@ -612,5 +618,8 @@
             <span class="whatsapp-text">¡Escríbenos!</span>
         </a>
     </div>
+
+    <!-- Sistema de traducción -->
+    <script src="js/i18n.js"></script>
 </body>
 </html>

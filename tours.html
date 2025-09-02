@@ -21,8 +21,8 @@
                 <div class="logo-section">
                     <img src="img/logo.jpeg" alt="Jaguar Expeditions Logo" class="logo">
                     <div class="company-info">
-                        <h1 class="company-name">Jaguar Expeditions</h1>
-                        <p class="slogan">Más que un tour, una aventura salvaje.</p>
+                        <h1 class="company-name" data-i18n="site_title">Jaguar Expeditions</h1>
+                        <p class="slogan" data-i18n="site_slogan">Más que un tour, una aventura salvaje.</p>
                     </div>
                 </div>
                 
@@ -43,16 +43,16 @@
                     
                     <!-- Selector de idioma -->
                     <div class="language-selector">
-                        <select id="language">
-                            <option value="es">ES</option>
-                            <option value="en">EN</option>
-                            <option value="pt">PT</option>
-                        </select>
+                        <div class="flag-selector">
+                            <img src="img/espana.png" alt="Español" data-lang="es" class="flag-option active">
+                            <img src="img/reino-unido.png" alt="English" data-lang="en" class="flag-option">
+                            <img src="img/alemania.png" alt="Deutsch" data-lang="de" class="flag-option">
+                        </div>
                     </div>
                     
                     <!-- Buscador -->
                     <div class="search-box">
-                        <input type="text" placeholder="Buscar tours...">
+                        <input type="text" data-i18n-placeholder="placeholder_buscar_tours" placeholder="Buscar tours...">
                         <button><i class="fas fa-search"></i></button>
                     </div>
                     
@@ -70,12 +70,12 @@
     <nav class="navbar">
         <div class="container">
             <ul class="nav-menu">
-                <li><a href="index.html" class="nav-link">Inicio</a></li>
-                <li><a href="tours.html" class="nav-link active">Tours</a></li>
-                <li><a href="contacto.html" class="nav-link">Contacto</a></li>
-                <li><a href="preguntas.html" class="nav-link">Preguntas</a></li>
-                <li><a href="galeria.html" class="nav-link">Galería</a></li>
-                <li><a href="nosotros.html" class="nav-link">Nosotros</a></li>
+                <li><a href="index.html" class="nav-link" data-i18n="nav_inicio">Inicio</a></li>
+                <li><a href="tours.html" class="nav-link active" data-i18n="nav_tours">Tours</a></li>
+                <li><a href="contacto.html" class="nav-link" data-i18n="nav_contacto">Contacto</a></li>
+                <li><a href="preguntas.html" class="nav-link" data-i18n="nav_preguntas">Preguntas</a></li>
+                <li><a href="galeria.html" class="nav-link" data-i18n="nav_galeria">Galería</a></li>
+                <li><a href="nosotros.html" class="nav-link" data-i18n="nav_nosotros">Nosotros</a></li>
             </ul>
             
             <!-- Menú hamburguesa para móviles -->
@@ -127,17 +127,17 @@
         <section id="tours" class="all-tours-section">
             <div class="container">
                 <div class="section-header">
-                    <h2>Explora Nuestras Aventuras</h2>
-                    <p>Desde expediciones de un día hasta aventuras de una semana, tenemos la experiencia perfecta para ti</p>
+                    <h2 data-i18n="tours_titulo">Explora Nuestras Aventuras</h2>
+                    <p data-i18n="tours_subtitulo">Desde expediciones de un día hasta aventuras de una semana, tenemos la experiencia perfecta para ti</p>
                 </div>
                 
                 <!-- Filtros de Tours -->
                 <div class="tour-filters">
-                    <button class="filter-btn active" data-filter="all">Todos los Tours</button>
-                    <button class="filter-btn" data-filter="adventure">Aventura</button>
-                    <button class="filter-btn" data-filter="cultural">Cultural</button>
-                    <button class="filter-btn" data-filter="wildlife">Vida Silvestre</button>
-                    <button class="filter-btn" data-filter="gastronomic">Gastronómico</button>
+                    <button class="filter-btn active" data-filter="all" data-i18n="tours_filtro_todos">Todos los Tours</button>
+                    <button class="filter-btn" data-filter="adventure" data-i18n="tours_filtro_aventura">Aventura</button>
+                    <button class="filter-btn" data-filter="cultural" data-i18n="tours_filtro_cultural">Cultural</button>
+                    <button class="filter-btn" data-filter="wildlife" data-i18n="tours_filtro_vida_silvestre">Vida Silvestre</button>
+                    <button class="filter-btn" data-filter="gastronomic" data-i18n="tours_filtro_gastronomico">Gastronómico</button>
                 </div>
                 
                 <!-- Grid de Tours 3x5 -->
@@ -628,9 +628,9 @@
                 <div class="load-more-section">
                     <button class="btn-load-more">
                         <i class="fas fa-plus"></i>
-                        Ver Más Tours
+                        <span data-i18n="btn_cargar_mas">Ver Más Tours</span>
                     </button>
-                    <p class="tours-info">Mostrando 15 de 25+ tours disponibles</p>
+                    <p class="tours-info" data-i18n="mostrar_tours" data-i18n-vars='{"count":"15"}'>Mostrando 15 de 25+ tours disponibles</p>
                 </div>
             </div>
         </section>
@@ -643,24 +643,24 @@
                         <div class="info-icon">
                             <i class="fas fa-shield-alt"></i>
                         </div>
-                        <h3>Seguridad Garantizada</h3>
-                        <p>Todos nuestros tours cuentan con guías certificados y equipos de seguridad de primera calidad</p>
+                        <h3 data-i18n="info_seguridad">Seguridad Garantizada</h3>
+                        <p data-i18n="info_seguridad_desc">Todos nuestros tours cuentan con guías certificados y equipos de seguridad de primera calidad</p>
                     </div>
                     
                     <div class="info-card-tour">
                         <div class="info-icon">
                             <i class="fas fa-calendar-check"></i>
                         </div>
-                        <h3>Reserva Flexible</h3>
-                        <p>Cancela o reprograma tu tour hasta 24 horas antes sin costo adicional</p>
+                        <h3 data-i18n="info_reserva">Reserva Flexible</h3>
+                        <p data-i18n="info_reserva_desc">Cancela o reprograma tu tour hasta 24 horas antes sin costo adicional</p>
                     </div>
                     
                     <div class="info-card-tour">
                         <div class="info-icon">
                             <i class="fas fa-headset"></i>
                         </div>
-                        <h3>Soporte 24/7</h3>
-                        <p>Nuestro equipo está disponible las 24 horas para ayudarte en cualquier momento</p>
+                        <h3 data-i18n="info_soporte">Soporte 24/7</h3>
+                        <p data-i18n="info_soporte_desc">Nuestro equipo está disponible las 24 horas para ayudarte en cualquier momento</p>
                     </div>
                 </div>
             </div>
@@ -672,19 +672,19 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h3>Jaguar Expeditions</h3>
-                    <p>Tu puerta de entrada a la aventura amazónica más auténtica</p>
+                    <h3 data-i18n="site_title">Jaguar Expeditions</h3>
+                    <p data-i18n="site_description">Tu puerta de entrada a la aventura amazónica más auténtica</p>
                 </div>
                 
                 <div class="footer-section">
-                    <h4>Contacto</h4>
+                    <h4 data-i18n="contacto_titulo">Contacto</h4>
                     <p><i class="fas fa-map-marker-alt"></i> Iquitos, Perú</p>
                     <p><i class="fas fa-phone"></i> +51 999 123 456</p>
                     <p><i class="fas fa-envelope"></i> info@jaguarexpeditions.com</p>
                 </div>
                 
                 <div class="footer-section">
-                    <h4>Síguenos</h4>
+                    <h4 data-i18n="footer_siguenos">Síguenos</h4>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-facebook"></i></a>
                         <a href="#"><i class="fab fa-instagram"></i></a>
@@ -696,15 +696,15 @@
             
             <div class="footer-bottom">
                 <div class="footer-bottom-content">
-                    <p>&copy; 2025 Jaguar Expeditions. Todos los derechos reservados.</p>
+                    <p data-i18n="footer_copyright">&copy; 2025 Jaguar Expeditions. Todos los derechos reservados.</p>
                     <div class="footer-links">
                         <a href="#" id="termsLink" class="terms-link">
                             <i class="fas fa-file-contract"></i>
-                            Términos y Condiciones
+                            <span data-i18n="footer_terminos">Términos y Condiciones</span>
                         </a>
                         <a href="#" class="privacy-link">
                             <i class="fas fa-shield-alt"></i>
-                            Política de Privacidad
+                            <span data-i18n="footer_privacidad">Política de Privacidad</span>
                         </a>
                     </div>
                 </div>
@@ -2117,12 +2117,14 @@
                         <h3>${tourNombreSafe}</h3>
                         <p>${tour.descripcion_corta}</p>
                         <div class="tour-features">
-                            <span><i class="fas fa-users"></i> Máx ${tour.max_personas} personas</span>
+                            <span data-i18n="max_personas" data-i18n-vars='{"count":"${tour.max_personas}"}'>
+                                <i class="fas fa-users"></i> Máx ${tour.max_personas} personas
+                            </span>
                         </div>
                         <div class="tour-pricing">${precio}</div>
                         <div class="tour-buttons">
-                            <button class="btn-details" data-tour="${tour.id}">Ver Detalles</button>
-                            <button class="btn-book-tour" data-tour-id="${tour.id}" data-tour-nombre="${tourNombreSafe}">Reservar Ahora</button>
+                            <button class="btn-details" data-tour="${tour.id}" data-i18n="btn_ver_detalles">Ver Detalles</button>
+                            <button class="btn-book-tour" data-tour-id="${tour.id}" data-tour-nombre="${tourNombreSafe}" data-i18n="btn_reservar">Reservar Ahora</button>
                         </div>
                     </div>
                 </div>
@@ -2161,143 +2163,12 @@
             }
         });
     </script>
-    
 
-
-        // Función para tours destacados (si necesitas marcar algunos como destacados)
-        function marcarToursDestacados() {
-            // Tours destacados (puedes cambiar estos índices)
-            const toursDestacados = [0, 1, 3]; // Río Amazonas, Safari Nocturno, Aventura Extrema
-            
-            toursDestacados.forEach(index => {
-                $(`.tour-card:eq(${index})`).addClass('featured');
-                $(`.tour-card:eq(${index}) .btn-book-tour`).addClass('btn-destacado');
-            });
-        }
-
-        // Llamar función al cargar la página
-        $(document).ready(function() {
-            marcarToursDestacados();
-        });
-
-        // Filtro de tours por categoría
-        $(document).ready(function() {
-            $('.filter-btn').on('click', function() {
-                var filter = $(this).data('filter');
-                // Botón activo
-                $('.filter-btn').removeClass('active');
-                $(this).addClass('active');
-                // Mostrar/Ocultar tours
-                if (filter === 'all') {
-                    $('.tour-item').show();
-                } else {
-                    $('.tour-item').each(function() {
-                        if ($(this).data('category') === filter) {
-                            $(this).show();
-                        } else {
-                            $(this).hide();
-                        }
-                    });
-                }
-            });
-        });
-    </script>
-
-    <style>
-        /* Estilos adicionales para botones de reserva mejorados */
-        .btn-book-tour {
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-book-tour:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.5s;
-        }
-
-        .btn-book-tour:hover:before {
-            left: 100%;
-        }
-
-        .btn-book-tour:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(255, 193, 7, 0.4);
-        }
-
-        .btn-destacado {
-            background: linear-gradient(45deg, #ffc107, #ff9800);
-            animation: pulso 2s infinite;
-        }
-
-        @keyframes pulso {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
-        .tour-card.featured {
-            border: 2px solid #ffc107;
-            box-shadow: 0 10px 30px rgba(255, 193, 7, 0.2);
-        }
-
-        .tour-card.featured .tour-title {
-            color: #ffc107;
-        }
-
-        .tour-card.featured:before {
-            content: '★ DESTACADO';
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: #ffc107;
-            color: white;
-            padding: 5px 10px;
-            border-radius: 15px;
-            font-size: 12px;
-            font-weight: bold;
-            z-index: 2;
-        }
-
-        /* Animación para elementos que entran en viewport */
-        .tour-card {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease;
-        }
-
-        .tour-card.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    </style>
-
-    <script>
-        // Animación de scroll para tour cards
-        $(window).on('scroll', function() {
-            $('.tour-card').each(function() {
-                const elementTop = $(this).offset().top;
-                const elementBottom = elementTop + $(this).outerHeight();
-                const viewportTop = $(window).scrollTop();
-                const viewportBottom = viewportTop + $(window).height();
-
-                if (elementBottom > viewportTop && elementTop < viewportBottom) {
-                    $(this).addClass('visible');
-                }
-            });
-        });
-
-        // Trigger inicial para elementos ya visibles
-        $(document).ready(function() {
-            $(window).trigger('scroll');
-        });
-    </script>
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script src="js/i18n.js"></script>
+    <script src="script.js"></script>
 
     <!-- Botón flotante de WhatsApp -->
     <div class="whatsapp-float">

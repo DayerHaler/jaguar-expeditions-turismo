@@ -6,11 +6,18 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <title>Reservar Tour - Jaguar Expeditions</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <title data-i18n="reserva_titulo">Reservar Tour - Jaguar Expeditions</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="responsive.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css?v=<?php echo time(); ?>">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Librerías JavaScript necesarias -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
     <!-- PayPal SDK - CONFIGURADO PARA PRODUCCIÓN -->
     <script>
         // ⚠️ CLIENT ID DE PRODUCCIÓN REAL
@@ -39,892 +46,109 @@
             console.log('⚠️ ATENCIÓN: Los pagos serán REALES');
         }
     </script>
-    
-    <style>
-        /* Estilos para el header */
-        .header {
-            background: linear-gradient(135deg, #2d5016, #4a7c59);
-            padding: 15px 0;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-        }
-
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .logo-section {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .logo {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid #ffd700;
-        }
-
-        .company-info h1 {
-            color: white;
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 5px;
-        }
-
-        .slogan {
-            color: #ffd700;
-            font-size: 0.9rem;
-            font-style: italic;
-            font-weight: 300;
-        }
-
-        .contact-info {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        .phone {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: white;
-            font-weight: 500;
-        }
-
-        .phone i {
-            color: #ffd700;
-        }
-
-        .social-media {
-            display: flex;
-            gap: 10px;
-        }
-
-        .social-media a {
-            color: white;
-            font-size: 1.2rem;
-            transition: color 0.3s ease;
-        }
-
-        .social-media a:hover {
-            color: #ffd700;
-        }
-
-        /* Navegación */
-        .navbar {
-            background: #2d5016;
-            padding: 0;
-            position: sticky;
-            top: 80px;
-            z-index: 999;
-        }
-
-        .navbar-nav {
-            display: flex;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .navbar-nav .nav-item {
-            margin: 0;
-        }
-
-        .navbar-nav .nav-link {
-            display: block;
-            padding: 15px 20px;
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            border-bottom: 3px solid transparent;
-        }
-
-        .navbar-nav .nav-link:hover,
-        .navbar-nav .nav-link.active {
-            background: #4a7c59;
-            border-bottom-color: #ffd700;
-            color: #ffd700;
-        }
-
-        body {
-            padding-top: 140px;
-        }
-
-        .reservation-container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 20px;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            margin-top: 20px;
-        }
-
-        .step-indicator {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 30px;
-            position: relative;
-        }
-
-        .step {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            flex: 1;
-            position: relative;
-        }
-
-        .step-number {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: #e0e0e0;
-            color: #666;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            margin-bottom: 8px;
-            transition: all 0.3s ease;
-        }
-
-        .step.active .step-number {
-            background: #2c5530;
-            color: white;
-        }
-
-        .step.completed .step-number {
-            background: #28a745;
-            color: white;
-        }
-
-        .step-title {
-            font-size: 12px;
-            text-align: center;
-            color: #666;
-            font-weight: 500;
-        }
-
-        .step.active .step-title {
-            color: #2c5530;
-            font-weight: bold;
-        }
-
-        .step-content {
-            display: none;
-            animation: fadeIn 0.5s ease-in-out;
-        }
-
-        .step-content.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            color: #333;
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 14px;
-            transition: border-color 0.3s ease;
-            box-sizing: border-box;
-        }
-
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #2c5530;
-        }
-
-        .navigation-buttons {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 30px;
-            gap: 15px;
-        }
-
-        .btn {
-            padding: 12px 30px;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            text-decoration: none;
-            min-height: 45px;
-            box-sizing: border-box;
-        }
-
-        .btn-anterior {
-            background: #6c757d;
-            color: white;
-            border: 2px solid #6c757d;
-        }
-
-        .btn-anterior:hover {
-            background: #5a6268;
-            border-color: #5a6268;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(108, 117, 125, 0.3);
-        }
-
-        .btn-siguiente {
-            background: #2c5530;
-            color: white;
-            border: 2px solid #2c5530;
-            margin-left: auto;
-        }
-
-        .btn-siguiente:hover {
-            background: #1e3a21;
-            border-color: #1e3a21;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(44, 85, 48, 0.3);
-        }
-
-        .btn:disabled {
-            background: #e0e0e0;
-            color: #999;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-            border-color: #e0e0e0;
-        }
-
-        .btn:disabled:hover {
-            background: #e0e0e0;
-            border-color: #e0e0e0;
-            transform: none;
-            box-shadow: none;
-        }
-
-        .tour-info {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-        }
-
-        .tour-title {
-            font-size: 24px;
-            font-weight: bold;
-            color: #2c5530;
-            margin-bottom: 10px;
-        }
-
-        .tour-details {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-top: 15px;
-        }
-
-        .detail-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .detail-item i {
-            color: #2c5530;
-            width: 20px;
-        }
-
-        .client-form {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 15px;
-            border-left: 4px solid #2c5530;
-        }
-
-        .client-form h4 {
-            color: #2c5530;
-            margin-bottom: 15px;
-            font-size: 18px;
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-        }
-
-        .payment-method {
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
-            padding: 15px;
-            margin-bottom: 15px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .payment-method:hover {
-            border-color: #2c5530;
-        }
-
-        .payment-method.selected {
-            border-color: #2c5530;
-            background: #f0f8f0;
-        }
-
-        .payment-method input[type="radio"] {
-            margin-right: 10px;
-        }
-
-        .summary-section {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-        }
-
-        .summary-item {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-            padding: 5px 0;
-        }
-
-        .summary-total {
-            border-top: 2px solid #2c5530;
-            padding-top: 10px;
-            font-weight: bold;
-            font-size: 18px;
-            color: #2c5530;
-        }
-
-        .success-animation {
-            text-align: center;
-            padding: 40px;
-        }
-
-        .checkmark {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background: #28a745;
-            margin: 0 auto 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            animation: bounceIn 0.6s ease-in-out;
-        }
-
-        .checkmark i {
-            color: white;
-            font-size: 40px;
-        }
-
-        @keyframes bounceIn {
-            0% { transform: scale(0); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-
-        .error-message {
-            background: #f8d7da;
-            color: #721c24;
-            padding: 12px;
-            border-radius: 6px;
-            margin-bottom: 15px;
-            border: 1px solid #f5c6cb;
-        }
-
-        .loading {
-            display: none;
-            text-align: center;
-            padding: 20px;
-        }
-
-        .spinner {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #2c5530;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 15px;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .reservation-container {
-                margin: 20px;
-                padding: 15px;
-                margin-top: 80px;
-            }
-
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-
-            .tour-details {
-                grid-template-columns: 1fr;
-            }
-
-            .navigation-buttons {
-                flex-direction: column;
-                gap: 10px;
-            }
-
-            .btn-siguiente {
-                margin-left: 0;
-            }
-
-            .step-indicator {
-                flex-wrap: wrap;
-                gap: 10px;
-            }
-
-            .step {
-                min-width: 80px;
-            }
-
-            .step-title {
-                font-size: 11px;
-            }
-
-            .step-number {
-                width: 35px;
-                height: 35px;
-                font-size: 14px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .reservation-container {
-                margin: 10px;
-                padding: 10px;
-            }
-
-            .btn {
-                padding: 10px 20px;
-                font-size: 14px;
-            }
-
-            .tour-title {
-                font-size: 20px;
-            }
-        }
-
-        /* Estilos para el calculador de precio */
-        #precio-preview {
-            margin-top: 20px;
-            padding: 20px;
-            background: #f8f9fa;
-            border-radius: 10px;
-            border: 1px solid #ddd;
-        }
-
-        #precio-preview h4 {
-            color: #2c5530;
-            margin-bottom: 15px;
-        }
-
-        .price-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 0;
-            border-bottom: 1px solid #e0e0e0;
-        }
-
-        .price-item:last-child {
-            border-bottom: none;
-            border-top: 2px solid #2c5530;
-            margin-top: 10px;
-            padding-top: 15px;
-            font-weight: bold;
-            background: #3e6842;
-            color: white;
-            margin: 10px -20px -20px -20px;
-            padding: 15px 20px;
-            border-radius: 0 0 8px 8px;
-        }
-
-        .price-label {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: #333;
-        }
-
-        .price-value {
-            font-weight: 600;
-            color: #2c5530;
-            text-align: right;
-            min-width: 80px;
-        }
-
-        .price-total .price-value {
-            color: white;
-            font-size: 18px;
-        }
-
-        .price-discount {
-            color: #28a745 !important;
-        }
-
-        .price-badge {
-            background: #28a745;
-            color: white;
-            font-size: 11px;
-            padding: 2px 6px;
-            border-radius: 10px;
-            margin-left: 5px;
-        }
-
-        /* Estilos para formularios de participantes */
-
-        .participante-form {
-            background: #f8f9fa;
-            border: 1px solid #dee2e6;
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 20px;
-            position: relative;
-        }
-
-        .participante-form h4 {
-            color: #495057;
-            border-bottom: 2px solid #dee2e6;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-        }
-
-        .form-header h3 {
-            color: #2c5530;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .participantes-container {
-            border-top: 3px solid #dee2e6;
-            padding-top: 20px;
-        }
-
-        .copy-option {
-            margin: 20px 0;
-        }
-
-        .copy-option label {
-            background: #e3f2fd;
-            padding: 15px;
-            border-radius: 8px;
-            border-left: 4px solid #2196f3;
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .copy-option label:hover {
-            background: #bbdefb;
-            border-left-color: #1976d2;
-        }
-
-        .copy-option input[type="checkbox"] {
-            margin-right: 10px;
-            transform: scale(1.2);
-        }
-
-        /* Estilos para opciones de tipo de pago */
-        .payment-type-section {
-            margin: 30px 0;
-            padding: 20px;
-            background: #f8f9fa;
-            border-radius: 12px;
-            border: 1px solid #dee2e6;
-        }
-
-        .payment-type-option {
-            margin-bottom: 20px;
-            border: 2px solid #dee2e6;
-            border-radius: 10px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .payment-type-option:hover {
-            border-color: #2c5530;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(44, 85, 48, 0.1);
-        }
-
-        .payment-type-option input[type="radio"] {
-            display: none;
-        }
-
-        .payment-type-option input[type="radio"]:checked + label {
-            background: linear-gradient(135deg, #e8f5e8, #f0f8f0);
-            border-color: #2c5530;
-        }
-
-        .payment-type-option label {
-            display: block;
-            padding: 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: none;
-            background: white;
-        }
-
-        .payment-type-option.selected {
-            border-color: #2c5530 !important;
-            background: linear-gradient(145deg, #f8f9fa, #e8f5e8) !important;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(44, 85, 48, 0.2) !important;
-        }
-
-        .payment-type-option.selected .payment-type-radio {
-            background: #2c5530;
-            border-color: #2c5530;
-        }
-
-        .payment-type-option.selected .payment-type-radio::after {
-            opacity: 1;
-        }
-
-        .payment-type-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 10px;
-            font-size: 18px;
-            font-weight: 600;
-            color: #2c5530;
-        }
-
-        .payment-type-header i {
-            font-size: 24px;
-            color: #2c5530;
-        }
-
-        .recommended-badge {
-            background: #28a745;
-            color: white;
-            font-size: 12px;
-            padding: 4px 8px;
-            border-radius: 12px;
-            margin-left: auto;
-            font-weight: 500;
-        }
-
-        .payment-type-description {
-            color: #666;
-            margin-bottom: 15px;
-            font-size: 14px;
-        }
-
-        .payment-type-benefits {
-            font-size: 13px;
-            color: #2c5530;
-            line-height: 1.6;
-        }
-
-        .payment-type-details {
-            background: rgba(44, 85, 48, 0.1);
-            padding: 15px;
-            border-radius: 8px;
-            margin: 15px 0;
-            font-size: 14px;
-        }
-
-        .payment-method-section {
-            margin: 30px 0;
-        }
-
-        .payment-method {
-            margin-bottom: 15px;
-            border: 1px solid #dee2e6;
-            border-radius: 8px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .payment-method:hover {
-            border-color: #2c5530;
-            box-shadow: 0 2px 8px rgba(44, 85, 48, 0.1);
-        }
-
-        .payment-method input[type="radio"] {
-            display: none;
-        }
-
-        .payment-method input[type="radio"]:checked + label {
-            background: #e8f5e8;
-            border-color: #2c5530;
-        }
-
-        .payment-method label {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 15px 20px;
-            cursor: pointer;
-            background: white;
-            transition: all 0.3s ease;
-            border: none;
-        }
-
-        .payment-method label i {
-            font-size: 20px;
-            color: #2c5530;
-            width: 24px;
-        }
-
-        .payment-method label small {
-            display: block;
-            color: #666;
-            font-size: 12px;
-            margin-top: 2px;
-        }
-
-        /* Responsive design */
-        @media (max-width: 768px) {
-            .reservation-container {
-                margin-top: 10px;
-                padding: 15px;
-            }
-
-            .btn {
-                padding: 10px 20px;
-                font-size: 14px;
-            }
-
-            .tour-title {
-                font-size: 20px;
-            }
-        }
-    </style>
 </head>
 <body>
     <!-- Header -->
     <header class="header">
-        <div class="header-content">
-            <div class="logo-section">
-                <img src="img/logo.jpeg" alt="Jaguar Expeditions" class="logo">
-                <div class="company-info">
-                    <h1>JAGUAR EXPEDITIONS</h1>
-                    <p class="slogan">Descubre la magia de la selva amazónica</p>
+        <div class="container">
+            <div class="header-content">
+                <!-- Logo y nombre -->
+                <div class="logo-section">  
+                    <img src="img/logo.jpeg" alt="Jaguar Expeditions Logo" class="logo">
+                    <div class="company-info">
+                        <h1 class="company-name" data-i18n="site_title">Jaguar Expeditions</h1>
+                        <p class="slogan" data-i18n="site_slogan">Más que un tour, una aventura salvaje.</p>
+                    </div>
                 </div>
-            </div>
-            <div class="contact-info">
-                <div class="phone">
-                    <i class="fas fa-phone"></i>
-                    <span>+51 965 842 777</span>
-                </div>
-                <div class="social-media">
-                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                
+                <!-- Información de contacto -->
+                <div class="contact-info">
+                    <div class="phone">
+                        <i class="fas fa-phone"></i>
+                        <span>+51 999 123 456</span>
+                    </div>
+                    
+                    <!-- Redes sociales -->
+                    <div class="social-media">
+                        <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-tripadvisor"></i></a>
+                    </div>
+                    
+                    <!-- Selector de idioma -->
+                    <div class="language-selector">
+                        <div class="flag-selector">
+                            <img src="img/espana.png" alt="Español" data-lang="es" class="flag-option active">
+                            <img src="img/reino-unido.png" alt="English" data-lang="en" class="flag-option">
+                            <img src="img/alemania.png" alt="Deutsch" data-lang="de" class="flag-option">
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
     </header>
 
     <!-- Navegación -->
-    <!-- <nav class="navbar">
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a href="index.html" class="nav-link">
-                    <i class="fas fa-home"></i> Inicio
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="tours.html" class="nav-link">
-                    <i class="fas fa-map"></i> Tours
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="reservar.html" class="nav-link active">
-                    <i class="fas fa-calendar-check"></i> Reservar
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="#contacto" class="nav-link">
-                    <i class="fas fa-envelope"></i> Contacto
-                </a>
-            </li>
-        </ul>
+    <nav class="navbar">
+        <div class="container">
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link" data-i18n="nav_inicio">Inicio</a></li>
+                <li><a href="tours.html" class="nav-link" data-i18n="nav_tours">Tours</a></li>
+                <li><a href="contacto.html" class="nav-link" data-i18n="nav_contacto">Contacto</a></li>
+                <li><a href="preguntas.html" class="nav-link" data-i18n="nav_preguntas">Preguntas</a></li>
+                <li><a href="galeria.html" class="nav-link" data-i18n="nav_galeria">Galería</a></li>
+                <li><a href="nosotros.html" class="nav-link" data-i18n="nav_nosotros">Nosotros</a></li>
+            </ul>
+            
+            <!-- Menú hamburguesa para móviles -->
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
     </nav>
- -->
+    
+
     <div class="reservation-container">
+        <!-- Selector de idioma -->
+        <!-- <div style="text-align: right; margin-bottom: 20px;">
+            <div class="language-selector">
+                <select id="language">
+                    <option value="es"></option>
+                    <option value="en"></option>
+                    <option value="de"></option>
+                </select>
+            </div>
+        </div> -->
+        
         <h1 style="text-align: center; color: #2c5530; margin-bottom: 30px;">
-            <i class="fas fa-calendar-check"></i> Reservar Tour
+            <i class="fas fa-calendar-check"></i> <span data-i18n="reserva_titulo">Reservar Tour</span>
         </h1>
 
         <!-- Indicador de pasos -->
         <div class="step-indicator">
             <div class="step active" data-step="1">
                 <div class="step-number">1</div>
-                <div class="step-title">Seleccionar Tour</div>
+                <div class="step-title" data-i18n="reserva_paso1">Seleccionar Tour</div>
             </div>
             <div class="step" data-step="2">
                 <div class="step-number">2</div>
-                <div class="step-title">Fecha y Personas</div>
+                <div class="step-title" data-i18n="reserva_paso2">Fecha y Personas</div>
             </div>
             <div class="step" data-step="3">
                 <div class="step-number">3</div>
-                <div class="step-title">Datos Personales</div>
+                <div class="step-title" data-i18n="reserva_paso3">Datos Personales</div>
             </div>
             <div class="step" data-step="4">
                 <div class="step-number">4</div>
-                <div class="step-title">Pago</div>
+                <div class="step-title" data-i18n="reserva_paso4">Pago</div>
             </div>
             <div class="step" data-step="5">
                 <div class="step-number">5</div>
-                <div class="step-title">Confirmación</div>
+                <div class="step-title" data-i18n="reserva_paso5">Confirmación</div>
             </div>
         </div>
 
@@ -933,86 +157,86 @@
             <div class="tour-info" id="tour-info">
                 <div class="loading">
                     <div class="spinner"></div>
-                    <p>Cargando información del tour...</p>
+                    <p data-i18n="msg_cargando">Cargando información del tour...</p>
                 </div>
             </div>
         </div>
 
         <!-- Paso 2: Fecha y Número de Personas -->
         <div class="step-content" id="paso2">
-            <h3>Selecciona la fecha y número de personas</h3>
+            <h3 data-i18n="reserva_seleccionar_fecha">Selecciona la fecha y número de personas</h3>
             
             <div class="form-row">
                 <div class="form-group">
                     <label for="fecha-tour">
-                        <i class="fas fa-calendar"></i> Fecha del Tour
+                        <i class="fas fa-calendar"></i> <span data-i18n="reserva_fecha_tour">Fecha del Tour</span>
                     </label>
                     <input type="date" id="fecha-tour" required>
-                    <small style="color: #666; margin-top: 5px; display: block;">
+                    <small style="color: #666; margin-top: 5px; display: block;" data-i18n="reserva_fechas_disponibles">
                         Las fechas disponibles se mostrarán automáticamente
                     </small>
                 </div>
 
                 <div class="form-group">
                     <label for="num-clientes">
-                        <i class="fas fa-users"></i> Número de Personas
+                        <i class="fas fa-users"></i> <span data-i18n="reserva_num_personas">Número de Personas</span>
                     </label>
                     <select id="num-clientes" required>
-                        <option value="">Seleccionar...</option>
-                        <option value="1">1 Persona</option>
-                        <option value="2">2 Personas</option>
-                        <option value="3">3 Personas</option>
-                        <option value="4">4 Personas</option>
-                        <option value="5">5 Personas</option>
-                        <option value="6">6 Personas</option>
-                        <option value="7">7 Personas</option>
-                        <option value="8">8 Personas</option>
-                        <option value="9">9 Personas</option>
-                        <option value="10">10 Personas</option>
+                        <option value="" data-i18n="reserva_seleccionar">Seleccionar...</option>
+                        <option value="1" data-i18n="reserva_1_persona">1 Persona</option>
+                        <option value="2" data-i18n="reserva_2_personas">2 Personas</option>
+                        <option value="3" data-i18n="reserva_3_personas">3 Personas</option>
+                        <option value="4" data-i18n="reserva_4_personas">4 Personas</option>
+                        <option value="5" data-i18n="reserva_5_personas">5 Personas</option>
+                        <option value="6" data-i18n="reserva_6_personas">6 Personas</option>
+                        <option value="7" data-i18n="reserva_7_personas">7 Personas</option>
+                        <option value="8" data-i18n="reserva_8_personas">8 Personas</option>
+                        <option value="9" data-i18n="reserva_9_personas">9 Personas</option>
+                        <option value="10" data-i18n="reserva_10_personas">10 Personas</option>
                     </select>
                 </div>
             </div>
 
             <div id="precio-preview" style="display: none; margin-top: 20px; padding: 20px; background: #f8f9fa; border-radius: 10px; border: 1px solid #ddd;">
-                <h4><i class="fas fa-calculator"></i> Cálculo de Precio</h4>
+                <h4><i class="fas fa-calculator"></i> <span data-i18n="reserva_calculo_precio">Cálculo de Precio</span></h4>
                 <div id="calculo-detalle"></div>
             </div>
         </div>
 
         <!-- Paso 3: Datos de los Clientes -->
         <div class="step-content" id="paso3">
-            <h3>Datos de los participantes</h3>
+            <h3 data-i18n="reserva_datos_participantes">Datos de los participantes</h3>
             <div id="formularios-clientes"></div>
         </div>
 
         <!-- Paso 4: Método de Pago -->
         <div class="step-content" id="paso4">
-            <h3>Opciones de Pago</h3>
+            <h3 data-i18n="reserva_opciones_pago">Opciones de Pago</h3>
             
             <div class="summary-section">
-                <h4><i class="fas fa-receipt"></i> Resumen de la Reserva</h4>
+                <h4><i class="fas fa-receipt"></i> <span data-i18n="reserva_resumen">Resumen de la Reserva</span></h4>
                 <div id="resumen-reserva"></div>
             </div>
 
             <!-- Opciones de Tipo de Pago -->
             <div class="payment-type-section">
-                <h4><i class="fas fa-money-bill-wave"></i> Tipo de Pago</h4>
+                <h4><i class="fas fa-money-bill-wave"></i> <span data-i18n="reserva_tipo_pago">Tipo de Pago</span></h4>
                 
                 <div class="payment-type-option" data-type="completo">
                     <input type="radio" name="tipo-pago" value="completo" id="tipo-completo" checked>
                     <label for="tipo-completo">
                         <div class="payment-type-header">
                             <i class="fas fa-credit-card"></i>
-                            <span>Pago Completo</span>
-                            <span class="recommended-badge">Recomendado</span>
+                            <span data-i18n="reserva_pago_completo">Pago Completo</span>
+                            <span class="recommended-badge" data-i18n="reserva_recomendado">Recomendado</span>
                         </div>
-                        <div class="payment-type-description">
+                        <div class="payment-type-description" data-i18n="reserva_pago_completo_desc">
                             Paga el total ahora y confirma tu reserva inmediatamente
                         </div>
                         <div class="payment-type-benefits">
-                            ✅ Reserva confirmada al instante<br>
-                            ✅ Sin preocupaciones futuras<br>
-                            ✅ Mejor precio garantizado
+                            <span data-i18n="reserva_pago_completo_beneficio1">✅ Reserva confirmada al instante</span><br>
+                            <span data-i18n="reserva_pago_completo_beneficio2">✅ Sin preocupaciones futuras</span><br>
+                            <span data-i18n="reserva_pago_completo_beneficio3">✅ Mejor precio garantizado</span>
                         </div>
                     </label>
                 </div>
@@ -1022,18 +246,18 @@
                     <label for="tipo-cuotas">
                         <div class="payment-type-header">
                             <i class="fas fa-calendar-alt"></i>
-                            <span>Pago en 2 Cuotas</span>
+                            <span data-i18n="reserva_pago_cuotas">Pago en 2 Cuotas</span>
                         </div>
-                        <div class="payment-type-description">
+                        <div class="payment-type-description" data-i18n="reserva_pago_cuotas_desc">
                             Paga en 2 cuotas para mayor comodidad
                         </div>
                         <div class="payment-type-details" id="cuotas-details">
                             <!-- Se llena dinámicamente con JavaScript -->
                         </div>
                         <div class="payment-type-benefits">
-                            💰 Primera cuota: Reserva el tour<br>
-                            📅 Segunda cuota: 15 días antes del viaje<br>
-                            🔒 Reserva asegurada
+                            <span data-i18n="reserva_cuotas_beneficio1">💰 Primera cuota: Reserva el tour</span><br>
+                            <span data-i18n="reserva_cuotas_beneficio2">📅 Segunda cuota: 15 días antes del viaje</span><br>
+                            <span data-i18n="reserva_cuotas_beneficio3">🔒 Reserva asegurada</span>
                         </div>
                     </label>
                 </div>
@@ -1041,13 +265,13 @@
 
             <!-- Métodos de Pago -->
             <div class="payment-method-section">
-                <h4><i class="fas fa-credit-card"></i> Método de Pago</h4>
+                <h4><i class="fas fa-credit-card"></i> <span data-i18n="reserva_metodo_pago"></span>Método de Pago</span></h4>
 
                 <div class="payment-method" data-method="tarjeta">
                     <input type="radio" name="metodo-pago" value="tarjeta" id="pago-tarjeta" checked>
                     <label for="pago-tarjeta">
-                        <i class="fas fa-credit-card"></i> Tarjeta de Crédito/Débito
-                        <small>Visa, Mastercard, American Express</small>
+                        <i class="fas fa-credit-card"></i> <span data-i18n="reserva_tarjeta">Tarjeta de Crédito/Débito</span>
+                        <small data-i18n="reserva_tarjeta_tipos">Visa, Mastercard, American Express</small>
                     </label>
                 </div>
 
@@ -1055,7 +279,7 @@
                     <input type="radio" name="metodo-pago" value="paypal" id="pago-paypal">
                     <label for="pago-paypal">
                         <i class="fab fa-paypal"></i> PayPal
-                        <small>Pago seguro internacional</small>
+                        <small data-i18n="reserva_paypal_desc">Pago seguro internacional</small>
                     </label>
                 </div>
 
@@ -1063,7 +287,7 @@
                     <input type="radio" name="metodo-pago" value="yape" id="pago-yape">
                     <label for="pago-yape">
                         <i class="fas fa-mobile-alt"></i> Yape
-                        <small>Pago rápido y seguro desde tu celular</small>
+                        <small data-i18n="reserva_yape_desc">Pago rápido y seguro desde tu celular</small>
                     </label>
                 </div>
 
@@ -1071,35 +295,35 @@
                     <input type="radio" name="metodo-pago" value="plin" id="pago-plin">
                     <label for="pago-plin">
                         <i class="fas fa-mobile-alt"></i> Plin
-                        <small>Transferencia instantánea</small>
+                        <small data-i18n="reserva_plin_desc">Transferencia instantánea</small>
                     </label>
                 </div>
 
                 <div class="payment-method" data-method="transferencia">
                     <input type="radio" name="metodo-pago" value="transferencia" id="pago-transferencia">
                     <label for="pago-transferencia">
-                        <i class="fas fa-university"></i> Transferencia Bancaria
-                        <small>BCP, BBVA, Interbank, Scotiabank</small>
+                        <i class="fas fa-university"></i> <span data-i18n="reserva_transferencia">Transferencia Bancaria</span>
+                        <small data-i18n="reserva_bancos">BCP, BBVA, Interbank, Scotiabank</small>
                     </label>
                 </div>
             </div>
 
             <!-- Formulario de tarjeta (se muestra cuando se selecciona tarjeta) -->
             <div id="formulario-tarjeta" style="display: none; margin-top: 20px; padding: 20px; background: #f8f9fa; border-radius: 10px;">
-                <h5><i class="fas fa-lock"></i> Datos de la Tarjeta</h5>
+                <h5><i class="fas fa-lock"></i> <span data-i18n="reserva_datos_tarjeta">Datos de la Tarjeta</span></h5>
                 <div class="form-row">
                     <div class="form-group">
-                        <label>Número de Tarjeta</label>
+                        <label data-i18n="reserva_numero_tarjeta">Número de Tarjeta</label>
                         <input type="text" id="numero-tarjeta" placeholder="1234 5678 9012 3456" maxlength="19">
                     </div>
                     <div class="form-group">
-                        <label>Nombre en la Tarjeta</label>
+                        <label data-i18n="reserva_nombre_tarjeta">Nombre en la Tarjeta</label>
                         <input type="text" id="nombre-tarjeta" placeholder="NOMBRE APELLIDO">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group">
-                        <label>Fecha de Vencimiento</label>
+                        <label data-i18n="reserva_fecha_vencimiento">Fecha de Vencimiento</label>
                         <input type="text" id="fecha-vencimiento" placeholder="MM/AA" maxlength="5">
                     </div>
                     <div class="form-group">
@@ -1111,9 +335,9 @@
 
             <!-- Formulario de PayPal (se muestra cuando se selecciona PayPal) -->
             <div id="formulario-paypal" style="display: none; margin-top: 20px; padding: 20px; background: #f8f9fa; border-radius: 10px;">
-                <h5><i class="fab fa-paypal"></i> Pagar con PayPal</h5>
+                <h5><i class="fab fa-paypal"></i> <span data-i18n="reserva_pagar_paypal">Pagar con PayPal</span></h5>
                 <div style="background: #e3f2fd; padding: 15px; border-radius: 8px; margin-bottom: 15px; border-left: 4px solid #2196f3;">
-                    <p style="margin: 0; color: #0d47a1;">
+                    <p style="margin: 0; color: #0d47a1;" data-i18n="reserva_paypal_info">
                         <i class="fas fa-info-circle"></i> 
                         Serás redirigido a PayPal para completar el pago de forma segura.
                     </p>
@@ -1130,21 +354,21 @@
                 <div class="checkmark">
                     <i class="fas fa-check"></i>
                 </div>
-                <h2 style="color: #28a745; margin-bottom: 15px;">¡Reserva Confirmada!</h2>
-                <p style="font-size: 16px; color: #666; margin-bottom: 20px;">
+                <h2 style="color: #28a745; margin-bottom: 15px;" data-i18n="reserva_confirmada">¡Reserva Confirmada!</h2>
+                <p style="font-size: 16px; color: #666; margin-bottom: 20px;" data-i18n="reserva_procesada">
                     Tu reserva ha sido procesada exitosamente
                 </p>
                 <div id="detalles-confirmacion" style="background: #f8f9fa; padding: 20px; border-radius: 10px; text-align: left;"></div>
                 
                 <div style="margin-top: 30px; display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
                     <button class="btn btn-siguiente" onclick="imprimirComprobante()">
-                        <i class="fas fa-print"></i> Imprimir Comprobante
+                        <i class="fas fa-print"></i> <span data-i18n="reserva_imprimir">Imprimir Comprobante</span>
                     </button>
                     <button class="btn btn-anterior" onclick="enviarPorEmail()">
-                        <i class="fas fa-envelope"></i> Enviar por Email
+                        <i class="fas fa-envelope"></i> <span data-i18n="reserva_enviar_email">Enviar por Email</span>
                     </button>
                     <a href="tours.html" class="btn" style="background: #17a2b8; color: white; border-color: #17a2b8;">
-                        <i class="fas fa-search"></i> Ver Más Tours
+                        <i class="fas fa-search"></i> <span data-i18n="reserva_ver_tours">Ver Más Tours</span>
                     </a>
                 </div>
             </div>
@@ -1153,13 +377,13 @@
         <!-- Botones de navegación -->
         <div class="navigation-buttons">
             <button type="button" class="btn btn-atras" id="btn-atras-reserva" style="display: flex; background: #e74c3c; color: white; border: 2px solid #e74c3c; margin-right: auto; align-items: center; gap: 8px;">
-                <i class="fas fa-arrow-left"></i> <span>Atrás</span>
+                <i class="fas fa-arrow-left"></i> <span data-i18n="reserva_btn_atras">Atrás</span>
             </button>
             <button type="button" class="btn btn-anterior" id="btn-anterior" onclick="pasoAnterior()" style="display: none;">
-                <i class="fas fa-arrow-left"></i> <span>Anterior</span>
+                <i class="fas fa-arrow-left"></i> <span data-i18n="reserva_btn_anterior">Anterior</span>
             </button>
             <button type="button" class="btn btn-siguiente" id="btn-siguiente" onclick="siguientePaso()">
-                <i class="fas fa-arrow-right"></i> <span>Siguiente</span>
+                <i class="fas fa-arrow-right"></i> <span data-i18n="reserva_btn_siguiente">Siguiente</span>
             </button>
         </div>
 
@@ -1167,7 +391,7 @@
         <div id="loading-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 9999;">
             <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; color: white;">
                 <div class="spinner" style="border-color: #f3f3f3; border-top-color: #fff;"></div>
-                <p>Procesando tu reserva...</p>
+                <p data-i18n="reserva_procesando">Procesando tu reserva...</p>
             </div>
         </div>
     </div>
@@ -3071,6 +2295,75 @@
 
         // Inicializar botones de navegación
         actualizarBotonesNavegacion();
+        
+        // Inicializar sistema de traducción después de cargar jQuery
+        setTimeout(function() {
+            if (typeof JaguarI18n !== 'undefined') {
+                const i18n = new JaguarI18n();
+                console.log('Sistema de traducción inicializado');
+            } else {
+                console.warn('Sistema de traducción no disponible');
+            }
+        }, 100);
     </script>
+
+    <!-- Sistema de traducción -->
+    <script src="js/i18n.js"></script>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 data-i18n="site_title">Jaguar Expeditions</h3>
+                    <p data-i18n="site_description">Tu puerta de entrada a la aventura amazónica más auténtica</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4 data-i18n="footer_pagos">Métodos de Pago</h4>
+                    <div class="payment-methods">
+                        <img src="img/visa.png" alt="Visa" class="payment-icon">
+                        <img src="img/paypal.png" alt="PayPal" class="payment-icon">
+                        <img src="img/american-express.png" alt="American Express" class="payment-icon">
+                        <img src="img/bitcoin.png" alt="Bitcoin" class="payment-icon">
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4 data-i18n="contacto_titulo">Contacto</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> Iquitos, Perú</p>
+                    <p><i class="fas fa-phone"></i> +51 999 123 456</p>
+                    <p><i class="fas fa-envelope"></i> info@jaguarexpeditions.com</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p data-i18n="footer_copyright">&copy; 2025 Jaguar Expeditions. Todos los derechos reservados.</p>
+                    <div class="footer-links">
+                        <a href="#" class="terms-link">
+                            <i class="fas fa-file-contract"></i>
+                            <span data-i18n="footer_terminos">Términos y Condiciones</span>
+                        </a>
+                        <a href="#" class="privacy-link">
+                            <i class="fas fa-shield-alt"></i>
+                            <span data-i18n="footer_privacidad">Política de Privacidad</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Botón flotante de WhatsApp -->
+    <div class="whatsapp-float">
+        <a href="https://wa.me/51962105395?text=Hola%2C%20me%20interesa%20obtener%20información%20sobre%20los%20tours%20de%20Jaguar%20Expeditions" 
+           target="_blank" 
+           class="whatsapp-button"
+           title="Contáctanos por WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+            <span class="whatsapp-text">¡Escríbenos!</span>
+        </a>
+    </div>
 </body>
 </html>

@@ -123,7 +123,173 @@ body {
     padding: 8px 12px;
     border-radius: 25px;
     font-weight: 500;
+    color: transparent;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 24px 18px;
+    width: 45px;
+    height: 40px;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+/* Estilos para las banderas en el selector */
+.language-selector select option {
+    background-repeat: no-repeat;
+    background-position: 8px center;
+    background-size: 20px 15px;
+    padding-left: 35px;
     color: var(--primary-green);
+    font-weight: 500;
+}
+
+.language-selector select option[value="es"] {
+    background-image: url('img/espana.png');
+}
+
+.language-selector select option[value="en"] {
+    background-image: url('img/reino-unido.png');
+}
+
+.language-selector select option[value="de"] {
+    background-image: url('img/alemania.png');
+}
+
+/* Clases para mostrar banderas según idioma seleccionado */
+.language-selector select.lang-es {
+    background-image: url('img/espana.png');
+}
+
+.language-selector select.lang-en {
+    background-image: url('img/reino-unido.png');
+}
+
+.language-selector select.lang-de {
+    background-image: url('img/alemania.png');
+}
+
+/* Estilo alternativo para selectores con banderas más grandes */
+.language-selector-flags select {
+    background: var(--white);
+    border: 2px solid var(--accent-green);
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-weight: 500;
+    color: transparent;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 32px 24px;
+    width: 60px;
+    height: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.language-selector-flags select:hover {
+    border-color: var(--golden-yellow);
+    box-shadow: 0 2px 8px rgba(44, 85, 48, 0.2);
+    transform: scale(1.05);
+}
+
+.language-selector-flags select option {
+    background-repeat: no-repeat;
+    background-position: 8px center;
+    background-size: 24px 18px;
+    padding-left: 40px;
+    color: var(--primary-green);
+    font-weight: 500;
+    min-height: 35px;
+    line-height: 35px;
+}
+
+.language-selector-flags select option[value="es"] {
+    background-image: url('img/espana.png');
+}
+
+.language-selector-flags select option[value="en"] {
+    background-image: url('img/reino-unido.png');
+}
+
+.language-selector-flags select option[value="de"] {
+    background-image: url('img/alemania.png');
+}
+
+.language-selector-flags select.lang-es {
+    background-image: url('img/espana.png');
+}
+
+.language-selector-flags select.lang-en {
+    background-image: url('img/reino-unido.png');
+}
+
+/* Flecha personalizada para el selector */
+.language-selector select::after {
+    content: '▼';
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--accent-green);
+    pointer-events: none;
+    font-size: 10px;
+}
+
+.language-selector-flags select::after {
+    content: '▼';
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--accent-green);
+    pointer-events: none;
+    font-size: 12px;
+}
+
+/* Hover effects para mejor UX */
+.language-selector select:hover,
+.language-selector-flags select:hover {
+    transform: scale(1.02);
+}
+
+/* Focus states */
+.language-selector select:focus,
+.language-selector-flags select:focus {
+    outline: 2px solid var(--golden-yellow);
+    outline-offset: 2px;
+}
+
+/* Estilos para banderas de idioma */
+.flag-selector {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.flag-option {
+    width: 24px;
+    height: 18px;
+    border-radius: 3px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    object-fit: cover;
+}
+
+.flag-option:hover {
+    transform: scale(1.1);
+    border-color: var(--golden-yellow);
+    box-shadow: 0 2px 8px rgba(255, 193, 7, 0.3);
+}
+
+.flag-option.active {
+    border-color: var(--golden-yellow);
+    box-shadow: 0 0 0 2px rgba(255, 193, 7, 0.3);
+    transform: scale(1.05);
 }
 
 .search-box {
@@ -586,6 +752,32 @@ body {
 .social-links a:hover {
     background: var(--sunset-orange);
     transform: translateY(-2px);
+}
+
+/* Métodos de pago en footer */
+.payment-methods {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.payment-icon {
+    height: 80px;
+    width: 80px;
+    margin: 0 15px;
+    transition: all 0.3s ease;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    filter: brightness(1) saturate(1);
+    background: white;
+    padding: 8px;
+}
+
+.payment-icon:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    filter: brightness(1.1) saturate(1.1);
 }
 
 .footer-bottom {
@@ -4994,4 +5186,614 @@ img.loaded {
         padding: 8px 15px;
         font-size: 0.9rem;
     }
+}
+
+/* CSS PARA RESERVAR.HTML */
+
+/* Estilos específicos para el sistema de reservas */
+.reservation-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    margin-top: 20px;
+}
+
+.step-indicator {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    position: relative;
+}
+
+.step-number {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #e0e0e0;
+    color: #666;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin-bottom: 8px;
+    transition: all 0.3s ease;
+}
+
+.step.active .step-number {
+    background: #2c5530;
+    color: white;
+}
+
+.step.completed .step-number {
+    background: #28a745;
+    color: white;
+}
+
+.step-title {
+    font-size: 12px;
+    text-align: center;
+    color: #666;
+    font-weight: 500;
+}
+
+.step.active .step-title {
+    color: #2c5530;
+    font-weight: bold;
+}
+
+.step-content {
+    display: none;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.step-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.navigation-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    gap: 15px;
+}
+
+.btn-anterior {
+    background: #6c757d;
+    color: white;
+    border: 2px solid #6c757d;
+}
+
+.btn-anterior:hover {
+    background: #5a6268;
+    border-color: #5a6268;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(108, 117, 125, 0.3);
+}
+
+.btn-siguiente {
+    background: #2c5530;
+    color: white;
+    border: 2px solid #2c5530;
+    margin-left: auto;
+}
+
+.btn-siguiente:hover {
+    background: #1e3a21;
+    border-color: #1e3a21;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(44, 85, 48, 0.3);
+}
+
+.btn:disabled {
+    background: #e0e0e0;
+    color: #999;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+    border-color: #e0e0e0;
+}
+
+.btn:disabled:hover {
+    background: #e0e0e0;
+    border-color: #e0e0e0;
+    transform: none;
+    box-shadow: none;
+}
+
+.tour-info {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.tour-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #2c5530;
+    margin-bottom: 10px;
+}
+
+.tour-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.detail-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.detail-item i {
+    color: #2c5530;
+    width: 20px;
+}
+
+.client-form {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    border-left: 4px solid #2c5530;
+}
+
+.client-form h4 {
+    color: #2c5530;
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.payment-method {
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.payment-method:hover {
+    border-color: #2c5530;
+}
+
+.payment-method.selected {
+    border-color: #2c5530;
+    background: #f0f8f0;
+}
+
+.payment-method input[type="radio"] {
+    margin-right: 10px;
+}
+
+.summary-section {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    padding: 5px 0;
+}
+
+.summary-total {
+    border-top: 2px solid #2c5530;
+    padding-top: 10px;
+    font-weight: bold;
+    font-size: 18px;
+    color: #2c5530;
+}
+
+.success-animation {
+    text-align: center;
+    padding: 40px;
+}
+
+.checkmark {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: #28a745;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: bounceIn 0.6s ease-in-out;
+}
+
+.checkmark i {
+    color: white;
+    font-size: 40px;
+}
+
+@keyframes bounceIn {
+    0% { transform: scale(0); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.error-message {
+    background: #f8d7da;
+    color: #721c24;
+    padding: 12px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    border: 1px solid #f5c6cb;
+}
+
+.loading {
+    display: none;
+    text-align: center;
+    padding: 20px;
+}
+
+.spinner {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #2c5530;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 15px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Estilos para el calculador de precio */
+#precio-preview {
+    margin-top: 20px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+}
+
+#precio-preview h4 {
+    color: #2c5530;
+    margin-bottom: 15px;
+}
+
+.price-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.price-item:last-child {
+    border-bottom: none;
+    border-top: 2px solid #2c5530;
+    margin-top: 10px;
+    padding-top: 15px;
+    font-weight: bold;
+    background: #3e6842;
+    color: white;
+    margin: 10px -20px -20px -20px;
+    padding: 15px 20px;
+    border-radius: 0 0 8px 8px;
+}
+
+.price-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #333;
+}
+
+.price-value {
+    font-weight: 600;
+    color: #2c5530;
+    text-align: right;
+    min-width: 80px;
+}
+
+.price-total .price-value {
+    color: white;
+    font-size: 18px;
+}
+
+.price-discount {
+    color: #28a745 !important;
+}
+
+.price-badge {
+    background: #28a745;
+    color: white;
+    font-size: 11px;
+    padding: 2px 6px;
+    border-radius: 10px;
+    margin-left: 5px;
+}
+
+/* Estilos para formularios de participantes */
+.participante-form {
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.participante-form h4 {
+    color: #495057;
+    border-bottom: 2px solid #dee2e6;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.participantes-container {
+    border-top: 3px solid #dee2e6;
+    padding-top: 20px;
+}
+
+.copy-option {
+    margin: 20px 0;
+}
+
+.copy-option label {
+    background: #e3f2fd;
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 4px solid #2196f3;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.copy-option label:hover {
+    background: #bbdefb;
+    border-left-color: #1976d2;
+}
+
+.copy-option input[type="checkbox"] {
+    margin-right: 10px;
+    transform: scale(1.2);
+}
+
+/* Estilos para opciones de tipo de pago */
+.payment-type-section {
+    margin: 30px 0;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 12px;
+    border: 1px solid #dee2e6;
+}
+
+.payment-type-option {
+    margin-bottom: 20px;
+    border: 2px solid #dee2e6;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.payment-type-option:hover {
+    border-color: #2c5530;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(44, 85, 48, 0.1);
+}
+
+.payment-type-option input[type="radio"] {
+    display: none;
+}
+
+.payment-type-option input[type="radio"]:checked + label {
+    background: linear-gradient(135deg, #e8f5e8, #f0f8f0);
+    border-color: #2c5530;
+}
+
+.payment-type-option label {
+    display: block;
+    padding: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    background: white;
+}
+
+.payment-type-option.selected {
+    border-color: #2c5530 !important;
+    background: linear-gradient(145deg, #f8f9fa, #e8f5e8) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(44, 85, 48, 0.2) !important;
+}
+
+.payment-type-option.selected .payment-type-radio {
+    background: #2c5530;
+    border-color: #2c5530;
+}
+
+.payment-type-option.selected .payment-type-radio::after {
+    opacity: 1;
+}
+
+.payment-type-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #2c5530;
+}
+
+.payment-type-header i {
+    font-size: 24px;
+    color: #2c5530;
+}
+
+.recommended-badge {
+    background: #28a745;
+    color: white;
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 12px;
+    margin-left: auto;
+    font-weight: 500;
+}
+
+.payment-type-description {
+    color: #666;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+.payment-type-benefits {
+    font-size: 13px;
+    color: #2c5530;
+    line-height: 1.6;
+}
+
+.payment-type-details {
+    background: rgba(44, 85, 48, 0.1);
+    padding: 15px;
+    border-radius: 8px;
+    margin: 15px 0;
+    font-size: 14px;
+}
+
+.payment-method-section {
+    margin: 30px 0;
+}
+
+.payment-method {
+    margin-bottom: 15px;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.payment-method:hover {
+    border-color: #2c5530;
+    box-shadow: 0 2px 8px rgba(44, 85, 48, 0.1);
+}
+
+.payment-method input[type="radio"] {
+    display: none;
+}
+
+.payment-method input[type="radio"]:checked + label {
+    background: #e8f5e8;
+    border-color: #2c5530;
+}
+
+.payment-method label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px 20px;
+    cursor: pointer;
+    background: white;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.payment-method label i {
+    font-size: 20px;
+    color: #2c5530;
+    width: 24px;
+}
+
+.payment-method label small {
+    display: block;
+    color: #666;
+    font-size: 12px;
+    margin-top: 2px;
+}
+
+/* Estilos para el recibo/confirmación */
+.recibo-container {
+    font-family: Arial, sans-serif; 
+    margin: 20px; 
+    line-height: 1.4;
+}
+
+.recibo-header {
+    text-align: center; 
+    border-bottom: 2px solid #2c5530; 
+    padding-bottom: 15px; 
+    margin-bottom: 20px;
+}
+
+.recibo-logo {
+    font-size: 24px; 
+    font-weight: bold; 
+    color: #2c5530; 
+    margin-bottom: 5px;
+}
+
+.recibo-section {
+    margin: 20px 0; 
+    padding: 15px; 
+    border: 1px solid #ddd; 
+    border-radius: 5px;
+}
+
+.recibo-section h3 {
+    margin-top: 0; 
+    color: #2c5530; 
+    border-bottom: 1px solid #eee; 
+    padding-bottom: 10px;
+}
+
+.detail-row {
+    display: flex; 
+    justify-content: space-between; 
+    margin-bottom: 8px;
+}
+
+.total {
+    font-size: 18px; 
+    font-weight: bold; 
+    color: #2c5530;
+}
+
+.codigo {
+    font-size: 20px; 
+    font-weight: bold; 
+    background: #f8f9fa; 
+    padding: 10px; 
+    text-align: center; 
+    border: 2px dashed #2c5530; 
+    margin: 15px 0;
+}
+
+@media print { 
+    body { margin: 0; }
+    .no-print { display: none; }
 }

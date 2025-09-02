@@ -20,8 +20,8 @@
                 <div class="logo-section">
                     <img src="img/logo.jpeg" alt="Jaguar Expeditions Logo" class="logo">
                     <div class="company-info">
-                        <h1 class="company-name">Jaguar Expeditions</h1>
-                        <p class="slogan">Más que un tour, una aventura salvaje.</p>
+                        <h1 class="company-name" data-i18n="site_title">Jaguar Expeditions</h1>
+                        <p class="slogan" data-i18n="site_slogan">Más que un tour, una aventura salvaje.</p>
                     </div>
                 </div>
                 
@@ -42,16 +42,16 @@
                     
                     <!-- Selector de idioma -->
                     <div class="language-selector">
-                        <select id="language">
-                            <option value="es">ES</option>
-                            <option value="en">EN</option>
-                            <option value="pt">PT</option>
-                        </select>
+                        <div class="flag-selector">
+                            <img src="img/espana.png" alt="Español" data-lang="es" class="flag-option active">
+                            <img src="img/reino-unido.png" alt="English" data-lang="en" class="flag-option">
+                            <img src="img/alemania.png" alt="Deutsch" data-lang="de" class="flag-option">
+                        </div>
                     </div>
                     
                     <!-- Buscador -->
                     <div class="search-box">
-                        <input type="text" placeholder="Buscar tours...">
+                        <input type="text" data-i18n-placeholder="btn_buscar" placeholder="Buscar tours...">
                         <button><i class="fas fa-search"></i></button>
                     </div>
                     
@@ -69,12 +69,12 @@
     <nav class="navbar">
         <div class="container">
             <ul class="nav-menu">
-                <li><a href="index.html" class="nav-link">Inicio</a></li>
-                <li><a href="tours.html" class="nav-link">Tours</a></li>
-                <li><a href="contacto.html" class="nav-link">Contacto</a></li>
-                <li><a href="preguntas.html" class="nav-link">Preguntas</a></li>
-                <li><a href="galeria.html" class="nav-link active">Galería</a></li>
-                <li><a href="nosotros.html" class="nav-link">Nosotros</a></li>
+                <li><a href="index.html" class="nav-link" data-i18n="nav_inicio">Inicio</a></li>
+                <li><a href="tours.html" class="nav-link" data-i18n="nav_tours">Tours</a></li>
+                <li><a href="contacto.html" class="nav-link" data-i18n="nav_contacto">Contacto</a></li>
+                <li><a href="preguntas.html" class="nav-link" data-i18n="nav_preguntas">Preguntas</a></li>
+                <li><a href="galeria.html" class="nav-link active" data-i18n="nav_galeria">Galería</a></li>
+                <li><a href="nosotros.html" class="nav-link" data-i18n="nav_nosotros">Nosotros</a></li>
             </ul>
             
             <!-- Menú hamburguesa para móviles -->
@@ -95,8 +95,8 @@
                 <div class="hero-overlay"></div>
             </div>
             <div class="hero-content">
-                <h1>Galería de Aventuras</h1>
-                <p>Descubre la belleza de la Amazonía a través de nuestras fotografías</p>
+                <h1 data-i18n="galeria_hero_titulo">Galería de Aventuras</h1>
+                <p data-i18n="galeria_hero_subtitulo">Descubre la belleza de la Amazonía a través de nuestras fotografías</p>
             </div>
         </section>
 
@@ -104,13 +104,13 @@
         <section class="gallery-filters">
             <div class="container">
                 <div class="filter-buttons">
-                    <button class="filter-btn active" data-filter="all">Todas</button>
-                    <button class="filter-btn" data-filter="fauna">Fauna</button>
-                    <button class="filter-btn" data-filter="flora">Flora</button>
-                    <button class="filter-btn" data-filter="aventura">Aventura</button>
-                    <button class="filter-btn" data-filter="cultura">Cultura</button>
-                    <button class="filter-btn" data-filter="paisajes">Paisajes</button>
-                    <button class="filter-btn" data-filter="tours">Tours</button>
+                    <button class="filter-btn active" data-filter="all" data-i18n="galeria_filtro_todas">Todas</button>
+                    <button class="filter-btn" data-filter="fauna" data-i18n="galeria_filtro_fauna">Fauna</button>
+                    <button class="filter-btn" data-filter="flora" data-i18n="galeria_filtro_flora">Flora</button>
+                    <button class="filter-btn" data-filter="aventura" data-i18n="galeria_filtro_aventura">Aventura</button>
+                    <button class="filter-btn" data-filter="cultura" data-i18n="galeria_filtro_cultura">Cultura</button>
+                    <button class="filter-btn" data-filter="paisajes" data-i18n="galeria_filtro_paisajes">Paisajes</button>
+                    <button class="filter-btn" data-filter="tours" data-i18n="galeria_filtro_tours">Tours</button>
                 </div>
             </div>
         </section>
@@ -390,7 +390,7 @@
                 <div class="load-more-section">
                     <button class="btn-load-more" id="loadMoreBtn">
                         <i class="fas fa-plus"></i>
-                        Cargar Más Fotos
+                        <span data-i18n="galeria_cargar_mas">Cargar Más Fotos</span>
                     </button>
                 </div>
             </div>
@@ -402,19 +402,19 @@
                 <div class="stats-grid">
                     <div class="stat-item">
                         <div class="stat-number">500+</div>
-                        <div class="stat-label">Fotos en Galería</div>
+                        <div class="stat-label" data-i18n="galeria_stats_fotos">Fotos en Galería</div>
                     </div>
                     <div class="stat-item">
                         <div class="stat-number">50+</div>
-                        <div class="stat-label">Especies Fotografiadas</div>
+                        <div class="stat-label" data-i18n="galeria_stats_especies">Especies Fotografiadas</div>
                     </div>
                     <div class="stat-item">
                         <div class="stat-number">15</div>
-                        <div class="stat-label">Años Documentando</div>
+                        <div class="stat-label" data-i18n="galeria_stats_anos">Años Documentando</div>
                     </div>
                     <div class="stat-item">
                         <div class="stat-number">1000+</div>
-                        <div class="stat-label">Aventureros Felices</div>
+                        <div class="stat-label" data-i18n="galeria_stats_aventureros">Aventureros Felices</div>
                     </div>
                 </div>
             </div>
@@ -424,11 +424,11 @@
         <section class="gallery-cta">
             <div class="container">
                 <div class="cta-content">
-                    <h2>¿Listo para Crear tus Propias Memorias?</h2>
-                    <p>Únete a nosotros y vive experiencias que se convertirán en fotografías inolvidables</p>
+                    <h2 data-i18n="galeria_cta_titulo">¿Listo para Crear tus Propias Memorias?</h2>
+                    <p data-i18n="galeria_cta_subtitulo">Únete a nosotros y vive experiencias que se convertirán en fotografías inolvidables</p>
                     <div class="cta-buttons">
-                        <a href="tours.html" class="btn-primary">Ver Tours</a>
-                        <a href="contacto.html" class="btn-secondary">Contactar</a>
+                        <a href="tours.html" class="btn-primary" data-i18n="btn_ver_tours">Ver Tours</a>
+                        <a href="contacto.html" class="btn-secondary" data-i18n="nav_contacto">Contactar</a>
                     </div>
                 </div>
             </div>
@@ -470,18 +470,18 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <h3>Jaguar Expeditions</h3>
-                    <p>Tu puerta de entrada a la aventura amazónica más auténtica</p>
+                    <p data-i18n="footer_descripcion">Tu puerta de entrada a la aventura amazónica más auténtica</p>
                 </div>
                 
                 <div class="footer-section">
-                    <h4>Contacto</h4>
+                    <h4 data-i18n="footer_contacto">Contacto</h4>
                     <p><i class="fas fa-map-marker-alt"></i> Iquitos, Perú</p>
                     <p><i class="fas fa-phone"></i> +51 999 123 456</p>
                     <p><i class="fas fa-envelope"></i> info@jaguarexpeditions.com</p>
                 </div>
                 
                 <div class="footer-section">
-                    <h4>Síguenos</h4>
+                    <h4 data-i18n="footer_siguenos">Síguenos</h4>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-facebook"></i></a>
                         <a href="#"><i class="fab fa-instagram"></i></a>
@@ -493,15 +493,15 @@
             
             <div class="footer-bottom">
                 <div class="footer-bottom-content">
-                    <p>&copy; 2025 Jaguar Expeditions. Todos los derechos reservados.</p>
+                    <p data-i18n="footer_derechos">&copy; 2025 Jaguar Expeditions. Todos los derechos reservados.</p>
                     <div class="footer-links">
                         <a href="#" class="terms-link">
                             <i class="fas fa-file-contract"></i>
-                            Términos y Condiciones
+                            <span data-i18n="footer_terminos">Términos y Condiciones</span>
                         </a>
                         <a href="#" class="privacy-link">
                             <i class="fas fa-shield-alt"></i>
-                            Política de Privacidad
+                            <span data-i18n="footer_privacidad">Política de Privacidad</span>
                         </a>
                     </div>
                 </div>
@@ -512,6 +512,7 @@
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script src="js/i18n.js"></script>
     <script src="script.js"></script>
 
     <!-- Botón flotante de WhatsApp -->

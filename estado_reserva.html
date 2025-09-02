@@ -11,6 +11,34 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS para banderas -->
+    <style>
+        .flag-selector {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .flag-option {
+            cursor: pointer;
+            width: 30px;
+            height: 20px;
+            border-radius: 3px;
+            transition: transform 0.2s ease;
+            border: 2px solid transparent;
+        }
+        
+        .flag-option:hover {
+            transform: scale(1.1);
+            border-color: var(--primary-green);
+        }
+        
+        .flag-option.active {
+            border-color: var(--primary-green);
+            transform: scale(1.1);
+        }
+    </style>
 </head>
 <body>
     <!-- Header -->
@@ -21,8 +49,8 @@
                 <div class="logo-section">
                     <img src="img/logo.jpeg" alt="Jaguar Expeditions Logo" class="logo">
                     <div class="company-info">
-                        <h1 class="company-name">Jaguar Expeditions</h1>
-                        <p class="slogan">Más que un tour, una aventura salvaje.</p>
+                        <h1 class="company-name" data-i18n="site_title">Jaguar Expeditions</h1>
+                        <p class="slogan" data-i18n="site_slogan">Más que un tour, una aventura salvaje.</p>
                     </div>
                 </div>
                 
@@ -43,16 +71,16 @@
                     
                     <!-- Selector de idioma -->
                     <div class="language-selector">
-                        <select id="language">
-                            <option value="es">ES</option>
-                            <option value="en">EN</option>
-                            <option value="pt">PT</option>
-                        </select>
+                        <div class="flag-selector">
+                            <img src="img/espana.png" alt="Español" class="flag-option active" data-lang="es">
+                            <img src="img/reino-unido.png" alt="English" class="flag-option" data-lang="en">
+                            <img src="img/alemania.png" alt="Deutsch" class="flag-option" data-lang="de">
+                        </div>
                     </div>
                     
                     <!-- Buscador -->
                     <div class="search-box">
-                        <input type="text" placeholder="Buscar tours...">
+                        <input type="text" data-i18n-placeholder="buscar_tours" placeholder="Buscar tours...">
                         <button><i class="fas fa-search"></i></button>
                     </div>
                     
@@ -70,12 +98,12 @@
     <nav class="navbar">
         <div class="container">
             <ul class="nav-menu">
-                <li><a href="index.html" class="nav-link">Inicio</a></li>
-                <li><a href="tours.html" class="nav-link">Tours</a></li>
-                <li><a href="contacto.html" class="nav-link">Contacto</a></li>
-                <li><a href="preguntas.html" class="nav-link">Preguntas</a></li>
-                <li><a href="galeria.html" class="nav-link">Galería</a></li>
-                <li><a href="nosotros.html" class="nav-link">Nosotros</a></li>
+                <li><a href="index.html" class="nav-link" data-i18n="nav_inicio">Inicio</a></li>
+                <li><a href="tours.html" class="nav-link" data-i18n="nav_tours">Tours</a></li>
+                <li><a href="contacto.html" class="nav-link" data-i18n="nav_contacto">Contacto</a></li>
+                <li><a href="preguntas.html" class="nav-link" data-i18n="nav_preguntas">Preguntas</a></li>
+                <li><a href="galeria.html" class="nav-link" data-i18n="nav_galeria">Galería</a></li>
+                <li><a href="nosotros.html" class="nav-link" data-i18n="nav_nosotros">Nosotros</a></li>
             </ul>
             
             <!-- Menú hamburguesa para móviles -->
@@ -94,29 +122,29 @@
             <div class="estado-reserva-form">
                 <div class="form-header">
                     <i class="fas fa-search" style="font-size: 48px; color: var(--primary-green); margin-bottom: 20px;"></i>
-                    <h2>Consultar Estado de Reserva</h2>
-                    <p>Ingresa tu código de reserva y email para verificar el estado</p>
+                    <h2 data-i18n="estado_reserva_titulo">Consultar Estado de Reserva</h2>
+                    <p data-i18n="estado_reserva_subtitulo">Ingresa tu código de reserva y email para verificar el estado</p>
                 </div>
                 
                 <form id="form-busqueda" class="reservation-search-form">
                     <div class="form-group">
-                        <label for="codigo-busqueda">Código de Reserva:</label>
-                        <input type="text" id="codigo-busqueda" placeholder="Ej: JE123456" required>
-                        <small class="form-help">Código que recibiste en tu email de confirmación</small>
+                        <label for="codigo-busqueda" data-i18n="estado_codigo_label">Código de Reserva:</label>
+                        <input type="text" id="codigo-busqueda" data-i18n-placeholder="estado_codigo_placeholder" placeholder="Ej: JE123456" required>
+                        <small class="form-help" data-i18n="estado_codigo_help">Código que recibiste en tu email de confirmación</small>
                     </div>
                     <div class="form-group">
-                        <label for="email-busqueda">Email de contacto:</label>
-                        <input type="email" id="email-busqueda" placeholder="tu-email@ejemplo.com" required>
-                        <small class="form-help">Email usado al hacer la reserva</small>
+                        <label for="email-busqueda" data-i18n="estado_email_label">Email de contacto:</label>
+                        <input type="email" id="email-busqueda" data-i18n-placeholder="estado_email_placeholder" placeholder="tu-email@ejemplo.com" required>
+                        <small class="form-help" data-i18n="estado_email_help">Email usado al hacer la reserva</small>
                     </div>
                     <button type="submit" class="btn-accion btn-info">
-                        <i class="fas fa-search"></i> Consultar Estado
+                        <i class="fas fa-search"></i> <span data-i18n="estado_btn_consultar">Consultar Estado</span>
                     </button>
                 </form>
                 
                 <div class="help-section">
-                    <p><strong>¿No tienes tu código de reserva?</strong></p>
-                    <p>Contáctanos al <strong>+51 999 123 456</strong> o escríbenos a <strong>info@jaguarexpeditions.com</strong></p>
+                    <p><strong data-i18n="estado_no_codigo">¿No tienes tu código de reserva?</strong></p>
+                    <p data-i18n="estado_contactanos">Contáctanos al <strong>+51 999 123 456</strong> o escríbenos a <strong>info@jaguarexpeditions.com</strong></p>
                 </div>
             </div>
         </div>
@@ -127,8 +155,8 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h3>Jaguar Expeditions</h3>
-                    <p>Descubre la magia de la selva amazónica con nuestros tours especializados.</p>
+                    <h3 data-i18n="site_title">Jaguar Expeditions</h3>
+                    <p data-i18n="footer_descripcion">Descubre la magia de la selva amazónica con nuestros tours especializados.</p>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-facebook"></i></a>
                         <a href="#"><i class="fab fa-instagram"></i></a>
@@ -137,17 +165,17 @@
                 </div>
                 
                 <div class="footer-section">
-                    <h3>Enlaces Rápidos</h3>
+                    <h3 data-i18n="footer_enlaces_rapidos">Enlaces Rápidos</h3>
                     <ul>
-                        <li><a href="tours.html">Nuestros Tours</a></li>
-                        <li><a href="galeria.html">Galería</a></li>
-                        <li><a href="nosotros.html">Sobre Nosotros</a></li>
-                        <li><a href="contacto.html">Contacto</a></li>
+                        <li><a href="tours.html" data-i18n="footer_nuestros_tours">Nuestros Tours</a></li>
+                        <li><a href="galeria.html" data-i18n="nav_galeria">Galería</a></li>
+                        <li><a href="nosotros.html" data-i18n="footer_sobre_nosotros">Sobre Nosotros</a></li>
+                        <li><a href="contacto.html" data-i18n="nav_contacto">Contacto</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-section">
-                    <h3>Contacto</h3>
+                    <h3 data-i18n="footer_contacto">Contacto</h3>
                     <div class="contact-item">
                         <i class="fas fa-map-marker-alt"></i>
                         <span>Iquitos, Perú</span>
@@ -164,7 +192,7 @@
             </div>
             
             <div class="footer-bottom">
-                <p>&copy; 2025 Jaguar Expeditions. Todos los derechos reservados.</p>
+                <p>&copy; 2025 Jaguar Expeditions. <span data-i18n="footer_derechos">Todos los derechos reservados.</span></p>
             </div>
         </div>
     </footer>
@@ -574,6 +602,27 @@
                 cerrarModalReembolso();
             }
         }
+    </script>
+    
+    <!-- Script de traducción -->
+    <script src="js/i18n.js"></script>
+    <script>
+        // Inicializar sistema de traducción
+        const i18n = new JaguarI18n();
+        
+        // Configurar eventos de banderas
+        document.querySelectorAll('.flag-option').forEach(flag => {
+            flag.addEventListener('click', function() {
+                const lang = this.getAttribute('data-lang');
+                
+                // Actualizar banderas activas
+                document.querySelectorAll('.flag-option').forEach(f => f.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Cambiar idioma
+                i18n.changeLanguage(lang);
+            });
+        });
     </script>
 </body>
 </html>

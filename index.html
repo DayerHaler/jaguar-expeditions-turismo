@@ -20,8 +20,8 @@
                 <div class="logo-section">
                     <img src="img/logo.jpeg" alt="Jaguar Expeditions Logo" class="logo">
                     <div class="company-info">
-                        <h1 class="company-name">Jaguar Expeditions</h1>
-                        <p class="slogan">Más que un tour, una aventura salvaje.</p>
+                        <h1 class="company-name" data-i18n="site_title">Jaguar Expeditions</h1>
+                        <p class="slogan" data-i18n="site_slogan">Más que un tour, una aventura salvaje.</p>
                     </div>
                 </div>
                 
@@ -42,16 +42,16 @@
                     
                     <!-- Selector de idioma -->
                     <div class="language-selector">
-                        <select id="language">
-                            <option value="es">ES</option>
-                            <option value="en">EN</option>
-                            <option value="pt">PT</option>
-                        </select>
+                        <div class="flag-selector">
+                            <img src="img/espana.png" alt="Español" data-lang="es" class="flag-option active">
+                            <img src="img/reino-unido.png" alt="English" data-lang="en" class="flag-option">
+                            <img src="img/alemania.png" alt="Deutsch" data-lang="de" class="flag-option">
+                        </div>
                     </div>
                     
                     <!-- Buscador -->
                     <div class="search-box">
-                        <input type="text" placeholder="Buscar tours...">
+                        <input type="text" data-i18n-placeholder="btn_buscar" placeholder="Buscar tours...">
                         <button><i class="fas fa-search"></i></button>
                     </div>
                     
@@ -65,7 +65,7 @@
                     <div class="verificar-reserva" style="margin-left: 15px;">
                         <a href="estado_reserva.html" class="btn-reserva" style="background: #27ae60; color: white; padding: 8px 15px; border-radius: 20px; text-decoration: none; font-size: 14px; display: flex; align-items: center; gap: 5px;">
                             <i class="fas fa-search"></i>
-                            Ver Reserva
+                            <span data-i18n="btn_ver_reserva">Ver Reserva</span>
                         </a>
                     </div>
                 </div>
@@ -77,12 +77,12 @@
     <nav class="navbar">
         <div class="container">
             <ul class="nav-menu">
-                <li><a href="index.html" class="nav-link active">Inicio</a></li>
-                <li><a href="tours.html" class="nav-link">Tours</a></li>
-                <li><a href="contacto.html" class="nav-link">Contacto</a></li>
-                <li><a href="preguntas.html" class="nav-link">Preguntas</a></li>
-                <li><a href="galeria.html" class="nav-link">Galería</a></li>
-                <li><a href="nosotros.html" class="nav-link">Nosotros</a></li>
+                <li><a href="index.html" class="nav-link active" data-i18n="nav_inicio">Inicio</a></li>
+                <li><a href="tours.html" class="nav-link" data-i18n="nav_tours">Tours</a></li>
+                <li><a href="contacto.html" class="nav-link" data-i18n="nav_contacto">Contacto</a></li>
+                <li><a href="preguntas.html" class="nav-link" data-i18n="nav_preguntas">Preguntas</a></li>
+                <li><a href="galeria.html" class="nav-link" data-i18n="nav_galeria">Galería</a></li>
+                <li><a href="nosotros.html" class="nav-link" data-i18n="nav_nosotros">Nosotros</a></li>
             </ul>
             
             <!-- Menú hamburguesa para móviles -->
@@ -102,36 +102,36 @@
                 <div class="slide">
                     <img src="img/fondo.jpg" alt="Aventura en la Selva">
                     <div class="slide-content">
-                        <h2>Descubre la Magia de la Amazonía</h2>
-                        <p>Vive experiencias únicas en el corazón de la selva peruana</p>
-                        <button class="btn-primary">Explorar Tours</button>
+                        <h2 data-i18n="hero_titulo_1">Descubre la Magia de la Amazonía</h2>
+                        <p data-i18n="hero_subtitulo_1">Vive experiencias únicas en el corazón de la selva peruana</p>
+                        <button class="btn-primary" data-i18n="btn_explorar_tours">Explorar Tours</button>
                     </div>
                 </div>
                 
                 <div class="slide">
                     <img src="img/fondo.jpg" alt="Expedición Amazonas">
                     <div class="slide-content">
-                        <h2>Tours Personalizados por Iquitos</h2>
-                        <p>Cada aventura diseñada especialmente para ti</p>
-                        <button class="btn-primary">Ver Paquetes</button>
+                        <h2 data-i18n="hero_titulo_2">Tours Personalizados por Iquitos</h2>
+                        <p data-i18n="hero_subtitulo_2">Cada aventura diseñada especialmente para ti</p>
+                        <button class="btn-primary" data-i18n="btn_ver_paquetes">Ver Paquetes</button>
                     </div>
                 </div>
                 
                 <div class="slide">
                     <img src="img/fondo.jpg" alt="Naturaleza Salvaje">
                     <div class="slide-content">
-                        <h2>Guías Expertos Locales</h2>
-                        <p>Conoce la selva de la mano de quienes la conocen mejor</p>
-                        <button class="btn-primary">Contactar</button>
+                        <h2 data-i18n="hero_titulo_3">Guías Expertos Locales</h2>
+                        <p data-i18n="hero_subtitulo_3">Conoce la selva de la mano de quienes la conocen mejor</p>
+                        <button class="btn-primary" data-i18n="btn_contactar">Contactar</button>
                     </div>
                 </div>
                 
                 <div class="slide">
                     <img src="img/fondo.jpg" alt="Aventura Garantizada">
                     <div class="slide-content">
-                        <h2>Aventura Garantizada por Iquitos</h2>
-                        <p>Momentos inolvidables en cada expedición</p>
-                        <button class="btn-primary">Reservar Ahora</button>
+                        <h2 data-i18n="hero_titulo_4">Aventura Garantizada por Iquitos</h2>
+                        <p data-i18n="hero_subtitulo_4">Momentos inolvidables en cada expedición</p>
+                        <button class="btn-primary" data-i18n="btn_reservar_ahora">Reservar Ahora</button>
                     </div>
                 </div>
             </div>
@@ -141,8 +141,8 @@
         <section class="popular-tours">
             <div class="container">
                 <div class="section-header">
-                    <h2>Tours Populares</h2>
-                    <p>Descubre nuestras expediciones más solicitadas</p>
+                    <h2 data-i18n="tours_populares_titulo">Tours Populares</h2>
+                    <p data-i18n="tours_populares_subtitulo">Descubre nuestras expediciones más solicitadas</p>
                 </div>
                 
                 <div class="tours-grid">
@@ -348,8 +348,8 @@
         <section class="why-choose-us">
             <div class="container">
                 <div class="section-header">
-                    <h2>¿Por qué elegir Jaguar Expeditions?</h2>
-                    <p>Somos más que una agencia de turismo, somos tus compañeros de aventura</p>
+                    <h2 data-i18n="por_que_elegir_titulo">¿Por qué elegir Jaguar Expeditions?</h2>
+                    <p data-i18n="por_que_elegir_subtitulo">Somos más que una agencia de turismo, somos tus compañeros de aventura</p>
                 </div>
                 
                 <div class="features-grid">
@@ -357,48 +357,48 @@
                         <div class="feature-icon">
                             <i class="fas fa-leaf"></i>
                         </div>
-                        <h3>Turismo Sostenible</h3>
-                        <p>Comprometidos con la conservación de la Amazonía y el desarrollo de las comunidades locales</p>
+                        <h3 data-i18n="feature_turismo_sostenible">Turismo Sostenible</h3>
+                        <p data-i18n="feature_turismo_sostenible_desc">Comprometidos con la conservación de la Amazonía y el desarrollo de las comunidades locales</p>
                     </div>
                     
                     <div class="feature">
                         <div class="feature-icon">
                             <i class="fas fa-users"></i>
                         </div>
-                        <h3>Guías Especializados</h3>
-                        <p>Nuestros guías nativos conocen cada rincón de la selva y comparten su sabiduría ancestral</p>
+                        <h3 data-i18n="feature_guias_especializados">Guías Especializados</h3>
+                        <p data-i18n="feature_guias_especializados_desc">Nuestros guías nativos conocen cada rincón de la selva y comparten su sabiduría ancestral</p>
                     </div>
                     
                     <div class="feature">
                         <div class="feature-icon">
                             <i class="fas fa-shield-alt"></i>
                         </div>
-                        <h3>Seguridad Garantizada</h3>
-                        <p>Equipos de seguridad certificados y protocolos estrictos para tu tranquilidad</p>
+                        <h3 data-i18n="feature_seguridad_garantizada">Seguridad Garantizada</h3>
+                        <p data-i18n="feature_seguridad_garantizada_desc">Equipos de seguridad certificados y protocolos estrictos para tu tranquilidad</p>
                     </div>
                     
                     <div class="feature">
                         <div class="feature-icon">
                             <i class="fas fa-star"></i>
                         </div>
-                        <h3>Experiencias Únicas</h3>
-                        <p>Cada tour es diseñado para crear recuerdos inolvidables y conexiones auténticas</p>
+                        <h3 data-i18n="feature_experiencias_unicas">Experiencias Únicas</h3>
+                        <p data-i18n="feature_experiencias_unicas_desc">Cada tour es diseñado para crear recuerdos inolvidables y conexiones auténticas</p>
                     </div>
                     
                     <div class="feature">
                         <div class="feature-icon">
                             <i class="fas fa-clock"></i>
                         </div>
-                        <h3>15 Años de Experiencia</h3>
-                        <p>Más de una década creando aventuras amazónicas para viajeros de todo el mundo</p>
+                        <h3 data-i18n="feature_15_anos_experiencia">15 Años de Experiencia</h3>
+                        <p data-i18n="feature_15_anos_experiencia_desc">Más de una década creando aventuras amazónicas para viajeros de todo el mundo</p>
                     </div>
                     
                     <div class="feature">
                         <div class="feature-icon">
                             <i class="fas fa-heart"></i>
                         </div>
-                        <h3>Atención Personalizada</h3>
-                        <p>Grupos pequeños y atención dedicada para hacer de tu viaje una experiencia personal</p>
+                        <h3 data-i18n="feature_atencion_personalizada">Atención Personalizada</h3>
+                        <p data-i18n="feature_atencion_personalizada_desc">Grupos pequeños y atención dedicada para hacer de tu viaje una experiencia personal</p>
                     </div>
                 </div>
             </div>
@@ -408,8 +408,8 @@
         <section class="amazon-experiences">
             <div class="container">
                 <div class="section-header">
-                    <h2>Experiencias Amazónicas Únicas</h2>
-                    <p>Descubre la magia de Iquitos a través de aventuras inolvidables</p>
+                    <h2 data-i18n="experiencias_amazonicas_titulo">Experiencias Amazónicas Únicas</h2>
+                    <p data-i18n="experiencias_amazonicas_subtitulo">Descubre la magia de Iquitos a través de aventuras inolvidables</p>
                 </div>
                 
                 <div class="experiences-grid">
@@ -417,9 +417,9 @@
                         <img src="img/mercado.jpg" alt="Mercado de Belén">
                         <div class="experience-overlay">
                             <div class="experience-content">
-                                <h3>Mercado de Belén</h3>
-                                <p>Explora el mercado flotante más famoso de la Amazonía</p>
-                                <button class="btn-outline" data-experience="mercado-belen">Explorar</button>
+                                <h3 data-i18n="exp_mercado_belen">Mercado de Belén</h3>
+                                <p data-i18n="exp_mercado_belen_desc">Explora el mercado flotante más famoso de la Amazonía</p>
+                                <button class="btn-outline" data-experience="mercado-belen" data-i18n="btn_explorar">Explorar</button>
                             </div>
                         </div>
                     </div>
@@ -428,9 +428,9 @@
                         <img src="img/navegacionamazonas.jpeg" alt="Río Amazonas">
                         <div class="experience-overlay">
                             <div class="experience-content">
-                                <h3>Navegación Amazónica</h3>
-                                <p>Recorre el río más grande del mundo</p>
-                                <button class="btn-outline" data-experience="navegacion-amazonica">Explorar</button>
+                                <h3 data-i18n="exp_navegacion_amazonica">Navegación Amazónica</h3>
+                                <p data-i18n="exp_navegacion_amazonica_desc">Recorre el río más grande del mundo</p>
+                                <button class="btn-outline" data-experience="navegacion-amazonica" data-i18n="btn_explorar">Explorar</button>
                             </div>
                         </div>
                     </div>
@@ -439,9 +439,9 @@
                         <img src="img/delfines.jpeg" alt="Delfines Rosados">
                         <div class="experience-overlay">
                             <div class="experience-content">
-                                <h3>Delfines Rosados</h3>
-                                <p>Nada con los delfines del Amazonas</p>
-                                <button class="btn-outline" data-experience="delfines-rosados">Explorar</button>
+                                <h3 data-i18n="exp_delfines_rosados">Delfines Rosados</h3>
+                                <p data-i18n="exp_delfines_rosados_desc">Nada con los delfines del Amazonas</p>
+                                <button class="btn-outline" data-experience="delfines-rosados" data-i18n="btn_explorar">Explorar</button>
                             </div>
                         </div>
                     </div>
@@ -450,9 +450,9 @@
                         <img src="img/CasaHierro.png" alt="Casa del Hierro">
                         <div class="experience-overlay">
                             <div class="experience-content">
-                                <h3>Casa del Hierro</h3>
-                                <p>Historia y arquitectura en el corazón de Iquitos</p>
-                                <button class="btn-outline" data-experience="casa-hierro">Explorar</button>
+                                <h3 data-i18n="exp_casa_hierro">Casa del Hierro</h3>
+                                <p data-i18n="exp_casa_hierro_desc">Historia y arquitectura en el corazón de Iquitos</p>
+                                <button class="btn-outline" data-experience="casa-hierro" data-i18n="btn_explorar">Explorar</button>
                             </div>
                         </div>
                     </div>
@@ -461,9 +461,9 @@
                         <img src="img/gastronomia.jpg" alt="Gastronomía Amazónica">
                         <div class="experience-overlay">
                             <div class="experience-content">
-                                <h3>Gastronomía Amazónica</h3>
-                                <p>Sabores únicos de la selva peruana</p>
-                                <button class="btn-outline" data-experience="gastronomia-amazonica">Explorar</button>
+                                <h3 data-i18n="exp_gastronomia_amazonica">Gastronomía Amazónica</h3>
+                                <p data-i18n="exp_gastronomia_amazonica_desc">Sabores únicos de la selva peruana</p>
+                                <button class="btn-outline" data-experience="gastronomia-amazonica" data-i18n="btn_explorar">Explorar</button>
                             </div>
                         </div>
                     </div>
@@ -488,11 +488,11 @@
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
                             </div>
-                            <span class="rating-text">4.8/5 - Excelente (247 reseñas)</span>
+                            <span class="rating-text" data-i18n="tripadvisor_rating">4.8/5 - Excelente (247 reseñas)</span>
                         </div>
                     </div>
-                    <h2>Lo que dicen nuestros viajeros</h2>
-                    <p>Experiencias reales de aventureros como tú</p>
+                    <h2 data-i18n="tripadvisor_titulo">Lo que dicen nuestros viajeros</h2>
+                    <p data-i18n="tripadvisor_subtitulo">Experiencias reales de aventureros como tú</p>
                 </div>
                 
                 <div class="reviews-carousel">
@@ -501,7 +501,7 @@
                             <img src="img/agregar.jpeg" alt="Sarah M." class="reviewer-avatar">
                             <div class="reviewer-info">
                                 <h4>Sarah M.</h4>
-                                <span class="reviewer-location">Estados Unidos</span>
+                                <span class="reviewer-location" data-i18n="pais_estados_unidos">Estados Unidos</span>
                                 <div class="review-stars">
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
@@ -511,8 +511,8 @@
                                 </div>
                             </div>
                         </div>
-                        <p class="review-text">"Una experiencia absolutamente increíble. Los guías de Jaguar Expeditions conocen la selva como la palma de su mano. Vimos delfines rosados, perezosos y una increíble variedad de aves. ¡Definitivamente regresaré!"</p>
-                        <span class="review-date">Marzo 2025</span>
+                        <p class="review-text" data-i18n="review_sarah">"Una experiencia absolutamente increíble. Los guías de Jaguar Expeditions conocen la selva como la palma de su mano. Vimos delfines rosados, perezosos y una increíble variedad de aves. ¡Definitivamente regresaré!"</p>
+                        <span class="review-date" data-i18n="fecha_marzo_2025">Marzo 2025</span>
                     </div>
                     
                     <div class="review-card">
@@ -520,7 +520,7 @@
                             <img src="img/agregar.jpeg" alt="Carlos R." class="reviewer-avatar">
                             <div class="reviewer-info">
                                 <h4>Carlos R.</h4>
-                                <span class="reviewer-location">España</span>
+                                <span class="reviewer-location" data-i18n="pais_espana">España</span>
                                 <div class="review-stars">
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
@@ -530,8 +530,8 @@
                                 </div>
                             </div>
                         </div>
-                        <p class="review-text">"El tour nocturno fue espectacular. Escuchar los sonidos de la selva en la oscuridad y ver los ojos brillantes de los caimanes fue una experiencia que jamás olvidaré. Guías muy profesionales y seguros."</p>
-                        <span class="review-date">Febrero 2025</span>
+                        <p class="review-text" data-i18n="review_carlos">"El tour nocturno fue espectacular. Escuchar los sonidos de la selva en la oscuridad y ver los ojos brillantes de los caimanes fue una experiencia que jamás olvidaré. Guías muy profesionales y seguros."</p>
+                        <span class="review-date" data-i18n="fecha_febrero_2025">Febrero 2025</span>
                     </div>
                     
                     <div class="review-card">
@@ -539,7 +539,7 @@
                             <img src="img/agregar.jpeg" alt="Ana L." class="reviewer-avatar">
                             <div class="reviewer-info">
                                 <h4>Ana L.</h4>
-                                <span class="reviewer-location">Brasil</span>
+                                <span class="reviewer-location" data-i18n="pais_brasil">Brasil</span>
                                 <div class="review-stars">
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
@@ -549,8 +549,8 @@
                                 </div>
                             </div>
                         </div>
-                        <p class="review-text">"La atención al detalle y el respeto por la naturaleza de este equipo es admirable. Aprendimos mucho sobre las plantas medicinales y la cultura local. Una aventura educativa y emocionante."</p>
-                        <span class="review-date">Enero 2025</span>
+                        <p class="review-text" data-i18n="review_ana">"La atención al detalle y el respeto por la naturaleza de este equipo es admirable. Aprendimos mucho sobre las plantas medicinales y la cultura local. Una aventura educativa y emocionante."</p>
+                        <span class="review-date" data-i18n="fecha_enero_2025">Enero 2025</span>
                     </div>
                     
                     <div class="review-card">
@@ -558,7 +558,7 @@
                             <img src="img/agregar.jpeg" alt="Michel D." class="reviewer-avatar">
                             <div class="reviewer-info">
                                 <h4>Michel D.</h4>
-                                <span class="reviewer-location">Francia</span>
+                                <span class="reviewer-location" data-i18n="pais_francia">Francia</span>
                                 <div class="review-stars">
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
@@ -568,15 +568,15 @@
                                 </div>
                             </div>
                         </div>
-                        <p class="review-text">"Fantastic! The biodiversity we encountered was beyond imagination. Our guide spotted animals we never would have seen on our own. Jaguar Expeditions made our Amazon dream come true!"</p>
-                        <span class="review-date">Diciembre 2024</span>
+                        <p class="review-text" data-i18n="review_michel">"Fantastic! The biodiversity we encountered was beyond imagination. Our guide spotted animals we never would have seen on our own. Jaguar Expeditions made our Amazon dream come true!"</p>
+                        <span class="review-date" data-i18n="fecha_diciembre_2024">Diciembre 2024</span>
                     </div>
                 </div>
                 
                 <div class="tripadvisor-cta">
                     <a href="https://www.tripadvisor.com" target="_blank" class="btn-tripadvisor">
                         <img src="img/tripadvisor.png" alt="TripAdvisor">
-                        Ver todas las reseñas en TripAdvisor
+                        <span data-i18n="btn_ver_tripadvisor">Ver todas las reseñas en TripAdvisor</span>
                     </a>
                 </div>
             </div>
@@ -586,8 +586,8 @@
         <section class="location-section">
             <div class="container">
                 <div class="section-header">
-                    <h2>Nuestra Ubicación en Iquitos</h2>
-                    <p>Nos encontramos en el corazón de la puerta de entrada a la Amazonía</p>
+                    <h2 data-i18n="ubicacion_titulo">Nuestra Ubicación en Iquitos</h2>
+                    <p data-i18n="ubicacion_subtitulo">Nos encontramos en el corazón de la puerta de entrada a la Amazonía</p>
                 </div>
                 
                 <div class="location-content">
@@ -597,8 +597,8 @@
                                 <i class="fas fa-map-marker-alt"></i>
                             </div>
                             <div class="location-details">
-                                <h3>Oficina Principal</h3>
-                                <p>Jr. Putumayo 184, Iquitos 16001<br>Loreto, Perú</p>
+                                <h3 data-i18n="ubicacion_oficina_principal">Oficina Principal</h3>
+                                <p data-i18n="ubicacion_direccion">Jr. Putumayo 184, Iquitos 16001<br>Loreto, Perú</p>
                             </div>
                         </div>
                         
@@ -607,8 +607,8 @@
                                 <i class="fas fa-clock"></i>
                             </div>
                             <div class="location-details">
-                                <h3>Horarios de Atención</h3>
-                                <p>Lunes a Domingo<br>8:00 AM - 7:00 PM</p>
+                                <h3 data-i18n="ubicacion_horarios">Horarios de Atención</h3>
+                                <p><span data-i18n="ubicacion_dias">Lunes a Domingo</span><br><span data-i18n="ubicacion_horas">8:00 AM - 7:00 PM</span></p>
                             </div>
                         </div>
                         
@@ -617,8 +617,8 @@
                                 <i class="fas fa-plane"></i>
                             </div>
                             <div class="location-details">
-                                <h3>Cómo Llegar</h3>
-                                <p>Aeropuerto Internacional Crnl. FAP Francisco Secada Vignetta<br>15 min en taxi desde el aeropuerto</p>
+                                <h3 data-i18n="ubicacion_como_llegar">Cómo Llegar</h3>
+                                <p><span data-i18n="ubicacion_aeropuerto">Aeropuerto Internacional Crnl. FAP Francisco Secada Vignetta</span><br><span data-i18n="ubicacion_tiempo_taxi">15 min en taxi desde el aeropuerto</span></p>
                             </div>
                         </div>
                         
@@ -627,15 +627,15 @@
                                 <i class="fas fa-ship"></i>
                             </div>
                             <div class="location-details">
-                                <h3>Puerto Fluvial</h3>
-                                <p>A 5 minutos del puerto de Iquitos<br>Conexión directa con nuestros tours</p>
+                                <h3 data-i18n="ubicacion_puerto_fluvial">Puerto Fluvial</h3>
+                                <p><span data-i18n="ubicacion_distancia_puerto">A 5 minutos del puerto de Iquitos</span><br><span data-i18n="ubicacion_conexion_tours">Conexión directa con nuestros tours</span></p>
                             </div>
                         </div>
                         
                         <div class="contact-buttons">
                             <a href="tel:+51999123456" class="btn-contact">
                                 <i class="fas fa-phone"></i>
-                                Llamar Ahora
+                                <span data-i18n="btn_llamar_ahora">Llamar Ahora</span>
                             </a>
                             <a href="https://wa.me/51999123456" target="_blank" class="btn-contact whatsapp">
                                 <i class="fab fa-whatsapp"></i>
@@ -670,8 +670,8 @@
         <section class="tourism-info">
             <div class="container">
                 <div class="section-header">
-                    <h2>Información Útil para tu Viaje</h2>
-                    <p>Todo lo que necesitas saber antes de tu aventura amazónica</p>
+                    <h2 data-i18n="info_util_titulo">Información Útil para tu Viaje</h2>
+                    <p data-i18n="info_util_subtitulo">Todo lo que necesitas saber antes de tu aventura amazónica</p>
                 </div>
                 
                 <div class="info-grid">
@@ -679,48 +679,48 @@
                         <div class="info-icon">
                             <i class="fas fa-thermometer-half"></i>
                         </div>
-                        <h3>Clima</h3>
-                        <p>Tropical húmedo, 26°C promedio. Época seca: Mayo-Octubre. Época de lluvias: Noviembre-Abril.</p>
+                        <h3 data-i18n="info_clima">Clima</h3>
+                        <p data-i18n="info_clima_desc">Tropical húmedo, 26°C promedio. Época seca: Mayo-Octubre. Época de lluvias: Noviembre-Abril.</p>
                     </div>
                     
                     <div class="info-card">
                         <div class="info-icon">
                             <i class="fas fa-suitcase"></i>
                         </div>
-                        <h3>Qué Traer</h3>
-                        <p>Ropa ligera, repelente, protector solar, botas de lluvia, cámara impermeable, linterna.</p>
+                        <h3 data-i18n="info_que_traer">Qué Traer</h3>
+                        <p data-i18n="info_que_traer_desc">Ropa ligera, repelente, protector solar, botas de lluvia, cámara impermeable, linterna.</p>
                     </div>
                     
                     <div class="info-card">
                         <div class="info-icon">
                             <i class="fas fa-medkit"></i>
                         </div>
-                        <h3>Salud</h3>
-                        <p>Vacuna contra fiebre amarilla recomendada. Medicamentos básicos incluidos en nuestros tours.</p>
+                        <h3 data-i18n="info_salud">Salud</h3>
+                        <p data-i18n="info_salud_desc">Vacuna contra fiebre amarilla recomendada. Medicamentos básicos incluidos en nuestros tours.</p>
                     </div>
                     
                     <div class="info-card">
                         <div class="info-icon">
                             <i class="fas fa-utensils"></i>
                         </div>
-                        <h3>Gastronomía</h3>
-                        <p>Prueba el juane, tacacho, paiche a la parrilla y frutas amazónicas únicas como camu camu.</p>
+                        <h3 data-i18n="info_gastronomia">Gastronomía</h3>
+                        <p data-i18n="info_gastronomia_desc">Prueba el juane, tacacho, paiche a la parrilla y frutas amazónicas únicas como camu camu.</p>
                     </div>
                     
                     <div class="info-card">
                         <div class="info-icon">
                             <i class="fas fa-paw"></i>
                         </div>
-                        <h3>Fauna</h3>
-                        <p>Delfines rosados, perezosos, jaguares, guacamayos, más de 500 especies de aves.</p>
+                        <h3 data-i18n="info_fauna">Fauna</h3>
+                        <p data-i18n="info_fauna_desc">Delfines rosados, perezosos, jaguares, guacamayos, más de 500 especies de aves.</p>
                     </div>
                     
                     <div class="info-card">
                         <div class="info-icon">
                             <i class="fas fa-seedling"></i>
                         </div>
-                        <h3>Flora</h3>
-                        <p>Más de 3,000 especies de plantas, árboles gigantes, plantas medicinales y orquídeas exóticas.</p>
+                        <h3 data-i18n="info_flora">Flora</h3>
+                        <p data-i18n="info_flora_desc">Más de 3,000 especies de plantas, árboles gigantes, plantas medicinales y orquídeas exóticas.</p>
                     </div>
                 </div>
             </div>
@@ -733,18 +733,18 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <h3>Jaguar Expeditions</h3>
-                    <p>Tu puerta de entrada a la aventura amazónica más auténtica</p>
+                    <p data-i18n="footer_descripcion">Tu puerta de entrada a la aventura amazónica más auténtica</p>
                 </div>
                 
                 <div class="footer-section">
-                    <h4>Contacto</h4>
+                    <h4 data-i18n="footer_contacto">Contacto</h4>
                     <p><i class="fas fa-map-marker-alt"></i> Iquitos, Perú</p>
                     <p><i class="fas fa-phone"></i> +51 999 123 456</p>
                     <p><i class="fas fa-envelope"></i> info@jaguarexpeditions.com</p>
                 </div>
                 
                 <div class="footer-section">
-                    <h4>Síguenos</h4>
+                    <h4 data-i18n="footer_siguenos">Síguenos</h4>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-facebook"></i></a>
                         <a href="#"><i class="fab fa-instagram"></i></a>
@@ -756,15 +756,15 @@
             
             <div class="footer-bottom">
                 <div class="footer-bottom-content">
-                    <p>&copy; 2025 Jaguar Expeditions. Todos los derechos reservados.</p>
+                    <p data-i18n="footer_derechos">&copy; 2025 Jaguar Expeditions. Todos los derechos reservados.</p>
                     <div class="footer-links">
                         <a href="#" id="termsLinkIndex" class="terms-link">
                             <i class="fas fa-file-contract"></i>
-                            Términos y Condiciones
+                            <span data-i18n="footer_terminos">Términos y Condiciones</span>
                         </a>
                         <a href="#" class="privacy-link">
                             <i class="fas fa-shield-alt"></i>
-                            Política de Privacidad
+                            <span data-i18n="footer_privacidad">Política de Privacidad</span>
                         </a>
                         <a href="admin_reservas.html" class="admin-link" style="color: #666; font-size: 12px;" title="Panel de Administración">
                             <i class="fas fa-cog"></i>
@@ -1060,5 +1060,6 @@
             });
         });
     </script>
+    <script src="js/i18n.js"></script>
 </body>
 </html>

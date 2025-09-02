@@ -97,7 +97,7 @@ try {
     foreach ($tourStats as $stat) {
         $tourNombre = $tours[$stat['tour_interes']] ?? 'Tour #' . $stat['tour_interes'];
         echo "<li><strong>{$tourNombre}:</strong> {$stat['cantidad']} solicitudes</li>";
-    }
+    } 
     echo "</ul>";
     
     // Contactos con newsletter

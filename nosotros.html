@@ -20,8 +20,8 @@
                 <div class="logo-section">
                     <img src="img/logo.jpeg" alt="Jaguar Expeditions Logo" class="logo">
                     <div class="company-info">
-                        <h1 class="company-name">Jaguar Expeditions</h1>
-                        <p class="slogan">Más que un tour, una aventura salvaje.</p>
+                        <h1 class="company-name" data-i18n="site_title">Jaguar Expeditions</h1>
+                        <p class="slogan" data-i18n="site_slogan">Más que un tour, una aventura salvaje.</p>
                     </div>
                 </div>
                 
@@ -42,16 +42,16 @@
                     
                     <!-- Selector de idioma -->
                     <div class="language-selector">
-                        <select id="language">
-                            <option value="es">ES</option>
-                            <option value="en">EN</option>
-                            <option value="pt">PT</option>
-                        </select>
+                        <div class="flag-selector">
+                            <img src="img/espana.png" alt="Español" data-lang="es" class="flag-option active">
+                            <img src="img/reino-unido.png" alt="English" data-lang="en" class="flag-option">
+                            <img src="img/alemania.png" alt="Deutsch" data-lang="de" class="flag-option">
+                        </div>
                     </div>
                     
                     <!-- Buscador -->
                     <div class="search-box">
-                        <input type="text" placeholder="Buscar tours...">
+                        <input type="text" data-i18n-placeholder="placeholder_buscar_tours" placeholder="Buscar tours...">
                         <button><i class="fas fa-search"></i></button>
                     </div>
                     
@@ -69,12 +69,12 @@
     <nav class="navbar">
         <div class="container">
             <ul class="nav-menu">
-                <li><a href="index.html" class="nav-link">Inicio</a></li>
-                <li><a href="tours.html" class="nav-link">Tours</a></li>
-                <li><a href="contacto.html" class="nav-link">Contacto</a></li>
-                <li><a href="preguntas.html" class="nav-link">Preguntas</a></li>
-                <li><a href="galeria.html" class="nav-link">Galería</a></li>
-                <li><a href="nosotros.html" class="nav-link active">Nosotros</a></li>
+                <li><a href="index.html" class="nav-link" data-i18n="nav_inicio">Inicio</a></li>
+                <li><a href="tours.html" class="nav-link" data-i18n="nav_tours">Tours</a></li>
+                <li><a href="contacto.html" class="nav-link" data-i18n="nav_contacto">Contacto</a></li>
+                <li><a href="preguntas.html" class="nav-link" data-i18n="nav_preguntas">Preguntas</a></li>
+                <li><a href="galeria.html" class="nav-link" data-i18n="nav_galeria">Galería</a></li>
+                <li><a href="nosotros.html" class="nav-link active" data-i18n="nav_nosotros">Nosotros</a></li>
             </ul>
             
             <!-- Menú hamburguesa para móviles -->
@@ -95,8 +95,8 @@
                 <div class="hero-overlay"></div>
             </div>
             <div class="hero-content">
-                <h1>Conoce Jaguar Expeditions</h1>
-                <p>15 años conectando aventureros con la magia de la Amazonía peruana</p>
+                <h1 data-i18n="nosotros_hero_titulo">Conoce Jaguar Expeditions</h1>
+                <p data-i18n="nosotros_hero_subtitulo">15 años conectando aventureros con la magia de la Amazonía peruana</p>
             </div>
         </section>
 
@@ -106,21 +106,21 @@
                 <div class="story-content">
                     <div class="story-text">
                         <div class="section-header">
-                            <h2>Nuestra Historia</h2>
-                            <p>Un viaje que comenzó con la pasión por la Amazonía</p>
+                            <h2 data-i18n="nosotros_historia_titulo">Nuestra Historia</h2>
+                            <p data-i18n="nosotros_historia_subtitulo">Un viaje que comenzó con la pasión por la Amazonía</p>
                         </div>
                         <div class="story-description">
-                            <p>Todo comenzó en 2010, cuando nuestro fundador, <strong>Carlos Ríos</strong>, un guía nativo de Iquitos con más de 20 años de experiencia en la selva, decidió crear algo más que una simple agencia de turismo. Su visión era compartir la verdadera esencia de la Amazonía peruana con viajeros de todo el mundo.</p>
+                            <p data-i18n="nosotros_historia_p1">Todo comenzó en 2010, cuando nuestro fundador, <strong>Carlos Ríos</strong>, un guía nativo de Iquitos con más de 20 años de experiencia en la selva, decidió crear algo más que una simple agencia de turismo. Su visión era compartir la verdadera esencia de la Amazonía peruana con viajeros de todo el mundo.</p>
                             
-                            <p>Nacido y criado en las orillas del río Amazonas, Carlos creció aprendiendo los secretos de la selva de su abuelo, un chamán respetado en la comunidad. Esta conexión profunda con la naturaleza y la cultura ancestral se convirtió en el corazón de Jaguar Expeditions.</p>
+                            <p data-i18n="nosotros_historia_p2">Nacido y criado en las orillas del río Amazonas, Carlos creció aprendiendo los secretos de la selva de su abuelo, un chamán respetado en la comunidad. Esta conexión profunda con la naturaleza y la cultura ancestral se convirtió en el corazón de Jaguar Expeditions.</p>
                             
-                            <p>Lo que comenzó como pequeños tours para amigos extranjeros se transformó gradualmente en una empresa reconocida internacionalmente. Hoy, 15 años después, hemos guiado a más de 10,000 aventureros de 50 países diferentes, siempre manteniendo nuestros valores fundamentales de respeto, autenticidad y conservación.</p>
+                            <p data-i18n="nosotros_historia_p3">Lo que comenzó como pequeños tours para amigos extranjeros se transformó gradualmente en una empresa reconocida internacionalmente. Hoy, 15 años después, hemos guiado a más de 10,000 aventureros de 50 países diferentes, siempre manteniendo nuestros valores fundamentales de respeto, autenticidad y conservación.</p>
                         </div>
                     </div>
                     <div class="story-image">
                         <img src="img/CasaHierro.png" alt="Historia de Jaguar Expeditions">
                         <div class="image-caption">
-                            <p>Casa del Hierro, uno de los primeros sitios que comenzamos a mostrar a nuestros visitantes</p>
+                            <p data-i18n="nosotros_imagen_caption">Casa del Hierro, uno de los primeros sitios que comenzamos a mostrar a nuestros visitantes</p>
                         </div>
                     </div>
                 </div>
@@ -135,29 +135,29 @@
                         <div class="mv-icon">
                             <i class="fas fa-eye"></i>
                         </div>
-                        <h3>Nuestra Visión</h3>
-                        <p>Ser la agencia de turismo amazónico más respetada y responsable del Perú, reconocida por ofrecer experiencias auténticas que transforman vidas mientras protegemos la selva y apoyamos a las comunidades locales.</p>
+                        <h3 data-i18n="nosotros_vision_titulo">Nuestra Visión</h3>
+                        <p data-i18n="nosotros_vision_texto">Ser la agencia de turismo amazónico más respetada y responsable del Perú, reconocida por ofrecer experiencias auténticas que transforman vidas mientras protegemos la selva y apoyamos a las comunidades locales.</p>
                     </div>
                     
                     <div class="mv-card">
                         <div class="mv-icon">
                             <i class="fas fa-bullseye"></i>
                         </div>
-                        <h3>Nuestra Misión</h3>
-                        <p>Conectar a viajeros de todo el mundo con la magia de la Amazonía peruana a través de aventuras seguras, educativas y sostenibles, promoviendo la conservación del ecosistema y el desarrollo de las comunidades nativas.</p>
+                        <h3 data-i18n="nosotros_mision_titulo">Nuestra Misión</h3>
+                        <p data-i18n="nosotros_mision_texto">Conectar a viajeros de todo el mundo con la magia de la Amazonía peruana a través de aventuras seguras, educativas y sostenibles, promoviendo la conservación del ecosistema y el desarrollo de las comunidades nativas.</p>
                     </div>
                     
                     <div class="mv-card">
                         <div class="mv-icon">
                             <i class="fas fa-heart"></i>
                         </div>
-                        <h3>Nuestros Valores</h3>
+                        <h3 data-i18n="nosotros_valores_titulo">Nuestros Valores</h3>
                         <ul>
-                            <li><strong>Respeto:</strong> Por la naturaleza y las culturas ancestrales</li>
-                            <li><strong>Autenticidad:</strong> Experiencias genuinas y verdaderas</li>
-                            <li><strong>Sostenibilidad:</strong> Turismo responsable y consciente</li>
-                            <li><strong>Seguridad:</strong> Protección total de nuestros visitantes</li>
-                            <li><strong>Pasión:</strong> Amor genuino por lo que hacemos</li>
+                            <li data-i18n="nosotros_valor_respeto"><strong>Respeto:</strong> Por la naturaleza y las culturas ancestrales</li>
+                            <li data-i18n="nosotros_valor_autenticidad"><strong>Autenticidad:</strong> Experiencias genuinas y verdaderas</li>
+                            <li data-i18n="nosotros_valor_sostenibilidad"><strong>Sostenibilidad:</strong> Turismo responsable y consciente</li>
+                            <li data-i18n="nosotros_valor_seguridad"><strong>Seguridad:</strong> Protección total de nuestros visitantes</li>
+                            <li data-i18n="nosotros_valor_pasion"><strong>Pasión:</strong> Amor genuino por lo que hacemos</li>
                         </ul>
                     </div>
                 </div>
@@ -168,8 +168,8 @@
         <section class="our-team">
             <div class="container">
                 <div class="section-header">
-                    <h2>Nuestro Equipo</h2>
-                    <p>Conoce a los expertos que harán de tu aventura una experiencia inolvidable</p>
+                    <h2 data-i18n="nosotros_equipo_titulo">Nuestro Equipo</h2>
+                    <p data-i18n="nosotros_equipo_subtitulo">Conoce a los expertos que harán de tu aventura una experiencia inolvidable</p>
                 </div>
                 
                 <div class="team-grid">
@@ -306,8 +306,8 @@
         <section class="achievements">
             <div class="container">
                 <div class="section-header">
-                    <h2>Nuestros Logros</h2>
-                    <p>15 años de excelencia reconocida</p>
+                    <h2 data-i18n="nosotros_logros_titulo">Nuestros Logros</h2>
+                    <p data-i18n="nosotros_logros_subtitulo">15 años de excelencia reconocida</p>
                 </div>
                 
                 <div class="achievements-grid">
@@ -373,8 +373,8 @@
             <div class="container">
                 <div class="commitment-content">
                     <div class="commitment-text">
-                        <h2>Compromiso Social y Ambiental</h2>
-                        <p>En Jaguar Expeditions creemos que el turismo debe ser una fuerza positiva para el cambio. Por eso, hemos desarrollado varios programas que benefician directamente a las comunidades locales y contribuyen a la conservación de la Amazonía.</p>
+                        <h2 data-i18n="nosotros_compromiso_titulo">Compromiso Social y Ambiental</h2>
+                        <p data-i18n="nosotros_compromiso_texto">En Jaguar Expeditions creemos que el turismo debe ser una fuerza positiva para el cambio. Por eso, hemos desarrollado varios programas que benefician directamente a las comunidades locales y contribuyen a la conservación de la Amazonía.</p>
                         
                         <div class="commitment-programs">
                             <div class="program">
@@ -530,6 +530,7 @@
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script src="js/i18n.js"></script>
     <script src="script.js"></script>
 
     <!-- Botón flotante de WhatsApp -->

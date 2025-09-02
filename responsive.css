@@ -230,6 +230,18 @@
         gap: 30px;
     }
     
+    /* Métodos de pago responsive */
+    .payment-methods {
+        justify-content: center;
+        gap: 10px;
+    }
+    
+    .payment-icon {
+        width: 45px;
+        height: 45px;
+        font-size: 20px;
+    }
+    
     /* Experiencias Amazónicas responsive */
     .amazon-experiences {
         padding: 60px 0;
@@ -371,6 +383,16 @@
     
     .language-selector {
         order: 3;
+    }
+    
+    /* Banderas responsive */
+    .flag-selector {
+        gap: 6px;
+    }
+    
+    .flag-option {
+        width: 20px;
+        height: 15px;
     }
     
     .search-box {
@@ -945,6 +967,17 @@
     
     .social-links {
         justify-content: center;
+    }
+    
+    /* Métodos de pago móvil */
+    .payment-methods {
+        gap: 8px;
+    }
+    
+    .payment-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
     }
 
 
@@ -2154,5 +2187,77 @@
     
     .whatsapp-button i {
         font-size: 24px;
+    }
+}
+
+/* CSS PARA RESERVAR.HTML - RESPONSIVE */
+
+/* Responsive Design para sistema de reservas */
+@media (max-width: 768px) {
+    .reservation-container {
+        margin: 20px;
+        padding: 15px;
+        margin-top: 80px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .tour-details {
+        grid-template-columns: 1fr;
+    }
+
+    .navigation-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .btn-siguiente {
+        margin-left: 0;
+    }
+
+    .step-indicator {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .step {
+        min-width: 80px;
+    }
+
+    .step-title {
+        font-size: 11px;
+    }
+
+    .step-number {
+        width: 35px;
+        height: 35px;
+        font-size: 14px;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+
+    .tour-title {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .reservation-container {
+        margin: 10px;
+        padding: 10px;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+
+    .tour-title {
+        font-size: 20px;
     }
 }

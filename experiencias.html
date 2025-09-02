@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experiencias Amazónicas - Jaguar Expeditions</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="responsive.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <!-- Logo y nombre -->
+                <div class="logo-section">
+                    <img src="img/logo.jpeg" alt="Jaguar Expeditions Logo" class="logo">
+                    <div class="company-info">
+                        <h1 class="company-name">Jaguar Expeditions</h1>
+                        <p class="slogan">Más que un tour, una aventura salvaje.</p>
+                    </div>
+                </div>
+                
+                <!-- Información de contacto -->
+                <div class="contact-info">
+                    <div class="phone">
+                        <i class="fas fa-phone"></i>
+                        <span>+51 999 123 456</span>
+                    </div>
+                    
+                    <!-- Redes sociales -->
+                    <div class="social-media">
+                        <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-tripadvisor"></i></a>
+                    </div>
+                    
+                    <!-- Selector de idioma -->
+                    <div class="language-selector">
+                        <select id="language">
+                            <option value="es">ES</option>
+                            <option value="en">EN</option>
+                            <option value="pt">PT</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Buscador -->
+                    <div class="search-box">
+                        <input type="text" placeholder="Buscar tours...">
+                        <button><i class="fas fa-search"></i></button>
+                    </div>
+                    
+                    <!-- Carrito -->
+                    <div class="cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </div>
+                    
+                    <!-- Verificar reserva -->
+                    <div class="verificar-reserva" style="margin-left: 15px;">
+                        <a href="estado_reserva.html" class="btn-reserva" style="background: #27ae60; color: white; padding: 8px 15px; border-radius: 20px; text-decoration: none; font-size: 14px; display: flex; align-items: center; gap: 5px;">
+                            <i class="fas fa-search"></i>
+                            Ver Reserva
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navegación -->
+    <nav class="navbar">
+        <div class="container">
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Inicio</a></li>
+                <li><a href="tours.html" class="nav-link">Tours</a></li>
+                <li><a href="contacto.html" class="nav-link">Contacto</a></li>
+                <li><a href="preguntas.html" class="nav-link">Preguntas</a></li>
+                <li><a href="galeria.html" class="nav-link">Galería</a></li>
+                <li><a href="nosotros.html" class="nav-link">Nosotros</a></li>
+                <li><a href="experiencias.html" class="nav-link active">Experiencias</a></li>
+            </ul>
+            
+            <!-- Menú hamburguesa para móviles -->
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sección Principal - Experiencias -->
+    <main id="experiencias">
+        <!-- Hero Section -->
+        <section class="page-hero">
+            <div class="hero-background">
+                <img src="img/fondo.jpg" alt="Experiencias Amazónicas">
+                <div class="hero-overlay"></div>
+            </div>
+            <div class="hero-content">
+                <h1>Experiencias Amazónicas Únicas</h1>
+                <p>Descubre la auténtica Amazonía peruana más allá de los tours tradicionales</p>
+            </div>
+        </section>
+
+        <!-- Navegación rápida -->
+        <section class="quick-nav">
+            <div class="container">
+                <div class="quick-nav-content">
+                    <span class="quick-nav-title">Explorar:</span>
+                    <div class="quick-nav-links">
+                        <a href="#mercado-belen" class="quick-nav-link">
+                            <i class="fas fa-shopping-basket"></i>
+                            Mercado de Belén
+                        </a>
+                        <a href="#navegacion-amazonica" class="quick-nav-link">
+                            <i class="fas fa-ship"></i>
+                            Navegación
+                        </a>
+                        <a href="#delfines-rosados" class="quick-nav-link">
+                            <i class="fas fa-water"></i>
+                            Delfines
+                        </a>
+                        <a href="#casa-hierro" class="quick-nav-link">
+                            <i class="fas fa-building"></i>
+                            Casa del Hierro
+                        </a>
+                        <a href="#gastronomia-amazonica" class="quick-nav-link">
+                            <i class="fas fa-utensils"></i>
+                            Gastronomía
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mercado de Belén -->
+        <section id="mercado-belen" class="experience-section">
+            <div class="container">
+                <div class="experience-content">
+                    <div class="experience-text">
+                        <div class="section-header">
+                            <h2>Mercado de Belén</h2>
+                            <p>El mercado flotante más famoso y fascinante de la Amazonía</p>
+                        </div>
+                        <div class="experience-description">
+                            <p>El <strong>Mercado de Belén</strong> es mucho más que un simple mercado; es el corazón pulsante de Iquitos y una ventana directa a la vida amazónica auténtica. Conocido como el "Mercado Flotante de la Amazonía", este vibrante centro comercial ha sido el alma de la ciudad durante más de un siglo.</p>
+                            
+                            <h3>¿Qué encontrarás aquí?</h3>
+                            <ul class="experience-list">
+                                <li><strong>Productos amazónicos únicos:</strong> Frutas exóticas como camu camu, aguaje, ungurahui, y cacao silvestre que no encontrarás en ningún otro lugar del mundo.</li>
+                                <li><strong>Medicina tradicional:</strong> Plantas medicinales utilizadas por los curanderos locales durante generaciones, como uña de gato, sangre de grado y ayahuasca.</li>
+                                <li><strong>Gastronomía local:</strong> Pescado fresco del Amazonas, carnes de monte como majaz y sajino, e ingredientes únicos para la cocina amazónica.</li>
+                                <li><strong>Artesanías auténticas:</strong> Trabajos en chambira, ceramica shipibo, textiles nativos y esculturas en madera.</li>
+                                <li><strong>Vida flotante:</strong> Casas sobre palafitos donde viven familias enteras, adaptándose al ritmo de las crecientes del río.</li>
+                            </ul>
+                            
+                            <h3>La experiencia completa</h3>
+                            <p>Durante tu visita al Mercado de Belén, no solo serás un observador, sino que te sumergirás en una experiencia sensorial completa. Los aromas intensos de las frutas tropicales se mezclan con el olor a pescado fresco y las hierbas medicinales. Los colores vibrantes de los productos contrastan con las aguas marrones del Amazonas, mientras que los sonidos de los vendedores pregonando sus productos en español y lenguas nativas crean una sinfonía única.</p>
+                            
+                            <p>Los vendedores, en su mayoría mujeres locales, te contarán las propiedades de cada planta, te enseñarán cómo preparar remedios tradicionales y te harán probar frutas que jamás imaginaste que existían. Es una oportunidad única para conectar con la sabiduría ancestral amazónica.</p>
+                            
+                            <h3>Importancia cultural</h3>
+                            <p>El Mercado de Belén es el principal centro de intercambio comercial y cultural de la región. Aquí confluyen comunidades indígenas de toda la cuenca amazónica, trayendo productos únicos de sus territorios. Es un lugar donde la tradición milenaria se mantiene viva, donde cada transacción es una historia y cada producto tiene un significado cultural profundo.</p>
+                        </div>
+                        <div class="experience-highlights">
+                            <h4>Datos interesantes:</h4>
+                            <div class="highlight-grid">
+                                <div class="highlight-item">
+                                    <i class="fas fa-calendar-alt"></i>
+                                    <span>Más de 100 años de historia</span>
+                                </div>
+                                <div class="highlight-item">
+                                    <i class="fas fa-users"></i>
+                                    <span>Más de 3,000 vendedores diarios</span>
+                                </div>
+                                <div class="highlight-item">
+                                    <i class="fas fa-leaf"></i>
+                                    <span>+200 especies de plantas medicinales</span>
+                                </div>
+                                <div class="highlight-item">
+                                    <i class="fas fa-apple-alt"></i>
+                                    <span>+50 variedades de frutas amazónicas</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="experience-image">
+                        <img src="img/mercado.jpg" alt="Mercado de Belén">
+                        <div class="image-caption">
+                            <p>El vibrante Mercado de Belén, donde la tradición amazónica cobra vida</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Navegación Amazónica -->
+        <section id="navegacion-amazonica" class="experience-section">
+            <div class="container">
+                <div class="experience-content reverse">
+                    <div class="experience-text">
+                        <div class="section-header">
+                            <h2>Navegación Amazónica</h2>
+                            <p>Navega por el río más grande y poderoso del mundo</p>
+                        </div>
+                        <div class="experience-description">
+                            <p>La <strong>navegación por el río Amazonas</strong> es una experiencia que conecta directamente con la esencia de la selva. No es simplemente un paseo en bote; es un viaje a través de la arteria principal de la vida amazónica, donde cada kilómetro navegado revela nuevos secretos de este ecosistema único.</p>
+                            
+                            <h3>¿Qué hace especial esta experiencia?</h3>
+                            <ul class="experience-list">
+                                <li><strong>El río más caudaloso del mundo:</strong> Navegarás por aguas que transportan más agua que los siguientes 10 ríos más grandes del mundo juntos.</li>
+                                <li><strong>Biodiversidad increíble:</strong> Avistamiento de delfines rosados, manatíes, caimanes, más de 300 especies de aves y una infinita variedad de peces.</li>
+                                <li><strong>Comunidades ribereñas:</strong> Visita a pueblos nativos que han vivido en armonía con el río durante siglos, manteniendo tradiciones ancestrales.</li>
+                                <li><strong>Fenómenos naturales únicos:</strong> Observa el "encuentro de las aguas" donde ríos de diferentes colores fluyen lado a lado sin mezclarse.</li>
+                                <li><strong>Medicina tradicional flotante:</strong> Conoce chamanes que navegan el río compartiendo conocimientos milenarios sobre plantas sagradas.</li>
+                            </ul>
+                            
+                            <h3>Tipos de embarcaciones</h3>
+                            <p>Utilizamos diferentes tipos de embarcaciones dependiendo de la experiencia que busques:</p>
+                            <ul class="experience-list">
+                                <li><strong>Peque-peques:</strong> Botes tradicionales de madera para navegación íntima y sigilosa, perfectos para observación de fauna.</li>
+                                <li><strong>Lanchas rápidas:</strong> Para quienes quieren cubrir más distancia y explorar áreas remotas del río.</li>
+                                <li><strong>Botes de medicina:</strong> Embarcaciones especiales equipadas para ceremonias tradicionales en el agua.</li>
+                                <li><strong>Canoas:</strong> La forma más auténtica y silenciosa de navegar, ideal para adentrarse en tributarios pequeños.</li>
+                            </ul>
+                            
+                            <h3>La magia del río de noche</h3>
+                            <p>La navegación nocturna es una experiencia completamente diferente. Bajo la luz de la luna y las estrellas, el río se transforma en un mundo misterioso lleno de sonidos únicos. Es el momento perfecto para avistar caimanes, escuchar el canto nocturno de las aves y experimentar la verdadera inmensidad del Amazonas.</p>
+                            
+                            <p>Los guías locales, criados a orillas del río, comparten leyendas ancestrales sobre espíritus del agua, sirenas amazónicas y criaturas místicas que, según la tradición, protegen estas aguas sagradas.</p>
+                        </div>
+                        <div class="experience-highlights">
+                            <h4>Datos fascinantes:</h4>
+                            <div class="highlight-grid">
+                                <div class="highlight-item">
+                                    <i class="fas fa-water"></i>
+                                    <span>6,400 km de longitud total</span>
+                                </div>
+                                <div class="highlight-item">
+                                    <i class="fas fa-fish"></i>
+                                    <span>+3,000 especies de peces</span>
+                                </div>
+                                <div class="highlight-item">
+                                    <i class="fas fa-tint"></i>
+                                    <span>20% del agua dulce mundial</span>
+                                </div>
+                                <div class="highlight-item">
+                                    <i class="fas fa-eye"></i>
+                                    <span>Delfines rosados únicos en el mundo</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="experience-image">
+                        <img src="img/navegacionamazonas.jpeg" alt="Navegación Amazónica">
+                        <div class="image-caption">
+                            <p>Navegando por las aguas del río Amazonas al atardecer</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Delfines Rosados -->
+        <section id="delfines-rosados" class="experience-section">
+            <div class="container">
+                <div class="experience-content">
+                    <div class="experience-text">
+                        <div class="section-header">
+                            <h2>Encuentro con Delfines Rosados</h2>
+                            <p>Una experiencia mágica con los guardianes del Amazonas</p>
+                        </div>
+                        <div class="experience-description">
+                            <p>Los <strong>delfines rosados del Amazonas</strong> son una de las criaturas más místicas y fascinantes de la selva. Conocidos localmente como "bufeos", estos inteligentes mamíferos acuáticos han sido venerados por las culturas amazónicas durante milenios, siendo considerados guardianes espirituales del río.</p>
+                            
+                            <h3>¿Por qué son tan especiales?</h3>
+                            <ul class="experience-list">
+                                <li><strong>Únicos en el mundo:</strong> Son los delfines de río más grandes del planeta y los únicos verdaderamente rosados en estado adulto.</li>
+                                <li><strong>Inteligencia excepcional:</strong> Poseen el cerebro más grande en relación a su cuerpo de todos los delfines, con capacidades cognitivas sorprendentes.</li>
+                                <li><strong>Flexibilidad asombrosa:</strong> A diferencia de los delfines marinos, pueden mover su cabeza 180 grados y navegar en aguas poco profundas.</li>
+                                <li><strong>Longevidad:</strong> Pueden vivir hasta 30 años y desarrollan su característico color rosado con la edad y la actividad.</li>
+                                <li><strong>Ecolocalización avanzada:</strong> Su sistema de sonar es tan preciso que pueden "ver" a través del agua turbia del Amazonas.</li>
+                            </ul>
+                            
+                            <h3>La experiencia de nadar con ellos</h3>
+                            <p>Nadar con delfines rosados no es solo una actividad turística; es un encuentro espiritual profundo. Estas criaturas curiosas y juguetonas a menudo se acercan a los humanos de forma voluntaria, creando momentos de conexión únicos e irrepetibles.</p>
+                            
+                            <p>Durante la experiencia, aprenderás sobre su comportamiento, alimentación y el importante papel que juegan en el ecosistema amazónico. Los delfines actúan como indicadores de la salud del río, ya que solo pueden sobrevivir en aguas limpias y ricas en biodiversidad.</p>
+                            
+                            <h3>Leyendas y mitos amazónicos</h3>
+                            <p>En la mitología amazónica, los delfines rosados son seres mágicos capaces de transformarse en humanos atractivos durante las noches de luna llena. Según las leyendas, emergen del río para participar en las fiestas de los pueblos ribereños, seduciendo a jóvenes para llevarlos a ciudades subacuáticas.</p>
+                            
+                            <p>Los chamanes consideran a los delfines como mensajeros entre el mundo acuático y terrestre, y muchas ceremonias tradicionales incluyen invocaciones a estos "espíritus del agua" para obtener protección durante los viajes fluviales.</p>
+                            
+                            <h3>Conservación y respeto</h3>
+                            <p>Nuestros encuentros con delfines rosados se realizan siguiendo estrictos protocolos de conservación. Trabajamos con biólogos marinos locales para asegurar que nuestras actividades no interfieran con sus patrones naturales de comportamiento. La experiencia se centra en la observación respetuosa y, cuando los delfines lo permiten, interacciones controladas que benefician tanto a los visitantes como a los programas de investigación y conservación.</p>
+                        </div>
+                        <div class="experience-highlights">
+                            <h4>Datos increíbles:</h4>
+                            <div class="highlight-grid">
+                                <div class="highlight-item">
+                                    <i class="fas fa-ruler-horizontal"></i>
+                                    <span>Hasta 2.5 metros de longitud</span>
+                                </div>
+                                <div class="highlight-item">
+                                    <i class="fas fa-weight"></i>
+                                    <span>Hasta 185 kg de peso</span>
+                                </div>
+                                <div class="highlight-item">
+                                    <i class="fas fa-brain"></i>
+                                    <span>40% más cerebro que delfines marinos</span>
+                                </div>
+                                <div class="highlight-item">
+                                    <i class="fas fa-heart"></i>
+                                    <span>El color rosado intensifica con la emoción</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="experience-image">
+                        <img src="img/delfines.jpeg" alt="Delfines Rosados">
+                        <div class="image-caption">
+                            <p>Un delfín rosado emergiendo de las aguas del Amazonas</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Casa del Hierro -->
+        <section id="casa-hierro" class="experience-section">
+            <div class="container">
+                <div class="experience-content reverse">
+                    <div class="experience-text">
+                        <div class="section-header">
+                            <h2>Casa del Hierro</h2>
+                            <p>Un tesoro arquitectónico en el corazón de la Amazonía</p>
+                        </div>
+                        <div class="experience-description">
+                            <p>La <strong>Casa del Hierro</strong> es uno de los monumentos arquitectónicos más extraordinarios de Iquitos y un testimonio fascinante de la época dorada del caucho en la Amazonía. Esta estructura metálica única representa la unión entre la ingeniería europea del siglo XIX y la necesidad de adaptación al clima tropical amazónico.</p>
+                            
+                            <h3>Historia fascinante</h3>
+                            <ul class="experience-list">
+                                <li><strong>Diseño de Gustave Eiffel:</strong> Creada en 1887 por el mismo arquitecto de la Torre Eiffel, esta casa fue originalmente diseñada para ser exhibida en la Exposición Universal de París.</li>
+                                <li><strong>Viaje épico:</strong> Fue desmontada pieza por pieza y transportada desde Europa hasta Iquitos a través del océano Atlántico y el río Amazonas, un viaje que duró más de dos años.</li>
+                                <li><strong>Símbolo del boom del caucho:</strong> Representa la riqueza extrema generada por la exportación de caucho amazónico entre 1880 y 1920.</li>
+                                <li><strong>Adaptación climática:</strong> Su diseño incorpora elementos específicos para resistir la humedad, las lluvias intensas y las altas temperaturas de la selva.</li>
+                                <li><strong>Patrimonio cultural:</strong> Declarada Patrimonio Histórico de la Nación, es un ícono arquitectónico único en el mundo.</li>
+                            </ul>
+                            
+                            <h3>Características arquitectónicas únicas</h3>
+                            <p>La Casa del Hierro es una maravilla de la ingeniería. Completamente construida en hierro forjado, presenta un sistema de ventilación natural que permite la circulación del aire en todos los niveles. Sus balcones ornamentados y la estructura metálica pintada en colores vivos contrastan dramáticamente con la exuberante vegetación tropical que la rodea.</p>
+                            
+                            <p>El diseño incluye elementos decorativos típicos del estilo Belle Époque, con intrincados trabajos en hierro que forman patrones florales y geométricos. Los techos altos y las amplias ventanas fueron diseñados específicamente para maximizar la ventilación en el clima húmedo amazónico.</p>
+                            
+                            <h3>La época dorada del caucho</h3>
+                            <p>Durante el boom del caucho, Iquitos era una de las ciudades más ricas de América del Sur. Los "barones del caucho" importaban los lujos más extravagantes de Europa, desde champagne francés hasta óperas completas que se presentaban en el Teatro Amazonas. La Casa del Hierro es un símbolo tangible de esta era de prosperidad extraordinaria.</p>
+                            
+                            <p>La casa albergó a numerosas personalidades importantes de la época, incluidos diplomáticos, comerciantes europeos y exploradores que llegaban a Iquitos atraídos por las oportunidades de riqueza que ofrecía el "oro blanco" amazónico.</p>
+                            
+                            <h3>Importancia cultural actual</h3>
+                            <p>Hoy en día, la Casa del Hierro funciona como un centro cultural y museo que narra la historia de Iquitos durante el boom del caucho. Sus salas exhiben fotografías históricas, documentos originales, y objetos de la época que permiten a los visitantes comprender la transformación radical que experimentó la región durante aquellos años.</p>
+                            
+                            <p>La casa también sirve como venue para eventos culturales, exposiciones de arte local y presentaciones sobre la historia amazónica, manteniendo viva la memoria de una época que definió el carácter cosmopolita único de Iquitos.</p>
+                        </div>
+                        <div class="experience-highlights">
+                            <h4>Datos históricos:</h4>
+                            <div class="highlight-grid">
+                                <div class="highlight-item">
+                                    <i class="fas fa-calendar"></i>
+                                    <span>Construida en 1887</span>
+                                </div>
+                                <div class="highlight-item">
+                                    <i class="fas fa-ship"></i>
+                                    <span>Viajó 12,000 km hasta Iquitos</span>
+                                </div>
+                                <div class="highlight-item">
+                                    <i class="fas fa-hammer"></i>
+                                    <span>Hierro forjado parisino auténtico</span>
+                                </div>
+                                <div class="highlight-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>Única en toda la Amazonía</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="experience-image">
+                        <img src="img/CasaHierro.png" alt="Casa del Hierro">
+                        <div class="image-caption">
+                            <p>La icónica Casa del Hierro, joya arquitectónica de la época del caucho</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gastronomía Amazónica -->
+        <section id="gastronomia-amazonica" class="experience-section">
+            <div class="container">
+                <div class="experience-content">
+                    <div class="experience-text">
+                        <div class="section-header">
+                            <h2>Gastronomía Amazónica</h2>
+                            <p>Un viaje culinario por los sabores únicos de la selva</p>
+                        </div>
+                        <div class="experience-description">
+                            <p>La <strong>gastronomía amazónica</strong> es una de las más ricas y diversas del mundo, resultado de miles de años de adaptación de las culturas nativas a los recursos únicos de la selva tropical. Es una cocina que combina ingredientes imposibles de encontrar en cualquier otro lugar del planeta con técnicas ancestrales de preparación que han sido transmitidas de generación en generación.</p>
+                            
+                            <h3>Ingredientes únicos del mundo</h3>
+                            <ul class="experience-list">
+                                <li><strong>Frutas exóticas:</strong> Camu camu (con más vitamina C que cualquier fruta conocida), aguaje, ungurahui, cocona, caimito y más de 200 especies frutales únicas.</li>
+                                <li><strong>Pescados amazónicos:</strong> Paiche (uno de los peces de agua dulce más grandes del mundo), dorado, gamitana, sábalo, y especies únicas como el zúngaro.</li>
+                                <li><strong>Carnes de monte:</strong> Majaz, sajino, venado, capybara, y aves como el paujil y la pucacunga, cazadas de forma sostenible.</li>
+                                <li><strong>Plantas y hierbas:</strong> Culantro de monte, sacha culantro, hierba luisa amazónica, y cientos de plantas aromáticas endémicas.</li>
+                                <li><strong>Tubérculos ancestrales:</strong> Yuca brava (procesada de forma especial), dale dale, uncucha, y variedades de ñame selvático.</li>
+                            </ul>
+                            
+                            <h3>Platos emblemáticos</h3>
+                            <p><strong>Juane:</strong> Considerado el plato más representativo de la Amazonía peruana. Consiste en arroz sazonado con cúrcuma, pollo o gallina, aceitunas y huevo duro, todo envuelto en hojas de bijao (una planta amazónica) y cocido al vapor. Cada familia tiene su receta secreta transmitida por generaciones.</p>
+                            
+                            <p><strong>Tacacho con cecina:</strong> Plátano verde machacado y mezclado con manteca de cerdo y chicharrón, acompañado de cecina (carne de cerdo salada y secada al sol) y chorizo regional. Es el desayuno de los trabajadores de la selva.</p>
+                            
+                            <p><strong>Paiche a la parrilla:</strong> El paiche, conocido como el "bacalao amazónico", se prepara a la parrilla con especias locales. Su carne blanca y firme es considerada una de las más finas del mundo.</p>
+                            
+                            <p><strong>Sopa de motelo:</strong> Una sopa nutritiva preparada con tortuga motelo, considerada un afrodisíaco natural y altamente nutritiva. Se prepara con especias amazónicas y se sirve tradicionalmente para celebraciones especiales.</p>
+                            
+                            <h3>Bebidas tradicionales</h3>
+                            <p>Las bebidas amazónicas son tan diversas como la selva misma. El <strong>masato</strong> es una bebida fermentada de yuca que es básica en la dieta amazónica. El <strong>chapo</strong> se prepara con plátano maduro cocido y es perfecto para el clima caluroso. Los jugos de frutas nativas como camu camu, aguaje y cocona ofrecen sabores impossibles de encontrar en otros lugares.</p>
+                            
+                            <h3>Técnicas de cocción ancestrales</h3>
+                            <p>Las técnicas culinarias amazónicas han sido desarrolladas a lo largo de milenios. El <strong>patarashca</strong> es una técnica donde el pescado se envuelve en hojas y se cocina sobre brasas, dándole un sabor ahumado único. La <strong>cocción en hojas de bijao</strong> no solo conserva los sabores, sino que también aporta propiedades medicinales de la planta.</p>
+                            
+                            <p>El uso de <strong>leña específica</strong> para diferentes tipos de cocción es todo un arte. Cada tipo de madera aporta sabores distintos, y los cocineros tradicionales saben exactamente qué madera usar para cada plato.</p>
+                            
+                            <h3>Experiencia gastronómica completa</h3>
+                            <p>Nuestra experiencia gastronómica no se limita a degustar platos, sino que incluye visitas a mercados locales, cocina con familias nativas, recolección de ingredientes en la selva, y participación en la preparación de comidas tradicionales. Aprenderás sobre las propiedades nutricionales y medicinales de cada ingrediente, así como su importancia cultural para las comunidades amazónicas.</p>
+                        </div>
+                        <div class="experience-highlights">
+                            <h4>Sabores únicos:</h4>
+                            <div class="highlight-grid">
+                                <div class="highlight-item">
+                                    <i class="fas fa-apple-alt"></i>
+                                    <span>+200 frutas endémicas</span>
+                                </div>
+                                <div class="highlight-item">
+                                    <i class="fas fa-fish"></i>
+                                    <span>+50 especies de peces comestibles</span>
+                                </div>
+                                <div class="highlight-item">
+                                    <i class="fas fa-leaf"></i>
+                                    <span>+100 plantas aromáticas</span>
+                                </div>
+                                <div class="highlight-item">
+                                    <i class="fas fa-fire"></i>
+                                    <span>Técnicas de cocción milenarias</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="experience-image">
+                        <img src="img/gastronomia.jpg" alt="Gastronomía Amazónica">
+                        <div class="image-caption">
+                            <p>Platos tradicionales amazónicos preparados con ingredientes de la selva</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-content">
+                    <h2>¿Listo para vivir estas experiencias únicas?</h2>
+                    <p>Contacta con nosotros para diseñar tu aventura amazónica personalizada</p>
+                    <div class="cta-buttons">
+                        <a href="contacto.html" class="btn-primary">Contáctanos</a>
+                        <a href="tours.html" class="btn-outline">Ver todos los tours</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <!-- Información de contacto -->
+                <div class="footer-section">
+                    <h3>Contacto</h3>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Jr. Próspero 234, Iquitos, Perú</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+51 999 123 456</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>info@jaguarexpeditions.com</span>
+                    </div>
+                </div>
+
+                <!-- Enlaces rápidos -->
+                <div class="footer-section">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="tours.html">Tours</a></li>
+                        <li><a href="experiencias.html">Experiencias</a></li>
+                        <li><a href="nosotros.html">Nosotros</a></li>
+                        <li><a href="contacto.html">Contacto</a></li>
+                    </ul>
+                </div>
+
+                <!-- Redes sociales -->
+                <div class="footer-section">
+                    <h3>Síguenos</h3>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-tripadvisor"></i></a>
+                    </div>
+                </div>
+
+                <!-- Newsletter -->
+                <div class="footer-section">
+                    <h3>Newsletter</h3>
+                    <p>Recibe las últimas noticias de la Amazonía</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Tu email">
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Jaguar Expeditions. Todos los derechos reservados.</p>
+                <p style="color: #666; margin: 10px 0 0 0;">Jaguar Expeditions - Experiencias Amazónicas Auténticas</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
