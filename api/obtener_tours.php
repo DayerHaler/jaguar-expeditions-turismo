@@ -16,19 +16,19 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
 try {
     $db = getDB();
     
-    // Obtener todos los tours
+    // Obtener todos los tours con los campos visuales necesarios
     $sql = "
         SELECT id, nombre, descripcion_corta, precio, precio_descuento,
-               duracion, dificultad, estado, max_personas, min_personas
+               duracion, dificultad, estado, max_personas, min_personas,
+               imagen_principal, categoria, destacado
         FROM tours 
         WHERE estado = 'Activo'
-        ORDER BY nombre ASC
+        ORDER BY destacado DESC, nombre ASC
     ";
-    
     $stmt = $db->prepare($sql);
     $stmt->execute();
     $tours = $stmt->fetchAll();
-    
+
     // Formatear datos para respuesta
     $toursFormateados = [];
     foreach ($tours as $tour) {
@@ -43,10 +43,13 @@ try {
             'max_personas' => $tour['max_personas'],
             'min_personas' => $tour['min_personas'],
             'estado' => $tour['estado'],
-            'disponible' => ($tour['estado'] === 'Activo')
+            'disponible' => ($tour['estado'] === 'Activo'),
+            'imagen_principal' => $tour['imagen_principal'],
+            'categoria' => $tour['categoria'],
+            'destacado' => (isset($tour['destacado']) ? (bool)$tour['destacado'] : false)
         ];
     }
-    
+
     respuestaJSON(true, 'Tours obtenidos correctamente', [
         'tours' => $toursFormateados,
         'total' => count($toursFormateados)

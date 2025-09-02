@@ -1173,6 +1173,9 @@
 
         <!-- Botones de navegación -->
         <div class="navigation-buttons">
+            <button type="button" class="btn btn-atras" id="btn-atras-reserva" style="display: flex; background: #e74c3c; color: white; border: 2px solid #e74c3c; margin-right: auto; align-items: center; gap: 8px;">
+                <i class="fas fa-arrow-left"></i> <span>Atrás</span>
+            </button>
             <button type="button" class="btn btn-anterior" id="btn-anterior" onclick="pasoAnterior()" style="display: none;">
                 <i class="fas fa-arrow-left"></i> <span>Anterior</span>
             </button>
@@ -1191,6 +1194,15 @@
     </div>
 
     <script type="text/javascript">
+        // Botón 'Atrás' para volver a tours.html solo en el primer paso
+        document.addEventListener('DOMContentLoaded', function() {
+            var btnAtrasReserva = document.getElementById('btn-atras-reserva');
+            if (btnAtrasReserva) {
+                btnAtrasReserva.addEventListener('click', function() {
+                    window.location.href = 'tours.html';
+                });
+            }
+        });
         // @ts-nocheck
         // eslint-disable
         /* 
@@ -1622,7 +1634,14 @@
             const spanAnterior = btnAnterior.querySelector('span');
             const spanSiguiente = btnSiguiente.querySelector('span');
 
-            // Botón anterior
+
+            // Botón 'Atrás' (rojo) solo visible en el primer paso
+            const btnAtrasReserva = document.getElementById('btn-atras-reserva');
+            if (btnAtrasReserva) {
+                btnAtrasReserva.style.display = (pasoActual === 1) ? 'flex' : 'none';
+            }
+
+            // Botón anterior solo visible en pasos > 1
             if (pasoActual === 1) {
                 btnAnterior.style.display = 'none';
             } else {
