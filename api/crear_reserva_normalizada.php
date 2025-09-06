@@ -31,28 +31,61 @@ try {
     
     $pdo->beginTransaction();
     
-    // 1. Insertar cliente responsable
+    // 1. Verificar si el cliente ya existe por email
     $clienteData = $input['cliente_responsable'];
-    $stmt = $pdo->prepare("
-        INSERT INTO clientes (nombre, apellido, email, celular, celular_contacto, documento, tipo_documento, edad, pais, direccion, descripcion) 
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-    ");
+    $clienteEmail = $clienteData['email'];
     
-    $stmt->execute([
-        $clienteData['nombre'],
-        $clienteData['apellido'],
-        $clienteData['email'],
-        $clienteData['telefono'] ?? $clienteData['celular'] ?? null,
-        $clienteData['celular_contacto'] ?? null,
-        $clienteData['documento_identidad'] ?? $clienteData['documento'],
-        $clienteData['tipo_documento'] ?? 'DNI',
-        $clienteData['edad'] ?? null,
-        $clienteData['pais'] ?? 'Perú',
-        $clienteData['ciudad'] ?? $clienteData['direccion'] ?? null,
-        'Cliente creado desde reserva online'
-    ]);
+    $stmt = $pdo->prepare("SELECT cliente_id FROM clientes WHERE email = ?");
+    $stmt->execute([$clienteEmail]);
+    $clienteExistente = $stmt->fetch();
     
-    $clienteResponsableId = $pdo->lastInsertId();
+    if ($clienteExistente) {
+        // Cliente ya existe, usar el ID existente
+        $clienteResponsableId = $clienteExistente['cliente_id'];
+        
+        // Opcionalmente, actualizar los datos del cliente existente
+        $stmt = $pdo->prepare("
+            UPDATE clientes SET 
+                nombre = ?, apellido = ?, celular = ?, celular_contacto = ?, 
+                documento = ?, tipo_documento = ?, edad = ?, pais = ?, direccion = ?
+            WHERE cliente_id = ?
+        ");
+        
+        $stmt->execute([
+            $clienteData['nombre'],
+            $clienteData['apellido'],
+            $clienteData['telefono'] ?? $clienteData['celular'] ?? null,
+            $clienteData['celular_contacto'] ?? null,
+            $clienteData['documento_identidad'] ?? $clienteData['documento'],
+            $clienteData['tipo_documento'] ?? 'DNI',
+            $clienteData['edad'] ?? null,
+            $clienteData['pais'] ?? 'Perú',
+            $clienteData['ciudad'] ?? $clienteData['direccion'] ?? null,
+            $clienteResponsableId
+        ]);
+    } else {
+        // Cliente no existe, crear nuevo
+        $stmt = $pdo->prepare("
+            INSERT INTO clientes (nombre, apellido, email, celular, celular_contacto, documento, tipo_documento, edad, pais, direccion, descripcion) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ");
+        
+        $stmt->execute([
+            $clienteData['nombre'],
+            $clienteData['apellido'],
+            $clienteData['email'],
+            $clienteData['telefono'] ?? $clienteData['celular'] ?? null,
+            $clienteData['celular_contacto'] ?? null,
+            $clienteData['documento_identidad'] ?? $clienteData['documento'],
+            $clienteData['tipo_documento'] ?? 'DNI',
+            $clienteData['edad'] ?? null,
+            $clienteData['pais'] ?? 'Perú',
+            $clienteData['ciudad'] ?? $clienteData['direccion'] ?? null,
+            'Cliente creado desde reserva online'
+        ]);
+        
+        $clienteResponsableId = $pdo->lastInsertId();
+    }
     
     // 2. Crear reserva (usar estructura real de la tabla)
     $stmt = $pdo->prepare("
@@ -90,12 +123,9 @@ try {
         $stmt = $pdo->prepare("
             INSERT INTO participantes_reserva (
                 reserva_id, nombre, apellido, email, celular, celular_contacto, 
-                documento, tipo_documento, edad, genero, pais, direccion, 
-                descripcion, es_responsable
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                documento, tipo_documento, edad, pais, direccion, descripcion
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         ");
-        
-        $esResponsable = ($index === 0) ? 1 : 0;
         
         $stmt->execute([
             $reservaId,
@@ -107,18 +137,18 @@ try {
             $participante['documento_identidad'] ?? $participante['documento'],
             $participante['tipo_documento'],
             $participante['edad'],
-            $participante['genero'] ?? null,
             $participante['pais'] ?? null,
             $participante['direccion'] ?? null,
-            $participante['descripcion'] ?? null,
-            $esResponsable
+            'Participante registrado desde reserva online'
         ]);
     }
     
     // 4. Crear registro de pago inicial (usar estructura real de la tabla pagos)
+    error_log("💳 Procesando pago tipo: " . $input['tipo_pago']);
     if ($input['tipo_pago'] === 'completo') {
         // Pago completo
         $codigoTransaccion = 'PAY-' . date('Ymd') . '-' . str_pad($reservaId, 6, '0', STR_PAD_LEFT);
+        error_log("💰 Pago completo, código: $codigoTransaccion");
         
         $stmt = $pdo->prepare("
             INSERT INTO pagos (
@@ -131,8 +161,11 @@ try {
             'metodo' => $input['metodo_pago'],
             'tipo_pago' => 'completo',
             'fecha_procesamiento' => date('Y-m-d H:i:s'),
-            'referencia_interna' => $codigoTransaccion
+            'referencia_interna' => $codigoTransaccion,
+            'transaction_id' => $input['transaction_id'] ?? null
         ]);
+        
+        error_log("📋 Datos de pago: " . $datosMetodoPago);
         
         $stmt->execute([
             $reservaId, 
@@ -146,11 +179,13 @@ try {
         // Actualizar estado de reserva a confirmada
         $stmt = $pdo->prepare("UPDATE reservas SET estado_reserva = 'Confirmada' WHERE reserva_id = ?");
         $stmt->execute([$reservaId]);
+        error_log("✅ Reserva confirmada como pagada completamente");
         
     } else if ($input['tipo_pago'] === 'cuotas') {
         // Sistema de cuotas - crear un pago principal y sus cuotas
         $montoCuota1 = $total * 0.5;
         $montoCuota2 = $total * 0.5;
+        error_log("💸 Sistema cuotas: C1=$montoCuota1, C2=$montoCuota2");
         
         // Crear el registro de pago principal para las cuotas
         $codigoTransaccionPrincipal = 'PAY-' . date('Ymd') . '-' . str_pad($reservaId, 6, '0', STR_PAD_LEFT) . '-CUOTAS';
@@ -166,7 +201,8 @@ try {
             'metodo' => $input['metodo_pago'],
             'tipo_pago' => 'cuotas',
             'fecha_procesamiento' => date('Y-m-d H:i:s'),
-            'referencia_interna' => $codigoTransaccionPrincipal
+            'referencia_interna' => $codigoTransaccionPrincipal,
+            'transaction_id' => $input['transaction_id'] ?? null
         ]);
         
         $stmt->execute([
@@ -199,17 +235,20 @@ try {
         // Actualizar estado de reserva
         $stmt = $pdo->prepare("UPDATE reservas SET estado_reserva = 'Pendiente' WHERE reserva_id = ?");
         $stmt->execute([$reservaId]);
+        error_log("✅ Reserva configurada como pendiente con sistema de cuotas");
     }
     
     // 5. Generar código de reserva único
     $codigoReserva = 'JE' . str_pad($reservaId, 6, '0', STR_PAD_LEFT);
     $stmt = $pdo->prepare("UPDATE reservas SET codigo_reserva = ? WHERE reserva_id = ?");
     $stmt->execute([$codigoReserva, $reservaId]);
+    error_log("🎟️ Código de reserva generado: $codigoReserva");
     
     $pdo->commit();
+    error_log("✅ ¡TRANSACCIÓN COMPLETADA EXITOSAMENTE!");
     
     // Respuesta exitosa
-    echo json_encode([
+    $response = [
         'success' => true,
         'message' => 'Reserva creada exitosamente',
         'data' => [
@@ -228,12 +267,18 @@ try {
                 'fecha' => date('Y-m-d H:i:s')
             ]
         ]
-    ]);
+    ];
+    
+    error_log("📤 Respuesta: " . json_encode($response));
+    echo json_encode($response);
     
 } catch (Exception $e) {
     if ($pdo && $pdo->inTransaction()) {
         $pdo->rollback();
     }
+    
+    error_log("❌ ERROR EN RESERVA: " . $e->getMessage());
+    error_log("❌ Stack trace: " . $e->getTraceAsString());
     
     echo json_encode([
         'success' => false,

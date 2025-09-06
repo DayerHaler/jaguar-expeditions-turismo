@@ -524,7 +524,7 @@ body {
 /* Tours Populares */
 .popular-tours {
     padding: 80px 0;
-    background: var(--light-gray);
+    background: white !important;
 }
 
 .section-header {
@@ -1884,16 +1884,56 @@ img.loaded {
     backdrop-filter: blur(5px);
 }
 
-.modal-content {
+.tour-modal .modal-content {
     background-color: white;
     margin: 2% auto;
     border-radius: 15px;
     width: 90%;
     max-width: 800px;
     max-height: 90vh;
-    overflow-y: auto;
+    overflow: hidden;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
     animation: modalSlideIn 0.3s ease-out;
+    display: flex;
+    flex-direction: column;
+}
+
+.tour-modal .modal-header {
+    padding: 20px 30px;
+    border-bottom: 1px solid #eee;
+    flex-shrink: 0;
+}
+
+.tour-modal .modal-body {
+    padding: 0 30px 20px;
+    overflow-y: auto;
+    flex: 1;
+    min-height: 0; /* Important for flex scrolling */
+}
+
+.tour-modal .modal-footer {
+    padding: 20px 30px;
+    border-top: 1px solid #eee;
+    flex-shrink: 0;
+}
+
+/* Estilos de scrollbar para los modales */
+.tour-modal .modal-body::-webkit-scrollbar {
+    width: 10px;
+}
+
+.tour-modal .modal-body::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 5px;
+}
+
+.tour-modal .modal-body::-webkit-scrollbar-thumb {
+    background: var(--primary-green);
+    border-radius: 5px;
+}
+
+.tour-modal .modal-body::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-green);
 }
 
 @keyframes modalSlideIn {
@@ -1945,9 +1985,7 @@ img.loaded {
     font-weight: 500;
 }
 
-.modal-body {
-    padding: 0 30px 20px;
-}
+/* Eliminar estilos duplicados - ya están definidos arriba para tour-modal */
 
 .modal-info {
     display: flex;
@@ -4364,7 +4402,11 @@ img.loaded {
     border-radius: 15px;
     width: 90%;
     max-width: 500px;
+    max-height: 80vh;
     box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
 .modal-header {
@@ -4396,6 +4438,32 @@ img.loaded {
 
 .modal form {
     padding: 20px;
+}
+
+/* Estilos para el contenido scrolleable de los modales de términos */
+.modal-body {
+    padding: 20px;
+    max-height: 60vh;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.modal-body::-webkit-scrollbar {
+    width: 8px;
+}
+
+.modal-body::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.modal-body::-webkit-scrollbar-thumb {
+    background: var(--primary-green);
+    border-radius: 4px;
+}
+
+.modal-body::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-green);
 }
 
 .modal .form-group {

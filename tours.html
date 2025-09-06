@@ -702,7 +702,7 @@
                             <i class="fas fa-file-contract"></i>
                             <span data-i18n="footer_terminos">Términos y Condiciones</span>
                         </a>
-                        <a href="#" class="privacy-link">
+                        <a href="#" id="privacyLink" class="privacy-link">
                             <i class="fas fa-shield-alt"></i>
                             <span data-i18n="footer_privacidad">Política de Privacidad</span>
                         </a>
@@ -1756,295 +1756,6 @@
         </div>
     </div>
 
-    <!-- Modal de Términos y Condiciones -->
-    <div id="termsModal" class="tour-modal">
-        <div class="modal-content">
-            <span class="close-modal" data-modal="terms">&times;</span>
-            <div class="modal-header">
-                <h2>Términos y Condiciones</h2>
-                <p style="color: #666; margin: 10px 0 0 0;">Jaguar Expeditions - Tours Amazónicos</p>
-            </div>
-            <div class="modal-body">
-                <div class="modal-info">
-                    <div class="info-section">
-                        <h3><i class="fas fa-file-contract"></i> 1. Condiciones Generales</h3>
-                        <ul class="includes-list">
-                            <li>Los precios están sujetos a cambios sin previo aviso</li>
-                            <li>Las reservas se confirman con el 50% de adelanto</li>
-                            <li>El saldo debe pagarse 24 horas antes del tour</li>
-                            <li>Los tours están sujetos a condiciones climáticas</li>
-                            <li>Edad mínima requerida según cada tour específico</li>
-                            <li>Capacidad máxima por tour claramente especificada</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="info-section">
-                        <h3><i class="fas fa-calendar-times"></i> 2. Política de Cancelación</h3>
-                        <ul class="avoid-list">
-                            <li>Cancelación 7+ días antes: Reembolso del 90%</li>
-                            <li>Cancelación 3-6 días antes: Reembolso del 70%</li>
-                            <li>Cancelación 1-2 días antes: Reembolso del 50%</li>
-                            <li>Cancelación el mismo día: Sin reembolso</li>
-                            <li>Cancelación por clima: Reembolso completo o reprogramación</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="info-section">
-                        <h3><i class="fas fa-shield-alt"></i> 3. Seguros y Responsabilidad</h3>
-                        <ul class="recommendations">
-                            <li>Todos los tours incluyen seguro básico de accidentes</li>
-                            <li>Recomendamos seguro de viaje adicional</li>
-                            <li>Los participantes asumen riesgos inherentes de aventura</li>
-                            <li>Jaguar Expeditions no se responsabiliza por objetos perdidos</li>
-                            <li>Certificado médico requerido para tours extremos</li>
-                            <li>Declaración de condiciones médicas obligatoria</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="info-section">
-                        <h3><i class="fas fa-heartbeat"></i> 4. Requisitos de Salud</h3>
-                        <ul class="includes-list">
-                            <li>Vacuna de fiebre amarilla obligatoria (certificado internacional)</li>
-                            <li>Consultar médico sobre profilaxis de malaria</li>
-                            <li>Informar sobre alergias y medicamentos</li>
-                            <li>No recomendado para embarazadas en tours extremos</li>
-                            <li>Condición física adecuada según dificultad del tour</li>
-                            <li>Botiquín básico incluido en todos los tours</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="info-section">
-                        <h3><i class="fas fa-users"></i> 5. Conducta y Comportamiento</h3>
-                        <ul class="bring-list">
-                            <li>Respetar las instrucciones del guía en todo momento</li>
-                            <li>No molestar o alimentar animales salvajes</li>
-                            <li>Respetar las comunidades nativas y sus costumbres</li>
-                            <li>No fumar en áreas protegidas</li>
-                            <li>Mantener limpio el entorno natural</li>
-                            <li>Prohibido el consumo de alcohol en tours extremos</li>
-                            <li>Comportamiento respetuoso con otros participantes</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="info-section">
-                        <h3><i class="fas fa-camera"></i> 6. Política de Fotografías</h3>
-                        <ul class="includes-list">
-                            <li>Fotografías libres para uso personal</li>
-                            <li>Pedir permiso antes de fotografiar personas locales</li>
-                            <li>Respetar áreas donde está prohibido fotografiar</li>
-                            <li>Las fotos del tour pueden usarse para promoción</li>
-                            <li>Equipo fotográfico bajo responsabilidad del cliente</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="info-section">
-                        <h3><i class="fas fa-leaf"></i> 7. Compromiso Ambiental</h3>
-                        <ul class="bring-list">
-                            <li>Turismo sostenible y responsable</li>
-                            <li>Contribución a la conservación local</li>
-                            <li>Apoyo a comunidades nativas</li>
-                            <li>Minimizar impacto ambiental</li>
-                            <li>Educación sobre conservación</li>
-                            <li>Principios de "Leave No Trace"</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="info-section">
-                        <h3><i class="fas fa-phone"></i> 8. Contacto y Emergencias</h3>
-                        <ul class="includes-list">
-                            <li>Línea de emergencia 24/7: +51 965 123 456</li>
-                            <li>Email: emergencias@jaguarexpeditions.com</li>
-                            <li>Oficina en Iquitos: Calle Putumayo 184</li>
-                            <li>Coordinación con autoridades locales</li>
-                            <li>Protocolo de evacuación médica</li>
-                            <li>Comunicación satelital en áreas remotas</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="info-section">
-                        <h3><i class="fas fa-gavel"></i> 9. Aspectos Legales</h3>
-                        <ul class="recommendations">
-                            <li>Contratos regidos por legislación peruana</li>
-                            <li>Disputas resueltas en tribunales de Loreto</li>
-                            <li>Licencias turísticas vigentes (MINCETUR)</li>
-                            <li>Cumplimiento de normativas ambientales</li>
-                            <li>Registro Nacional de Prestadores de Servicios Turísticos</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="info-section" style="background: #e8f5e8; border-left: 4px solid #4caf50;">
-                        <h3><i class="fas fa-handshake"></i> 10. Acuerdo del Cliente</h3>
-                        <p style="color: #2e7d32; font-weight: 500; margin-bottom: 15px;">
-                            Al realizar una reserva, el cliente confirma que ha leído, entendido y acepta todos los términos y condiciones aquí establecidos.
-                        </p>
-                        <ul class="includes-list">
-                            <li>Confirmación de aceptación en el momento de la reserva</li>
-                            <li>Firma digital o física del contrato de servicios</li>
-                            <li>Copia de términos entregada al cliente</li>
-                            <li>Briefing presencial antes de iniciar cada tour</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <p style="text-align: center; color: #666; margin: 0;">
-                    <strong>Jaguar Expeditions</strong> - RUC: 20123456789<br>
-                    Licencia MINCETUR: PE-2024-0156 | Actualizado: Agosto 2025
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal de Política de Privacidad -->
-    <div id="privacyModal" class="tour-modal">
-        <div class="modal-content">
-            <span class="close-modal" data-modal="privacy">&times;</span>
-            <div class="modal-header">
-                <h2>Política de Privacidad</h2>
-                <p style="color: #666; margin: 10px 0 0 0;">Jaguar Expeditions - Protección de Datos Personales</p>
-            </div>
-            <div class="modal-body">
-                <div class="modal-info">
-                    <div class="info-section">
-                        <h3><i class="fas fa-user-shield"></i> 1. Información que Recopilamos</h3>
-                        <ul class="includes-list">
-                            <li>Nombres y apellidos completos</li>
-                            <li>Documento de identidad y/o pasaporte</li>
-                            <li>Fecha de nacimiento y edad</li>
-                            <li>Dirección de residencia y contacto</li>
-                            <li>Números telefónicos y email</li>
-                            <li>Información médica relevante para tours</li>
-                            <li>Preferencias de viaje y alimentarias</li>
-                            <li>Datos de pago y facturación</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="info-section">
-                        <h3><i class="fas fa-bullseye"></i> 2. Finalidad del Tratamiento</h3>
-                        <ul class="includes-list">
-                            <li>Prestación de servicios turísticos contratados</li>
-                            <li>Gestión de reservas y pagos</li>
-                            <li>Comunicación durante el servicio</li>
-                            <li>Cumplimiento de obligaciones legales</li>
-                            <li>Seguridad y asistencia en emergencias</li>
-                            <li>Mejora de nuestros servicios</li>
-                            <li>Marketing directo (con consentimiento)</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="info-section">
-                        <h3><i class="fas fa-share-alt"></i> 3. Compartir Información</h3>
-                        <ul class="bring-list">
-                            <li>Autoridades migratorias y de turismo</li>
-                            <li>Servicios de emergencia y salud</li>
-                            <li>Proveedores de servicios (guías, lodges)</li>
-                            <li>Compañías de seguros contratadas</li>
-                            <li>Autoridades competentes por requerimiento legal</li>
-                            <li>NO vendemos datos a terceros</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="info-section">
-                        <h3><i class="fas fa-lock"></i> 4. Seguridad de los Datos</h3>
-                        <ul class="includes-list">
-                            <li>Encriptación SSL en todas las transacciones</li>
-                            <li>Servidores seguros con acceso restringido</li>
-                            <li>Personal capacitado en protección de datos</li>
-                            <li>Auditorías periódicas de seguridad</li>
-                            <li>Respaldo seguro de información</li>
-                            <li>Protocolos de respuesta ante incidentes</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="info-section">
-                        <h3><i class="fas fa-calendar"></i> 5. Tiempo de Conservación</h3>
-                        <ul class="recommendations">
-                            <li>Datos de clientes activos: Durante la relación comercial</li>
-                            <li>Datos financieros: 10 años (obligación tributaria)</li>
-                            <li>Datos médicos: 5 años post-servicio</li>
-                            <li>Datos de marketing: Hasta revocación del consentimiento</li>
-                            <li>Datos de menores: Hasta cumplir mayoría + 3 años</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="info-section">
-                        <h3><i class="fas fa-user-check"></i> 6. Derechos del Titular</h3>
-                        <ul class="includes-list">
-                            <li><strong>Acceso:</strong> Conocer qué datos tenemos sobre usted</li>
-                            <li><strong>Rectificación:</strong> Corregir datos inexactos</li>
-                            <li><strong>Cancelación:</strong> Eliminar datos cuando proceda</li>
-                            <li><strong>Oposición:</strong> Negarse al tratamiento para marketing</li>
-                            <li><strong>Portabilidad:</strong> Recibir sus datos en formato digital</li>
-                            <li><strong>Limitación:</strong> Restringir ciertos usos de sus datos</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="info-section">
-                        <h3><i class="fas fa-cookie-bite"></i> 7. Cookies y Tecnologías</h3>
-                        <ul class="bring-list">
-                            <li>Cookies esenciales para funcionamiento del sitio</li>
-                            <li>Cookies de análisis para mejorar la experiencia</li>
-                            <li>Cookies de marketing (con consentimiento)</li>
-                            <li>Opción de configurar preferencias de cookies</li>
-                            <li>Información detallada en política de cookies</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="info-section">
-                        <h3><i class="fas fa-baby"></i> 8. Protección de Menores</h3>
-                        <ul class="recommendations">
-                            <li>No recopilamos datos de menores de 14 años directamente</li>
-                            <li>Consentimiento parental requerido para menores</li>
-                            <li>Protección especial para datos de menores</li>
-                            <li>Verificación de edad en procesos de registro</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="info-section">
-                        <h3><i class="fas fa-envelope"></i> 9. Marketing Directo</h3>
-                        <ul class="avoid-list">
-                            <li>Solo con consentimiento explícito del cliente</li>
-                            <li>Opción de darse de baja en cada comunicación</li>
-                            <li>Respeto a preferencias de comunicación</li>
-                            <li>No spam ni comunicaciones excesivas</li>
-                            <li>Segmentación responsable de audiencias</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="info-section">
-                        <h3><i class="fas fa-phone-alt"></i> 10. Contacto para Datos Personales</h3>
-                        <ul class="includes-list">
-                            <li><strong>Email:</strong> privacidad@jaguarexpeditions.com</li>
-                            <li><strong>Teléfono:</strong> +51 999 123 456 (Ext. 101)</li>
-                            <li><strong>Oficina:</strong> Calle Putumayo 184, Iquitos</li>
-                            <li><strong>Responsable:</strong> Oficial de Protección de Datos</li>
-                            <li><strong>Horario:</strong> Lunes a Viernes 9:00 AM - 6:00 PM</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="info-section" style="background: #e3f2fd; border-left: 4px solid #2196f3;">
-                        <h3><i class="fas fa-info-circle"></i> 11. Cambios en la Política</h3>
-                        <p style="color: #1565c0; font-weight: 500; margin-bottom: 15px;">
-                            Nos reservamos el derecho de actualizar esta política. Los cambios importantes serán notificados por email y/o mensaje en el sitio web.
-                        </p>
-                        <ul class="includes-list">
-                            <li>Notificación 30 días antes de cambios importantes</li>
-                            <li>Historial de versiones disponible</li>
-                            <li>Opción de rechazar cambios y cancelar servicio</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <p style="text-align: center; color: #666; margin: 0;">
-                    <strong>Jaguar Expeditions</strong><br>
-                    Cumplimos con la Ley N° 29733 - Ley de Protección de Datos Personales del Perú<br>
-                    Última actualización: Agosto 2025
-                </p>
-            </div>
-        </div>
-    </div>
-
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
@@ -2052,6 +1763,25 @@
 
     <script>
         $(document).ready(function() {
+            loadToursWithLanguage();
+            
+            // Escuchar cambios de idioma
+            if (window.jaguarI18n) {
+                $(document).on('languageChanged', function() {
+                    loadToursWithLanguage();
+                });
+            }
+        });
+        
+        function loadToursWithLanguage() {
+            // Obtener idioma actual del sistema i18n
+            let currentLang = 'es'; // default
+            if (window.jaguarI18n && window.jaguarI18n.currentLang) {
+                currentLang = window.jaguarI18n.currentLang;
+            }
+            
+            console.log('Cargando tours en idioma:', currentLang);
+            
             // Cargar tours dinámicamente
             $.ajax({
                 url: 'api/obtener_tours.php',
@@ -2060,6 +1790,10 @@
                 success: function(response) {
                     let tours = response.tours || (response.data && response.data.tours) || [];
                     if (response.success && tours.length > 0) {
+                        // Aplicar traducciones en el frontend si no es español
+                        if (currentLang !== 'es') {
+                            tours = translateTours(tours, currentLang);
+                        }
                         renderTours(tours);
                     } else {
                         $('.all-tours-grid').html('<div style="padding:2em;">No se encontraron tours disponibles.</div>');
@@ -2069,7 +1803,53 @@
                     $('.all-tours-grid').html('<div style="padding:2em;">Error al cargar los tours.</div>');
                 }
             });
-        });
+        }
+        
+        // Función para traducir tours en el frontend usando las claves de traducción
+        function translateTours(tours, lang) {
+            if (!window.jaguarI18n || !window.jaguarI18n.translations[lang]) {
+                return tours;
+            }
+            
+            const translations = window.jaguarI18n.translations[lang];
+            
+            // Mapa de nombres de tours a claves de traducción
+            const tourKeyMap = {
+                'Aventura Extrema': 'tour_aventura_extrema',
+                'Comunidades Nativas': 'tour_comunidades_nativas',
+                'Expedición Completa VIP': 'tour_expedicion_completa_vip',
+                'Expedición río Amazonas': 'tour_expedicion_rio_amazonas',
+                'Nado con Delfines Rosados': 'tour_nado_con_delfines_rosados',
+                'Safari Nocturno Amazonico': 'tour_safari_nocturno_amazonico',
+                'Tour Gastronomico': 'tour_tour_gastronomico',
+                'Casa de Hierro Historica': 'tour_casa_de_hierro_historica',
+                'Medicina Ancestral': 'tour_medicina_ancestral',
+                'Navegación Nocturna': 'tour_navegacion_nocturna',
+                'Observación de Aves': 'tour_observacion_de_aves',
+                'Observación de Fauna': 'tour_observacion_de_fauna',
+                'Pesca Deportiva Amazonica': 'tour_pesca_deportiva_amazonica',
+                'Reserva Pacaya Samiria': 'tour_reserva_pacaya_samiria',
+                'Trekking Selvatico': 'tour_trekking_selvatico'
+            };
+            
+            return tours.map(tour => {
+                // Crear una copia del tour para no modificar el original
+                let translatedTour = {...tour};
+                
+                // Buscar la clave de traducción correspondiente
+                const tourKey = tourKeyMap[tour.nombre];
+                if (tourKey && translations[tourKey]) {
+                    translatedTour.nombre = translations[tourKey];
+                }
+                
+                const tourDescKey = tourKey + '_desc';
+                if (tourKey && translations[tourDescKey]) {
+                    translatedTour.descripcion_corta = translations[tourDescKey];
+                }
+                
+                return translatedTour;
+            });
+        }
 
         function renderTours(tours) {
             let html = '';
@@ -2170,6 +1950,226 @@
     <script src="js/i18n.js"></script>
     <script src="script.js"></script>
 
+    <!-- Modal de Términos y Condiciones -->
+    <div id="termsModal" class="tour-modal">
+        <div class="modal-content">
+            <span class="close-modal" data-modal="terms">&times;</span>
+            <div class="modal-header">
+                <h2 data-i18n="terms_title">Términos y Condiciones</h2>
+                <p style="color: #666; margin: 10px 0 0 0;" data-i18n="terms_subtitle">Jaguar Expeditions - Tours Amazónicos</p>
+            </div>
+            <div class="modal-body">
+                <div class="modal-info">
+                    <div class="info-section">
+                        <h3><i class="fas fa-file-contract"></i> <span data-i18n="terms_general_conditions">1. Condiciones Generales</span></h3>
+                        <ul class="includes-list">
+                            <li data-i18n="terms_prices_subject">Los precios están sujetos a cambios sin previo aviso</li>
+                            <li data-i18n="terms_reservations_confirmed">Las reservas se confirman con el 50% de adelanto</li>
+                            <li data-i18n="terms_balance_payment">El saldo debe pagarse 24 horas antes del tour</li>
+                            <li data-i18n="terms_weather_conditions">Los tours están sujetos a condiciones climáticas</li>
+                            <li data-i18n="terms_minimum_age">Edad mínima requerida según cada tour específico</li>
+                            <li data-i18n="terms_maximum_capacity">Capacidad máxima por tour claramente especificada</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h3><i class="fas fa-calendar-times"></i> <span data-i18n="terms_cancellation_policy">2. Política de Cancelación</span></h3>
+                        <ul class="avoid-list">
+                            <li data-i18n="terms_cancel_7_days">Cancelación 7+ días antes: Reembolso del 90%</li>
+                            <li data-i18n="terms_cancel_3_6_days">Cancelación 3-6 días antes: Reembolso del 70%</li>
+                            <li data-i18n="terms_cancel_1_2_days">Cancelación 1-2 días antes: Reembolso del 50%</li>
+                            <li data-i18n="terms_cancel_same_day">Cancelación el mismo día: Sin reembolso</li>
+                            <li data-i18n="terms_cancel_weather">Cancelación por clima: Reembolso completo o reprogramación</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h3><i class="fas fa-shield-alt"></i> <span data-i18n="terms_insurance_responsibility">3. Seguros y Responsabilidad</span></h3>
+                        <ul class="recommendations">
+                            <li data-i18n="terms_basic_insurance">Todos los tours incluyen seguro básico de accidentes</li>
+                            <li data-i18n="terms_additional_insurance">Recomendamos seguro de viaje adicional</li>
+                            <li data-i18n="terms_adventure_risks">Los participantes asumen riesgos inherentes de aventura</li>
+                            <li data-i18n="terms_lost_objects">Jaguar Expeditions no se responsabiliza por objetos perdidos</li>
+                            <li data-i18n="terms_medical_certificate">Certificado médico requerido para tours extremos</li>
+                            <li data-i18n="terms_medical_declaration">Declaración de condiciones médicas obligatoria</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h3><i class="fas fa-heartbeat"></i> <span data-i18n="terms_health_requirements">4. Requisitos de Salud</span></h3>
+                        <ul class="includes-list">
+                            <li data-i18n="terms_yellow_fever">Vacuna de fiebre amarilla obligatoria (certificado internacional)</li>
+                            <li data-i18n="terms_malaria_consultation">Consultar médico sobre profilaxis de malaria</li>
+                            <li data-i18n="terms_allergies_medications">Informar sobre alergias y medicamentos</li>
+                            <li data-i18n="terms_pregnant_extreme">No recomendado para embarazadas en tours extremos</li>
+                            <li data-i18n="terms_physical_condition">Condición física adecuada según dificultad del tour</li>
+                            <li data-i18n="terms_first_aid_kit">Botiquín básico incluido en todos los tours</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h3><i class="fas fa-users"></i> <span data-i18n="terms_conduct_behavior">5. Conducta y Comportamiento</span></h3>
+                        <ul class="bring-list">
+                            <li data-i18n="terms_follow_guide">Respetar las instrucciones del guía en todo momento</li>
+                            <li data-i18n="terms_no_animals">No molestar o alimentar animales salvajes</li>
+                            <li data-i18n="terms_respect_communities">Respetar las comunidades nativas y sus costumbres</li>
+                            <li data-i18n="terms_no_smoking">No fumar en áreas protegidas</li>
+                            <li data-i18n="terms_keep_clean">Mantener limpio el entorno natural</li>
+                            <li data-i18n="terms_no_alcohol">Prohibido el consumo de alcohol en tours extremos</li>
+                            <li data-i18n="terms_respectful_behavior">Comportamiento respetuoso con otros participantes</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h3><i class="fas fa-leaf"></i> <span data-i18n="terms_environmental_commitment">6. Compromiso Ambiental</span></h3>
+                        <ul class="bring-list">
+                            <li data-i18n="terms_sustainable_tourism">Turismo sostenible y responsable</li>
+                            <li data-i18n="terms_local_conservation">Contribución a la conservación local</li>
+                            <li data-i18n="terms_support_natives">Apoyo a comunidades nativas</li>
+                            <li data-i18n="terms_minimize_impact">Minimizar impacto ambiental</li>
+                            <li data-i18n="terms_conservation_education">Educación sobre conservación</li>
+                            <li data-i18n="terms_leave_no_trace">Principios de "Leave No Trace"</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-section" style="background: #e8f5e8; border-left: 4px solid #4caf50;">
+                        <h3><i class="fas fa-handshake"></i> <span data-i18n="terms_client_agreement">7. Acuerdo del Cliente</span></h3>
+                        <p style="color: #2e7d32; font-weight: 500; margin-bottom: 15px;" data-i18n="terms_agreement_text">
+                            Al realizar una reserva, el cliente confirma que ha leído, entendido y acepta todos los términos y condiciones aquí establecidos.
+                        </p>
+                        <ul class="includes-list">
+                            <li data-i18n="terms_acceptance_confirmation">Confirmación de aceptación en el momento de la reserva</li>
+                            <li data-i18n="terms_copy_delivered">Copia de términos entregada al cliente</li>
+                            <li data-i18n="terms_briefing_before">Briefing presencial antes de iniciar cada tour</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <p style="text-align: center; color: #666; margin: 0;">
+                    <strong>Jaguar Expeditions</strong> - RUC: 20123456789<br>
+                    <span data-i18n="terms_footer_text">Licencia MINCETUR: PE-2024-0156 | Actualizado: Agosto 2025</span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Política de Privacidad -->
+    <div id="privacyModal" class="tour-modal">
+        <div class="modal-content">
+            <span class="close-modal" data-modal="privacy">&times;</span>
+            <div class="modal-header">
+                <h2 data-i18n="privacy_title">Política de Privacidad</h2>
+                <p style="color: #666; margin: 10px 0 0 0;" data-i18n="privacy_subtitle">Jaguar Expeditions - Protección de Datos Personales</p>
+            </div>
+            <div class="modal-body">
+                <div class="modal-info">
+                    <div class="info-section">
+                        <h3><i class="fas fa-user-shield"></i> <span data-i18n="privacy_information_collected">1. Información que Recopilamos</span></h3>
+                        <ul class="includes-list">
+                            <li data-i18n="privacy_full_names">Nombres y apellidos completos</li>
+                            <li data-i18n="privacy_identity_document">Documento de identidad y/o pasaporte</li>
+                            <li data-i18n="privacy_birth_date">Fecha de nacimiento y edad</li>
+                            <li data-i18n="privacy_address">Dirección de residencia y contacto</li>
+                            <li data-i18n="privacy_phone_email">Números telefónicos y email</li>
+                            <li data-i18n="privacy_medical_info">Información médica relevante para tours</li>
+                            <li data-i18n="privacy_travel_preferences">Preferencias de viaje y alimentarias</li>
+                            <li data-i18n="privacy_payment_data">Datos de pago y facturación</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h3><i class="fas fa-bullseye"></i> <span data-i18n="privacy_purpose_processing">2. Finalidad del Tratamiento</span></h3>
+                        <ul class="includes-list">
+                            <li data-i18n="privacy_service_provision">Prestación de servicios turísticos contratados</li>
+                            <li data-i18n="privacy_reservation_management">Gestión de reservas y pagos</li>
+                            <li data-i18n="privacy_service_communication">Comunicación durante el servicio</li>
+                            <li data-i18n="privacy_legal_compliance">Cumplimiento de obligaciones legales</li>
+                            <li data-i18n="privacy_emergency_assistance">Seguridad y asistencia en emergencias</li>
+                            <li data-i18n="privacy_service_improvement">Mejora de nuestros servicios</li>
+                            <li data-i18n="privacy_direct_marketing">Marketing directo (con consentimiento)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h3><i class="fas fa-share-alt"></i> <span data-i18n="privacy_information_sharing">3. Compartir Información</span></h3>
+                        <ul class="bring-list">
+                            <li data-i18n="privacy_migration_authorities">Autoridades migratorias y de turismo</li>
+                            <li data-i18n="privacy_emergency_services">Servicios de emergencia y salud</li>
+                            <li data-i18n="privacy_service_providers">Proveedores de servicios (guías, lodges)</li>
+                            <li data-i18n="privacy_insurance_companies">Compañías de seguros contratadas</li>
+                            <li data-i18n="privacy_legal_requirement">Autoridades competentes por requerimiento legal</li>
+                            <li data-i18n="privacy_no_sell_data">NO vendemos datos a terceros</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h3><i class="fas fa-lock"></i> <span data-i18n="privacy_data_security">4. Seguridad de los Datos</span></h3>
+                        <ul class="includes-list">
+                            <li data-i18n="privacy_ssl_encryption">Encriptación SSL en todas las transacciones</li>
+                            <li data-i18n="privacy_secure_servers">Servidores seguros con acceso restringido</li>
+                            <li data-i18n="privacy_trained_staff">Personal capacitado en protección de datos</li>
+                            <li data-i18n="privacy_security_audits">Auditorías periódicas de seguridad</li>
+                            <li data-i18n="privacy_data_backup">Respaldo seguro de información</li>
+                            <li data-i18n="privacy_incident_protocols">Protocolos de respuesta ante incidentes</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h3><i class="fas fa-user-check"></i> <span data-i18n="privacy_data_subject_rights">5. Derechos del Titular</span></h3>
+                        <ul class="includes-list">
+                            <li><span data-i18n="privacy_access_right">Acceso: </span><span data-i18n="privacy_access_description">Conocer qué datos tenemos sobre usted</span></li>
+                            <li><span data-i18n="privacy_rectification_right">Rectificación: </span><span data-i18n="privacy_rectification_description">Corregir datos inexactos</span></li>
+                            <li><span data-i18n="privacy_cancellation_right">Cancelación: </span><span data-i18n="privacy_cancellation_description">Eliminar datos cuando proceda</span></li>
+                            <li><span data-i18n="privacy_objection_right">Oposición: </span><span data-i18n="privacy_objection_description">Negarse al tratamiento para marketing</span></li>
+                            <li><span data-i18n="privacy_portability_right">Portabilidad: </span><span data-i18n="privacy_portability_description">Recibir sus datos en formato digital</span></li>
+                            <li><span data-i18n="privacy_limitation_right">Limitación: </span><span data-i18n="privacy_limitation_description">Restringir ciertos usos de sus datos</span></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h3><i class="fas fa-envelope"></i> <span data-i18n="privacy_direct_marketing">6. Marketing Directo</span></h3>
+                        <ul class="avoid-list">
+                            <li data-i18n="privacy_explicit_consent">Solo con consentimiento explícito del cliente</li>
+                            <li data-i18n="privacy_unsubscribe_option">Opción de darse de baja en cada comunicación</li>
+                            <li data-i18n="privacy_communication_preferences">Respeto a preferencias de comunicación</li>
+                            <li data-i18n="privacy_no_spam">No spam ni comunicaciones excesivas</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h3><i class="fas fa-phone-alt"></i> <span data-i18n="privacy_contact_data">7. Contacto para Datos Personales</span></h3>
+                        <ul class="includes-list">
+                            <li>Email: privacidad@jaguarexpeditions.com</li>
+                            <li data-i18n="privacy_phone_label">Teléfono: +51 999 123 456 (Ext. 101)</li>
+                            <li data-i18n="privacy_office_label">Oficina: Calle Putumayo 184, Iquitos</li>
+                            <li><span data-i18n="privacy_responsible_label">Responsable: </span><span data-i18n="privacy_data_protection_officer">Oficial de Protección de Datos</span></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-section" style="background: #e3f2fd; border-left: 4px solid #2196f3;">
+                        <h3><i class="fas fa-info-circle"></i> <span data-i18n="privacy_policy_changes">8. Cambios en la Política</span></h3>
+                        <p style="color: #1565c0; font-weight: 500; margin-bottom: 15px;" data-i18n="privacy_policy_changes_text">
+                            Nos reservamos el derecho de actualizar esta política. Los cambios importantes serán notificados por email.
+                        </p>
+                        <ul class="includes-list">
+                            <li data-i18n="privacy_30_day_notice">Notificación 30 días antes de cambios importantes</li>
+                            <li data-i18n="privacy_version_history">Historial de versiones disponible</li>
+                            <li data-i18n="privacy_reject_changes">Opción de rechazar cambios y cancelar servicio</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <p style="text-align: center; color: #666; margin: 0;">
+                    <strong>Jaguar Expeditions</strong><br>
+                    <span data-i18n="privacy_footer_text">Cumplimos con la Ley N° 29733 - Ley de Protección de Datos Personales del Perú</span><br>
+                    <span data-i18n="privacy_last_update">Última actualización: Agosto 2025</span>
+                </p>
+            </div>
+        </div>
+    </div>
+
     <!-- Botón flotante de WhatsApp -->
     <div class="whatsapp-float">
         <a href="https://wa.me/51962105395?text=Hola%2C%20me%20interesa%20obtener%20información%20sobre%20los%20tours%20de%20Jaguar%20Expeditions" 
@@ -2180,5 +2180,71 @@
             <span class="whatsapp-text">¡Escríbenos!</span>
         </a>
     </div>
+
+    <script>
+        // JavaScript para manejar los modales de Términos y Privacidad
+        document.addEventListener('DOMContentLoaded', function() {
+            // Obtener elementos
+            var termsModal = document.getElementById('termsModal');
+            var privacyModal = document.getElementById('privacyModal');
+            var termsLink = document.getElementById('termsLink');
+            var privacyLink = document.getElementById('privacyLink');
+            var closeBtns = document.querySelectorAll('.close-modal');
+
+            // Función para abrir modal
+            function openModal(modal) {
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+                
+                // Forzar traducción del modal cuando se abre
+                if (window.jaguarI18n && typeof window.jaguarI18n.applyTranslations === 'function') {
+                    window.jaguarI18n.applyTranslations();
+                }
+            }
+
+            // Función para cerrar modal
+            function closeModal(modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+
+            // Event listeners para abrir modales
+            if (termsLink) {
+                termsLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    openModal(termsModal);
+                });
+            }
+
+            if (privacyLink) {
+                privacyLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    openModal(privacyModal);
+                });
+            }
+
+            // Event listeners para cerrar modales
+            closeBtns.forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    var modalType = this.getAttribute('data-modal');
+                    if (modalType === 'terms') {
+                        closeModal(termsModal);
+                    } else if (modalType === 'privacy') {
+                        closeModal(privacyModal);
+                    }
+                });
+            });
+
+            // Cerrar modal al hacer click fuera de él
+            window.addEventListener('click', function(e) {
+                if (e.target === termsModal) {
+                    closeModal(termsModal);
+                }
+                if (e.target === privacyModal) {
+                    closeModal(privacyModal);
+                }
+            });
+        });
+    </script>
 </body>
 </html>

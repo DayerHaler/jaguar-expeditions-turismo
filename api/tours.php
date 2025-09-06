@@ -51,6 +51,49 @@ try {
 }
 
 /**
+ * Función helper para aplicar traducciones a un tour
+ */
+function aplicarTraduccion($tour, $idioma = 'es') {
+    if ($idioma === 'es') {
+        // Si es español, no hay nada que traducir, ya está en el idioma base
+        return $tour;
+    }
+    
+    // Aplicar traducciones según el idioma
+    if ($idioma === 'en') {
+        $tour['nombre'] = $tour['nombre_en'] ?? $tour['nombre'];
+        $tour['descripcion'] = $tour['descripcion_en'] ?? $tour['descripcion'];
+        $tour['descripcion_corta'] = $tour['descripcion_corta_en'] ?? $tour['descripcion_corta'];
+        $tour['incluye'] = !empty($tour['incluye_en']) ? json_decode($tour['incluye_en'], true) : 
+                          (!empty($tour['incluye']) ? json_decode($tour['incluye'], true) : []);
+        $tour['no_incluye'] = !empty($tour['no_incluye_en']) ? json_decode($tour['no_incluye_en'], true) : 
+                             (!empty($tour['no_incluye']) ? json_decode($tour['no_incluye'], true) : []);
+        $tour['itinerario'] = !empty($tour['itinerario_en']) ? json_decode($tour['itinerario_en'], true) : 
+                             (!empty($tour['itinerario']) ? json_decode($tour['itinerario'], true) : []);
+    } elseif ($idioma === 'de') {
+        $tour['nombre'] = $tour['nombre_de'] ?? $tour['nombre'];
+        $tour['descripcion'] = $tour['descripcion_de'] ?? $tour['descripcion'];
+        $tour['descripcion_corta'] = $tour['descripcion_corta_de'] ?? $tour['descripcion_corta'];
+        $tour['incluye'] = !empty($tour['incluye_de']) ? json_decode($tour['incluye_de'], true) : 
+                          (!empty($tour['incluye']) ? json_decode($tour['incluye'], true) : []);
+        $tour['no_incluye'] = !empty($tour['no_incluye_de']) ? json_decode($tour['no_incluye_de'], true) : 
+                             (!empty($tour['no_incluye']) ? json_decode($tour['no_incluye'], true) : []);
+        $tour['itinerario'] = !empty($tour['itinerario_de']) ? json_decode($tour['itinerario_de'], true) : 
+                             (!empty($tour['itinerario']) ? json_decode($tour['itinerario'], true) : []);
+    }
+    
+    // Limpiar campos de traducción para no enviarlos al frontend
+    unset($tour['nombre_en'], $tour['nombre_de']);
+    unset($tour['descripcion_en'], $tour['descripcion_de']);
+    unset($tour['descripcion_corta_en'], $tour['descripcion_corta_de']);
+    unset($tour['incluye_en'], $tour['incluye_de']);
+    unset($tour['no_incluye_en'], $tour['no_incluye_de']);
+    unset($tour['itinerario_en'], $tour['itinerario_de']);
+    
+    return $tour;
+}
+
+/**
  * Manejar peticiones GET
  */
 function manejarGET($db, $path) {
@@ -137,15 +180,26 @@ function obtenerTodosLosTours($db) {
  * Obtener tours activos
  */
 function obtenerToursActivos($db) {
+    $idioma = $_GET['lang'] ?? $_GET['idioma'] ?? 'es';
+    
     $sql = "SELECT * FROM tours WHERE estado = 'Activo' ORDER BY destacado DESC, precio ASC";
     $stmt = $db->prepare($sql);
     $stmt->execute();
     $tours = $stmt->fetchAll();
     
     foreach ($tours as &$tour) {
+        // Aplicar traducción según el idioma solicitado
+        $tour = aplicarTraduccion($tour, $idioma);
+        
         $tour['precio_formateado'] = formatearPrecio($tour['precio']);
-        $tour['incluye'] = !empty($tour['incluye']) ? json_decode($tour['incluye'], true) : [];
-        $tour['no_incluye'] = !empty($tour['no_incluye']) ? json_decode($tour['no_incluye'], true) : [];
+        
+        // Asegurar que incluye y no_incluye sean arrays
+        if (!is_array($tour['incluye'])) {
+            $tour['incluye'] = !empty($tour['incluye']) ? json_decode($tour['incluye'], true) : [];
+        }
+        if (!is_array($tour['no_incluye'])) {
+            $tour['no_incluye'] = !empty($tour['no_incluye']) ? json_decode($tour['no_incluye'], true) : [];
+        }
     }
     
     respuestaJSON(true, 'Tours activos obtenidos', $tours);
@@ -155,12 +209,17 @@ function obtenerToursActivos($db) {
  * Obtener tours destacados
  */
 function obtenerToursDestacados($db) {
+    $idioma = $_GET['lang'] ?? $_GET['idioma'] ?? 'es';
+    
     $sql = "SELECT * FROM tours WHERE estado = 'Activo' AND destacado = 1 ORDER BY precio ASC LIMIT 6";
     $stmt = $db->prepare($sql);
     $stmt->execute();
     $tours = $stmt->fetchAll();
     
     foreach ($tours as &$tour) {
+        // Aplicar traducción según el idioma solicitado
+        $tour = aplicarTraduccion($tour, $idioma);
+        
         $tour['precio_formateado'] = formatearPrecio($tour['precio']);
     }
     
@@ -171,6 +230,8 @@ function obtenerToursDestacados($db) {
  * Obtener tour por ID
  */
 function obtenerTourPorId($db, $id) {
+    $idioma = $_GET['lang'] ?? $_GET['idioma'] ?? 'es';
+    
     $sql = "SELECT * FROM tours WHERE id = ?";
     $stmt = $db->prepare($sql);
     $stmt->execute([$id]);
@@ -180,11 +241,23 @@ function obtenerTourPorId($db, $id) {
         respuestaJSON(false, 'Tour no encontrado');
     }
     
+    // Aplicar traducción según el idioma solicitado
+    $tour = aplicarTraduccion($tour, $idioma);
+    
     // Procesar campos JSON
     $tour['precio_formateado'] = formatearPrecio($tour['precio']);
-    $tour['incluye'] = !empty($tour['incluye']) ? json_decode($tour['incluye'], true) : [];
-    $tour['no_incluye'] = !empty($tour['no_incluye']) ? json_decode($tour['no_incluye'], true) : [];
-    $tour['itinerario'] = !empty($tour['itinerario']) ? json_decode($tour['itinerario'], true) : [];
+    
+    // Asegurar que los campos JSON sean arrays
+    if (!is_array($tour['incluye'])) {
+        $tour['incluye'] = !empty($tour['incluye']) ? json_decode($tour['incluye'], true) : [];
+    }
+    if (!is_array($tour['no_incluye'])) {
+        $tour['no_incluye'] = !empty($tour['no_incluye']) ? json_decode($tour['no_incluye'], true) : [];
+    }
+    if (!is_array($tour['itinerario'])) {
+        $tour['itinerario'] = !empty($tour['itinerario']) ? json_decode($tour['itinerario'], true) : [];
+    }
+    
     $tour['imagenes_galeria'] = !empty($tour['imagenes_galeria']) ? json_decode($tour['imagenes_galeria'], true) : [];
     
     // Obtener disponibilidad próxima

@@ -144,12 +144,17 @@ class JaguarI18n {
                 try {
                     this.showLoadingIndicator();
                     await this.loadLanguage(newLang);
+                    const oldLang = this.currentLang;
                     this.currentLang = newLang;
                     localStorage.setItem('jaguar_lang', newLang);
                     document.documentElement.lang = newLang;
                     this.applyTranslations();
                     this.syncLanguageSelectors();
                     this.updateLanguageFlags();
+                    
+                    // Emitir evento personalizado
+                    $(document).trigger('languageChanged', { newLang: newLang, oldLang: oldLang });
+                    
                     console.log(`🔄 Idioma cambiado a: ${newLang} (por bandera)`);
                 } catch (error) {
                     console.error('Error al cambiar idioma por bandera:', error);
@@ -222,6 +227,9 @@ class JaguarI18n {
             
             // Actualizar banderas
             this.updateLanguageFlags();
+            
+            // Emitir evento personalizado para que otros componentes puedan reaccionar
+            $(document).trigger('languageChanged', { newLang: newLang, oldLang: this.currentLang });
             
             console.log(`🔄 Idioma cambiado a: ${newLang}`);
             
