@@ -524,7 +524,7 @@ body {
 /* Tours Populares */
 .popular-tours {
     padding: 80px 0;
-    background: white !important;
+    background: var(--light-gray);
 }
 
 .section-header {
@@ -1884,56 +1884,16 @@ img.loaded {
     backdrop-filter: blur(5px);
 }
 
-.tour-modal .modal-content {
+.modal-content {
     background-color: white;
     margin: 2% auto;
     border-radius: 15px;
     width: 90%;
     max-width: 800px;
     max-height: 90vh;
-    overflow: hidden;
+    overflow-y: auto;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
     animation: modalSlideIn 0.3s ease-out;
-    display: flex;
-    flex-direction: column;
-}
-
-.tour-modal .modal-header {
-    padding: 20px 30px;
-    border-bottom: 1px solid #eee;
-    flex-shrink: 0;
-}
-
-.tour-modal .modal-body {
-    padding: 0 30px 20px;
-    overflow-y: auto;
-    flex: 1;
-    min-height: 0; /* Important for flex scrolling */
-}
-
-.tour-modal .modal-footer {
-    padding: 20px 30px;
-    border-top: 1px solid #eee;
-    flex-shrink: 0;
-}
-
-/* Estilos de scrollbar para los modales */
-.tour-modal .modal-body::-webkit-scrollbar {
-    width: 10px;
-}
-
-.tour-modal .modal-body::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 5px;
-}
-
-.tour-modal .modal-body::-webkit-scrollbar-thumb {
-    background: var(--primary-green);
-    border-radius: 5px;
-}
-
-.tour-modal .modal-body::-webkit-scrollbar-thumb:hover {
-    background: var(--accent-green);
 }
 
 @keyframes modalSlideIn {
@@ -1985,7 +1945,9 @@ img.loaded {
     font-weight: 500;
 }
 
-/* Eliminar estilos duplicados - ya están definidos arriba para tour-modal */
+.modal-body {
+    padding: 0 30px 20px;
+}
 
 .modal-info {
     display: flex;
@@ -2168,12 +2130,26 @@ img.loaded {
 
 .footer-links {
     display: flex;
-    gap: 25px;
+    flex-direction: row;
+    gap: 18px;
     align-items: center;
+    flex-wrap: nowrap;
+    justify-content: center;
+    white-space: nowrap;
 }
 
-.terms-link,
-.privacy-link {
+.footer-terms-link,
+.footer-privacy-link {
+    width: auto;
+    min-width: 180px;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+/* Footer links exclusivos */
+.footer-terms-link,
+.footer-privacy-link {
     color: green;
     align-items: center;
     gap: 8px;
@@ -2181,6 +2157,45 @@ img.loaded {
     transition: all 0.3s ease;
     border-radius: 20px;
     border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.footer-terms-link:hover,
+.footer-privacy-link:hover {
+    color: red;
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+.footer-terms-link i,
+.footer-privacy-link i {
+    font-size: 0.8rem;
+}
+
+/* Contacto.html links exclusivos */
+.contact-terms-link,
+.contact-privacy-link {
+    color: #fff;
+    background: linear-gradient(90deg, var(--sunset-orange), var(--golden-yellow));
+    align-items: center;
+    gap: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border-radius: 24px;
+    border: none;
+    padding: 10px 24px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+    text-shadow: 0 1px 2px rgba(0,0,0,0.10);
+    display: flex;
+}
+
+.contact-terms-link:hover,
+.contact-privacy-link:hover {
+    color: #fff;
+    background: linear-gradient(90deg, var(--golden-yellow), var(--sunset-orange));
+    transform: scale(1.05) translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+    text-decoration: none;
 }
 
 .terms-link:hover,
@@ -3143,12 +3158,14 @@ img.loaded {
 
 .modal-content {
     position: relative;
-    max-width: 90%;
-    max-height: 90%;
+    max-width: 95vw;
+    max-height: 95vh;
     background: white;
     border-radius: 15px;
     overflow: hidden;
     z-index: 1001;
+    display: flex;
+    flex-direction: column;
 }
 
 .close-modal {
@@ -3177,8 +3194,9 @@ img.loaded {
 
 .modal-image-container img {
     width: 100%;
-    height: 60vh;
+    max-height: 45vh;
     object-fit: cover;
+    display: block;
 }
 
 .modal-navigation {
@@ -3217,6 +3235,21 @@ img.loaded {
 
 .modal-info {
     padding: 30px;
+    overflow-y: auto;
+    max-height: 40vh;
+}
+@media (max-width: 700px) {
+    .modal-content {
+        max-width: 99vw;
+        max-height: 99vh;
+    }
+    .modal-image-container img {
+        max-height: 30vh;
+    }
+    .modal-info {
+        padding: 18px 10px;
+        max-height: 55vh;
+    }
 }
 
 .modal-info h3 {
@@ -4402,11 +4435,7 @@ img.loaded {
     border-radius: 15px;
     width: 90%;
     max-width: 500px;
-    max-height: 80vh;
     box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
 }
 
 .modal-header {
@@ -4438,32 +4467,6 @@ img.loaded {
 
 .modal form {
     padding: 20px;
-}
-
-/* Estilos para el contenido scrolleable de los modales de términos */
-.modal-body {
-    padding: 20px;
-    max-height: 60vh;
-    overflow-y: auto;
-    flex: 1;
-}
-
-.modal-body::-webkit-scrollbar {
-    width: 8px;
-}
-
-.modal-body::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 4px;
-}
-
-.modal-body::-webkit-scrollbar-thumb {
-    background: var(--primary-green);
-    border-radius: 4px;
-}
-
-.modal-body::-webkit-scrollbar-thumb:hover {
-    background: var(--accent-green);
 }
 
 .modal .form-group {
