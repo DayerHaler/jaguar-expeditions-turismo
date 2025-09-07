@@ -255,9 +255,9 @@
                                 <input type="checkbox" id="terminos" name="terminos" required>
                                 <label for="terminos">
                                     <span data-i18n="form_acepto_los">Acepto los</span> 
-                                    <a href="#" class="terms-link" data-i18n="form_terminos_link">términos y condiciones</a> 
+                                    <a href="#" id="termsLinkCheckbox" class="terms-link" data-i18n="form_terminos_link">términos y condiciones</a> 
                                     <span data-i18n="form_y_la">y la</span> 
-                                    <a href="#" class="privacy-link" data-i18n="form_privacidad_link">política de privacidad</a> *
+                                    <a href="#" id="privacyLinkCheckbox" class="privacy-link" data-i18n="form_privacidad_link">política de privacidad</a> *
                                 </label>
                             </div>
 
@@ -316,7 +316,7 @@
                         </div>
                         <h3 data-i18n="messenger_titulo">Facebook Messenger</h3>
                         <p data-i18n="messenger_descripcion">Chatea con nosotros en Facebook</p>
-                        <a href="#" target="_blank" class="method-link">@JaguarExpeditions</a>
+                        <a href="https://m.me/JaguarExpeditions" target="_blank" rel="noopener" class="method-link">@JaguarExpeditions</a>
                     </div>
 
                     <div class="method-card">
@@ -325,7 +325,7 @@
                         </div>
                         <h3 data-i18n="skype_titulo">Videollamada</h3>
                         <p data-i18n="skype_descripcion">Consulta personalizada por Skype</p>
-                        <a href="#" class="method-link">jaguar.expeditions</a>
+                        <a href="https://join.skype.com/invite/jaguar.expeditions" target="_blank" rel="noopener" class="method-link">jaguar.expeditions</a>
                     </div>
 
                     <div class="method-card">
@@ -359,11 +359,14 @@
                 
                 <div class="footer-section">
                     <h4 data-i18n="footer_siguenos">Síguenos</h4>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-whatsapp"></i></a>
-                        <a href="#"><i class="fab fa-tripadvisor"></i></a>
+                    <div class="social-links" style="margin-top: 10px; display: flex; justify-content: center; gap: 20px;">
+                        <a href="https://www.facebook.com/" target="_blank" aria-label="Facebook" class="social-btn"><i class="fab fa-facebook"></i></a>
+                        <a href="https://www.instagram.com/" target="_blank" aria-label="Instagram" class="social-btn"><i class="fab fa-instagram"></i></a>
+                        <a href="https://wa.me/51999123456" target="_blank" aria-label="WhatsApp" class="social-btn"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://www.tripadvisor.com/" target="_blank" aria-label="TripAdvisor" class="social-btn">
+                            <img src="img/tripadvisor.png" alt="TripAdvisor" style="height: 24px; width: 24px; vertical-align: middle; background: #fff; border-radius: 50%; padding: 2px; box-shadow: 0 0 2px #222;"> 
+                            <i class="fab fa-tripadvisor"></i>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -372,11 +375,11 @@
                 <div class="footer-bottom-content">
                     <p data-i18n="footer_copyright">&copy; 2025 Jaguar Expeditions. Todos los derechos reservados.</p>
                     <div class="footer-links">
-                        <a href="#" id="termsLink" class="terms-link">
+                        <a href="#" id="termsLink" class="contact-terms-link">
                             <i class="fas fa-file-contract"></i>
                             <span data-i18n="footer_terminos">Términos y Condiciones</span>
                         </a>
-                        <a href="#" id="privacyLink" class="privacy-link">
+                        <a href="#" id="privacyLink" class="contact-privacy-link">
                             <i class="fas fa-shield-alt"></i>
                             <span data-i18n="footer_privacidad">Política de Privacidad</span>
                         </a>
@@ -713,7 +716,7 @@
     </div>
 
     <!-- Modal de Términos y Condiciones -->
-    <div id="termsModal" class="tour-modal">
+    <!-- <div id="termsModal" class="tour-modal">
         <div class="modal-content">
             <span class="close-modal" data-modal="terms">&times;</span>
             <div class="modal-header">
@@ -814,7 +817,7 @@
                 </p>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <!-- Modal de Política de Privacidad -->
     <div id="privacyModal" class="tour-modal">
@@ -954,6 +957,8 @@
             var privacyModal = document.getElementById('privacyModal');
             var termsLink = document.getElementById('termsLink');
             var privacyLink = document.getElementById('privacyLink');
+            var termsLinkCheckbox = document.getElementById('termsLinkCheckbox');
+            var privacyLinkCheckbox = document.getElementById('privacyLinkCheckbox');
             var closeBtns = document.querySelectorAll('.close-modal');
 
             // Función para abrir modal
@@ -975,9 +980,21 @@
                     openModal(termsModal);
                 });
             }
+            if (termsLinkCheckbox) {
+                termsLinkCheckbox.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    openModal(termsModal);
+                });
+            }
 
             if (privacyLink) {
                 privacyLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    openModal(privacyModal);
+                });
+            }
+            if (privacyLinkCheckbox) {
+                privacyLinkCheckbox.addEventListener('click', function(e) {
                     e.preventDefault();
                     openModal(privacyModal);
                 });
