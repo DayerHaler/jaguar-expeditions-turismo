@@ -1,0 +1,129 @@
+<!-- EJEMPLO DE INTEGRACIÓN MERCADOPAGO -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MercadoPago Integration</title>
+</head>
+<body>
+    <!-- Formulario de tarjeta -->
+    <form id="form-checkout">
+        <div>
+            <label for="form-checkout__cardNumber">Número de tarjeta:</label>
+            <input type="text" name="cardNumber" id="form-checkout__cardNumber" />
+        </div>
+        <div>
+            <label for="form-checkout__expirationDate">Fecha de vencimiento:</label>
+            <input type="text" name="expirationDate" id="form-checkout__expirationDate" placeholder="MM/YY" />
+        </div>
+        <div>
+            <label for="form-checkout__securityCode">Código de seguridad:</label>
+            <input type="text" name="securityCode" id="form-checkout__securityCode" />
+        </div>
+        <div>
+            <label for="form-checkout__cardholderName">Titular:</label>
+            <input type="text" name="cardholderName" id="form-checkout__cardholderName" />
+        </div>
+        <div>
+            <label for="form-checkout__issuer">Banco emisor:</label>
+            <select name="issuer" id="form-checkout__issuer"></select>
+        </div>
+        <div>
+            <label for="form-checkout__installments">Cuotas:</label>
+            <select name="installments" id="form-checkout__installments"></select>
+        </div>
+        <button type="submit" id="form-checkout__submit">Pagar</button>
+    </form>
+
+    <!-- MercadoPago SDK -->
+    <script src="https://sdk.mercadopago.com/js/v2"></script>
+
+    <script>
+        const mp = new MercadoPago('TU_PUBLIC_KEY_AQUI');
+
+        const cardForm = mp.cardForm({
+            amount: "299.00",
+            iframe: true,
+            form: {
+                id: "form-checkout",
+                cardNumber: {
+                    id: "form-checkout__cardNumber",
+                    placeholder: "Número de tarjeta",
+                },
+                expirationDate: {
+                    id: "form-checkout__expirationDate",
+                    placeholder: "MM/YY",
+                },
+                securityCode: {
+                    id: "form-checkout__securityCode",
+                    placeholder: "Código de seguridad",
+                },
+                cardholderName: {
+                    id: "form-checkout__cardholderName",
+                    placeholder: "Titular de la tarjeta",
+                },
+                issuer: {
+                    id: "form-checkout__issuer",
+                    placeholder: "Banco emisor",
+                },
+                installments: {
+                    id: "form-checkout__installments",
+                    placeholder: "Cuotas",
+                },
+                identificationType: {
+                    id: "form-checkout__identificationType",
+                    placeholder: "Tipo de documento",
+                },
+                identificationNumber: {
+                    id: "form-checkout__identificationNumber",
+                    placeholder: "Número de documento",
+                },
+            },
+            callbacks: {
+                onFormMounted: error => {
+                    if (error) return console.warn("Form Mounted handling error: ", error);
+                    console.log("Form mounted");
+                },
+                onSubmit: event => {
+                    event.preventDefault();
+
+                    const {
+                        paymentMethodId: payment_method_id,
+                        issuerId: issuer_id,
+                        cardholderEmail: email,
+                        amount,
+                        token,
+                        installments,
+                        identificationNumber,
+                        identificationType,
+                    } = cardForm.getCardFormData();
+
+                    fetch("/procesar-pago-mercadopago.php", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            token,
+                            issuer_id,
+                            payment_method_id,
+                            transaction_amount: Number(amount),
+                            installments: Number(installments),
+                            description: "Expedición Río Amazonas",
+                            payer: {
+                                email,
+                                identification: {
+                                    type: identificationType,
+                                    number: identificationNumber,
+                                },
+                            },
+                        }),
+                    });
+                },
+                onFetching: (resource) => {
+                    console.log("Fetching resource: ", resource);
+                }
+            },
+        });
+    </script>
+</body>
+</html>

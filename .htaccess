@@ -1,0 +1,36 @@
+# Configuración de codificación UTF-8
+AddDefaultCharset UTF-8
+
+# Configurar Content-Type específico para cada tipo de archivo
+AddType "text/html; charset=UTF-8" .html
+AddType "text/css; charset=UTF-8" .css
+AddType "application/javascript; charset=UTF-8" .js
+AddType "image/jpeg" .jpg .jpeg
+AddType "image/png" .png
+AddType "image/gif" .gif
+
+# Habilitar compresión y configurar headers para mejor rendimiento
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/plain
+    AddOutputFilterByType DEFLATE text/html
+    AddOutputFilterByType DEFLATE text/xml
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE application/xml
+    AddOutputFilterByType DEFLATE application/xhtml+xml
+    AddOutputFilterByType DEFLATE application/rss+xml
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE application/x-javascript
+</IfModule>
+
+# Headers específicos - SOLO para archivos HTML
+<IfModule mod_headers.c>
+    <FilesMatch "\.(html)$">
+        Header set Content-Type "text/html; charset=UTF-8"
+    </FilesMatch>
+    <FilesMatch "\.(css)$">
+        Header set Content-Type "text/css; charset=UTF-8"
+    </FilesMatch>
+    <FilesMatch "\.(js)$">
+        Header set Content-Type "application/javascript; charset=UTF-8"
+    </FilesMatch>
+</IfModule>

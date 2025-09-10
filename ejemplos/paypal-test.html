@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PayPal Test - Jaguar Expeditions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        .product-info {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        #paypal-button-container {
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="product-info">
+        <h2>🐆 Expedición Río Amazonas</h2>
+        <p><strong>Precio:</strong> $299.00 USD</p>
+        <p><strong>Duración:</strong> 3 días / 2 noches</p>
+        <p><strong>Incluye:</strong> Transporte, alimentación, guía especializado</p>
+    </div>
+
+    <h3>Pagar con PayPal:</h3>
+    <!-- Contenedor para botón de PayPal -->
+    <div id="paypal-button-container"></div>
+
+    <div id="result-message"></div>
+
+    <!-- IMPORTANTE: Reemplaza TU_CLIENT_ID_AQUI con tu Client ID real -->
+    <script src="https://www.paypal.com/sdk/js?client-id=TU_CLIENT_ID_AQUI&currency=USD"></script>
+
+    <script>
+        paypal.Buttons({
+            // Configurar la transacción
+            createOrder: function(data, actions) {
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: '299.00',
+                            currency_code: 'USD'
+                        },
+                        description: 'Expedición Río Amazonas - Jaguar Expeditions',
+                        custom_id: 'TOUR_001',
+                        invoice_id: 'INV_' + Date.now()
+                    }]
+                });
+            },
+
+            // Ejecutar cuando el pago es aprobado
+            onApprove: function(data, actions) {
+                return actions.order.capture().then(function(details) {
+                    const messageContainer = document.getElementById('result-message');
+                    messageContainer.innerHTML = `
+                        <div style="background: #d4edda; padding: 15px; border-radius: 5px; border: 1px solid #c3e6cb;">
+                            <h4 style="color: #155724; margin: 0 0 10px 0;">✅ ¡Pago Exitoso!</h4>
+                            <p><strong>Nombre:</strong> ${details.payer.name.given_name} ${details.payer.name.surname}</p>
+                            <p><strong>Email:</strong> ${details.payer.email_address}</p>
+                            <p><strong>ID de transacción:</strong> ${details.id}</p>
+                            <p><strong>Estado:</strong> ${details.status}</p>
+                            <p><strong>Monto:</strong> $${details.purchase_units[0].amount.value} ${details.purchase_units[0].amount.currency_code}</p>
+                        </div>
+                    `;
+                    
+                    // Aquí enviarías los datos a tu servidor
+                    console.log('Detalles del pago:', details);
+                    
+                    // Simular envío al servidor
+                    fetch('/api/procesar-pago-paypal.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            orderID: data.orderID,
+                            details: details,
+                            tour_id: 1,
+                            reserva_id: 'RES_' + Date.now()
+                        }),
+                    }).then(response => response.json())
+                      .then(data => {
+                          console.log('Respuesta del servidor:', data);
+                      });
+                });
+            },
+
+            // Manejar cancelación
+            onCancel: function(data) {
+                document.getElementById('result-message').innerHTML = `
+                    <div style="background: #fff3cd; padding: 15px; border-radius: 5px; border: 1px solid #ffeaa7;">
+                        <h4 style="color: #856404; margin: 0;">⚠️ Pago cancelado</h4>
+                        <p>El pago fue cancelado. Puedes intentar nuevamente.</p>
+                    </div>
+                `;
+            },
+
+            // Manejar errores
+            onError: function(err) {
+                console.error('Error de PayPal:', err);
+                document.getElementById('result-message').innerHTML = `
+                    <div style="background: #f8d7da; padding: 15px; border-radius: 5px; border: 1px solid #f5c6cb;">
+                        <h4 style="color: #721c24; margin: 0;">❌ Error en el pago</h4>
+                        <p>Hubo un error procesando el pago. Intente nuevamente.</p>
+                    </div>
+                `;
+            }
+        }).render('#paypal-button-container');
+    </script>
+</body>
+</html>

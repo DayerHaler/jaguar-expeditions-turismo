@@ -1,0 +1,54 @@
+<!-- EJEMPLO DE INTEGRACIÓN IZIPAY -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Izipay Integration Example</title>
+    <!-- SDK de Izipay -->
+    <script src="https://api.izipay.pe/static/js/krypton-client/V4.0/stable/kr-payment-form.min.js"></script>
+</head>
+<body>
+    <!-- Formulario de pago Izipay -->
+    <div class="kr-form-payment" kr-post-url-success="/payment-success.php">
+        <!-- Datos del pedido -->
+        <div class="kr-payment-button"></div>
+        <div class="kr-form-error"></div>
+    </div>
+
+    <script>
+        // Configuración Izipay
+        KR.setFormConfig({
+            // Datos que te proporcionará Izipay
+            'kr-public-key': 'TU_PUBLIC_KEY_IZIPAY',
+            'kr-post-url-success': '/payment-success.php',
+            'kr-post-url-refused': '/payment-error.php',
+            
+            // Personalización
+            'kr-theme': 'neon', // o 'classic', 'material'
+            'kr-language': 'es-ES',
+            
+            // Datos de la transacción
+            'kr-currency': 'PEN', // Soles peruanos
+            'kr-amount': '34282',  // En centavos: 342.82 soles
+            
+            // Información del pedido
+            'kr-order-id': 'JAGUAR-' + Date.now(),
+            'kr-customer': {
+                'email': 'cliente@email.com',
+                'firstName': 'Juan',
+                'lastName': 'Pérez'
+            }
+        });
+
+        // Personalizar estilos
+        KR.onFormReady(function() {
+            // El formulario está listo
+            console.log('Formulario Izipay cargado');
+        });
+
+        // Manejar resultado del pago
+        KR.onFormError(function(event) {
+            console.error('Error en pago:', event);
+        });
+    </script>
+</body>
+</html>

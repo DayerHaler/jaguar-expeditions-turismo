@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulación de Pago - Jaguar Expeditions</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c5530 0%, #1a3a1c 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            opacity: 0.9;
+            font-size: 16px;
+        }
+
+        .payment-section {
+            display: flex;
+            min-height: 500px;
+        }
+
+        .order-summary {
+            flex: 1;
+            background: #f8f9fa;
+            padding: 30px;
+            border-right: 1px solid #e9ecef;
+        }
+
+        .payment-form {
+            flex: 1.5;
+            padding: 30px;
+        }
+
+        .tour-info {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .tour-image {
+            width: 100%;
+            height: 150px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200"><rect width="400" height="200" fill="%23e9ecef"/><text x="200" y="100" text-anchor="middle" dy=".3em" font-family="Arial" font-size="18" fill="%236c757d">🐆 Río Amazonas</text></svg>') center/cover;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .price-breakdown {
+            border-top: 2px solid #dee2e6;
+            padding-top: 20px;
+            margin-top: 20px;
+        }
+
+        .price-line {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .price-total {
+            font-weight: bold;
+            font-size: 20px;
+            color: #2c5530;
+            border-top: 1px solid #dee2e6;
+            padding-top: 15px;
+            margin-top: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #495057;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #2c5530;
+            box-shadow: 0 0 0 3px rgba(44, 85, 48, 0.1);
+        }
+
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        .card-icons {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .card-icon {
+            width: 40px;
+            height: 28px;
+            background: #e9ecef;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+            color: #6c757d;
+        }
+
+        .visa { background: #1a1f71; color: white; }
+        .mastercard { background: #eb001b; color: white; }
+        .amex { background: #006fcf; color: white; }
+
+        .security-info {
+            background: #e8f5e8;
+            border: 1px solid #c3e6c3;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-pay {
+            width: 100%;
+            background: linear-gradient(135deg, #2c5530 0%, #1a3a1c 100%);
+            color: white;
+            border: none;
+            padding: 16px 24px;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-pay:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(44, 85, 48, 0.3);
+        }
+
+        .btn-pay:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .spinner {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-top: 2px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        .processing .spinner {
+            display: block;
+        }
+
+        .processing .btn-text {
+            opacity: 0;
+        }
+
+        .result-message {
+            margin-top: 20px;
+            padding: 16px;
+            border-radius: 8px;
+            font-weight: 500;
+            display: none;
+        }
+
+        .success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .card-preview {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            position: relative;
+            min-height: 180px;
+        }
+
+        .card-number-display {
+            font-family: 'Courier New', monospace;
+            font-size: 20px;
+            letter-spacing: 2px;
+            margin: 20px 0;
+        }
+
+        .card-details {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .payment-section {
+                flex-direction: column;
+            }
+            
+            .order-summary {
+                border-right: none;
+                border-bottom: 1px solid #e9ecef;
+            }
+            
+            .form-row {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🐆 Finalizar Pago</h1>
+            <p>Expedición Río Amazonas - Jaguar Expeditions</p>
+        </div>
+
+        <div class="payment-section">
+            <div class="order-summary">
+                <h3>Resumen del Pedido</h3>
+                
+                <div class="tour-info">
+                    <div class="tour-image"></div>
+                    <h4>Expedición Río Amazonas</h4>
+                    <p>3 días / 2 noches</p>
+                    <p><strong>Fecha:</strong> 28 de Agosto, 2025</p>
+                    <p><strong>Personas:</strong> 1 adulto</p>
+                </div>
+
+                <div class="price-breakdown">
+                    <div class="price-line">
+                        <span>Subtotal:</span>
+                        <span>$299.00</span>
+                    </div>
+                    <div class="price-line">
+                        <span>Impuestos (18%):</span>
+                        <span>$53.82</span>
+                    </div>
+                    <div class="price-line">
+                        <span>Descuento:</span>
+                        <span style="color: #28a745;">-$10.00</span>
+                    </div>
+                    <div class="price-line price-total">
+                        <span>Total:</span>
+                        <span>$342.82</span>
+                    </div>
+                </div>
+
+                <div class="security-info">
+                    <span>🔒</span>
+                    <div>
+                        <strong>Pago 100% Seguro</strong><br>
+                        <small>Tus datos están protegidos con encriptación SSL</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="payment-form">
+                <h3>Información de Pago</h3>
+                
+                <!-- Vista previa de tarjeta -->
+                <div class="card-preview">
+                    <div style="text-align: right; font-size: 14px;">VISA</div>
+                    <div class="card-number-display" id="card-display">**** **** **** ****</div>
+                    <div class="card-details">
+                        <div>
+                            <div style="font-size: 12px; opacity: 0.8;">TITULAR</div>
+                            <div id="holder-display">NOMBRE APELLIDO</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 12px; opacity: 0.8;">VÁLIDA HASTA</div>
+                            <div id="expiry-display">MM/YY</div>
+                        </div>
+                    </div>
+                </div>
+
+                <form id="payment-form">
+                    <div class="form-group">
+                        <label for="card-number">Número de Tarjeta</label>
+                        <input type="text" id="card-number" class="form-control" placeholder="1234 5678 9012 3456" maxlength="19" required>
+                        <div class="card-icons">
+                            <div class="card-icon visa">VISA</div>
+                            <div class="card-icon mastercard">MC</div>
+                            <div class="card-icon amex">AMEX</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="card-holder">Nombre del Titular</label>
+                        <input type="text" id="card-holder" class="form-control" placeholder="Como aparece en la tarjeta" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="expiry-date">Fecha de Vencimiento</label>
+                            <input type="text" id="expiry-date" class="form-control" placeholder="MM/YY" maxlength="5" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="cvv">CVV</label>
+                            <input type="text" id="cvv" class="form-control" placeholder="123" maxlength="4" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email de Confirmación</label>
+                        <input type="email" id="email" class="form-control" placeholder="tu@email.com" required>
+                    </div>
+
+                    <button type="submit" class="btn-pay" id="pay-button">
+                        <span class="btn-text">💳 Pagar $342.82</span>
+                        <div class="spinner"></div>
+                    </button>
+
+                    <div class="result-message" id="result-message"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Formatear número de tarjeta
+        document.getElementById('card-number').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\s/g, '').replace(/[^0-9]/gi, '');
+            let formattedValue = value.match(/.{1,4}/g)?.join(' ') || '';
+            
+            e.target.value = formattedValue;
+            
+            // Actualizar vista previa
+            let displayValue = formattedValue.padEnd(19, '*').replace(/(.{4})/g, '$1 ').trim();
+            if (formattedValue.length === 0) {
+                displayValue = '**** **** **** ****';
+            }
+            document.getElementById('card-display').textContent = displayValue;
+        });
+
+        // Formatear fecha de vencimiento
+        document.getElementById('expiry-date').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length >= 2) {
+                value = value.substring(0, 2) + '/' + value.substring(2, 4);
+            }
+            e.target.value = value;
+            
+            // Actualizar vista previa
+            document.getElementById('expiry-display').textContent = value || 'MM/YY';
+        });
+
+        // Actualizar nombre del titular
+        document.getElementById('card-holder').addEventListener('input', function(e) {
+            document.getElementById('holder-display').textContent = e.target.value.toUpperCase() || 'NOMBRE APELLIDO';
+        });
+
+        // Solo números en CVV
+        document.getElementById('cvv').addEventListener('input', function(e) {
+            e.target.value = e.target.value.replace(/\D/g, '');
+        });
+
+        // Procesar pago
+        document.getElementById('payment-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const button = document.getElementById('pay-button');
+            const resultMessage = document.getElementById('result-message');
+            
+            // Validaciones básicas
+            const cardNumber = document.getElementById('card-number').value.replace(/\s/g, '');
+            const expiryDate = document.getElementById('expiry-date').value;
+            const cvv = document.getElementById('cvv').value;
+            const email = document.getElementById('email').value;
+            
+            if (cardNumber.length < 16) {
+                showResult('error', 'Número de tarjeta inválido');
+                return;
+            }
+            
+            if (expiryDate.length < 5) {
+                showResult('error', 'Fecha de vencimiento inválida');
+                return;
+            }
+            
+            if (cvv.length < 3) {
+                showResult('error', 'CVV inválido');
+                return;
+            }
+            
+            // Simular procesamiento
+            button.disabled = true;
+            button.classList.add('processing');
+            resultMessage.style.display = 'none';
+            
+            setTimeout(() => {
+                // Simular éxito o error (80% éxito)
+                const success = Math.random() > 0.2;
+                
+                button.disabled = false;
+                button.classList.remove('processing');
+                
+                if (success) {
+                    showResult('success', `
+                        <strong>🎉 ¡Pago Exitoso!</strong><br>
+                        <strong>ID de Transacción:</strong> TXN-${Date.now()}<br>
+                        <strong>Monto:</strong> $342.82 USD<br>
+                        <strong>Método:</strong> **** **** **** ${cardNumber.slice(-4)}<br>
+                        <br>
+                        ✅ Confirmación enviada a: ${email}<br>
+                        📧 Recibirás los detalles del tour por email<br>
+                        📱 Te contactaremos 24h antes del viaje
+                    `);
+                    
+                    // Simular redirección después de 3 segundos
+                    setTimeout(() => {
+                        alert('Redirigiendo a la página de confirmación...');
+                    }, 3000);
+                    
+                } else {
+                    const errors = [
+                        'Tarjeta declinada. Verifica los datos.',
+                        'Fondos insuficientes.',
+                        'Tarjeta vencida.',
+                        'Error de conexión con el banco.',
+                        'CVV incorrecto.'
+                    ];
+                    const randomError = errors[Math.floor(Math.random() * errors.length)];
+                    showResult('error', `❌ Error en el pago: ${randomError}`);
+                }
+            }, 3000);
+        });
+        
+        function showResult(type, message) {
+            const resultMessage = document.getElementById('result-message');
+            resultMessage.className = `result-message ${type}`;
+            resultMessage.innerHTML = message;
+            resultMessage.style.display = 'block';
+            resultMessage.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Números de tarjeta de prueba que siempre funcionan
+        const testCards = [
+            '4111111111111111', // Visa
+            '4000056655665556', // Visa (error simulado)
+            '5555555555554444', // Mastercard
+            '2223003122003222', // Mastercard
+            '378282246310005',  // American Express
+        ];
+        
+        // Mostrar ayuda
+        console.log('🧪 TARJETAS DE PRUEBA:');
+        console.log('✅ Visa: 4111 1111 1111 1111');
+        console.log('✅ Mastercard: 5555 5555 5555 4444');
+        console.log('❌ Error: 4000 0566 5566 5556');
+        console.log('📅 Fecha: cualquier fecha futura (ej: 12/25)');
+        console.log('🔒 CVV: cualquier 3-4 dígitos');
+    </script>
+</body>
+</html>

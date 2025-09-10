@@ -1,0 +1,51 @@
+# Archivos de configuración sensibles
+config/database.php
+config/config.php
+
+# Archivos de Composer (vendor se puede regenerar)
+/vendor/
+composer.lock
+
+# Archivos de VS Code
+.vscode/
+
+# Archivos temporales
+*.tmp
+*.temp
+*.log
+
+# Archivos de backup
+*_backup.*
+*_old.*
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Archivos PHP temporales
+*.php~
+
+# Cache y sesiones
+/cache/
+/sessions/
+/tmp/
+
+# Archivos de configuración local
+.env
+.env.local
+.env.production
+
+# Archivos de base de datos locales (dumps)
+*.sql.bak
+*.sql.backup
+
+# Archivos de prueba
+test_*.php
+test_*.html
+debug_*.php
+diagnostico*.php
+
+# Logs de errores
+error.log
+php_errors.log

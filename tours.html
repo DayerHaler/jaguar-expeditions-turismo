@@ -1,0 +1,2308 @@
+    <!-- Modal para compartir tour -->
+    <div id="shareTourModal" class="tour-modal" style="display:none;z-index:9999;">
+        <div class="modal-content" style="max-width:340px;position:relative;background:#fff;border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,0.18);padding:1.5em 1.5em 1em 1.5em;">
+            <span class="close-modal" id="closeShareTourModal" style="position:absolute;top:18px;right:18px;width:40px;height:40px;background:#fff;border-radius:50%;box-shadow:0 2px 8px rgba(0,0,0,0.08);color:#888;font-size:1.7rem;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:10;transition:background 0.2s,color 0.2s;border:none;padding:0;line-height:1;">&times;</span>
+            <div class="modal-header" style="text-align:center;">
+                <h2 id="shareTourTitle" style="font-size:1.2rem;font-weight:700;margin-bottom:1em;">Compartir tour</h2>
+                <div id="shareTourName" style="font-size:1.05em;font-weight:500;margin-bottom:1.2em;"></div>
+            </div>
+            <div class="modal-body" style="display:flex;flex-direction:column;gap:1em;align-items:center;">
+                <button class="btn-share-social" id="btnShareFacebook" style="width:90%;background:#1877f3;color:#fff;border:none;border-radius:8px;padding:0.7em 1.3em;font-size:1.1em;font-weight:600;display:flex;align-items:center;justify-content:center;gap:0.7em;cursor:pointer;"><i class="fab fa-facebook"></i> Compartir en Facebook</button>
+                <button class="btn-share-social" id="btnShareInstagram" style="width:90%;background:#e4405f;color:#fff;border:none;border-radius:8px;padding:0.7em 1.3em;font-size:1.1em;font-weight:600;display:flex;align-items:center;justify-content:center;gap:0.7em;cursor:pointer;"><i class="fab fa-instagram"></i> Compartir en Instagram</button>
+                <button class="btn-share-social" id="btnShareWhatsapp" style="width:90%;background:#25d366;color:#fff;border:none;border-radius:8px;padding:0.7em 1.3em;font-size:1.1em;font-weight:600;display:flex;align-items:center;justify-content:center;gap:0.7em;cursor:pointer;"><i class="fab fa-whatsapp"></i> Compartir en WhatsApp</button>
+            </div>
+        </div>
+    </div>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tours - Jaguar Expeditions</title>
+    <meta name="description" content="Descubre todos nuestros tours y aventuras amazónicas en Iquitos. Expediciones personalizadas con guías expertos locales.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="responsive.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <!-- Logo y nombre -->
+                <div class="logo-section">
+                    <img src="img/logo.jpeg" alt="Jaguar Expeditions Logo" class="logo">
+                    <div class="company-info">
+                        <h1 class="company-name" data-i18n="site_title">Jaguar Expeditions</h1>
+                        <p class="slogan" data-i18n="site_slogan">Más que un tour, una aventura salvaje.</p>
+                    </div>
+                </div>
+                
+                <!-- Información de contacto -->
+                <div class="contact-info">
+                    <div class="phone">
+                        <i class="fas fa-phone"></i>
+                        <span>+51 999 123 456</span>
+                    </div>
+                    
+                    <!-- Redes sociales -->
+                    <div class="social-media">
+                        <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-tripadvisor"></i></a>
+                    </div>
+                    
+                    <!-- Selector de idioma -->
+                    <div class="language-selector">
+                        <div class="flag-selector">
+                            <img src="img/espana.png" alt="Español" data-lang="es" class="flag-option active">
+                            <img src="img/reino-unido.png" alt="English" data-lang="en" class="flag-option">
+                            <img src="img/alemania.png" alt="Deutsch" data-lang="de" class="flag-option">
+                        </div>
+                    </div>
+                    
+                    <!-- Buscador -->
+                    <div class="search-box">
+                        <input type="text" data-i18n-placeholder="placeholder_buscar_tours" placeholder="Buscar tours...">
+                        <button><i class="fas fa-search"></i></button>
+                    </div>
+                    
+                    <!-- Carrito -->
+                    <div class="cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navegación -->
+    <nav class="navbar">
+        <div class="container">
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link" data-i18n="nav_inicio">Inicio</a></li>
+                <li><a href="tours.html" class="nav-link active" data-i18n="nav_tours">Tours</a></li>
+                <li><a href="contacto.html" class="nav-link" data-i18n="nav_contacto">Contacto</a></li>
+                <li><a href="preguntas.html" class="nav-link" data-i18n="nav_preguntas">Preguntas</a></li>
+                <li><a href="galeria.html" class="nav-link" data-i18n="nav_galeria">Galería</a></li>
+                <li><a href="nosotros.html" class="nav-link" data-i18n="nav_nosotros">Nosotros</a></li>
+            </ul>
+            
+            <!-- Menú hamburguesa para móviles -->
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section para Tours -->
+    <!-- <section class="tours-hero">
+        <div class="tours-hero-content">
+            <div class="container">
+                <div class="hero-text">
+                    <h1>Nuestros Tours Amazónicos</h1>
+                    <p>Descubre la magia de la Amazonía peruana con nuestras expediciones cuidadosamente diseñadas</p>
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <span class="stat-number">25+</span>
+                            <span class="stat-label">Tours Disponibles</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">15</span>
+                            <span class="stat-label">Años de Experiencia</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">5000+</span>
+                            <span class="stat-label">Aventureros Felices</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">4.9</span>
+                            <span class="stat-label">Rating Promedio</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tours-hero-bg">
+            <img src="img/fondo.jpeg" alt="Amazonía Peruana">
+            <div class="hero-overlay"></div>
+        </div>
+    </section> -->
+
+    <!-- Sección Principal de Tours -->
+    <main>
+        <!-- Sección de Todos los Tours -->
+        <section id="tours" class="all-tours-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 data-i18n="tours_titulo">Explora Nuestras Aventuras</h2>
+                    <p data-i18n="tours_subtitulo">Desde expediciones de un día hasta aventuras de una semana, tenemos la experiencia perfecta para ti</p>
+                </div>
+                
+                <!-- Filtros de Tours -->
+                <div class="tour-filters">
+                    <button class="filter-btn active" data-filter="all" data-i18n="tours_filtro_todos">Todos los Tours</button>
+                    <button class="filter-btn" data-filter="adventure" data-i18n="tours_filtro_aventura">Aventura</button>
+                    <button class="filter-btn" data-filter="cultural" data-i18n="tours_filtro_cultural">Cultural</button>
+                    <button class="filter-btn" data-filter="wildlife" data-i18n="tours_filtro_vida_silvestre">Vida Silvestre</button>
+                    <button class="filter-btn" data-filter="gastronomic" data-i18n="tours_filtro_gastronomico">Gastronómico</button>
+                </div>
+                
+                <!-- Grid de Tours 3x5 -->
+                <div class="all-tours-grid">
+                    <!-- Los tours se cargarán dinámicamente aquí -->
+                </div>
+    <!-- Modal dinámico para detalles de tour -->
+    <style>
+    /* Modal detalles tour ajustes visuales */
+    #tourDetailModal .modal-content {
+        max-width: 600px;
+        position: relative;
+        background: #fff;
+        border-radius: 16px;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+        padding: 0 0 0.5em 0;
+    }
+    #closeTourDetailModal {
+        position: absolute;
+        top: 18px;
+        right: 18px;
+        width: 40px;
+        height: 40px;
+        background: #fff;
+        border-radius: 50%;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        color: #888;
+        font-size: 1.7rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 10;
+        transition: background 0.2s, color 0.2s;
+        border: none;
+        padding: 0;
+        line-height: 1;
+    }
+    #closeTourDetailModal:hover {
+        background: #f5f5f5;
+        color: #ff6600;
+    }
+    #closeTourDetailModal:hover {
+        background: #f5f5f5;
+        color: #ff6600;
+    }
+    #tourDetailModal .modal-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 1.5em 2em 0.5em 2em;
+    }
+    #tourDetailModal .modal-header h2 {
+        margin: 0;
+        font-size: 1.6rem;
+        font-weight: 700;
+        flex: none;
+        display: flex;
+        align-items: center;
+        gap: 0.5em;
+    }
+    #tourDetailModal .badge-popular {
+        background: #ff6600;
+        color: #fff;
+        font-size: 0.95em;
+        font-weight: 600;
+        border-radius: 8px;
+        padding: 2px 12px;
+        margin-left: 0.2em;
+        vertical-align: middle;
+        display: inline-block;
+    }
+    #tourDetailModal .modal-body {
+        padding: 0 2em 1em 2em;
+    }
+    #tourDetailModal .modal-footer {
+        background: #f7f7f7;
+        border-radius: 0 0 16px 16px;
+        padding: 1.2em 2em 1.5em 2em;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1em;
+    }
+    #modalTourReservarBtn {
+        background: #ff6600;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: 0.8em 2.2em;
+        font-size: 1.1em;
+        font-weight: 600;
+        cursor: pointer;
+        margin-top: 0.5em;
+        box-shadow: 0 2px 8px rgba(255,102,0,0.08);
+        transition: background 0.2s, color 0.2s;
+    }
+    #modalTourReservarBtn:hover {
+        background: #e65c00;
+        color: #fff;
+    }
+    </style>
+    <div id="tourDetailModal" class="tour-modal" style="display:none;z-index:9999;">
+        <div class="modal-content">
+            <span class="close-modal" id="closeTourDetailModal">&times;</span>
+            <div class="modal-header">
+                <h2 id="modalTourName"><span id="modalTourNameText"></span><span id="modalTourDestacado"></span></h2>
+            </div>
+            <div class="modal-body">
+                <img id="modalTourImage" src="" alt="Imagen del tour" style="width:100%;max-height:250px;object-fit:cover;border-radius:10px;margin-bottom:1em;display:none;">
+                <p id="modalTourDescripcionCorta" style="margin-bottom:0.5em;font-weight:500;"></p>
+                <p id="modalTourDescripcion" style="margin-bottom:1em;"></p>
+                <div id="modalTourIncluye" style="margin-bottom:1em;"></div>
+                <div id="modalTourNoIncluye" style="margin-bottom:1em;"></div>
+                <div id="modalTourItinerario" style="margin-bottom:1em;"></div>
+                <div style="display:flex;gap:1em;flex-wrap:wrap;margin-bottom:1em;">
+                    <span id="modalTourDuracion" class="badge-info"></span>
+                    <span id="modalTourDificultad" class="badge-info"></span>
+                    <span id="modalTourPersonas" class="badge-info"></span>
+                    <span id="modalTourUbicacion" class="badge-info"></span>
+                </div>
+                <div id="modalTourIncluye" style="margin-bottom:1em;"></div>
+                <div id="modalTourNoIncluye" style="margin-bottom:1em;"></div>
+                <div id="modalTourItinerario" style="margin-bottom:1em;"></div>
+            </div>
+            <div class="modal-footer">
+                <div class="modal-price" id="modalTourPrecio"></div>
+                <button class="btn-book-modal" id="modalTourReservarBtn">Reservar Ahora</button>
+            </div>
+        </div>
+    </div>
+
+                <!-- Botón Ver Más -->
+                <!-- <div class="load-more-section">
+                    <button class="btn-load-more">
+                        <i class="fas fa-plus"></i>
+                        <span data-i18n="btn_cargar_mas">Ver Más Tours</span>
+                    </button>
+                    <p class="tours-info" data-i18n="mostrar_tours" data-i18n-vars='{"count":"15"}'>Mostrando 15 de 25+ tours disponibles</p>
+                </div> -->
+            </div>
+        </section>
+
+        <!-- Sección de Información Adicional -->
+        <section class="tours-info-section">
+            <div class="container">
+                <div class="info-cards-grid">
+                    <div class="info-card-tour">
+                        <div class="info-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3 data-i18n="info_seguridad">Seguridad Garantizada</h3>
+                        <p data-i18n="info_seguridad_desc">Todos nuestros tours cuentan con guías certificados y equipos de seguridad de primera calidad</p>
+                    </div>
+                    
+                    <div class="info-card-tour">
+                        <div class="info-icon">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <h3 data-i18n="info_reserva">Reserva Flexible</h3>
+                        <p data-i18n="info_reserva_desc">Cancela o reprograma tu tour hasta 24 horas antes sin costo adicional</p>
+                    </div>
+                    
+                    <div class="info-card-tour">
+                        <div class="info-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <h3 data-i18n="info_soporte">Soporte 24/7</h3>
+                        <p data-i18n="info_soporte_desc">Nuestro equipo está disponible las 24 horas para ayudarte en cualquier momento</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 data-i18n="site_title">Jaguar Expeditions</h3>
+                    <p data-i18n="site_description">Tu puerta de entrada a la aventura amazónica más auténtica</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4 data-i18n="contacto_titulo">Contacto</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> Iquitos, Perú</p>
+                    <p><i class="fas fa-phone"></i> +51 999 123 456</p>
+                    <p><i class="fas fa-envelope"></i> info@jaguarexpeditions.com</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4 data-i18n="footer_siguenos">Síguenos</h4>
+                    <div class="social-links" style="margin-top: 10px; display: flex; justify-content: center; gap: 20px;">
+                        <a href="https://www.facebook.com/" target="_blank" aria-label="Facebook" class="social-btn"><i class="fab fa-facebook"></i></a>
+                        <a href="https://www.instagram.com/" target="_blank" aria-label="Instagram" class="social-btn"><i class="fab fa-instagram"></i></a>
+                        <a href="https://wa.me/51999123456" target="_blank" aria-label="WhatsApp" class="social-btn"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://www.tripadvisor.com/" target="_blank" aria-label="TripAdvisor" class="social-btn">
+                            <img src="img/tripadvisor.png" alt="TripAdvisor" style="height: 24px; width: 24px; vertical-align: middle; background: #fff; border-radius: 50%; padding: 2px; box-shadow: 0 0 2px #222;"> 
+                            <i class="fab fa-tripadvisor"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p data-i18n="footer_copyright">&copy; 2025 Jaguar Expeditions. Todos los derechos reservados.</p>
+                    <div class="footer-links">
+                        <a href="#" id="termsLink" class="contact-terms-link">
+                            <i class="fas fa-file-contract"></i>
+                            <span data-i18n="footer_terminos">Términos y Condiciones</span>
+                        </a>
+                        <a href="#" id="privacyLink" class="contact-privacy-link">
+                            <i class="fas fa-shield-alt"></i>
+                            <span data-i18n="footer_privacidad">Política de Privacidad</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modales de Detalles de Tours -->
+    
+    <!-- Modal Tour 1: Expedición Río Amazonas -->
+    <div id="tourModal1" class="tour-modal">
+        <div class="modal-content">
+            <span class="close-modal" data-modal="1">&times;</span>
+            <div class="modal-header">
+                <h2>Expedición Río Amazonas</h2>
+                <div class="modal-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <span>4.9 (127 reseñas)</span>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="modal-info">
+                    <div class="info-section">
+                        <h3><i class="fas fa-info-circle"></i> Descripción del Tour</h3>
+                        <p>Embárcate en una aventura épica de 3 días navegando por el río más largo del mundo. Descubre la biodiversidad única de la selva amazónica, visita comunidades nativas auténticas y vive la experiencia de dormir bajo las estrellas en la jungla más impresionante del planeta.</p>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h3><i class="fas fa-route"></i> Itinerario Detallado</h3>
+                        <div class="itinerary">
+                            <div class="day">
+                                <h4>Día 1: Inicio de la Aventura</h4>
+                                <ul>
+                                    <li>6:00 AM - Recojo del hotel</li>
+                                    <li>7:00 AM - Desayuno en puerto de Bellavista</li>
+                                    <li>8:30 AM - Navegación hacia Monkey Island</li>
+                                    <li>12:00 PM - Almuerzo a bordo</li>
+                                    <li>2:00 PM - Visita a comunidad nativa Boras</li>
+                                    <li>6:00 PM - Cena y pernocte en lodge</li>
+                                </ul>
+                            </div>
+                            <div class="day">
+                                <h4>Día 2: Exploración Profunda</h4>
+                                <ul>
+                                    <li>5:30 AM - Avistamiento de aves al amanecer</li>
+                                    <li>8:00 AM - Desayuno</li>
+                                    <li>9:00 AM - Trekking en selva primaria</li>
+                                    <li>12:30 PM - Almuerzo en la selva</li>
+                                    <li>3:00 PM - Pesca de pirañas</li>
+                                    <li>7:00 PM - Safari nocturno</li>
+                                </ul>
+                            </div>
+                            <div class="day">
+                                <h4>Día 3: Regreso</h4>
+                                <ul>
+                                    <li>6:00 AM - Observación de delfines rosados</li>
+                                    <li>9:00 AM - Desayuno y retorno</li>
+                                    <li>12:00 PM - Almuerzo en ruta</li>
+                                    <li>4:00 PM - Llegada a Iquitos</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h3><i class="fas fa-check-circle"></i> ¿Qué Incluye?</h3>
+                        <ul class="includes-list">
+                            <li>Transporte ida y vuelta desde hotel</li>
+                            <li>Guía naturalista bilingüe certificado</li>
+                            <li>Todas las comidas (6 comidas + snacks)</li>
+                            <li>Alojamiento en lodge ecológico</li>
+                            <li>Equipo de pesca y binoculares</li>
+                            <li>Botas de jebe y poncho para lluvia</li>
+                            <li>Seguro de viaje</li>
+                            <li>Agua embotellada ilimitada</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h3><i class="fas fa-backpack"></i> ¿Qué Llevar?</h3>
+                        <ul class="bring-list">
+                            <li>Ropa ligera de manga larga (colores neutros)</li>
+                            <li>Pantalones largos</li>
+                            <li>Repelente de insectos (DEET 30%+)</li>
+                            <li>Protector solar factor 50+</li>
+                            <li>Sombrero o gorra</li>
+                            <li>Medicamentos personales</li>
+                            <li>Cámara fotográfica (con protección)</li>
+                            <li>Linterna o lámpara frontal</li>
+                            <li>Ropa de baño</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h3><i class="fas fa-times-circle"></i> ¿Qué NO Llevar?</h3>
+                        <ul class="avoid-list">
+                            <li>Joyas o objetos de valor</li>
+                            <li>Ropa de colores llamativos (azul, amarillo, rojo)</li>
+                            <li>Perfumes o colonias fuertes</li>
+                            <li>Comida externa</li>
+                            <li>Alcohol</li>
+                            <li>Zapatos nuevos o incómodos</li>
+                            <li>Equipaje excesivo (máx. 15kg)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h3><i class="fas fa-exclamation-triangle"></i> Recomendaciones Importantes</h3>
+                        <ul class="recommendations">
+                            <li>Vacuna contra fiebre amarilla obligatoria (aplicar 10 días antes)</li>
+                            <li>Consultar médico sobre profilaxis de malaria</li>
+                            <li>No recomendado para menores de 8 años</li>
+                            <li>Nivel de dificultad: Moderado</li>
+                            <li>Temporada recomendada: Mayo - Octubre (época seca)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="modal-price">
+                    <span class="price-original">$399</span>
+                    <span class="price-current">$299</span>
+                </div>
+                <button class="btn-book-modal">Reservar Ahora</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Tour 2: Safari Nocturno -->
+    <div id="tourModal2" class="tour-modal">
+        <div class="modal-content">
+            <span class="close-modal" data-modal="2">&times;</span>
+            <div class="modal-header">
+                <h2>Safari Nocturno Amazónico</h2>
+                <div class="modal-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                    <span>4.7 (89 reseñas)</span>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="modal-info">
+                    <div class="info-section">
+                        <h3><i class="fas fa-info-circle"></i> Descripción del Tour</h3>
+                        <p>Descubre la vida nocturna de la Amazonía en esta emocionante aventura de un día. Observa caimanes, escucha los sonidos nocturnos de la selva y experimenta la magia del río bajo la luz de la luna y las estrellas. Una experiencia única para los amantes de la vida silvestre.</p>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h3><i class="fas fa-route"></i> Itinerario</h3>
+                        <div class="itinerary">
+                            <div class="day">
+                                <h4>Tour Nocturno (6 horas)</h4>
+                                <ul>
+                                    <li>4:00 PM - Recojo del hotel</li>
+                                    <li>5:00 PM - Navegación hacia área de observación</li>
+                                    <li>6:30 PM - Cena a bordo al atardecer</li>
+                                    <li>8:00 PM - Búsqueda de caimanes con linternas</li>
+                                    <li>9:30 PM - Observación de vida nocturna</li>
+                                    <li>11:00 PM - Retorno a Iquitos</li>
+                                    <li>12:00 AM - Llegada al hotel</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h3><i class="fas fa-check-circle"></i> ¿Qué Incluye?</h3>
+                        <ul class="includes-list">
+                            <li>Transporte ida y vuelta</li>
+                            <li>Guía especializado en vida nocturna</li>
+                            <li>Cena ligera a bordo</li>
+                            <li>Linternas profesionales</li>
+                            <li>Equipo de seguridad</li>
+                            <li>Repelente de insectos</li>
+                            <li>Bebidas (agua, café, té)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h3><i class="fas fa-backpack"></i> ¿Qué Llevar?</h3>
+                        <ul class="bring-list">
+                            <li>Ropa oscura de manga larga</li>
+                            <li>Pantalones largos</li>
+                            <li>Zapatos cerrados antideslizantes</li>
+                            <li>Chaqueta ligera</li>
+                            <li>Cámara con flash</li>
+                            <li>Medicamentos personales</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h3><i class="fas fa-times-circle"></i> ¿Qué NO Llevar?</h3>
+                        <ul class="avoid-list">
+                            <li>Ropa de colores brillantes</li>
+                            <li>Perfumes fuertes</li>
+                            <li>Objetos que hagan ruido</li>
+                            <li>Comida crujiente</li>
+                            <li>Linternas muy potentes propias</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h3><i class="fas fa-exclamation-triangle"></i> Recomendaciones</h3>
+                        <ul class="recommendations">
+                            <li>No recomendado para menores de 12 años</li>
+                            <li>Mantener silencio durante observaciones</li>
+                            <li>No tocar animales salvajes</li>
+                            <li>Seguir instrucciones del guía</li>
+                            <li>Llevar medicamentos para mareos si es necesario</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="modal-price">
+                    <span class="price-current">$89</span>
+                </div>
+                <button class="btn-book-modal">Reservar Ahora</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Tour 4: Aventura Extrema -->
+    <div id="tourModal4" class="tour-modal">
+        <div class="modal-content">
+            <span class="close-modal" data-modal="4">&times;</span>
+            <div class="modal-header">
+                <h2>Aventura Extrema</h2>
+                <div class="modal-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <span>4.9 (98 reseñas)</span>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="modal-info">
+                    <div class="info-section">
+                        <h3><i class="fas fa-info-circle"></i> Descripción del Tour</h3>
+                        <p>Para los más aventureros: 4 días de adrenalina pura en la selva amazónica. Canopy, rappel, trekking extremo y deportes de aventura en el corazón de la jungla. Una experiencia que desafiará tus límites y te conectará con la naturaleza de manera intensa.</p>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h3><i class="fas fa-route"></i> Itinerario de 4 Días</h3>
+                        <div class="itinerary">
+                            <div class="day">
+                                <h4>Día 1: Llegada y Preparación</h4>
+                                <ul>
+                                    <li>6:00 AM - Recojo y briefing de seguridad</li>
+                                    <li>8:00 AM - Traslado al campamento base</li>
+                                    <li>10:00 AM - Entrenamiento en cuerdas</li>
+                                    <li>2:00 PM - Primera sesión de canopy</li>
+                                    <li>6:00 PM - Cena y descanso</li>
+                                </ul>
+                            </div>
+                            <div class="day">
+                                <h4>Día 2: Canopy y Rappel</h4>
+                                <ul>
+                                    <li>5:30 AM - Desayuno energético</li>
+                                    <li>7:00 AM - Canopy de 500 metros</li>
+                                    <li>11:00 AM - Rappel de 80 metros</li>
+                                    <li>3:00 PM - Escalada en roca natural</li>
+                                    <li>7:00 PM - Fogata nocturna</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h3><i class="fas fa-check-circle"></i> ¿Qué Incluye?</h3>
+                        <ul class="includes-list">
+                            <li>Equipo profesional de seguridad</li>
+                            <li>Instructor certificado en deportes extremos</li>
+                            <li>Camping en tiendas especializadas</li>
+                            <li>Todas las comidas energéticas</li>
+                            <li>Seguro de aventura extrema</li>
+                            <li>Certificado de participación</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h3><i class="fas fa-exclamation-triangle"></i> Requisitos</h3>
+                        <ul class="recommendations">
+                            <li>Edad mínima: 16 años</li>
+                            <li>Excelente condición física requerida</li>
+                            <li>No sufrir de vértigo</li>
+                            <li>Certificado médico obligatorio</li>
+                            <li>Experiencia previa recomendada</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="modal-price">
+                    <span class="price-original">$599</span>
+                    <span class="price-current">$449</span>
+                </div>
+                <button class="btn-book-modal">Reservar Ahora</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Tour 5: Observación de Fauna -->
+    <div id="tourModal5" class="tour-modal">
+        <div class="modal-content">
+            <span class="close-modal" data-modal="5">&times;</span>
+            <div class="modal-header">
+                <h2>Observación de Fauna</h2>
+                <div class="modal-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                    <span>4.6 (134 reseñas)</span>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="modal-info">
+                    <div class="info-section">
+                        <h3><i class="fas fa-info-circle"></i> Descripción del Tour</h3>
+                        <p>Tour especializado para observar la increíble biodiversidad amazónica. Con guías biólogos expertos, descubre jaguares, perezosos, monos, reptiles y cientos de especies únicas. Incluye equipo profesional de observación y fotografía.</p>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h3><i class="fas fa-paw"></i> Fauna a Observar</h3>
+                        <ul class="includes-list">
+                            <li>Jaguar (Panthera onca)</li>
+                            <li>Perezoso de tres dedos</li>
+                            <li>Mono aullador rojo</li>
+                            <li>Anaconda verde</li>
+                            <li>Caimán negro</li>
+                            <li>Nutria gigante</li>
+                            <li>Tapir amazónico</li>
+                            <li>Boa constrictora</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h3><i class="fas fa-camera"></i> Equipo Incluido</h3>
+                        <ul class="includes-list">
+                            <li>Binoculares profesionales 10x42</li>
+                            <li>Telescopio terrestre</li>
+                            <li>Cámara con teleobjetivo</li>
+                            <li>Linternas de visión nocturna</li>
+                            <li>Guía de identificación</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="modal-price">
+                    <span class="price-current">$179</span>
+                </div>
+                <button class="btn-book-modal">Reservar Ahora</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Tour 6: Tour Gastronómico -->
+    <div id="tourModal6" class="tour-modal">
+        <div class="modal-content">
+            <span class="close-modal" data-modal="6">&times;</span>
+            <div class="modal-header">
+                <h2>Tour Gastronómico</h2>
+                <div class="modal-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <span>4.8 (176 reseñas)</span>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="modal-info">
+                    <div class="info-section">
+                        <h3><i class="fas fa-info-circle"></i> Descripción del Tour</h3>
+                        <p>Descubre los sabores únicos de la Amazonía. Aprende a cocinar platos típicos con ingredientes autóctonos, visita mercados locales y degusta frutas exóticas. Una experiencia culinaria dirigida por chefs especializados en cocina amazónica.</p>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h3><i class="fas fa-utensils"></i> Platos a Preparar</h3>
+                        <ul class="includes-list">
+                            <li>Juane (plato típico de arroz)</li>
+                            <li>Tacacho con cecina</li>
+                            <li>Paiche a la plancha</li>
+                            <li>Sopa de motelo</li>
+                            <li>Patarashca de pescado</li>
+                            <li>Helado de camu camu</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h3><i class="fas fa-apple-alt"></i> Frutas Exóticas</h3>
+                        <ul class="bring-list">
+                            <li>Camu camu (vitamina C)</li>
+                            <li>Aguaje (antioxidantes)</li>
+                            <li>Cocona amazónica</li>
+                            <li>Caimito estrella</li>
+                            <li>Ungurahui negro</li>
+                            <li>Huasaí energético</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="modal-price">
+                    <span class="price-current">$129</span>
+                </div>
+                <button class="btn-book-modal">Reservar Ahora</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Tour 7: Mercado de Belén -->
+    <div id="tourModal7" class="tour-modal">
+        <div class="modal-content">
+            <span class="close-modal" data-modal="7">&times;</span>
+            <div class="modal-header">
+                <h2>Mercado de Belén</h2>
+                <div class="modal-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                    <span>4.5 (92 reseñas)</span>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="modal-info">
+                    <div class="info-section">
+                        <h3><i class="fas fa-info-circle"></i> Descripción del Tour</h3>
+                        <p>Explora el mercado flotante más famoso de la Amazonía. Conoce la vida local, productos únicos, plantas medicinales y la cultura ribereña. El "Mercado de Venecia" amazónico te sorprenderá con su autenticidad y colorido.</p>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h3><i class="fas fa-shopping-basket"></i> Qué Encontrarás</h3>
+                        <ul class="includes-list">
+                            <li>Pescados amazónicos frescos</li>
+                            <li>Plantas medicinales ancestrales</li>
+                            <li>Frutas exóticas regionales</li>
+                            <li>Artesanías tradicionales</li>
+                            <li>Productos de la selva</li>
+                            <li>Comida típica local</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h3><i class="fas fa-water"></i> Zona Flotante</h3>
+                        <ul class="bring-list">
+                            <li>Casas sobre pilotes</li>
+                            <li>Navegación en bote</li>
+                            <li>Vida ribereña auténtica</li>
+                            <li>Mercado sobre el agua</li>
+                            <li>Cultura amazónica viva</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="modal-price">
+                    <span class="price-current">$45</span>
+                </div>
+                <button class="btn-book-modal">Reservar Ahora</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Tour 9: Trekking Selvático -->
+    <div id="tourModal9" class="tour-modal">
+        <div class="modal-content">
+            <span class="close-modal" data-modal="9">&times;</span>
+            <div class="modal-header">
+                <h2>Trekking Selvático</h2>
+                <div class="modal-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                    <span>4.7 (115 reseñas)</span>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="modal-info">
+                    <div class="info-section">
+                        <h3><i class="fas fa-info-circle"></i> Descripción del Tour</h3>
+                        <p>Caminata profunda por senderos vírgenes de la selva amazónica. 3 días de inmersión total en la naturaleza, acampando en la selva y aprendiendo técnicas de supervivencia. Para aventureros que buscan una experiencia auténtica.</p>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h3><i class="fas fa-hiking"></i> Niveles de Dificultad</h3>
+                        <ul class="recommendations">
+                            <li>Distancia: 25-30 km en 3 días</li>
+                            <li>Terreno: Irregular y húmedo</li>
+                            <li>Dificultad: Media-Alta</li>
+                            <li>Condición física: Buena requerida</li>
+                            <li>Edad mínima: 14 años</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h3><i class="fas fa-leaf"></i> Técnicas de Supervivencia</h3>
+                        <ul class="includes-list">
+                            <li>Construcción de refugios</li>
+                            <li>Purificación de agua natural</li>
+                            <li>Identificación de plantas comestibles</li>
+                            <li>Orientación sin brújula</li>
+                            <li>Señales de emergencia</li>
+                            <li>Primeros auxilios básicos</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="modal-price">
+                    <span class="price-current">$259</span>
+                </div>
+                <button class="btn-book-modal">Reservar Ahora</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Tour 10: Casa de Hierro -->
+    <div id="tourModal10" class="tour-modal">
+        <div class="modal-content">
+            <span class="close-modal" data-modal="10">&times;</span>
+            <div class="modal-header">
+                <h2>Casa de Hierro Histórica</h2>
+                <div class="modal-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                    <span>4.4 (78 reseñas)</span>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="modal-info">
+                    <div class="info-section">
+                        <h3><i class="fas fa-info-circle"></i> Descripción del Tour</h3>
+                        <p>Descubre la historia de la Casa de Hierro, diseñada por Gustave Eiffel para la Exposición Universal de París 1889. Conoce la época del caucho, la arquitectura colonial y el patrimonio histórico de Iquitos en este icónico edificio.</p>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h3><i class="fas fa-history"></i> Historia del Caucho</h3>
+                        <ul class="includes-list">
+                            <li>Época dorada (1880-1920)</li>
+                            <li>Barones del caucho</li>
+                            <li>Arquitectura europea en Amazonía</li>
+                            <li>Declive y legado histórico</li>
+                            <li>Patrimonio cultural de Iquitos</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h3><i class="fas fa-building"></i> Arquitectura Eiffel</h3>
+                        <ul class="bring-list">
+                            <li>Estructura de hierro forjado</li>
+                            <li>Diseño europeo en trópico</li>
+                            <li>Técnicas constructivas únicas</li>
+                            <li>Adaptación al clima amazónico</li>
+                            <li>Restauración y conservación</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="modal-price">
+                    <span class="price-current">$35</span>
+                </div>
+                <button class="btn-book-modal">Reservar Ahora</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Tour 11: Navegación Nocturna -->
+    <div id="tourModal11" class="tour-modal">
+        <div class="modal-content">
+            <span class="close-modal" data-modal="11">&times;</span>
+            <div class="modal-header">
+                <h2>Navegación Nocturna</h2>
+                <div class="modal-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <span>4.8 (123 reseñas)</span>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="modal-info">
+                    <div class="info-section">
+                        <h3><i class="fas fa-info-circle"></i> Descripción del Tour</h3>
+                        <p>Navega por el Amazonas bajo un manto de estrellas. 2 días de navegación nocturna, acampando en islas remotas y experimentando la magia del río más grande del mundo. Una aventura romántica y mística bajo la Vía Láctea amazónica.</p>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h3><i class="fas fa-moon"></i> Experiencia Nocturna</h3>
+                        <ul class="includes-list">
+                            <li>Navegación bajo las estrellas</li>
+                            <li>Campamento en isla desierta</li>
+                            <li>Observación astronómica</li>
+                            <li>Sonidos nocturnos de la selva</li>
+                            <li>Fogata a orillas del río</li>
+                            <li>Pesca nocturna de bagres</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h3><i class="fas fa-star"></i> Observación Astronómica</h3>
+                        <ul class="bring-list">
+                            <li>Vía Láctea sin contaminación lumínica</li>
+                            <li>Constelaciones del hemisferio sur</li>
+                            <li>Telescopio profesional incluido</li>
+                            <li>Guía astronómico especializado</li>
+                            <li>Fotografía nocturna</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="modal-price">
+                    <span class="price-current">$199</span>
+                </div>
+                <button class="btn-book-modal">Reservar Ahora</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Tour 12: Observación de Aves -->
+    <div id="tourModal12" class="tour-modal">
+        <div class="modal-content">
+            <span class="close-modal" data-modal="12">&times;</span>
+            <div class="modal-header">
+                <h2>Observación de Aves</h2>
+                <div class="modal-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                    <span>4.6 (142 reseñas)</span>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="modal-info">
+                    <div
+                        <h3><i class="fas fa-info-circle"></i> Descripción del Tour</h3>
+                        <p>Tour especializado para observar las más de 500 especies de aves amazónicas. Con ornitólogos expertos, descubre tucanes, loros, águilas, colibríes y especies endémicas. Una experiencia para amantes del birdwatching en la región más biodiversa del planeta.</p>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h3><i class="fas fa-feather"></i> Especies Destacadas</h3>
+                        <ul class="includes-list">
+                            <li>Tucán de pico iris</li>
+                            <li>Águila arpía</li>
+                            <li>Gallito de las rocas</li>
+                            <li>Loro cabeza azul</li>
+                            <li>Martin pescador gigante</li>
+                            <li>Colibrí topacio</li>
+                            <li>Hoatzin (ave primitiva)</li>
+                            <li>Paujil unicornio</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h3><i class="fas fa-clock"></i> Horarios Ideales</h3>
+                        <ul class="bring-list">
+                            <li>5:30 AM - Amanecer (máxima actividad)</li>
+                            <li>6:00-10:00 AM - Búsqueda matutina</li>
+                            <li>4:00-6:00 PM - Actividad vespertina</li>
+                            <li>7:00-9:00 PM - Aves nocturnas</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="modal-price">
+                    <span class="price-current">$99</span>
+                </div>
+                <button class="btn-book-modal">Reservar Ahora</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Tour 13: Pesca Deportiva -->
+    <div id="tourModal13" class="tour-modal">
+        <div class="modal-content">
+            <span class="close-modal" data-modal="13">&times;</span>
+            <div class="modal-header">
+                <h2>Pesca Deportiva Amazónica</h2>
+                <div class="modal-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <span>4.7 (87 reseñas)</span>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="modal-info">
+                    <div class="info-section">
+                        <h3><i class="fas fa-info-circle"></i> Descripción del Tour</h3>
+                        <p>Pesca deportiva en las aguas más ricas del mundo. Captura el famoso paiche, tucunaré, bagres gigantes y pirañas. Con equipo profesional y guías expertos en pesca amazónica. Una aventura para pescadores de todos los niveles.</p>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h3><i class="fas fa-fish"></i> Especies Objetivo</h3>
+                        <ul class="includes-list">
+                            <li>Paiche (pez gigante - hasta 200kg)</li>
+                            <li>Tucunaré (pez deportivo)</li>
+                            <li>Bagre gigante (surubí)</li>
+                            <li>Pirañas rojas</li>
+                            <li>Sábalo amazónico</li>
+                            <li>Dorado del río</li>
+                            <li>Arahuana plateada</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h3><i class="fas fa-tools"></i> Equipo Profesional</h3>
+                        <ul class="bring-list">
+                            <li>Cañas de pescar especializadas</li>
+                            <li>Carretes de alta resistencia</li>
+                            <li>Anzuelos y señuelos variados</li>
+                            <li>Red de aterrizaje</li>
+                            <li>Silla de pesca cómoda</li>
+                            <li>Cooler para conservar capturas</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h3><i class="fas fa-leaf"></i> Pesca Responsable</h3>
+                        <ul class="recommendations">
+                            <li>Catch & Release (pesca y suelta)</li>
+                            <li>Respeto por vedas reproductivas</li>
+                            <li>Uso de anzuelos sin rebaba</li>
+                            <li>Conservación de especies</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="modal-price">
+                    <span class="price-current">$139</span>
+                </div>
+                <button class="btn-book-modal">Reservar Ahora</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Tour 14: Medicina Ancestral -->
+    <div id="tourModal14" class="tour-modal">
+        <div class="modal-content">
+            <span class="close-modal" data-modal="14">&times;</span>
+            <div class="modal-header">
+                <h2>Medicina Ancestral</h2>
+                <div class="modal-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <span>4.9 (76 reseñas)</span>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="modal-info">
+                    <div class="info-section">
+                        <h3><i class="fas fa-info-circle"></i> Descripción del Tour</h3>
+                        <p>Aprende sobre plantas medicinales amazónicas con chamanes y curanderos tradicionales. 2 días de inmersión en la sabiduría ancestral, conociendo remedios naturales, ceremonias de sanación y la farmacopea más rica del mundo.</p>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h3><i class="fas fa-leaf"></i> Plantas Medicinales</h3>
+                        <ul class="includes-list">
+                            <li>Uña de gato (immunoestimulante)</li>
+                            <li>Sangre de grado (cicatrizante)</li>
+                            <li>Cat's claw (antiinflamatorio)</li>
+                            <li>Copaiba (antibiótico natural)</li>
+                            <li>Chuchuhuasi (energizante)</li>
+                            <li>Ojé (antiparasitario)</li>
+                            <li>Camu camu (vitamina C)</li>
+                            <li>Sacha inchi (omega 3)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h3><i class="fas fa-magic"></i> Ceremonias Tradicionales</h3>
+                        <ul class="bring-list">
+                            <li>Ritual de limpieza energética</li>
+                            <li>Preparación de remedios</li>
+                            <li>Lectura de hojas de coca</li>
+                            <li>Ceremonias de agradecimiento</li>
+                            <li>Baños de plantas medicinales</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h3><i class="fas fa-exclamation-triangle"></i> Importante</h3>
+                        <ul class="recommendations">
+                            <li>Experiencia con fines educativos</li>
+                            <li>No sustituye tratamiento médico</li>
+                            <li>Consultar médico antes de participar</li>
+                            <li>Respeto por tradiciones ancestrales</li>
+                            <li>Contribución a comunidades nativas</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="modal-price">
+                    <span class="price-current">$229</span>
+                </div>
+                <button class="btn-book-modal">Reservar Ahora</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Tour 8: Nado con Delfines Rosados -->
+    <div id="tourModal8" class="tour-modal">
+        <div class="modal-content">
+            <span class="close-modal" data-modal="8">&times;</span>
+            <div class="modal-header">
+                <h2>Nado con Delfines Rosados</h2>
+                <div class="modal-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <span>4.9 (201 reseñas)</span>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="modal-info">
+                    <div class="info-section">
+                        <h3><i class="fas fa-info-circle"></i> Descripción del Tour</h3>
+                        <p>Vive una experiencia mágica e inolvidable nadando con los delfines rosados del Amazonas. Estos mamíferos únicos en el mundo te permitirán vivir un encuentro cercano en su hábitat natural. Una aventura que conecta con la naturaleza más pura de la Amazonía.</p>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h3><i class="fas fa-route"></i> Itinerario</h3>
+                        <div class="itinerary">
+                            <div class="day">
+                                <h4>Tour de 1 Día (8 horas)</h4>
+                                <ul>
+                                    <li>6:00 AM - Recojo del hotel</li>
+                                    <li>7:30 AM - Navegación hacia zona de delfines</li>
+                                    <li>9:00 AM - Primer avistamiento y observación</li>
+                                    <li>10:30 AM - Sesión de nado con delfines</li>
+                                    <li>12:00 PM - Almuerzo en lodge flotante</li>
+                                    <li>2:00 PM - Segunda sesión de nado</li>
+                                    <li>3:30 PM - Fotografías y videos</li>
+                                    <li>5:00 PM - Retorno a Iquitos</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h3><i class="fas fa-check-circle"></i> ¿Qué Incluye?</h3>
+                        <ul class="includes-list">
+                            <li>Transporte ida y vuelta desde hotel</li>
+                            <li>Guía especializado en mamíferos acuáticos</li>
+                            <li>Equipo de nado y snorkel</li>
+                            <li>Almuerzo típico amazónico</li>
+                            <li>Bebidas durante todo el tour</li>
+                            <li>Chaleco salvavidas</li>
+                            <li>Sesión fotográfica profesional</li>
+                            <li>Certificado de experiencia</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h3><i class="fas fa-backpack"></i> ¿Qué Llevar?</h3>
+                        <ul class="bring-list">
+                            <li>Traje de baño</li>
+                            <li>Toalla personal</li>
+                            <li>Protector solar biodegradable</li>
+                            <li>Ropa de cambio</li>
+                            <li>Cámara acuática (opcional)</li>
+                            <li>Medicamentos personales</li>
+                            <li>Actitud positiva y respeto por la vida animal</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h3><i class="fas fa-times-circle"></i> ¿Qué NO Llevar?</h3>
+                        <ul class="avoid-list">
+                            <li>Protector solar con químicos</li>
+                            <li>Joyas o objetos metálicos</li>
+                            <li>Comida externa</li>
+                            <li>Repelente de insectos (tóxico para delfines)</li>
+                            <li>Objetos que puedan dañar a los animales</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h3><i class="fas fa-exclamation-triangle"></i> Recomendaciones</h3>
+                        <ul class="recommendations">
+                            <li>Saber nadar es obligatorio</li>
+                            <li>No tocar ni perseguir a los delfines</li>
+                            <li>Mantener distancia respetuosa</li>
+                            <li>No recomendado para menores de 10 años</li>
+                            <li>Experiencia dependiente del clima</li>
+                            <li>Respeto total hacia los animales</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="modal-price">
+                    <span class="price-original">$189</span>
+                    <span class="price-current">$149</span>
+                </div>
+                <button class="btn-book-modal">Reservar Ahora</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Tour 15: Expedición Completa VIP -->
+    <div id="tourModal15" class="tour-modal">
+        <div class="modal-content">
+            <span class="close-modal" data-modal="15">&times;</span>
+            <div class="modal-header">
+                <h2>Expedición Completa VIP</h2>
+                <div class="modal-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <span>5.0 (45 reseñas)</span>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="modal-info">
+                    <div class="info-section">
+                        <h3><i class="fas fa-info-circle"></i> Descripción del Tour</h3>
+                        <p>La experiencia definitiva en la Amazonía peruana. 7 días de lujo, aventura y naturaleza en el corazón de la selva más biodiversa del mundo. Incluye lodge de lujo, guías especializados, actividades exclusivas y un servicio VIP personalizado. La aventura amazónica para los más exigentes.</p>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h3><i class="fas fa-route"></i> Itinerario de 7 Días</h3>
+                        <div class="itinerary">
+                            <div class="day">
+                                <h4>Día 1: Llegada VIP</h4>
+                                <ul>
+                                    <li>Recepción VIP en aeropuerto</li>
+                                    <li>Traslado en vehículo de lujo</li>
+                                    <li>Check-in en lodge premium</li>
+                                    <li>Cena de bienvenida</li>
+                                </ul>
+                            </div>
+                            <div class="day">
+                                <h4>Día 2-3: Exploración Premium</h4>
+                                <ul>
+                                    <li>Navegación en yacht privado</li>
+                                    <li>Avistamiento de delfines rosados</li>
+                                    <li>Comunidades nativas exclusivas</li>
+                                    <li>Spa amazónico</li>
+                                </ul>
+                            </div>
+                            <div class="day">
+                                <h4>Día 4-5: Aventura Extrema</h4>
+                                <ul>
+                                    <li>Canopy y rappel profesional</li>
+                                    <li>Expedición nocturna VIP</li>
+                                    <li>Pesca deportiva de lujo</li>
+                                    <li>Cenas temáticas gourmet</li>
+                                </ul>
+                            </div>
+                            <div class="day">
+                                <h4>Día 6-7: Relax y Partida</h4>
+                                <ul>
+                                    <li>Sesión de fotos profesional</li>
+                                    <li>Compras en mercados exclusivos</li>
+                                    <li>Cena de despedida VIP</li>
+                                    <li>Traslado de salida</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h3><i class="fas fa-crown"></i> Servicios VIP Incluidos</h3>
+                        <ul class="includes-list">
+                            <li>Alojamiento en suite premium con vista al río</li>
+                            <li>Todas las comidas gourmet y bebidas premium</li>
+                            <li>Guía naturalista privado trilingüe</li>
+                            <li>Transporte en yacht y vehículos de lujo</li>
+                            <li>Actividades exclusivas no disponibles al público</li>
+                            <li>Spa y tratamientos con productos naturales</li>
+                            <li>Sesión fotográfica profesional</li>
+                            <li>Seguro VIP y asistencia médica 24/7</li>
+                            <li>Servicio de lavandería</li>
+                            <li>Wi-Fi de alta velocidad</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h3><i class="fas fa-suitcase"></i> ¿Qué Llevar?</h3>
+                        <ul class="bring-list">
+                            <li>Ropa ligera y elegante</li>
+                            <li>Equipamiento outdoor de calidad</li>
+                            <li>Cámara profesional</li>
+                            <li>Medicamentos personales</li>
+                            <li>Documentos de viaje</li>
+                            <li>Actitud de aventura</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h3><i class="fas fa-star"></i> Experiencias Exclusivas</h3>
+                        <ul class="recommendations">
+                            <li>Acceso a áreas privadas de conservación</li>
+                            <li>Encuentro con chamanes reconocidos</li>
+                            <li>Degustación de vinos amazónicos</li>
+                            <li>Observación astronómica nocturna</li>
+                            <li>Ceremonias ancestrales privadas</li>
+                            <li>Servicio de mayordomo personal</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="modal-price">
+                    <span class="price-original">$1299</span>
+                    <span class="price-current">$999</span>
+                </div>
+                <button class="btn-book-modal">Reservar Ahora</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script src="script.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            loadToursWithLanguage();
+            
+            // Escuchar cambios de idioma
+            if (window.jaguarI18n) {
+                $(document).on('languageChanged', function() {
+                    loadToursWithLanguage();
+                });
+            }
+        });
+        
+        function loadToursWithLanguage() {
+            // Obtener idioma actual del sistema i18n
+            let currentLang = 'es'; // default
+            if (window.jaguarI18n && window.jaguarI18n.currentLang) {
+                currentLang = window.jaguarI18n.currentLang;
+            }
+            
+            console.log('Cargando tours en idioma:', currentLang);
+            
+            // Cargar tours dinámicamente
+            $.ajax({
+                url: 'api/obtener_tours.php',
+                method: 'GET',
+                dataType: 'json',
+                success: function(response) {
+                    let tours = response.tours || (response.data && response.data.tours) || [];
+                    if (response.success && tours.length > 0) {
+                        // Aplicar traducciones en el frontend si no es español
+                        if (currentLang !== 'es') {
+                            tours = translateTours(tours, currentLang);
+                        }
+                        renderTours(tours);
+                    } else {
+                        $('.all-tours-grid').html('<div style="padding:2em;">No se encontraron tours disponibles.</div>');
+                    }
+                },
+                error: function() {
+                    $('.all-tours-grid').html('<div style="padding:2em;">Error al cargar los tours.</div>');
+                }
+            });
+        }
+        
+        // Función para traducir tours en el frontend usando las claves de traducción
+        function translateTours(tours, lang) {
+            if (!window.jaguarI18n || !window.jaguarI18n.translations[lang]) {
+                return tours;
+            }
+            
+            const translations = window.jaguarI18n.translations[lang];
+            
+            // Mapa de nombres de tours a claves de traducción
+            const tourKeyMap = {
+                'Aventura Extrema': 'tour_aventura_extrema',
+                'Comunidades Nativas': 'tour_comunidades_nativas',
+                'Expedición Completa VIP': 'tour_expedicion_completa_vip',
+                'Expedición río Amazonas': 'tour_expedicion_rio_amazonas',
+                'Nado con Delfines Rosados': 'tour_nado_con_delfines_rosados',
+                'Safari Nocturno Amazonico': 'tour_safari_nocturno_amazonico',
+                'Tour Gastronomico': 'tour_tour_gastronomico',
+                'Casa de Hierro Historica': 'tour_casa_de_hierro_historica',
+                'Medicina Ancestral': 'tour_medicina_ancestral',
+                'Navegación Nocturna': 'tour_navegacion_nocturna',
+                'Observación de Aves': 'tour_observacion_de_aves',
+                'Observación de Fauna': 'tour_observacion_de_fauna',
+                'Pesca Deportiva Amazonica': 'tour_pesca_deportiva_amazonica',
+                'Reserva Pacaya Samiria': 'tour_reserva_pacaya_samiria',
+                'Trekking Selvatico': 'tour_trekking_selvatico'
+            };
+            
+            return tours.map(tour => {
+                // Crear una copia del tour para no modificar el original
+                let translatedTour = {...tour};
+                
+                // Buscar la clave de traducción correspondiente
+                const tourKey = tourKeyMap[tour.nombre];
+                if (tourKey && translations[tourKey]) {
+                    translatedTour.nombre = translations[tourKey];
+                }
+                
+                const tourDescKey = tourKey + '_desc';
+                if (tourKey && translations[tourDescKey]) {
+                    translatedTour.descripcion_corta = translations[tourDescKey];
+                }
+                
+                return translatedTour;
+            });
+        }
+
+        function renderTours(tours) {
+            let html = '';
+            // Mapeo de categorías de la base de datos a los filtros del frontend
+            const categoriaMap = {
+                'aventura': 'adventure',
+                'naturaleza': 'wildlife',
+                'cultural': 'cultural',
+                '': 'gastronomic',
+            };
+            tours.forEach(function(tour) {
+                let badge = '';
+                // Normalizar categoría
+                let cat = (tour.categoria || '').toLowerCase();
+                let catFiltro = categoriaMap[cat] || cat;
+                if (tour.destacado) {
+                    badge = '<span class="badge-popular">Popular</span>';
+                } else if (catFiltro === 'gastronomic') {
+                    badge = '<span class="badge-new">Nuevo</span>';
+                }
+                let precio = tour.precio_descuento && tour.precio_descuento < tour.precio ?
+                    `<span class=\"price-original\">$${tour.precio.toFixed(0)}</span> <span class=\"price-current\">$${tour.precio_descuento.toFixed(0)}</span> <span class=\"price-savings\">¡Ahorra $${(tour.precio - tour.precio_descuento).toFixed(0)}!</span>` :
+                    `<span class=\"price-current\">$${tour.precio.toFixed(0)}</span>`;
+
+                // Escapar comillas dobles en el nombre
+                let tourNombreSafe = tour.nombre.replace(/"/g, '&quot;');
+
+                html += `
+                <div class="tour-item" data-category="${catFiltro}">
+                    <div class="tour-image">
+                        <img src="img/${tour.imagen_principal}" alt="${tourNombreSafe}" loading="lazy">
+                        <div class="tour-badge">${badge}</div>
+                        <div class="tour-overlay">
+                            <div class="tour-actions">
+                                <button class="btn-quick-view" data-tour="${tour.id}"><i class="fas fa-eye"></i></button>
+                                <button class="btn-add-cart" data-tour="${tour.id}"><i class="fas fa-cart-plus"></i></button>
+                                <button class="btn-share" data-tour="${tour.id}"><i class="fas fa-share-alt"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tour-content">
+                        <div class="tour-meta">
+                            <span class="tour-duration"><i class="fas fa-clock"></i> ${tour.duracion}</span>
+                        </div>
+                        <h3>${tourNombreSafe}</h3>
+                        <p>${tour.descripcion_corta}</p>
+                        <div class="tour-features">
+                            <span data-i18n="max_personas" data-i18n-vars='{"count":"${tour.max_personas}"}'>
+                                <i class="fas fa-users"></i> Máx ${tour.max_personas} personas
+                            </span>
+                        </div>
+                        <div class="tour-pricing">${precio}</div>
+                        <div class="tour-buttons">
+                            <button class="btn-details" data-tour="${tour.id}" data-i18n="btn_ver_detalles">Ver Detalles</button>
+                            <button class="btn-book-tour" data-tour-id="${tour.id}" data-tour-nombre="${tourNombreSafe}" data-i18n="btn_reservar">Reservar Ahora</button>
+                        </div>
+                    </div>
+                </div>
+                `;
+            });
+            $('.all-tours-grid').html(html);
+
+            // Eliminar eventos previos y volver a asignar
+            $('.btn-book-tour').off('click').on('click', function(e) {
+                e.preventDefault();
+                const tourId = $(this).attr('data-tour-id');
+                const tourNombre = $(this).attr('data-tour-nombre');
+                if (confirm(`¿Deseas reservar el tour "${tourNombre}"?`)) {
+                    window.location.href = `reservar.html?tour=${tourId}`;
+                }
+            });
+
+            // Evento para abrir el modal de detalles
+            // Variable global para guardar el último tour seleccionado
+            window.lastSelectedTourId = null;
+
+            $('.btn-details').off('click').on('click', function(e) {
+                e.preventDefault();
+                const tourId = $(this).attr('data-tour') || $(this).attr('data-tour-id');
+                const tour = tours.find(t => t.id == tourId);
+                if (!tour) return;
+
+                // Llenar modal
+                $('#modalTourNameText').text(tour.nombre);
+                if (tour.destacado) {
+                    $('#modalTourDestacado').html('<span class="badge-popular">Popular</span>');
+                } else {
+                    $('#modalTourDestacado').html('');
+                }
+                if (tour.imagen_principal) {
+                    $('#modalTourImage').attr('src', tour.imagen_principal.startsWith('http') ? tour.imagen_principal : 'img/' + tour.imagen_principal).show();
+                } else {
+                    $('#modalTourImage').hide();
+                }
+                $('#modalTourDescripcionCorta').text(tour.descripcion_corta || '');
+                $('#modalTourDescripcion').text(tour.descripcion || '');
+                $('#modalTourDuracion').text(tour.duracion ? 'Duración: ' + tour.duracion : '').toggle(!!tour.duracion);
+                if (tour.duracion) {
+                    $('#modalTourDuracion').html('<strong>Duración:</strong> ' + tour.duracion).show();
+                } else {
+                    $('#modalTourDuracion').hide();
+                }
+                if (tour.dificultad) {
+                    $('#modalTourDificultad').html('<strong>Dificultad:</strong> ' + tour.dificultad).show();
+                } else {
+                    $('#modalTourDificultad').hide();
+                }
+                let personas = [];
+                if (tour.min_personas) personas.push('Mín ' + tour.min_personas);
+                if (tour.max_personas) personas.push('Máx ' + tour.max_personas);
+                if (personas.length > 0) {
+                    $('#modalTourPersonas').html('<strong>Personas:</strong> ' + personas.join(' / ')).show();
+                } else {
+                    $('#modalTourPersonas').hide();
+                }
+                $('#modalTourUbicacion').text(tour.ubicacion ? 'Ubicación: ' + tour.ubicacion : '').toggle(!!tour.ubicacion);
+
+                // Incluye
+                if (tour.incluye) {
+                    let inc = Array.isArray(tour.incluye) ? tour.incluye : (typeof tour.incluye === 'string' ? tour.incluye.split(/\r?\n|,/).filter(x=>x.trim()) : []);
+                    $('#modalTourIncluye').html('<strong>Incluye:</strong><ul>' + inc.map(i=>'<li>'+i+'</li>').join('') + '</ul>').show();
+                } else {
+                    $('#modalTourIncluye').hide();
+                }
+                // No incluye
+                if (tour.no_incluye) {
+                    let ninc = Array.isArray(tour.no_incluye) ? tour.no_incluye : (typeof tour.no_incluye === 'string' ? tour.no_incluye.split(/\r?\n|,/).filter(x=>x.trim()) : []);
+                    $('#modalTourNoIncluye').html('<strong>No incluye:</strong><ul>' + ninc.map(i=>'<li>'+i+'</li>').join('') + '</ul>').show();
+                } else {
+                    $('#modalTourNoIncluye').hide();
+                }
+                // Itinerario
+                if (tour.itinerario) {
+                    let iti = Array.isArray(tour.itinerario) ? tour.itinerario : (typeof tour.itinerario === 'string' ? tour.itinerario.split(/\r?\n|,/).filter(x=>x.trim()) : []);
+                    $('#modalTourItinerario').html('<strong>Itinerario:</strong><ul>' + iti.map(i=>'<li>'+i+'</li>').join('') + '</ul>').show();
+                } else {
+                    $('#modalTourItinerario').hide();
+                }
+                // Precio
+                let precioHtml = '';
+                if (tour.precio_descuento && tour.precio_descuento < tour.precio) {
+                    precioHtml = `<span class='price-original'>$${tour.precio.toFixed(0)}</span> <span class='price-current'>$${tour.precio_descuento.toFixed(0)}</span> <span class='price-savings'>¡Ahorra $${(tour.precio - tour.precio_descuento).toFixed(0)}!</span>`;
+                } else {
+                    precioHtml = `<span class='price-current'>$${tour.precio.toFixed(0)}</span>`;
+                }
+                $('#modalTourPrecio').html(precioHtml);
+
+                // Reservar ahora
+                $('#modalTourReservarBtn').off('click').on('click', function() {
+                    // Aquí va la lógica de confirmación y llamada al API, que ya tienes implementada
+                    if (confirm(`¿Deseas reservar el tour "${tour.nombre}"?`)) {
+                        // Llama al API para obtener los datos del tour antes de redirigir
+                        $.get('api/get_tour.php?id=' + tour.id, function(response) {
+                            // Puedes hacer algo con la respuesta si lo necesitas
+                            window.location.href = `reservar.html?tour=${tour.id}`;
+                        });
+                    }
+                });
+
+                // Guardar el id del tour actual globalmente para el carrito
+                window.lastSelectedTourId = tour.id;
+
+                // Mostrar modal
+                $('#tourDetailModal').fadeIn(150);
+                $('body').css('overflow', 'hidden');
+            });
+            // Hacer que el botón de "Agregar al carrito" dispare el mismo flujo que el botón de "Reservar Ahora"
+            $('.btn-add-cart').off('click').on('click', function(e) {
+                e.preventDefault();
+                // Obtener el id del tour desde el botón clickeado
+                var tourId = $(this).attr('data-tour') || $(this).attr('data-tour-id');
+                var tour = (typeof tours !== 'undefined') ? tours.find(t => t.id == tourId) : null;
+                if (tour) {
+                    if (confirm(`¿Deseas reservar el tour "${tour.nombre}"?`)) {
+                        $.get('../api/get_tour.php?id=' + tour.id, function(response) {
+                            window.location.href = `reservar.html?tour=${tour.id}`;
+                        });
+                    }
+                } else {
+                    alert('Por favor, selecciona un tour para reservar.');
+                }
+            });
+
+            // Mostrar modal de compartir al hacer click en btn-share
+            $('.btn-share').off('click').on('click', function(e) {
+                e.preventDefault();
+                var tourId = $(this).attr('data-tour') || $(this).attr('data-tour-id');
+                var tour = (typeof tours !== 'undefined') ? tours.find(t => t.id == tourId) : null;
+                if (tour) {
+                    $('#shareTourName').text(tour.nombre);
+                    // Guardar url para compartir
+                    var shareUrl = window.location.origin + '/tours.html?tour=' + tour.id;
+                    // Facebook
+                    $('#btnShareFacebook').off('click').on('click', function() {
+                        var url = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(shareUrl);
+                        window.open(url, '_blank');
+                    });
+                    // Instagram (no permite compartir directo, sugerir copiar link)
+                    $('#btnShareInstagram').off('click').on('click', function() {
+                        navigator.clipboard.writeText(shareUrl);
+                        alert('Enlace copiado. Puedes compartirlo en Instagram Stories o Mensajes.');
+                    });
+                    // WhatsApp
+                    $('#btnShareWhatsapp').off('click').on('click', function() {
+                        var url = 'https://wa.me/?text=' + encodeURIComponent('¡Mira este tour! ' + tour.nombre + ' ' + shareUrl);
+                        window.open(url, '_blank');
+                    });
+                    $('#shareTourModal').fadeIn(150);
+                    $('body').css('overflow', 'hidden');
+                }
+            });
+            // Cerrar modal de compartir
+            $(document).on('click', '#closeShareTourModal', function() {
+                $('#shareTourModal').fadeOut(150);
+                $('body').css('overflow', 'auto');
+            });
+            // Cerrar modal al hacer click fuera del contenido
+            $(document).on('mousedown', function(e) {
+                var modal = document.getElementById('shareTourModal');
+                if (modal && modal.style.display !== 'none' && e.target === modal) {
+                    $('#shareTourModal').fadeOut(150);
+                    $('body').css('overflow', 'auto');
+                }
+            });
+            // Hacer que el botón de ojo funcione igual que el de detalles
+            $('.btn-quick-view').off('click').on('click', function(e) {
+                e.preventDefault();
+                const tourId = $(this).attr('data-tour') || $(this).attr('data-tour-id');
+                $('.btn-details[data-tour="' + tourId + '"]').trigger('click');
+            });
+    // Cerrar modal de detalles de tour
+    $(document).on('click', '#closeTourDetailModal', function() {
+        $('#tourDetailModal').fadeOut(150);
+        $('body').css('overflow', 'auto');
+    });
+    // Cerrar modal al hacer click fuera del contenido
+    $(document).on('mousedown', function(e) {
+        var modal = document.getElementById('tourDetailModal');
+        if (modal && modal.style.display !== 'none' && e.target === modal) {
+            $('#tourDetailModal').fadeOut(150);
+            $('body').css('overflow', 'auto');
+        }
+    });
+        }
+
+        // Filtro de tours por categoría (delegado para funcionar con tours dinámicos)
+        $(document).on('click', '.filter-btn', function() {
+            var filter = $(this).data('filter');
+            // Botón activo
+            $('.filter-btn').removeClass('active');
+            $(this).addClass('active');
+            // Mostrar/Ocultar tours
+            if (filter === 'all') {
+                $('.tour-item').show();
+            } else {
+                $('.tour-item').each(function() {
+                    if ($(this).data('category') === filter) {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                });
+            }
+        });
+    </script>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script src="js/i18n.js"></script>
+    <script src="script.js"></script>
+
+    <!-- Modal de Términos y Condiciones -->
+    <div id="termsModal" class="tour-modal">
+        <div class="modal-content">
+            <span class="close-modal" data-modal="terms">&times;</span>
+            <div class="modal-header">
+                <h2 data-i18n="terms_title">Términos y Condiciones</h2>
+                <p style="color: #666; margin: 10px 0 0 0;" data-i18n="terms_subtitle">Jaguar Expeditions - Tours Amazónicos</p>
+            </div>
+            <div class="modal-body">
+                <div class="modal-info">
+                    <div class="info-section">
+                        <h3><i class="fas fa-file-contract"></i> <span data-i18n="terms_general_conditions">1. Condiciones Generales</span></h3>
+                        <ul class="includes-list">
+                            <li data-i18n="terms_prices_subject">Los precios están sujetos a cambios sin previo aviso</li>
+                            <li data-i18n="terms_reservations_confirmed">Las reservas se confirman con el 50% de adelanto</li>
+                            <li data-i18n="terms_balance_payment">El saldo debe pagarse 24 horas antes del tour</li>
+                            <li data-i18n="terms_weather_conditions">Los tours están sujetos a condiciones climáticas</li>
+                            <li data-i18n="terms_minimum_age">Edad mínima requerida según cada tour específico</li>
+                            <li data-i18n="terms_maximum_capacity">Capacidad máxima por tour claramente especificada</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h3><i class="fas fa-calendar-times"></i> <span data-i18n="terms_cancellation_policy">2. Política de Cancelación</span></h3>
+                        <ul class="avoid-list">
+                            <li data-i18n="terms_cancel_7_days">Cancelación 7+ días antes: Reembolso del 90%</li>
+                            <li data-i18n="terms_cancel_3_6_days">Cancelación 3-6 días antes: Reembolso del 70%</li>
+                            <li data-i18n="terms_cancel_1_2_days">Cancelación 1-2 días antes: Reembolso del 50%</li>
+                            <li data-i18n="terms_cancel_same_day">Cancelación el mismo día: Sin reembolso</li>
+                            <li data-i18n="terms_cancel_weather">Cancelación por clima: Reembolso completo o reprogramación</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h3><i class="fas fa-shield-alt"></i> <span data-i18n="terms_insurance_responsibility">3. Seguros y Responsabilidad</span></h3>
+                        <ul class="recommendations">
+                            <li data-i18n="terms_basic_insurance">Todos los tours incluyen seguro básico de accidentes</li>
+                            <li data-i18n="terms_additional_insurance">Recomendamos seguro de viaje adicional</li>
+                            <li data-i18n="terms_adventure_risks">Los participantes asumen riesgos inherentes de aventura</li>
+                            <li data-i18n="terms_lost_objects">Jaguar Expeditions no se responsabiliza por objetos perdidos</li>
+                            <li data-i18n="terms_medical_certificate">Certificado médico requerido para tours extremos</li>
+                            <li data-i18n="terms_medical_declaration">Declaración de condiciones médicas obligatoria</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h3><i class="fas fa-heartbeat"></i> <span data-i18n="terms_health_requirements">4. Requisitos de Salud</span></h3>
+                        <ul class="includes-list">
+                            <li data-i18n="terms_yellow_fever">Vacuna de fiebre amarilla obligatoria (certificado internacional)</li>
+                            <li data-i18n="terms_malaria_consultation">Consultar médico sobre profilaxis de malaria</li>
+                            <li data-i18n="terms_allergies_medications">Informar sobre alergias y medicamentos</li>
+                            <li data-i18n="terms_pregnant_extreme">No recomendado para embarazadas en tours extremos</li>
+                            <li data-i18n="terms_physical_condition">Condición física adecuada según dificultad del tour</li>
+                            <li data-i18n="terms_first_aid_kit">Botiquín básico incluido en todos los tours</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h3><i class="fas fa-users"></i> <span data-i18n="terms_conduct_behavior">5. Conducta y Comportamiento</span></h3>
+                        <ul class="bring-list">
+                            <li data-i18n="terms_follow_guide">Respetar las instrucciones del guía en todo momento</li>
+                            <li data-i18n="terms_no_animals">No molestar o alimentar animales salvajes</li>
+                            <li data-i18n="terms_respect_communities">Respetar las comunidades nativas y sus costumbres</li>
+                            <li data-i18n="terms_no_smoking">No fumar en áreas protegidas</li>
+                            <li data-i18n="terms_keep_clean">Mantener limpio el entorno natural</li>
+                            <li data-i18n="terms_no_alcohol">Prohibido el consumo de alcohol en tours extremos</li>
+                            <li data-i18n="terms_respectful_behavior">Comportamiento respetuoso con otros participantes</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h3><i class="fas fa-leaf"></i> <span data-i18n="terms_environmental_commitment">6. Compromiso Ambiental</span></h3>
+                        <ul class="bring-list">
+                            <li data-i18n="terms_sustainable_tourism">Turismo sostenible y responsable</li>
+                            <li data-i18n="terms_local_conservation">Contribución a la conservación local</li>
+                            <li data-i18n="terms_support_natives">Apoyo a comunidades nativas</li>
+                            <li data-i18n="terms_minimize_impact">Minimizar impacto ambiental</li>
+                            <li data-i18n="terms_conservation_education">Educación sobre conservación</li>
+                            <li data-i18n="terms_leave_no_trace">Principios de "Leave No Trace"</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-section" style="background: #e8f5e8; border-left: 4px solid #4caf50;">
+                        <h3><i class="fas fa-handshake"></i> <span data-i18n="terms_client_agreement">7. Acuerdo del Cliente</span></h3>
+                        <p style="color: #2e7d32; font-weight: 500; margin-bottom: 15px;" data-i18n="terms_agreement_text">
+                            Al realizar una reserva, el cliente confirma que ha leído, entendido y acepta todos los términos y condiciones aquí establecidos.
+                        </p>
+                        <ul class="includes-list">
+                            <li data-i18n="terms_acceptance_confirmation">Confirmación de aceptación en el momento de la reserva</li>
+                            <li data-i18n="terms_copy_delivered">Copia de términos entregada al cliente</li>
+                            <li data-i18n="terms_briefing_before">Briefing presencial antes de iniciar cada tour</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <p style="text-align: center; color: #666; margin: 0;">
+                    <strong>Jaguar Expeditions</strong> - RUC: 20123456789<br>
+                    <span data-i18n="terms_footer_text">Licencia MINCETUR: PE-2024-0156 | Actualizado: Agosto 2025</span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Política de Privacidad -->
+    <div id="privacyModal" class="tour-modal">
+        <div class="modal-content">
+            <span class="close-modal" data-modal="privacy">&times;</span>
+            <div class="modal-header">
+                <h2 data-i18n="privacy_title">Política de Privacidad</h2>
+                <p style="color: #666; margin: 10px 0 0 0;" data-i18n="privacy_subtitle">Jaguar Expeditions - Protección de Datos Personales</p>
+            </div>
+            <div class="modal-body">
+                <div class="modal-info">
+                    <div class="info-section">
+                        <h3><i class="fas fa-user-shield"></i> <span data-i18n="privacy_information_collected">1. Información que Recopilamos</span></h3>
+                        <ul class="includes-list">
+                            <li data-i18n="privacy_full_names">Nombres y apellidos completos</li>
+                            <li data-i18n="privacy_identity_document">Documento de identidad y/o pasaporte</li>
+                            <li data-i18n="privacy_birth_date">Fecha de nacimiento y edad</li>
+                            <li data-i18n="privacy_address">Dirección de residencia y contacto</li>
+                            <li data-i18n="privacy_phone_email">Números telefónicos y email</li>
+                            <li data-i18n="privacy_medical_info">Información médica relevante para tours</li>
+                            <li data-i18n="privacy_travel_preferences">Preferencias de viaje y alimentarias</li>
+                            <li data-i18n="privacy_payment_data">Datos de pago y facturación</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h3><i class="fas fa-bullseye"></i> <span data-i18n="privacy_purpose_processing">2. Finalidad del Tratamiento</span></h3>
+                        <ul class="includes-list">
+                            <li data-i18n="privacy_service_provision">Prestación de servicios turísticos contratados</li>
+                            <li data-i18n="privacy_reservation_management">Gestión de reservas y pagos</li>
+                            <li data-i18n="privacy_service_communication">Comunicación durante el servicio</li>
+                            <li data-i18n="privacy_legal_compliance">Cumplimiento de obligaciones legales</li>
+                            <li data-i18n="privacy_emergency_assistance">Seguridad y asistencia en emergencias</li>
+                            <li data-i18n="privacy_service_improvement">Mejora de nuestros servicios</li>
+                            <li data-i18n="privacy_direct_marketing">Marketing directo (con consentimiento)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h3><i class="fas fa-share-alt"></i> <span data-i18n="privacy_information_sharing">3. Compartir Información</span></h3>
+                        <ul class="bring-list">
+                            <li data-i18n="privacy_migration_authorities">Autoridades migratorias y de turismo</li>
+                            <li data-i18n="privacy_emergency_services">Servicios de emergencia y salud</li>
+                            <li data-i18n="privacy_service_providers">Proveedores de servicios (guías, lodges)</li>
+                            <li data-i18n="privacy_insurance_companies">Compañías de seguros contratadas</li>
+                            <li data-i18n="privacy_legal_requirement">Autoridades competentes por requerimiento legal</li>
+                            <li data-i18n="privacy_no_sell_data">NO vendemos datos a terceros</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h3><i class="fas fa-lock"></i> <span data-i18n="privacy_data_security">4. Seguridad de los Datos</span></h3>
+                        <ul class="includes-list">
+                            <li data-i18n="privacy_ssl_encryption">Encriptación SSL en todas las transacciones</li>
+                            <li data-i18n="privacy_secure_servers">Servidores seguros con acceso restringido</li>
+                            <li data-i18n="privacy_trained_staff">Personal capacitado en protección de datos</li>
+                            <li data-i18n="privacy_security_audits">Auditorías periódicas de seguridad</li>
+                            <li data-i18n="privacy_data_backup">Respaldo seguro de información</li>
+                            <li data-i18n="privacy_incident_protocols">Protocolos de respuesta ante incidentes</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h3><i class="fas fa-user-check"></i> <span data-i18n="privacy_data_subject_rights">5. Derechos del Titular</span></h3>
+                        <ul class="includes-list">
+                            <li><span data-i18n="privacy_access_right">Acceso: </span><span data-i18n="privacy_access_description">Conocer qué datos tenemos sobre usted</span></li>
+                            <li><span data-i18n="privacy_rectification_right">Rectificación: </span><span data-i18n="privacy_rectification_description">Corregir datos inexactos</span></li>
+                            <li><span data-i18n="privacy_cancellation_right">Cancelación: </span><span data-i18n="privacy_cancellation_description">Eliminar datos cuando proceda</span></li>
+                            <li><span data-i18n="privacy_objection_right">Oposición: </span><span data-i18n="privacy_objection_description">Negarse al tratamiento para marketing</span></li>
+                            <li><span data-i18n="privacy_portability_right">Portabilidad: </span><span data-i18n="privacy_portability_description">Recibir sus datos en formato digital</span></li>
+                            <li><span data-i18n="privacy_limitation_right">Limitación: </span><span data-i18n="privacy_limitation_description">Restringir ciertos usos de sus datos</span></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h3><i class="fas fa-envelope"></i> <span data-i18n="privacy_direct_marketing">6. Marketing Directo</span></h3>
+                        <ul class="avoid-list">
+                            <li data-i18n="privacy_explicit_consent">Solo con consentimiento explícito del cliente</li>
+                            <li data-i18n="privacy_unsubscribe_option">Opción de darse de baja en cada comunicación</li>
+                            <li data-i18n="privacy_communication_preferences">Respeto a preferencias de comunicación</li>
+                            <li data-i18n="privacy_no_spam">No spam ni comunicaciones excesivas</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h3><i class="fas fa-phone-alt"></i> <span data-i18n="privacy_contact_data">7. Contacto para Datos Personales</span></h3>
+                        <ul class="includes-list">
+                            <li>Email: privacidad@jaguarexpeditions.com</li>
+                            <li data-i18n="privacy_phone_label">Teléfono: +51 999 123 456 (Ext. 101)</li>
+                            <li data-i18n="privacy_office_label">Oficina: Calle Putumayo 184, Iquitos</li>
+                            <li><span data-i18n="privacy_responsible_label">Responsable: </span><span data-i18n="privacy_data_protection_officer">Oficial de Protección de Datos</span></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-section" style="background: #e3f2fd; border-left: 4px solid #2196f3;">
+                        <h3><i class="fas fa-info-circle"></i> <span data-i18n="privacy_policy_changes">8. Cambios en la Política</span></h3>
+                        <p style="color: #1565c0; font-weight: 500; margin-bottom: 15px;" data-i18n="privacy_policy_changes_text">
+                            Nos reservamos el derecho de actualizar esta política. Los cambios importantes serán notificados por email.
+                        </p>
+                        <ul class="includes-list">
+                            <li data-i18n="privacy_30_day_notice">Notificación 30 días antes de cambios importantes</li>
+                            <li data-i18n="privacy_version_history">Historial de versiones disponible</li>
+                            <li data-i18n="privacy_reject_changes">Opción de rechazar cambios y cancelar servicio</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <p style="text-align: center; color: #666; margin: 0;">
+                    <strong>Jaguar Expeditions</strong><br>
+                    <span data-i18n="privacy_footer_text">Cumplimos con la Ley N° 29733 - Ley de Protección de Datos Personales del Perú</span><br>
+                    <span data-i18n="privacy_last_update">Última actualización: Agosto 2025</span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Botón flotante de WhatsApp -->
+    <div class="whatsapp-float">
+        <a href="https://wa.me/51962105395?text=Hola%2C%20me%20interesa%20obtener%20información%20sobre%20los%20tours%20de%20Jaguar%20Expeditions" 
+           target="_blank" 
+           class="whatsapp-button"
+           title="Contáctanos por WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+            <span class="whatsapp-text">¡Escribenos!</span>
+        </a>
+    </div>
+
+    <!-- Modal de Términos y Condiciones -->
+    <div id="termsModal" class="tour-modal">
+        <div class="modal-content">
+            <span class="close-modal" data-modal="terms">&times;</span>
+            <div class="modal-header">
+                <h2 data-i18n="terms_title">Términos y Condiciones</h2>
+                <p style="color: #666; margin: 10px 0 0 0;" data-i18n="terms_subtitle">Jaguar Expeditions - Tours Amazónicos</p>
+            </div>
+            <div class="modal-body">
+                <div class="modal-info">
+                    <div class="info-section">
+                        <h3><i class="fas fa-file-contract"></i> <span data-i18n="terms_general_conditions">1. Condiciones Generales</span></h3>
+                        <ul class="includes-list">
+                            <li data-i18n="terms_prices_subject">Los precios están sujetos a cambios sin previo aviso</li>
+                            <li data-i18n="terms_reservations_confirmed">Las reservas se confirman con el 50% de adelanto</li>
+                            <li data-i18n="terms_balance_payment">El saldo debe pagarse 24 horas antes del tour</li>
+                            <li data-i18n="terms_weather_conditions">Los tours están sujetos a condiciones climáticas</li>
+                            <li data-i18n="terms_minimum_age">Edad mínima requerida según cada tour específico</li>
+                            <li data-i18n="terms_maximum_capacity">Capacidad máxima por tour claramente especificada</li>
+                        </ul>
+                    </div>
+                    <div class="info-section">
+                        <h3><i class="fas fa-calendar-times"></i> <span data-i18n="terms_cancellation_policy">2. Política de Cancelación</span></h3>
+                        <ul class="avoid-list">
+                            <li data-i18n="terms_cancel_7_days">Cancelación 7+ días antes: Reembolso del 90%</li>
+                            <li data-i18n="terms_cancel_3_6_days">Cancelación 3-6 días antes: Reembolso del 70%</li>
+                            <li data-i18n="terms_cancel_1_2_days">Cancelación 1-2 días antes: Reembolso del 50%</li>
+                            <li data-i18n="terms_cancel_same_day">Cancelación el mismo día: Sin reembolso</li>
+                            <li data-i18n="terms_cancel_weather">Cancelación por clima: Reembolso completo o reprogramación</li>
+                        </ul>
+                    </div>
+                    <div class="info-section">
+                        <h3><i class="fas fa-shield-alt"></i> <span data-i18n="terms_insurance_responsibility">3. Seguros y Responsabilidad</span></h3>
+                        <ul class="recommendations">
+                            <li data-i18n="terms_basic_insurance">Todos los tours incluyen seguro básico de accidentes</li>
+                            <li data-i18n="terms_additional_insurance">Recomendamos seguro de viaje adicional</li>
+                            <li data-i18n="terms_adventure_risks">Los participantes asumen riesgos inherentes de aventura</li>
+                            <li data-i18n="terms_lost_objects">Jaguar Expeditions no se responsabiliza por objetos perdidos</li>
+                            <li data-i18n="terms_medical_certificate">Certificado médico requerido para tours extremos</li>
+                            <li data-i18n="terms_medical_declaration">Declaración de condiciones médicas obligatoria</li>
+                        </ul>
+                    </div>
+                    <div class="info-section">
+                        <h3><i class="fas fa-heartbeat"></i> <span data-i18n="terms_health_requirements">4. Requisitos de Salud</span></h3>
+                        <ul class="includes-list">
+                            <li data-i18n="terms_yellow_fever">Vacuna de fiebre amarilla obligatoria (certificado internacional)</li>
+                            <li data-i18n="terms_malaria_consultation">Consultar médico sobre profilaxis de malaria</li>
+                            <li data-i18n="terms_allergies_medications">Informar sobre alergias y medicamentos</li>
+                            <li data-i18n="terms_pregnant_extreme">No recomendado para embarazadas en tours extremos</li>
+                            <li data-i18n="terms_physical_condition">Condición física adecuada según dificultad del tour</li>
+                            <li data-i18n="terms_first_aid_kit">Botiquín básico incluido en todos los tours</li>
+                        </ul>
+                    </div>
+                    <div class="info-section">
+                        <h3><i class="fas fa-users"></i> <span data-i18n="terms_conduct_behavior">5. Conducta y Comportamiento</span></h3>
+                        <ul class="bring-list">
+                            <li data-i18n="terms_follow_guide">Respetar las instrucciones del guía en todo momento</li>
+                            <li data-i18n="terms_no_animals">No molestar o alimentar animales salvajes</li>
+                            <li data-i18n="terms_respect_communities">Respetar las comunidades nativas y sus costumbres</li>
+                            <li data-i18n="terms_no_smoking">No fumar en áreas protegidas</li>
+                            <li data-i18n="terms_keep_clean">Mantener limpio el entorno natural</li>
+                            <li data-i18n="terms_no_alcohol">Prohibido el consumo de alcohol en tours extremos</li>
+                            <li data-i18n="terms_respectful_behavior">Comportamiento respetuoso con otros participantes</li>
+                        </ul>
+                    </div>
+                    <div class="info-section">
+                        <h3><i class="fas fa-leaf"></i> <span data-i18n="terms_environmental_commitment">6. Compromiso Ambiental</span></h3>
+                        <ul class="bring-list">
+                            <li data-i18n="terms_sustainable_tourism">Turismo sostenible y responsable</li>
+                            <li data-i18n="terms_local_conservation">Contribución a la conservación local</li>
+                            <li data-i18n="terms_support_natives">Apoyo a comunidades nativas</li>
+                            <li data-i18n="terms_minimize_impact">Minimizar impacto ambiental</li>
+                            <li data-i18n="terms_conservation_education">Educación sobre conservación</li>
+                            <li data-i18n="terms_leave_no_trace">Principios de "Leave No Trace"</li>
+                        </ul>
+                    </div>
+                    <div class="info-section" style="background: #e8f5e8; border-left: 4px solid #4caf50;">
+                        <h3><i class="fas fa-handshake"></i> <span data-i18n="terms_client_agreement">7. Acuerdo del Cliente</span></h3>
+                        <p style="color: #2e7d32; font-weight: 500; margin-bottom: 15px;" data-i18n="terms_agreement_text">
+                            Al realizar una reserva, el cliente confirma que ha leído, entendido y acepta todos los términos y condiciones aquí establecidos.
+                        </p>
+                        <ul class="includes-list">
+                            <li data-i18n="terms_acceptance_confirmation">Confirmación de aceptación en el momento de la reserva</li>
+                            <li data-i18n="terms_copy_delivered">Copia de términos entregada al cliente</li>
+                            <li data-i18n="terms_briefing_before">Briefing presencial antes de iniciar cada tour</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <p style="text-align: center; color: #666; margin: 0;">
+                    <strong>Jaguar Expeditions</strong> - RUC: 20123456789<br>
+                    <span data-i18n="terms_footer_text">Licencia MINCETUR: PE-2024-0156 | Actualizado: Agosto 2025</span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Política de Privacidad -->
+    <div id="privacyModal" class="tour-modal">
+        <div class="modal-content">
+            <span class="close-modal" data-modal="privacy">&times;</span>
+            <div class="modal-header">
+                <h2 data-i18n="privacy_title">Política de Privacidad</h2>
+                <p style="color: #666; margin: 10px 0 0 0;" data-i18n="privacy_subtitle">Jaguar Expeditions - Protección de Datos Personales</p>
+            </div>
+            <div class="modal-body">
+                <div class="modal-info">
+                    <div class="info-section">
+                        <h3><i class="fas fa-user-shield"></i> <span data-i18n="privacy_information_collected">1. Información que Recopilamos</span></h3>
+                        <ul class="includes-list">
+                            <li data-i18n="privacy_full_names">Nombres y apellidos completos</li>
+                            <li data-i18n="privacy_identity_document">Documento de identidad y/o pasaporte</li>
+                            <li data-i18n="privacy_birth_date">Fecha de nacimiento y edad</li>
+                            <li data-i18n="privacy_address">Dirección de residencia y contacto</li>
+                            <li data-i18n="privacy_phone_email">Números telefónicos y email</li>
+                            <li data-i18n="privacy_medical_info">Información médica relevante para tours</li>
+                            <li data-i18n="privacy_travel_preferences">Preferencias de viaje y alimentarias</li>
+                            <li data-i18n="privacy_payment_data">Datos de pago y facturación</li>
+                        </ul>
+                    </div>
+                    <div class="info-section">
+                        <h3><i class="fas fa-bullseye"></i> <span data-i18n="privacy_purpose_processing">2. Finalidad del Tratamiento</span></h3>
+                        <ul class="includes-list">
+                            <li data-i18n="privacy_service_provision">Prestación de servicios turísticos contratados</li>
+                            <li data-i18n="privacy_reservation_management">Gestión de reservas y pagos</li>
+                            <li data-i18n="privacy_service_communication">Comunicación durante el servicio</li>
+                            <li data-i18n="privacy_legal_compliance">Cumplimiento de obligaciones legales</li>
+                            <li data-i18n="privacy_emergency_assistance">Seguridad y asistencia en emergencias</li>
+                            <li data-i18n="privacy_service_improvement">Mejora de nuestros servicios</li>
+                            <li data-i18n="privacy_direct_marketing">Marketing directo (con consentimiento)</li>
+                        </ul>
+                    </div>
+                    <div class="info-section">
+                        <h3><i class="fas fa-share-alt"></i> <span data-i18n="privacy_information_sharing">3. Compartir Información</span></h3>
+                        <ul class="bring-list">
+                            <li data-i18n="privacy_migration_authorities">Autoridades migratorias y de turismo</li>
+                            <li data-i18n="privacy_emergency_services">Servicios de emergencia y salud</li>
+                            <li data-i18n="privacy_service_providers">Proveedores de servicios (guías, lodges)</li>
+                            <li data-i18n="privacy_insurance_companies">Compañías de seguros contratadas</li>
+                            <li data-i18n="privacy_legal_requirement">Autoridades competentes por requerimiento legal</li>
+                            <li data-i18n="privacy_no_sell_data">NO vendemos datos a terceros</li>
+                        </ul>
+                    </div>
+                    <div class="info-section">
+                        <h3><i class="fas fa-lock"></i> <span data-i18n="privacy_data_security">4. Seguridad de los Datos</span></h3>
+                        <ul class="includes-list">
+                            <li data-i18n="privacy_ssl_encryption">Encriptación SSL en todas las transacciones</li>
+                            <li data-i18n="privacy_secure_servers">Servidores seguros con acceso restringido</li>
+                            <li data-i18n="privacy_trained_staff">Personal capacitado en protección de datos</li>
+                            <li data-i18n="privacy_security_audits">Auditorías periódicas de seguridad</li>
+                            <li data-i18n="privacy_data_backup">Respaldo seguro de información</li>
+                            <li data-i18n="privacy_incident_protocols">Protocolos de respuesta ante incidentes</li>
+                        </ul>
+                    </div>
+                    <div class="info-section">
+                        <h3><i class="fas fa-user-check"></i> <span data-i18n="privacy_data_subject_rights">5. Derechos del Titular</span></h3>
+                        <ul class="includes-list">
+                            <li><span data-i18n="privacy_access_right">Acceso: </span><span data-i18n="privacy_access_description">Conocer qué datos tenemos sobre usted</span></li>
+                            <li><span data-i18n="privacy_rectification_right">Rectificación: </span><span data-i18n="privacy_rectification_description">Corregir datos inexactos</span></li>
+                            <li><span data-i18n="privacy_cancellation_right">Cancelación: </span><span data-i18n="privacy_cancellation_description">Eliminar datos cuando proceda</span></li>
+                            <li><span data-i18n="privacy_objection_right">Oposición: </span><span data-i18n="privacy_objection_description">Negarse al tratamiento para marketing</span></li>
+                            <li><span data-i18n="privacy_portability_right">Portabilidad: </span><span data-i18n="privacy_portability_description">Recibir sus datos en formato digital</span></li>
+                            <li><span data-i18n="privacy_limitation_right">Limitación: </span><span data-i18n="privacy_limitation_description">Restringir ciertos usos de sus datos</span></li>
+                        </ul>
+                    </div>
+                    <div class="info-section">
+                        <h3><i class="fas fa-envelope"></i> <span data-i18n="privacy_direct_marketing">6. Marketing Directo</span></h3>
+                        <ul class="avoid-list">
+                            <li data-i18n="privacy_explicit_consent">Solo con consentimiento explícito del cliente</li>
+                            <li data-i18n="privacy_unsubscribe_option">Opción de darse de baja en cada comunicación</li>
+                            <li data-i18n="privacy_communication_preferences">Respeto a preferencias de comunicación</li>
+                            <li data-i18n="privacy_no_spam">No spam ni comunicaciones excesivas</li>
+                        </ul>
+                    </div>
+                    <div class="info-section">
+                        <h3><i class="fas fa-phone-alt"></i> <span data-i18n="privacy_contact_data">7. Contacto para Datos Personales</span></h3>
+                        <ul class="includes-list">
+                            <li>Email: privacidad@jaguarexpeditions.com</li>
+                            <li data-i18n="privacy_phone_label">Teléfono: +51 999 123 456 (Ext. 101)</li>
+                            <li data-i18n="privacy_office_label">Oficina: Calle Putumayo 184, Iquitos</li>
+                            <li><span data-i18n="privacy_responsible_label">Responsable: </span><span data-i18n="privacy_data_protection_officer">Oficial de Protección de Datos</span></li>
+                        </ul>
+                    </div>
+                    <div class="info-section" style="background: #e3f2fd; border-left: 4px solid #2196f3;">
+                        <h3><i class="fas fa-info-circle"></i> <span data-i18n="privacy_policy_changes">8. Cambios en la Política</span></h3>
+                        <p style="color: #1565c0; font-weight: 500; margin-bottom: 15px;" data-i18n="privacy_policy_changes_text">
+                            Nos reservamos el derecho de actualizar esta política. Los cambios importantes serán notificados por email.
+                        </p>
+                        <ul class="includes-list">
+                            <li data-i18n="privacy_30_day_notice">Notificación 30 días antes de cambios importantes</li>
+                            <li data-i18n="privacy_version_history">Historial de versiones disponible</li>
+                            <li data-i18n="privacy_reject_changes">Opción de rechazar cambios y cancelar servicio</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <p style="text-align: center; color: #666; margin: 0;">
+                    <strong>Jaguar Expeditions</strong><br>
+                    <span data-i18n="privacy_footer_text">Cumplimos con la Ley N° 29733 - Ley de Protección de Datos Personales del Perú</span><br>
+                    <span data-i18n="privacy_last_update">Última actualización: Agosto 2025</span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript para manejar los modales de Términos y Privacidad
+        document.addEventListener('DOMContentLoaded', function() {
+            // Obtener elementos
+            var termsModal = document.getElementById('termsModal');
+            var privacyModal = document.getElementById('privacyModal');
+            var termsLink = document.getElementById('termsLink');
+            var privacyLink = document.getElementById('privacyLink');
+            var termsLinkCheckbox = document.getElementById('termsLinkCheckbox');
+            var privacyLinkCheckbox = document.getElementById('privacyLinkCheckbox');
+            var closeBtns = document.querySelectorAll('.close-modal');
+
+            // Función para abrir modal
+            function openModal(modal) {
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+                
+                // Forzar traducción del modal cuando se abre
+                if (window.jaguarI18n && typeof window.jaguarI18n.applyTranslations === 'function') {
+                    window.jaguarI18n.applyTranslations();
+                }
+            }
+
+            // Función para cerrar modal
+            function closeModal(modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+
+            // Event listeners para abrir modales
+            if (termsLink) {
+                termsLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    openModal(termsModal);
+                });
+            }
+            if (termsLinkCheckbox) {
+                termsLinkCheckbox.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    openModal(termsModal);
+                });
+            }
+
+            if (privacyLink) {
+                privacyLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    openModal(privacyModal);
+                });
+            }
+            if (privacyLinkCheckbox) {
+                privacyLinkCheckbox.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    openModal(privacyModal);
+                });
+            }
+
+            // Event listeners para cerrar modales
+            closeBtns.forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    var modalType = this.getAttribute('data-modal');
+                    if (modalType === 'terms') {
+                        closeModal(termsModal);
+                    } else if (modalType === 'privacy') {
+                        closeModal(privacyModal);
+                    }
+                });
+            });
+
+            // Cerrar modal al hacer click fuera de él
+            window.addEventListener('click', function(e) {
+                if (e.target === termsModal) {
+                    closeModal(termsModal);
+                }
+                if (e.target === privacyModal) {
+                    closeModal(privacyModal);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
